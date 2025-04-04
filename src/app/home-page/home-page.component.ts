@@ -476,6 +476,15 @@ export class HomePageComponent {
     this.languageService.setLanguage(language); // Update language in service
   }
   // Login and MFA code
+
+// 
+
+login_custom () {
+  this.route.navigate(['/krya/dashboard-menu']);
+  
+}
+
+
   login() {
 
     const login = {
