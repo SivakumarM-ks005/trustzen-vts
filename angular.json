@@ -47,6 +47,8 @@
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css",
+              "https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css",
               "src/styles.scss"
             ],
             "scripts": [
@@ -115,6 +117,8 @@
             "styles": [
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css",
+              "https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css",
               "src/styles.scss"
             ],
             "scripts": [
