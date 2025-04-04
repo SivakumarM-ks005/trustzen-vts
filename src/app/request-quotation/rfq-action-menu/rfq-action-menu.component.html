@@ -1,0 +1,20 @@
+<div>
+    <a class="d-flex align-items-center" [matMenuTriggerFor]="menu"><span>Action</span>
+        <mat-icon class="material-icons">arrow_drop_down</mat-icon>
+    </a>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item class="menu-hight" (click)="viewOrEditRFQ(element)" [routerLink]="['/krya/new-rfq']">View /Edit</button>
+        <button mat-menu-item class="menu-hight" disabled>View Workflow</button>
+        <button mat-menu-item class="menu-hight" (click)="queriesClarification()" >Queries & Clarifications</button>
+        <button mat-menu-item class="menu-hight" [routerLink]="['/krya/authorizeOpening']"  >Authorize Opening</button>
+        <button mat-menu-item class="menu-hight" [routerLink]="['/krya/rfxInsights']">Insight Details</button>
+        <button mat-menu-item class="menu-hight" [routerLink]="['/krya/evaluation']">Evaluation</button>
+        <button mat-menu-item class="menu-hight" [routerLink]="['/krya/cqa']">Comparative Quotation Analysis</button>
+        <button mat-menu-item class="menu-hight" (click)="rfqCancel()">Cancellation</button>
+        <button mat-menu-item class="menu-hight" (click)="rfqExtension()">Extension / Exception Approval</button>        
+        <button mat-menu-item class="menu-hight" (click)="rfqBafoLafo()" >Seek BAFO/LAFO</button>
+        <button mat-menu-item class="menu-hight" [routerLink]="['/krya/post-tender-queries']">Publish PTC</button>
+        <button mat-menu-item class="menu-hight" (click)="approvalSummary()">Approval Summary</button>
+        <button mat-menu-item class="menu-hight" [routerLink]="['/krya/extend-validity']" >Extend Validity</button>
+          </mat-menu>
+</div>

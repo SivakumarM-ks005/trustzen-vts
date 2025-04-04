@@ -1,0 +1,30 @@
+<div class="flex-column justify-content-center align-items-center text-center h-60 confirm-dialog">
+    <mat-dialog-content>        
+    <div class="">
+            <div class="boxHeader btn-confirm-close"  *ngIf="data.deleteFlag == true" > 
+                    <button class="btn btn-danger btn-sm smBtn no-border" matTooltip="close" mat-dialog-close
+                        (click)="closeDialog(false)">
+                        <span class="material-icons-outlined">close</span>
+                    </button> 
+            </div> 
+            <div class="confir-icon">
+                <div class="alert-msg">
+                    <h6> Confirmation </h6>
+                     <div> {{data?.moduleName}} Data Saved Successfully. Kindly Submit for PreQualification Process!</div>
+                </div>
+            </div> 
+    </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">             
+            <div class="confirm-btn">   
+                <button   cdkFocusInitial  class="btn-blue" (click)="closeDialog(true)">
+                    <span class="material-icons-outlined">done</span>Yes
+                </button>
+                <span class="me-2"></span>
+                <button   class="btn-gray" mat-dialog-close cdkFocusInitial (click)="closeDialog(false)">
+                    <span class="material-icons-outlined">close</span>No
+                </button>
+            </div>        
+    </mat-dialog-actions>
+    
+</div>

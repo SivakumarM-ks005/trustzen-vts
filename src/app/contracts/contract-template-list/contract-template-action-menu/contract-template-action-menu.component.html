@@ -1,0 +1,17 @@
+<div>
+    <a class="d-flex align-items-center" [matMenuTriggerFor]="menu"><span>Action</span>
+        <mat-icon class="material-icons">arrow_drop_down</mat-icon>
+    </a>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item class="menu-hight" (click)="viewOrEditTemplate(element)">View /
+            Edit</button>
+        <button mat-menu-item class="menu-hight" [disabled]="(element.status !== 'Draft')"
+            (click)="viewOrEditTemplate(element)">Amendment</button>
+        <button mat-menu-item class="menu-hight" [disabled]="(element.status !== 'Active')"
+            (click)="deactivateTemplate(element)">Deactivate</button>
+        <button mat-menu-item class="menu-hight" (click)="copyTemplate(element)">Copy
+            Template</button>
+        <button mat-menu-item class="menu-hight" (click)="viewWorkFlow(element)">View
+            Workflow</button>
+    </mat-menu>
+</div>

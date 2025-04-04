@@ -1,0 +1,21 @@
+
+<div class="specific-container">
+    <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+    <div class="placeholder cust-field-height">
+        <p class="title">PlaceHolder</p>
+        <mat-form-field class="search-box">
+            <input matInput type="search">
+            <button matSuffix mat-icon-button aria-label="Search">
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+        <mat-list role="list">
+            <mat-list-item role="listitem">Tender/PO Reference</mat-list-item>
+            <mat-list-item role="listitem">Creation Date</mat-list-item>
+            <mat-list-item role="listitem">Start Date</mat-list-item>
+            <mat-list-item role="listitem">Contract #</mat-list-item>
+            <mat-list-item role="listitem">Revision Date</mat-list-item>
+            <mat-list-item role="listitem">End Date</mat-list-item>
+          </mat-list>
+    </div>
+</div>

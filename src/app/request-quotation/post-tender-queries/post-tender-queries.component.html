@@ -1,0 +1,148 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title">
+            <i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Sourcing
+            Management >> Request for Quotation >> Post Tender Queries
+        </h2>
+    </div>
+
+    <div class="content-box p-2">
+       
+        <div class="widget-box">
+            <h5 class="widget-title">
+               Header
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">RFT #</div>
+                        <div class="display-col-data">RFT-249</div>
+                    </div>
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">RFT Name</div>
+                        <div class="display-col-data">Desktop</div>
+                    </div>
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">PTC Technical Submission Date</div>
+                        <div class="display-col-data">28-Jan-2025</div>
+                    </div>
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">PTC Technical Response Date</div>
+                        <div class="display-col-data">30-Jan-2025</div>
+                    </div>
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">PTC Financial Submission Date</div>
+                        <div class="display-col-data">28-Jan-2025</div>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title">
+                Submitted PTC Questions
+            </h5>
+            <div class="widget-content">
+                <div class="table-responsive">
+                    <table class="content-table w-100">
+                        <thead>
+                            <tr>
+                                <th  scope="col">Publish</th>
+                                <th  scope="col">RFT #</th>
+                                <th  scope="col">PTC #</th>
+                                <th  scope="col">Question #</th>
+                                <th  scope="col">Evaluator Name</th>
+                                <th  scope="col">Category</th>
+                                <th  scope="col">Document Reference</th>
+                                <th  scope="col">Question</th>
+                                <th  scope="col">Reference Document</th>
+                                <th  scope="col">Supplier Name</th>
+                                <th  scope="col">Request Date</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <tr class="cust-field-height">
+                                <td class="text-center">
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td>
+                                    RFT-12
+                                </td>
+                                <td>
+                                    RFT-12
+                                </td>
+                                <td>
+                                    12
+                                </td>
+                                <td>
+                                   Test
+                                </td>
+                                <td >
+                                    <mat-form-field class="w-100">
+                                        <mat-select matTooltip="Fixed value %" placeholder="Select Fixed value">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Days">Bid Bond</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td class="text-center">
+                                    <mat-form-field >
+                                        <textarea matInput  ></textarea>
+                                      </mat-form-field>
+                                </td>
+                                <td>
+                                    <div class="custom-file-upload mt-2">
+                                        <button class="file-upload-button">
+                                            <input class="custom-file-input"
+                                                id="customFileLang" type="file" #fileInput
+                                                accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf"
+                                                 multiple>
+                                            <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
+                                                class="ps-2">Upload</span>
+                                        </button>
+                
+                                    </div>
+                                </td>
+                                <td >
+                                    <mat-form-field class="w-100">
+                                        <mat-select matTooltip="Fixed value %" placeholder="Select Fixed value">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Days">Bid Bond</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field >
+                                        <input matInput [matDatepicker]="dp1">
+                                        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                        <mat-datepicker #dp1></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                                             
+                            </tr>
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title">
+                Previous PTC Questions
+            </h5>
+            <div class="widget-content">
+                <ag-grid-angular [theme]="theme" [rowData]="rowData" [columnDefs]="colDefs"
+                [defaultColDef]="defaultColDef"  [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+                [paginationPageSizeSelector]="paginationPageSizeSelector" />
+            </div>
+        </div>
+       
+    </div>
+    <div class="footer-action-btn">
+        <button    class="btn-gray" >
+            <i class="fa fa-times pe-2"></i>Cancel</button> 
+    <div class="middle-spacer"></div>
+    <button   class="btn-blue">
+        <i class="fa fa-paper-plane-o pe-2" aria-hidden="true"></i> Save				
+    </button>
+</div>
+</div>

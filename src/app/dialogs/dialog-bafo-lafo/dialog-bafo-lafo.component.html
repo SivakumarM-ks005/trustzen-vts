@@ -1,0 +1,103 @@
+<div class="dialog-container">
+    <div mat-dialog-title>
+        <h3> BAFO / LAFO Submission</h3>
+        <button mat-icon-button mat-dialog-close>
+            <i class="material-icons" matTooltip="close">close</i>
+        </button>
+    </div>
+    <mat-dialog-content>
+      
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Header
+            </h5>
+            <div class="widget-content">
+                <div class="grid-4cols">
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">RFx Ref #</div>
+                        <div class="display-col-data">RFQ-249</div>
+                    </div>
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">RFx creation Date</div>
+                        <div class="display-col-data">20-03-2025</div>
+                    </div>
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">Short Name</div>
+                        <div class="display-col-data">Public RFQ</div>
+                    </div>
+                    <div class="display-field-cols ">
+                        <div class="display-col-label">Reason Description</div>
+                        <div class="display-col-data">Public RFQ</div>
+                    </div>
+                    <mat-form-field class="w-100">
+                        <mat-label>Reason Code </mat-label>
+                        <mat-select required >
+                            <mat-option value="">-- Please Select --</mat-option>
+                            <mat-option value=""></mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    
+    <mat-form-field >
+        <mat-label>Reason Description</mat-label>
+        <textarea matInput placeholder="Supporting for Engineering projects for 1 year" required></textarea>
+      </mat-form-field>
+                    <mat-form-field >
+                        <mat-label>Submission Due Date</mat-label>
+                        <input matInput [matDatepicker]="dp1">
+                        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                        <mat-datepicker #dp1></mat-datepicker>
+                    </mat-form-field>
+                  
+                    <mat-form-field >
+                        <mat-label>Open Date</mat-label>
+                        <input matInput [matDatepicker]="dp2">
+                        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                        <mat-datepicker #dp2></mat-datepicker>
+                    </mat-form-field>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title">
+                Invite to Supplier
+            </h5>
+            <div class="widget-content">
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Serial #</th>
+                                <th scope="col">Supplier Name</th>
+                                <th scope="col">Supplier Response #</th>
+                                <th scope="col">Financial Ranking #</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="list">
+                            <tr>
+                                <td >1</td>
+                                <td >Indian Oil</td>
+                                <td >133423423232</td>
+                                <td >5</td>
+                                <td class="text-center">    <mat-checkbox></mat-checkbox></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="footer-action-btn">
+            <button class="btn-gray" mat-dialog-close cdkFocusInitial>
+                <i class="fa fa-ban pe-2"></i>Cancel RFQ</button>
+                <div class="middle-spacer"></div>
+                <button  class="btn-blue"><i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>
+                    Initial Workflow</button>
+                <button  class="btn-blue"><i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>
+                Save as Draft</button>
+        </div>
+    </mat-dialog-actions>
+</div>

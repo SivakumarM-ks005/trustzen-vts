@@ -1,0 +1,44 @@
+.grid-25-55-18 {
+    display: grid;
+    grid-template-columns: 25% 55% 18%;
+    gap:10px;
+}
+
+.mxw-120 {
+    width: 120px;
+}
+
+
+.display-box {
+    display: grid;
+    grid-template-columns: 35% 65%;
+  
+    p {
+      margin-bottom: 0;
+    }
+  
+    border-left: 1px dotted #000;
+    padding-left: 10px;
+  
+    &:first-child {
+      border: 0;
+      padding-left: 0px;
+    }
+  
+  }
+  
+  .display-label {
+    font-size: 12px;
+    color: #525252;
+    font-weight: 500;
+  }
+  
+  .display-data {
+    font-size: 13px;
+    font-weight: 500;
+    color: #202020;
+    &::before {
+      content: ":";
+      margin-right: 5px;
+    }
+  }

@@ -1,0 +1,62 @@
+{
+    "LANGUAGE_LABEL": "Select Language",
+    "CompanyDetail": {
+        "Welcome": "Welcome to procurezen Portal",
+        "ProjectName": "An AI enabled Digital Procurement Platform",
+        "CompanyName": "procureZEN Solutions Pvt Ltd",
+        "About": "About",
+        "Us": "procureZEN",
+        "CompanyContent": "Procurezen is a comprehensive AI-Enabled digital procurement platform, that covers the various processes relating to Supplier Onboarding, Procurement Forecasting, Sourcing Management including Quotations, Tenders, Proposals, Auctions and Reverse Auctions, , Contract Life Cycle Management,  Order Management, Milestone Completion Request & Approvals, Invoice & Payment Tracking, 360-degree Performance Evaluation, and comprehensive Insights including the multi-dimensional Spend Analytics."
+    },
+    "Download": {
+        "DowhHeader": "Download Centre",
+        "DoenContant": "Download and review our Terms and Conditions. Ensure you understand our policies before proceeding to registration.",
+        "DownLink": " Access Files",
+        "Agree": "I have read and agree to the Supplier Registration Guidelines and Code of Conduct"
+    },
+    "ViewSource": {
+        "ViewSourceHeader": "View Sourcing Events",
+        "ViewConant": "Explore current sourcing events and opportunities. Stay updated and participate to connect with potential partners.",
+        "ViewLink": "Explore Events"
+    },
+    "Login": {
+        "Sign": "Sign In",
+        "LoginContant": "Welcome! Please log in to access your account. Enter your credentials below to continue.",
+        "Usernameplaceholder": "User Name",
+        "Password": "Password",
+        "SignUp": "Sign Up",
+        "Forgetpwd": "Forgot Password?",
+        "Register": "Supplier"
+    },
+    "RegisterCreation": {
+        "RegHeader": "Supplier User Creation",
+        "RegTitle": "Company Details",
+        "RegSubTitle": "procureZEN Solutions is an emerging technology initiative by DSSI Solutions and MITRAA LEGAL, focused on leveraging IoT, ICT, and Cybertech technologies",
+        "Submit": "submit",
+        "Cancal": "Cancel",
+        "SupplierClassification": "Supplier Classification",
+        "SupplierName": "Company Name",
+        "SupplierNameNativeLanguage": "Company Name in Native Language",
+        "CommercialTradeLicense": "Commercial / Trade License#",
+        "SiteCode": "Site Code",
+        "SiteName": "Site Name",
+        "UserName": "User Name",
+        "Password": "Password",
+        "ConfirmPassword": "Confirm / Retype Password",
+        "CompanyEmail": "Company Email",
+        "ContactDetails": "Primary Contact Details",
+        "Salutation": "Salutation",
+        "FirstName": "First Name",
+        "MiddleName": "Middle Name",
+        "LastName": "Last Name",
+        "Designation": "Designation",
+        "ContactRole": "Role",
+        "EmailID": "Email ID",
+        "Mobile": "Mobile Number",
+        "MobileCountryCode": "Mobile Code",
+        "Landline": "Landline Number",
+        "LandlineCountryCode": "Landline Code",
+        "UserDetails": "Supplier Portal Login Credentials",
+        "Taxreg": "Tax Registration"
+    }
+}

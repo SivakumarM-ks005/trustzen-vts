@@ -1,0 +1,1197 @@
+<div class="container-fluid">
+    <div class="pageContainer">
+        <div class="pageHeader">
+            <h1 class="heading">Contract View</h1>
+            <div class="btn-group">
+                <button mat-stroked-button >History of Review Tracking</button>
+                <button  >Track & Trace</button>
+            </div>
+        </div>
+        <div class="pageContent contract-view">
+            <div class="mb-2">
+                <mat-accordion class="custom-accordion">
+                    <mat-expansion-panel class="cust-panel" [expanded]="isAccordionState">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Header Details</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="accord-grid-5cols ps-2">
+                            <mat-form-field>
+                                <mat-label>Source Txn</mat-label>
+                                <mat-select matTooltip="Select Source" placeholder="Direct" [disabled]="isDisabled">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="Expense contract">Direct</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Source Txn Ref #</mat-label>
+                                <input matInput [disabled]="isDisabled" placeholder="">
+                            </mat-form-field>
+
+                            <mat-form-field>
+                                <mat-label>Contract #</mat-label>
+                                <input matInput [disabled]="isDisabled" placeholder="CN/20244"
+                                    formControlName="Version">
+                            </mat-form-field>
+                            <mat-form-field class="version">
+                                <mat-label>Version</mat-label>
+                                <input matInput [disabled]="isDisabled" placeholder="1.0">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Creation Date</mat-label>
+                                <input matInput [matDatepicker]="dp1" [disabled]="isDisabled" placeholder="01-Nov-2024"
+                                    value="">
+                                <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                <mat-datepicker #dp1></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Contract Admin</mat-label>
+                                <mat-select [disabled]="isDisabled" placeholder="Sam Williams">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="Expense contract">Sam Williams</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Contract Name</mat-label>
+                                <input matInput [disabled]="isDisabled" placeholder="Contract Serve">
+                            </mat-form-field>
+                            <mat-form-field class="description">
+                                <mat-label>Description</mat-label>
+                                <input matInput [disabled]="isDisabled" placeholder="Contract Serve Contract Serve">
+                            </mat-form-field>
+
+
+                            <mat-form-field>
+                                <mat-label>Start Date</mat-label>
+                                <input matInput [matDatepicker]="dp2" [disabled]="isDisabled" placeholder="05-Nov-2024"
+                                    value="">
+                                <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                                <mat-datepicker #dp2 required></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>End Date</mat-label>
+                                <input matInput [matDatepicker]="dp3" [disabled]="isDisabled" placeholder="31-Dec-2024"
+                                    value="">
+                                <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                <mat-datepicker #dp3 required></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Functional Currency</mat-label>
+                                <mat-select [disabled]="isDisabled" placeholder="USD">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="Expense contract">USD</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Contract Classification</mat-label>
+                                <mat-select [disabled]="isDisabled" placeholder="General">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="Expense contract">General</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Contract Type</mat-label>
+                                <mat-select [disabled]="isDisabled" placeholder="Expense Contract">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="">Expense Contract</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Spend Type</mat-label>
+                                <mat-select [disabled]="isDisabled" placeholder="Expense Contract">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="">Expense Contract</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Template ID</mat-label>
+                                <mat-select [disabled]="isDisabled" placeholder="Temp0001">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="">Temp0001</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="last-row">
+                            <mat-form-field>
+                                <mat-label>Parent Category</mat-label>
+                                <mat-select placeholder="Information Technology" [disabled]="isDisabled">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value=""></mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Sub Category</mat-label>
+                                <mat-select placeholder="Application Support Service" [disabled]="isDisabled">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="">Application Support Service</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Child Category</mat-label>
+                                <mat-select placeholder="IBM Maximo" [disabled]="isDisabled">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option value="">IBM Maximo</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <div>
+                                <mat-checkbox class="coloumn-fix" [disabled]="isDisabled" checked>Allow Partial
+                                    Response</mat-checkbox>
+                                <mat-checkbox class="coloumn-fix" [disabled]="isDisabled" checked>Allow Substitute
+                                    Items</mat-checkbox>
+                                <mat-checkbox class="coloumn-fix" [disabled]="isDisabled" checked>Child
+                                    Contract</mat-checkbox>
+                            </div>
+                        </div>
+
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <div class="mt-2 mb-2">
+                <mat-accordion class="custom-accordion">
+                    <mat-expansion-panel class="cust-panel">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Details</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <mat-tab-group class="partyTabs">
+                            <mat-tab label="Parties in Transaction">                              
+                                <div class="parties">
+                                    <div class="sub-division">
+                                        <div class="title">Party: 1</div>
+                                        <div class="p-2">
+                                            <p class="ft-bold">IBM Systems</p>
+                                            <p>13th Street. 47 W 13th St, New York, NY 10011</p>
+                                        </div>
+        
+                                        <div class="party-info">
+                                            <p> Authorized Signatory:</p>
+                                            <p class="ps-1 ft-bold"> Mr Baskaran Mahadevan</p>
+                                            <p> Witness-1:</p>
+                                            <p class="ps-1 ft-bold"> Mr Baskaran Mahadevan</p>
+                                            <p> Witness-2:</p>
+                                            <p class="ps-1 ft-bold"> Mr Sampath Kumar</p>
+                                        </div>
+                                    </div>
+                                    <div class="sub-division">
+                                        <div class="title">Party: 2</div>
+                                        <div class="p-2">
+                                            <p class="ft-bold">Information Technology</p>
+                                            <p>4909 Adams Avenue, New York, NY 10011</p>
+                                        </div>
+        
+                                        <div class="party-info">
+                                            <p> Authorized Signatory:</p>
+                                            <p class="ps-1 ft-bold"> Mr Senthilkumar </p>
+                                            <p> Witness-1:</p>
+                                            <p class="ps-1 ft-bold"> Mr Marimuthu Maddy</p>
+                                            <p> Witness-2:</p>
+                                            <p class="ps-1 ft-bold"> Mr Sampath Kumar</p>
+                                        </div>
+                                    </div>
+        
+                                </div>
+                                <div class="read-agree">
+                                    <mat-radio-button>Read & Agree</mat-radio-button>
+                                    <mat-radio-button>Read & Disagree</mat-radio-button>
+                                    <div class="d-flex">
+        
+                                        <mat-form-field class="col cust-field-height">
+                                            <mat-label>Leave a comment</mat-label>
+                                            <input matInput placeholder="Enter Your comments here">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            <!-- <mat-tab label="Roles & Responsibilities">
+                                <app-roles-responsibilities></app-roles-responsibilities></mat-tab> -->
+                            <mat-tab label="Standard - Terms & Conditions"> 
+                                <div class="p-2">
+                                   <app-terms-condition disabled></app-terms-condition>
+                                   <div class="read-agree">
+                                    <mat-radio-button>Read & Agree</mat-radio-button>
+                                    <mat-radio-button>Read & Disagree</mat-radio-button>
+                                    <div class="d-flex">
+        
+                                        <mat-form-field class="col cust-field-height">
+                                            <mat-label>Leave a comment</mat-label>
+                                            <input matInput placeholder="Enter Your comments here">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                  
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Transaction Specific - Terms & Conditions">
+                                <app-transaction-specific-tc></app-transaction-specific-tc>
+                                <div class="read-agree">
+                                    <mat-radio-button>Read & Agree</mat-radio-button>
+                                    <mat-radio-button>Read & Disagree</mat-radio-button>
+                                    <div class="d-flex">
+        
+                                        <mat-form-field class="col cust-field-height">
+                                            <mat-label>Leave a comment</mat-label>
+                                            <input matInput placeholder="Enter Your comments here">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Commercials">
+                                <div class="commericials">
+                                    <div class="d-flex cust-field-height pt-2 pb-1 justify-content-start align-items-center">
+                                        <div class="d-flex">
+                                            <label style="font-size: 13px;">Currency: </label>
+                                            <span class="ft-size13 ft-bold"> USD</span>
+                                            
+                                        </div>
+                                        <div class="d-flex ps-3">
+                                            <label style="font-size: 13px;">Pay Terms: </label>
+                                           <span class="ft-size13 ft-bold"> Pay Net 30 Days</span>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-flush comman-table-style">
+                                            <thead class="thead-light">
+                                                <tr>
+                                                    <th scope="col">Serial #</th>
+                                                    <th scope="col" class="mxW-100">Code</th>
+                                                    <th scope="col" >Description</th>
+                                                    <th scope="col" class="mxW-100">UOM</th>
+                                                    <th scope="col" class="mxW-100">Quantity</th>
+                                                    <th scope="col" class="mxW-100">Ship to Site</th>
+                                                    <th scope="col" class="mxW-120">Item Need By Date</th>
+                                                    <th scope="col" class="mxW-100">Rate</th>
+                                                    <th scope="col" class="mxW-100">Value</th>
+                                                    <th scope="col" class="mxW-150 ">Action
+                                                        <mat-icon  matTooltip="Add Row" class="cust-primary-btn">add_box</mat-icon>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="list">
+                                                <tr class="cust-field-height">
+                                                    <td>1</td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" [disabled]="isDisabled"  value="DL120009">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field >
+                                                            <input matInput placeholder="" [disabled]="isDisabled"  value="HP Seller">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13"> Piece</span>
+                                                    </td>
+                                                    <td class=" text-right">
+                                                        <span class="ft-size13"> 10</span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13 text-right"> 10-Nov-2024</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13 text-right"> NaN</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13 text-right"> NaN</span>
+                                                    </td>
+                                                    <td class="mxW-150 text-center">
+                                                       <mat-icon>delete</mat-icon>
+                                                    </td>
+                                                </tr>
+                                                <tr class="cust-field-height">
+                                                    <td>2</td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" [disabled]="isDisabled"  value="DL120009">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field >
+                                                            <input matInput placeholder="" [disabled]="isDisabled"  value="HP Seller">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13"> Piece</span>
+                                                    </td>
+                                                    <td class=" text-right">
+                                                        <span class="ft-size13"> 10</span>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13 text-right"> 10-Nov-2024</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13 text-right"> NaN</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="ft-size13 text-right"> NaN</span>
+                                                    </td>
+                                                    <td class="mxW-150 text-center">
+                                                       <mat-icon>delete</mat-icon>
+                                                    </td>
+                                                </tr>
+                                                <tr class="cust-field-height">
+                                                    <td colspan="6" class="text-right"> Item Total</td>                   
+                                                    <td>
+                                                        <mat-form-field class="mxW-100 text-right">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td class="mxW-150 text-center">
+                                                    </td>
+                                                </tr>
+                                                <tr class="cust-field-height">
+                                                    <td colspan="6" class="text-right"> Discount</td>                   
+                                                    <td>
+                                                        <mat-form-field class="w-70">
+                                                            <input matInput placeholder="" class="text-right"  value="5">
+                                                        </mat-form-field> %
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td class="mxW-150 text-center">
+                                                    </td>
+                                                </tr>
+                                                <tr class="cust-field-height">
+                                                    <td colspan="6" class="text-right"> Net Value</td>                   
+                                                    <td>
+                                                        <mat-form-field class="mxW-100 text-right">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td class="mxW-150 text-center">
+                                                    </td>
+                                                </tr>
+                                                <tr class="cust-field-height">
+                                                    <td colspan="6" class="text-right"> Tax</td>                   
+                                                    <td>
+                                                        <mat-form-field class="w-70">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field> %
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td class="mxW-150 text-center">
+                                                    </td>
+                                                </tr>
+                                                <tr class="cust-field-height">
+                                                    <td colspan="6" class="text-right"> Total Amount</td>                   
+                                                    <td>
+                                                        <mat-form-field class="mxW-100 text-right">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td>
+                                                        <mat-form-field class="mxW-100">
+                                                            <input matInput placeholder="" class="text-right"  value="">
+                                                        </mat-form-field>
+                                                    </td>
+                                                    <td class="mxW-150 text-center">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </div>
+                                    <div class="read-agree">
+                                        <mat-radio-button>Read & Agree</mat-radio-button>
+                                        <mat-radio-button>Read & Disagree</mat-radio-button>
+                                        <div class="d-flex">
+            
+                                            <mat-form-field class="col cust-field-height">
+                                                <mat-label>Leave a comment</mat-label>
+                                                <input matInput placeholder="Enter Your comments here">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                            </mat-tab>
+                            <mat-tab label="Milestone"> 
+                                <div class="table-responsive">
+                                    <table class="table table-flush comman-table-style">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">Serial #</th>
+                                                <th scope="col" >Description</th>
+                                                <th scope="col" >Milestone Description</th>
+                                                <th scope="col" >Fixed value or %</th>
+                                                <th scope="col" >value</th>
+                                                <th scope="col" >Expanded Value</th>
+                                                <th scope="col" >Billable</th>
+                                                <th scope="col" >Advance Payable</th>
+                                                <th scope="col" >Reserve Fund</th>
+                                                <th scope="col" >Completion Date</th>
+                                                <!-- <th scope="col" class="mxW-150 ">Action
+                                                    <mat-icon  matTooltip="Add Row" class="cust-primary-btn">add_box</mat-icon>
+                                                </th> -->
+                                            </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                            <tr class="cust-field-height">
+                                                <td>1</td>
+                                                <td>
+                                                    <span class="ft-size13"> Nil</span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> </span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> NA</span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> NA</span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> No</span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> No</span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> No</span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> No</span>
+                                                </td>
+                                                <td>
+                                                    <span class="ft-size13"> 20-N0v-2024</span>
+                                                </td>
+                                                <!-- <td>
+                                                    <mat-form-field class="mxW-100">
+                                                        <input matInput placeholder="" class="text-right"  value="">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    <mat-form-field class="mxW-100">
+                                                        <input matInput placeholder="" class="text-right"  value="">
+                                                    </mat-form-field>
+                                                </td> -->
+                                              
+                                            </tr>
+                                          
+                                        </tbody>
+                                    </table>
+                                </div>
+                                    <div class="read-agree">
+                                        <mat-radio-button>Read & Agree</mat-radio-button>
+                                        <mat-radio-button>Read & Disagree</mat-radio-button>
+                                        <div class="d-flex">
+            
+                                            <mat-form-field class="col cust-field-height">
+                                                <mat-label>Leave a comment</mat-label>
+                                                <input matInput placeholder="Enter Your comments here">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                            </mat-tab>
+                            <mat-tab label="Compliance"> 
+                                <div class="performance">
+                                    <div class="title">Performance Bond</div>
+                                    <div class="per-bond">
+                                        <mat-form-field>
+                                            <mat-label>Performance Bond Requirement</mat-label>
+                                            <mat-select placeholder="Yes" [disabled]="isDisabled">
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">Yes</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <mat-label>Bond Type</mat-label>
+                                            <mat-select placeholder="Bank Gurantee" [disabled]="isDisabled">
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value=""></mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <mat-label>Bond Basis</mat-label>
+                                            <mat-select placeholder="Fixed" [disabled]="isDisabled">
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value=""></mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <mat-label>Bond Value</mat-label>
+                                            <input matInput [disabled]="isDisabled" class="text-right" value="100,00" >
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <mat-label>Band Submission Mode</mat-label>
+                                            <mat-select [disabled]="isDisabled"  placeholder="Online">
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value=""></mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        </div>
+                                    <div class="per-bond-2ndrow">        
+                                        <mat-form-field class="ms-2">
+                                            <mat-label>Validity Period</mat-label>
+                                            <mat-select [disabled]="isDisabled"  placeholder="Contract Duration + 1 month">
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">Online</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                                <div class="d-flex align-items-center">
+                                            <span style="font-size: 13px; font-weight: 600;">Mandate Following Submission: </span>
+                                            <mat-checkbox [disabled]="isDisabled">Business Continuity Undertaking</mat-checkbox>
+                                            <mat-checkbox [disabled]="isDisabled">Performance Guarantee Insurance</mat-checkbox>
+                                            <mat-checkbox [disabled]="isDisabled">workmen Compensation Insurance</mat-checkbox></div>
+                                       
+                                    </div>
+                                </div>
+                                <div class="compliance">
+                                    <div class="sub-division">
+                                        <div class="title">Threshold for Variations and Claims</div>
+                                        <div class="threshold">
+                                            <mat-form-field>
+                                                <mat-label>Variation Order %</mat-label>
+                                                <input matInput [disabled]="isDisabled" placeholder="NA">
+                                            </mat-form-field>
+                                            <mat-form-field>
+                                                <mat-label>Claim Order %</mat-label>
+                                                <input matInput [disabled]="isDisabled" placeholder="NA">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="sub-division">
+                                        <div class="title">Issuance of Warning & Termination Notice</div>
+                                        <div class="issuance">
+                                            <mat-form-field>
+                                                <mat-label>Number of Warnings</mat-label>
+                                                <mat-select [disabled]="isDisabled" placeholder="3">
+                                                    <mat-option value="">-- Please Select --</mat-option>
+                                                    <mat-option value="">1</mat-option>
+                                                    <mat-option value="">2</mat-option>
+                                                    <mat-option value="">3</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field>
+                                                <mat-label>Action to be Taken</mat-label>
+                                                <mat-select [disabled]="isDisabled" placeholder="Terminate">
+                                                    <mat-option value="">-- Please Select --</mat-option>
+                                                    <mat-option value="">1</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field>
+                                                <mat-label>Termination Notice Period</mat-label>
+                                                <mat-select [disabled]="isDisabled" placeholder="Days">
+                                                    <mat-option value="">-- Please Select --</mat-option>
+                                                    <mat-option value="">Days</mat-option>
+                                                    <mat-option value="">Month</mat-option>
+                                                    <mat-option value="">Year</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field>
+                                                <mat-label></mat-label>
+                                                <mat-label>Days</mat-label>
+                                                <mat-select [disabled]="isDisabled" placeholder="10" >
+                                                    <mat-option value="">-- Please Select --</mat-option>
+                                                    <mat-option value="">16</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                    <div class="read-agree">
+                                        <mat-radio-button>Read & Agree</mat-radio-button>
+                                        <mat-radio-button>Read & Disagree</mat-radio-button>
+                                        <div class="d-flex">
+            
+                                            <mat-form-field class="col cust-field-height">
+                                                <mat-label>Leave a comment</mat-label>
+                                                <input matInput placeholder="Enter Your comments here">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                            </mat-tab>
+                            <mat-tab label="Documents">
+                                <div class="table-responsive mt-2">
+                                    <table class="table table-flush comman-table-style">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col" >Document Name</th>
+                                                <th scope="col" >Description</th>
+                                                <th scope="col" >Uploaded By</th>
+                                                <th scope="col" >Uploaded Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                            <tr class="cust-field-height">
+                                             <td>Signed Contract</td>
+                                             <td>Contract9001.pdf</td>
+                                             <td>Jason sam</td>
+                                             <td>24-Dec-2024</td>              
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+            <!-- <div class="mb-2">
+                <mat-accordion class="custom-accordion mb-2">
+                    <mat-expansion-panel class="cust-panel" [expanded]="isAccordionState">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Parties Detail</mat-panel-title>
+                        </mat-expansion-panel-header>
+                   
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div> -->
+            <!-- <div class="mb-2">
+                <mat-accordion class="custom-accordion mt-2">
+                    <mat-expansion-panel class="cust-panel" [expanded]="isAccordionState">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Terms and Conditions</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <app-terms-condition disabled></app-terms-condition>
+                        <div class="d-flex">Contract Specific Terms and Conditions</div>
+                        <app-transaction-specific-tc disabled></app-transaction-specific-tc>
+                        <div class="read-agree">
+                            <mat-radio-button>Read & Agree</mat-radio-button>
+                            <mat-radio-button>Read & Disagree</mat-radio-button>
+                            <div class="d-flex">
+
+                                <mat-form-field class="col cust-field-height">
+                                    <mat-label>Leave a comment</mat-label>
+                                    <input matInput placeholder="Enter Your comments here">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div> -->
+            <!-- <div class="mb-2">
+                <mat-accordion class="custom-accordion mt-2">
+                    <mat-expansion-panel class="cust-panel" [expanded]="isAccordionState">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Contract Commercials</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="commericials">
+                            <div class="d-flex cust-field-height pt-2 pb-1 justify-content-start align-items-center">
+                                <div class="d-flex">
+                                    <label style="font-size: 13px;">Currency: </label>
+                                    <span class="ft-size13 ft-bold"> USD</span>
+                                    
+                                </div>
+                                <div class="d-flex ps-3">
+                                    <label style="font-size: 13px;">Pay Terms: </label>
+                                   <span class="ft-size13 ft-bold"> Pay Net 30 Days</span>
+                                    
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-flush comman-table-style">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th scope="col">Serial #</th>
+                                            <th scope="col" class="mxW-100">Code</th>
+                                            <th scope="col" >Description</th>
+                                            <th scope="col" class="mxW-100">UOM</th>
+                                            <th scope="col" class="mxW-100">Quantity</th>
+                                            <th scope="col" class="mxW-100">Ship to Site</th>
+                                            <th scope="col" class="mxW-120">Item Need By Date</th>
+                                            <th scope="col" class="mxW-100">Rate</th>
+                                            <th scope="col" class="mxW-100">Value</th>
+                                            <th scope="col" class="mxW-150 ">Action
+                                                <mat-icon  matTooltip="Add Row" class="cust-primary-btn">add_box</mat-icon>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="list">
+                                        <tr class="cust-field-height">
+                                            <td>1</td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" [disabled]="isDisabled"  value="DL120009">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field >
+                                                    <input matInput placeholder="" [disabled]="isDisabled"  value="HP Seller">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13"> Piece</span>
+                                            </td>
+                                            <td class=" text-right">
+                                                <span class="ft-size13"> 10</span>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13 text-right"> 10-Nov-2024</span>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13 text-right"> NaN</span>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13 text-right"> NaN</span>
+                                            </td>
+                                            <td class="mxW-150 text-center">
+                                               <mat-icon>delete</mat-icon>
+                                            </td>
+                                        </tr>
+                                        <tr class="cust-field-height">
+                                            <td>2</td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" [disabled]="isDisabled"  value="DL120009">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field >
+                                                    <input matInput placeholder="" [disabled]="isDisabled"  value="HP Seller">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13"> Piece</span>
+                                            </td>
+                                            <td class=" text-right">
+                                                <span class="ft-size13"> 10</span>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13 text-right"> 10-Nov-2024</span>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13 text-right"> NaN</span>
+                                            </td>
+                                            <td>
+                                                <span class="ft-size13 text-right"> NaN</span>
+                                            </td>
+                                            <td class="mxW-150 text-center">
+                                               <mat-icon>delete</mat-icon>
+                                            </td>
+                                        </tr>
+                                        <tr class="cust-field-height">
+                                            <td colspan="6" class="text-right"> Item Total</td>                   
+                                            <td>
+                                                <mat-form-field class="mxW-100 text-right">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="mxW-150 text-center">
+                                            </td>
+                                        </tr>
+                                        <tr class="cust-field-height">
+                                            <td colspan="6" class="text-right"> Discount</td>                   
+                                            <td>
+                                                <mat-form-field class="w-70">
+                                                    <input matInput placeholder="" class="text-right"  value="5">
+                                                </mat-form-field> %
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="mxW-150 text-center">
+                                            </td>
+                                        </tr>
+                                        <tr class="cust-field-height">
+                                            <td colspan="6" class="text-right"> Net Value</td>                   
+                                            <td>
+                                                <mat-form-field class="mxW-100 text-right">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="mxW-150 text-center">
+                                            </td>
+                                        </tr>
+                                        <tr class="cust-field-height">
+                                            <td colspan="6" class="text-right"> Tax</td>                   
+                                            <td>
+                                                <mat-form-field class="w-70">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field> %
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="mxW-150 text-center">
+                                            </td>
+                                        </tr>
+                                        <tr class="cust-field-height">
+                                            <td colspan="6" class="text-right"> Total Amount</td>                   
+                                            <td>
+                                                <mat-form-field class="mxW-100 text-right">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-100">
+                                                    <input matInput placeholder="" class="text-right"  value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td class="mxW-150 text-center">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <div class="read-agree">
+                                <mat-radio-button>Read & Agree</mat-radio-button>
+                                <mat-radio-button>Read & Disagree</mat-radio-button>
+                                <div class="d-flex">
+    
+                                    <mat-form-field class="col cust-field-height">
+                                        <mat-label>Leave a comment</mat-label>
+                                        <input matInput placeholder="Enter Your comments here">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div> -->
+            <!-- <div class="mb-2">
+                <mat-accordion class="custom-accordion mt-2">
+                    <mat-expansion-panel class="cust-panel" [expanded]="isAccordionState">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Contract MileStones</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="table-responsive">
+                            <table class="table table-flush comman-table-style">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Serial #</th>
+                                        <th scope="col" >Description</th>
+                                        <th scope="col" >Milestone Description</th>
+                                        <th scope="col" >Fixed value or %</th>
+                                        <th scope="col" >value</th>
+                                        <th scope="col" >Expanded Value</th>
+                                        <th scope="col" >Billable</th>
+                                        <th scope="col" >Advance Payable</th>
+                                        <th scope="col" >Reserve Fund</th>
+                                        <th scope="col" >Completion Date</th>
+                                        <th scope="col" class="mxW-150 ">Action
+                                            <mat-icon  matTooltip="Add Row" class="cust-primary-btn">add_box</mat-icon>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="list">
+                                    <tr class="cust-field-height">
+                                        <td>1</td>
+                                        <td>
+                                            <span class="ft-size13"> Nil</span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> </span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> NA</span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> NA</span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> No</span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> No</span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> No</span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> No</span>
+                                        </td>
+                                        <td>
+                                            <span class="ft-size13"> 20-N0v-2024</span>
+                                        </td>
+                                        <td>
+                                            <mat-form-field class="mxW-100">
+                                                <input matInput placeholder="" class="text-right"  value="">
+                                            </mat-form-field>
+                                        </td>
+                                        <td>
+                                            <mat-form-field class="mxW-100">
+                                                <input matInput placeholder="" class="text-right"  value="">
+                                            </mat-form-field>
+                                        </td>
+                                      
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                            <div class="read-agree">
+                                <mat-radio-button>Read & Agree</mat-radio-button>
+                                <mat-radio-button>Read & Disagree</mat-radio-button>
+                                <div class="d-flex">
+    
+                                    <mat-form-field class="col cust-field-height">
+                                        <mat-label>Leave a comment</mat-label>
+                                        <input matInput placeholder="Enter Your comments here">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div> -->
+            <!-- <div class="mb-2">
+                <mat-accordion class="custom-accordion mt-2">
+                    <mat-expansion-panel class="cust-panel" [expanded]="isAccordionState">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Contract Compliance</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="performance">
+                            <div class="title">Performance Bond</div>
+                            <div class="per-bond">
+                                <mat-form-field>
+                                    <mat-label>Performance Bond Requirement</mat-label>
+                                    <mat-select placeholder="Yes" [disabled]="isDisabled">
+                                        <mat-option value="">-- Please Select --</mat-option>
+                                        <mat-option value="">Yes</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Bond Type</mat-label>
+                                    <mat-select placeholder="Bank Gurantee" [disabled]="isDisabled">
+                                        <mat-option value="">-- Please Select --</mat-option>
+                                        <mat-option value=""></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Bond Basis</mat-label>
+                                    <mat-select placeholder="Fixed" [disabled]="isDisabled">
+                                        <mat-option value="">-- Please Select --</mat-option>
+                                        <mat-option value=""></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Bond Value</mat-label>
+                                    <input matInput [disabled]="isDisabled" class="text-right" value="100,00" >
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Band Submission Mode</mat-label>
+                                    <mat-select [disabled]="isDisabled"  placeholder="Online">
+                                        <mat-option value="">-- Please Select --</mat-option>
+                                        <mat-option value=""></mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                </div>
+                            <div class="per-bond-2ndrow">        
+                                <mat-form-field class="ms-2">
+                                    <mat-label>Validity Period</mat-label>
+                                    <mat-select [disabled]="isDisabled"  placeholder="Contract Duration + 1 month">
+                                        <mat-option value="">-- Please Select --</mat-option>
+                                        <mat-option value="">Online</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                        <div class="d-flex align-items-center">
+                                    <span style="font-size: 13px; font-weight: 600;">Mandate Following Submission: </span>
+                                    <mat-checkbox [disabled]="isDisabled">Business Continuity Undertaking</mat-checkbox>
+                                    <mat-checkbox [disabled]="isDisabled">Performance Guarantee Insurance</mat-checkbox>
+                                    <mat-checkbox [disabled]="isDisabled">workmen Compensation Insurance</mat-checkbox></div>
+                               
+                            </div>
+                        </div>
+                        <div class="compliance">
+                            <div class="sub-division">
+                                <div class="title">Threshold for Variations and Claims</div>
+                                <div class="threshold">
+                                    <mat-form-field>
+                                        <mat-label>Variation Order %</mat-label>
+                                        <input matInput [disabled]="isDisabled" placeholder="NA">
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Claim Order %</mat-label>
+                                        <input matInput [disabled]="isDisabled" placeholder="NA">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="sub-division">
+                                <div class="title">Issuance of Warning & Termination Notice</div>
+                                <div class="issuance">
+                                    <mat-form-field>
+                                        <mat-label>Number of Warnings</mat-label>
+                                        <mat-select [disabled]="isDisabled" placeholder="3">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="">1</mat-option>
+                                            <mat-option value="">2</mat-option>
+                                            <mat-option value="">3</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Action to be Taken</mat-label>
+                                        <mat-select [disabled]="isDisabled" placeholder="Terminate">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="">1</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Termination Notice Period</mat-label>
+                                        <mat-select [disabled]="isDisabled" placeholder="Days">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="">Days</mat-option>
+                                            <mat-option value="">Month</mat-option>
+                                            <mat-option value="">Year</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label></mat-label>
+                                        <mat-label>Days</mat-label>
+                                        <mat-select [disabled]="isDisabled" placeholder="10" >
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="">16</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                        
+                            <div class="read-agree">
+                                <mat-radio-button>Read & Agree</mat-radio-button>
+                                <mat-radio-button>Read & Disagree</mat-radio-button>
+                                <div class="d-flex">
+    
+                                    <mat-form-field class="col cust-field-height">
+                                        <mat-label>Leave a comment</mat-label>
+                                        <input matInput placeholder="Enter Your comments here">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div> -->
+            <!-- <div class="mb-2">
+                <mat-accordion class="custom-accordion mt-2">
+                    <mat-expansion-panel class="cust-panel" [expanded]="isAccordionState">
+                        <mat-expansion-panel-header class="accordion-cust-header">
+                            <mat-panel-title class="custom-panel-header">Contract Attached Documents</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        
+                        <div class="table-responsive mt-2">
+                            <table class="table table-flush comman-table-style">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col" >Document Name</th>
+                                        <th scope="col" >Description</th>
+                                        <th scope="col" >Uploaded By</th>
+                                        <th scope="col" >Uploaded Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="list">
+                                    <tr class="cust-field-height">
+                                     <td>Signed Contract</td>
+                                     <td>Contract9001.pdf</td>
+                                     <td>Jason sam</td>
+                                     <td>24-Dec-2024</td>              
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div> -->
+        </div>
+    </div>
+    <footer>
+        <div>
+            <button   (click)="contractRep()">Back</button>
+            <!-- <span class="me-2"></span>
+            <button mat-stroked-button >Save as Draft</button>
+            <span class="me-2"></span>
+            <button  >Initiate Internal Review</button>
+            <span class="me-2"></span>
+            <button  >Initiate Review with Supplier</button>
+            <span class="me-2"></span>
+            <button  >Freeze Contract</button> -->
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,75 @@
+<div #target class="me-2">
+
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Compliance
+        </h5>
+        <div class="widget-content"> 
+            <mat-tab-group class="normalTab" (selectedTabChange)="tabClick($event)"
+                #tabGroupReg>
+                @for (link of links; track link) {
+                @if(link.isShow){
+                <mat-tab label={{link.name}}>
+                    <div class="tabContent previewBox m-0">
+                        @if (link.id === 1 && link.showHide) {
+                        <app-licence-activities [supplierId]="supplierId" [userId]="userId"
+                            (tabValidCheckEmitchild)="tabParentCheck()" (SaveActDraftFlag)="saveDraftCommonFlag($event)"
+                            (tabPreviousChild)="previousTab()" (tabNextChild)="nextTab($event)"
+                            (pageUp)="goPageUp(target)" (NextFlag)="getNextFlag($event)"></app-licence-activities>
+                        }
+                        @if (link.id === 2 && link.showHide) {
+                        <app-licence-certificates [supplierId]="supplierId" [userId]="userId"
+                            (tabValidCheckEmitchild)="tabParentCheck()" (tabPreviousChild)="previousTab()"
+                            (SaveCerDraftFlag)="saveDraftCommonFlag($event)" (tabNextChild)="nextTab($event)"
+                            (pageUp)="goPageUp(target)" (NextFlag)="getNextFlag($event)"></app-licence-certificates>
+                        }
+                        @if (link.id === 3 && link.showHide) {
+                        <app-related-party-disc [supplierId]="supplierId" [userId]="userId"
+                            (tabValidCheckEmitchild)="tabParentCheck()" (tabPreviousChild)="previousTab()"
+                            (SaveCerDraftFlag)="saveDraftCommonFlag($event)" (tabNextChild)="nextTab($event)"
+                            (pageUp)="goPageUp(target)" (NextFlag)="getNextFlag($event)"></app-related-party-disc>
+                        }
+                    </div>
+                </mat-tab>
+                }
+                }
+                <!-- @if(licensedActivitiesAndSubActivities){
+                    <mat-tab label="Licensed Activities and Sub-Activities">
+                        <div class="tabContent previewBox m-0">
+                            @if (tabGroupReg.selectedIndex === 0) {
+                            <app-licence-activities [supplierId]="supplierId" [userId]="userId"
+                                (tabValidCheckEmitchild)="tabParentCheck()" (SaveActDraftFlag)="saveDraftCommonFlag($event)"
+                                (tabPreviousChild)="previousTab()" (tabNextChild)="nextTab()"></app-licence-activities>
+                            }
+                        </div>
+                    </mat-tab>
+                    }
+                    @if(businessLicensesAndCertificates){
+                    <mat-tab label="Business Licenses and Certificates">
+                        <div class="tabContent previewBox m-0">
+                            @if (tabGroupReg.selectedIndex === 1) {
+                            <app-licence-certificates [supplierId]="supplierId" [userId]="userId"
+                                (tabValidCheckEmitchild)="tabParentCheck()" (tabPreviousChild)="previousTab()"
+                                (SaveCerDraftFlag)="saveDraftCommonFlag($event)"
+                                (tabNextChild)="nextTab()"></app-licence-certificates>
+                            }
+                        </div>
+                    </mat-tab>
+                    }
+                    @if(relatedPartyInformation){
+                    <mat-tab label="Related Party Disclosures">
+                        <div class="tabContent previewBox m-0">
+                            @if (tabGroupReg.selectedIndex === 2) {
+                            <app-related-party-disc [supplierId]="supplierId" [userId]="userId"
+                                (tabValidCheckEmitchild)="tabParentCheck()" (tabPreviousChild)="previousTab()"
+                                (SaveCerDraftFlag)="saveDraftCommonFlag($event)"
+                                (tabNextChild)="nextTab()"></app-related-party-disc>
+                            }
+                        </div>
+                    </mat-tab>
+                    } -->
+            </mat-tab-group>
+        </div>
+    </div>
+
+</div>

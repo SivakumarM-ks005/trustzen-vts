@@ -1,0 +1,146 @@
+<div class="widget-box">
+    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+        Add Related Party Disclosures <span *ngIf="NextButtonValidation()"></span>
+        <div class="d-flex">
+            <button [disabled]="disableStatusBased == false" *ngIf="clearValues()" class="header-level-btn-gray me-2"
+                (click)="clearRelatedParty()" matTooltip="Clear Activity"><i
+                    class="fa fa-refresh pe-2"></i>Clear</button>
+            <!-- <button class="header-level-btn-blue" matTooltip="Add more Activities" (click)="saveRelatedParty()"
+                [disabled]="disableSave || disableStatusBased == false || !relatedPartyForm.valid"> <i class="fa fa-floppy-o pe-2"></i>{{editFlag ?
+                'Update':'Save'}}
+            </button> -->
+        </div>
+    </h5>
+    <form #relatedPartyForm="ngForm" id="relatedPartyFormId">
+        <div class="widget-content">
+            <div class="grid-4cols">
+            <mat-form-field class="col">
+                <mat-label>
+                    @if (!isSubmitted || !relatedPartyControl.errors?.required) {
+                    Related Party Details
+                    }
+                    @if (isSubmitted && relatedPartyControl.errors?.required) {
+                    <span class="error-msg"> Related Party Details is required</span>
+                    }
+                </mat-label>
+                <input matInput matTooltip="Enter the Related Party Details"
+                    [(ngModel)]="saveRelatedPartyVm.relatedPartyDetails" #relatedPartyControl="ngModel"
+                    [required]="true" name="relatedParty">
+                <!-- @if (relatedPartyControl.errors?.required) {
+                <mat-error matTooltip="Enter the Related Party Details">
+                    Related Party Details is required</mat-error>
+                } -->
+            </mat-form-field>
+
+            <mat-form-field class="col">
+                <mat-label>
+                    @if (!isSubmitted || !typeOfRelationControl.errors?.required) {
+                        Type of Relationship
+                        }
+                        @if (isSubmitted && typeOfRelationControl.errors?.required) {
+                        <span class="error-msg"> Type of Relationship is required is required</span>
+                        }
+                        </mat-label>
+                <input matInput matTooltip="Enter the Type of Relationship"
+                    [(ngModel)]="saveRelatedPartyVm.typeofRelationship" #typeOfRelationControl="ngModel"
+                    [required]="true" name="relationShip">
+                <!-- @if (typeOfRelationControl.errors?.required) {
+                <mat-error matTooltip="Enter the Type of Relationship">
+                    Type of Relationship is required</mat-error>
+                } -->
+            </mat-form-field>
+
+            <mat-form-field class="col">
+                <mat-label>
+                    @if (!isSubmitted || !typeOfRelationControl.errors?.required) {
+                        % Of Ownership
+                        }
+                        @if (isSubmitted && percentControl.invalid) {
+                        <span class="error-msg">% Of Ownership must be between 0 and 100</span>
+                        }
+                        </mat-label>
+                <input 
+                  matInput 
+                  matTooltip="Enter the % Of Ownership"
+                  [(ngModel)]="saveRelatedPartyVm.percentOfOwnership" 
+                  #percentControl="ngModel" 
+                  name="percentOfOwner"
+                  maxlength="3"
+                  allowNumberOnly
+                  (input)="validateOwnership($event)" 
+                  required
+                  pattern="^(100|[1-9]?[0-9])$"
+                >
+                
+                <!-- <mat-error *ngIf="percentControl.invalid && percentControl.touched" matTooltip="Enter a valid % Of Ownership">
+                  % Of Ownership must be between 0 and 100
+                </mat-error> -->
+              </mat-form-field>
+              
+
+            <mat-form-field class="col">
+                <mat-label>
+                    @if (!isSubmitted || !startControl.errors?.required) {
+                        Start Date
+                        }
+                        @if (isSubmitted && startControl.errors?.required) {
+                        <span class="error-msg"> start Date is required</span>
+                        }
+                        </mat-label>
+                <input matInput matTooltip="Enter the start Date" [matDatepicker]="startDateTab"
+                    [(ngModel)]="saveRelatedPartyVm.startDate" #startControl="ngModel" [required]="true"
+                    name="startDate">
+                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="startDateTab"></mat-datepicker-toggle>
+                <mat-datepicker #startDateTab></mat-datepicker>
+                <!-- @if (startControl.errors?.required) {
+                <mat-error matTooltip="Enter the start Date">
+                    start Date is required</mat-error>
+                } -->
+            </mat-form-field>
+        </div>
+        </div>
+    </form>
+</div>
+
+
+@if (saveAllRelatedPartyVm.length > 0) {
+    <div class="table-responsive table-col-control" >
+        <table class="content-table">
+        <thead>
+            <tr>
+                <th scope="col">Serial #</th>
+                <th scope="col">Related Party Details</th>
+                <th scope="col">% Of Ownership</th>
+                <th scope="col">Type of Relationship</th>
+                <th scope="col" >Start Date</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody class="list">
+            @for (activity of saveAllRelatedPartyVm; track activity; let idx = $index) {
+            <tr class="border-bottom">
+                <td>{{idx + 1}}</td>
+                <td>{{activity.relatedPartyDetails}}</td>
+                <td>{{activity.percentOfOwnership}}</td>
+                <td>{{activity.typeofRelationship}}</td>
+                <td>{{activity.startDate |date:(commonService.showFormat)}}</td>
+                <td>
+                    <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === false" mat-button class="btn-small" matTooltip="Edit"
+                        (click)="editRelatedParty(idx)"><i class="fa fa-eye"></i>
+                    </button>
+                    <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === true" mat-button class="btn-small" matTooltip="Edit"
+                        (click)="editRelatedParty(idx)"><i class="fa fa-edit"></i>
+                    </button>
+                    <button Xclass="btn btn-danger btn-sm smBtn" [disabled]="disableStatusBased == false"
+                        class="btn-small" mat-button matTooltip="Delete"
+                        (click)="deleteRelatedParty(idx,activity.relatedPartyDiscId)">
+                        <i class="fa fa-trash text-danger"></i>
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+}

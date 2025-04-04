@@ -1,0 +1,31 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Contract Management</h2>
+    </div>
+    <div class="content-box p-2" style="border: 1px solid red;">
+        <div class="widget-box">
+            <h5 class="widget-title d-flex justify-content-between pt-4 pb-4">
+                Clause Library
+                <div class="d-flex align-items-center">
+                    <!-- <label class="me-3">
+                        <span class="helper-legend legend-gray"></span>
+                        <span> InActive </span>
+                    </label> -->
+                    <mat-checkbox  class="checkbox-custom fontNormal me-3" [(ngModel)]="showInActive"
+                        (change)="showInActiveChange($event)">Show Inactive</mat-checkbox>
+                    <button  class="header-level-btn-blue" matTooltip="Create Template"
+                        (click)="newClause()"><i class="fa fa-plus pe-2"></i>New</button>
+                </div>
+            </h5>
+            <div class="widget-content">
+                <ag-grid-angular 
+                [theme]="theme" [rowData]="dataList" [columnDefs]="colDefs"
+                    [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+                    [paginationPageSizeSelector]="paginationPageSizeSelector"
+                    (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)"
+                    rowSelection="single"/>
+                    <!-- [rowClassRules]="rowClassRules" -->
+            </div>
+        </div>
+
+    </div>

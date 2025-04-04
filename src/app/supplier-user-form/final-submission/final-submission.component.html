@@ -1,0 +1,39 @@
+<!-- Standard Declaration -->
+@if(supplierManagementDet?.complianceRenewalBank?.captureStandardDeclaration){
+<div class="widget-box">
+    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+        Standard Declaration
+    </h5>
+    <div class="widget-content">
+        <mat-checkbox color="primary" style="margin-left:-10px" [formControl]="acknowledgmentControlStandardDeclaration">
+            {{supplierManagementDet?.complianceRenewalBank?.captureStandardDeclarationDesc}}
+        </mat-checkbox>
+    </div>
+</div>
+}
+<!-- Declaration of Conflict of Interest -->
+@if(supplierManagementDet?.complianceRenewalBank?.captureConflictOfInterest){
+<div class="widget-box">
+    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+        Declaration of Conflict of Interest
+    </h5>
+    <div class="widget-content">
+        <mat-checkbox color="primary" style="margin-left:-10px" [formControl]="acknowledgmentControlConflictOfInterest">
+            {{supplierManagementDet?.complianceRenewalBank?.captureConflictOfInterestDesc}}
+        </mat-checkbox>
+    </div>
+</div>
+}
+<!-- Declaration of Ongoing/Previous Litigations -->
+@if(supplierManagementDet?.complianceRenewalBank?.captureOngoingLitigations){
+<div class="widget-box">
+    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+        Declaration of Ongoing/Previous Litigations
+    </h5>
+    <div class="widget-content">
+        <mat-checkbox color="primary" style="margin-left:-10px" [formControl]="acknowledgmentControlLitigations">
+            {{supplierManagementDet?.complianceRenewalBank?.captureOngoingLitigationsDesc}}
+        </mat-checkbox>
+    </div>
+</div>
+}

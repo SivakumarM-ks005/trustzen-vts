@@ -1,0 +1,1603 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Order Management >> New Purchase Order </h2>
+    </div>
+    <form [formGroup]="PO_Form" novalidate>
+    <div class="content-box p-2">
+        <!-- entitylevel static code -->
+     
+        <!-- <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/selection.png" alt="" width="22"> Select Entity Level
+                </div>
+                <span class="status-label">Status: <span class="status-state">Draft</span></span>
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-form-field>
+                        <mat-label>Entity Name</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">Info sys</mat-option>
+                            <mat-option value="Direct">CTS</mat-option>
+                            <mat-option value="Direct">TATA</mat-option>
+                            <mat-option value="Direct">Maruthi</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 1</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 2</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 3</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 4</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div> -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/selection.png" alt="" width="22"> Select Entity Level
+                </div>
+                <span class="status-label">Status: <span class="status-state">Draft</span></span>
+            </h5>
+            <div class="widget-content">
+                <ng-container formGroupName="entityLevel">
+                    <div class="grid-5cols">
+                        <mat-form-field>
+                            <mat-label>Entity Name</mat-label>
+                            <mat-select formControlName="entityName" required>
+                                <mat-option value="Info sys">Info sys</mat-option>
+                                <mat-option value="CTS">CTS</mat-option>
+                                <mat-option value="TATA">TATA</mat-option>
+                                <mat-option value="Maruthi">Maruthi</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Level 1</mat-label>
+                            <mat-select formControlName="level1" required>
+                                <mat-option value="ERP System">ERP System</mat-option>
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="Mat Request">Mat Request</mat-option>
+                                <mat-option value="Auto-Requisition">Auto-Requisition</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Level 2</mat-label>
+                            <mat-select formControlName="level2" required>
+                                <mat-option value="ERP System">ERP System</mat-option>
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="Mat Request">Mat Request</mat-option>
+                                <mat-option value="Auto-Requisition">Auto-Requisition</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Level 3</mat-label>
+                            <mat-select formControlName="level3" required>
+                                <mat-option value="ERP System">ERP System</mat-option>
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="Mat Request">Mat Request</mat-option>
+                                <mat-option value="Auto-Requisition">Auto-Requisition</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Level 4</mat-label>
+                            <mat-select formControlName="level4" required>
+                                <mat-option value="ERP System">ERP System</mat-option>
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="Mat Request">Mat Request</mat-option>
+                                <mat-option value="Auto-Requisition">Auto-Requisition</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+           <!-- entitylevel static code -->
+        <!-- PO header formGroup -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/header.png" alt="" width="20">
+                    Header
+                </div>
+                <span class="status-label">Status: <span class="status-state">Draft</span></span>
+            </h5>
+            <div class="widget-content">
+                <ng-container formGroupName="PO_header">
+                    <div class="grid-5cols">
+                        <mat-form-field>
+                            <mat-label>Source</mat-label>
+                            <mat-select formControlName="source" required matTooltip="Select the Source">
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="rfq">RFQ</mat-option>
+                                <mat-option value="rft">RFT</mat-option>
+                                <mat-option value="pd">Product Directory</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>PO Ref #</mat-label>
+                            <input matInput formControlName="poRef" matTooltip="PO Ref Number">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Created Date</mat-label>
+                            <input matInput [matDatepicker]="dp2" formControlName="createdDate" matTooltip="Created Date & Time">
+                            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                            <mat-datepicker #dp2></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>PO Created by</mat-label>
+                            <input matInput formControlName="poCreatedBy" required matTooltip="PO Created By">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>PO Currency</mat-label>
+                            <input matInput formControlName="poCurrency" required matTooltip="PO Currency">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>PO Value</mat-label>
+                            <input matInput formControlName="poValue" required matTooltip="PO Value" class="text-end">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Supplier Name</mat-label>
+                            <input matInput formControlName="supplierName" required matTooltip="Supplier Name">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Quotation Ref #</mat-label>
+                            <input matInput formControlName="quotationRef" required matTooltip="Quotation Ref #">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Quotation Date</mat-label>
+                            <input matInput [matDatepicker]="datepickx" formControlName="quotationDate" matTooltip="Quotation Date">
+                            <mat-datepicker-toggle matSuffix [for]="datepickx"></mat-datepicker-toggle>
+                            <mat-datepicker #datepickx></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Purchase Type</mat-label>
+                            <mat-select formControlName="purchaseType" required matTooltip="Select the Purchase Type">
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="rfq">RFQ</mat-option>
+                                <mat-option value="rft">RFT</mat-option>
+                                <mat-option value="pd">Product Directory</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Purchase Order Type</mat-label>
+                            <mat-select formControlName="purchaseOrderType" required matTooltip="Select the Purchase Order Type">
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="rfq">RFQ</mat-option>
+                                <mat-option value="rft">RFT</mat-option>
+                                <mat-option value="pd">Product Directory</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Purchase Classification</mat-label>
+                            <input matInput formControlName="purchaseClassification" matTooltip="Purchase Classification">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Spend Type</mat-label>
+                            <mat-select formControlName="spendType" required matTooltip="Select the Spend Type">
+                                <mat-option value="CapEx Purchase">CapEx Purchase</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Sourcing Type</mat-label>
+                            <mat-select formControlName="sourcingType" required matTooltip="Select the Sourcing Type">
+                                <mat-option value="CapEx Purchase">CapEx Purchase</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Delivery Date</mat-label>
+                            <input matInput [matDatepicker]="dedatepickt" formControlName="deliveryDate" matTooltip="Delivery Date" required>
+                            <mat-datepicker-toggle matSuffix [for]="dedatepickt"></mat-datepicker-toggle>
+                            <mat-datepicker #dedatepickt></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Short Name</mat-label>
+                            <input matInput formControlName="shortName" matTooltip="Short Name">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <textarea matInput formControlName="description" matTooltip="Enter the Description" rows="1"></textarea>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Contract Ref #</mat-label>
+                            <input matInput formControlName="contractRef" matTooltip="Contract Ref #" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Contract Creation Date</mat-label>
+                            <input matInput [matDatepicker]="contractcreationdatepick" formControlName="contractCreationDate" matTooltip="Contract Creation Date" required>
+                            <mat-datepicker-toggle matSuffix [for]="contractcreationdatepick"></mat-datepicker-toggle>
+                            <mat-datepicker #contractcreationdatepick></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Payment Terms</mat-label>
+                            <mat-select formControlName="paymentTerms" required matTooltip="Select the Payment Terms">
+                                <mat-option value="-- Select --">-- Select --</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+       
+        <!-- <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/header.png" alt="" width="20">
+                    Header
+                </div>
+                <span class="status-label">Status: <span class="status-state">Draft</span></span>
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-form-field>
+                        <mat-label>Source</mat-label>
+                        <mat-select required matTooltip="Select the Source">
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="rfq">RFQ</mat-option>
+                            <mat-option value="rft">RFT</mat-option>
+                            <mat-option value="pd">Product Directory</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>PO Ref #</mat-label>
+                        <input matInput  value="" matTooltip="PO Ref Number">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Created Date</mat-label>
+                        <input matInput [matDatepicker]="dp2" matTooltip="Created Date & Time">
+                        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                        <mat-datepicker #dp2></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>PO Created by</mat-label>
+                        <input matInput  value="" required matTooltip="PO Created By">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>PO Currency</mat-label>
+                        <input matInput  value="" required matTooltip="PO Currency">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>PO Value</mat-label>
+                        <input matInput  value="" required matTooltip="PO Value" class="text-end">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Supplier Name</mat-label>
+                        <input matInput  value="" required matTooltip="Supplier Name">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Quotation Ref #</mat-label>
+                        <input matInput  value="" requred matTooltip="Quotation Ref #">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Quotation Date</mat-label>
+                        <input matInput [matDatepicker]="datepickx" matTooltip="Quotation Date">
+                        <mat-datepicker-toggle matSuffix [for]="datepickx"></mat-datepicker-toggle>
+                        <mat-datepicker #datepickx></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Purchase Type</mat-label>
+                        <mat-select required matTooltip="Select the Purchase Type">
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="rfq">RFQ</mat-option>
+                            <mat-option value="rft">RFT</mat-option>
+                            <mat-option value="pd">Product Directory</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Purchase Order Type</mat-label>
+                        <mat-select required matTooltip="Select the Purchase Order Type">
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="rfq">RFQ</mat-option>
+                            <mat-option value="rft">RFT</mat-option>
+                            <mat-option value="pd">Product Directory</mat-option>
+                        </mat-select>
+                    </mat-form-field>                    
+                    <mat-form-field>
+                        <mat-label>Purchase Classification</mat-label>
+                        <input matInput  value="" matTooltip="Purchase Classification">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Spend Type</mat-label>
+                        <mat-select required matTooltip="Select the Spend Type">
+                            <mat-option value="CapEx Purchase">CapEx Purchase</mat-option> 
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Sourcing Type</mat-label>
+                        <mat-select required matTooltip="Select the Sourcing Type">
+                            <mat-option value="CapEx Purchase">CapEx Purchase</mat-option> 
+                        </mat-select>
+                    </mat-form-field>
+                  
+                    <mat-form-field>
+                        <mat-label>Delivery Date</mat-label>
+                        <input matInput [matDatepicker]="dedatepickt" matTooltip="Delivery Date" required="">
+                        <mat-datepicker-toggle matSuffix [for]="dedatepickt"></mat-datepicker-toggle>
+                        <mat-datepicker #dedatepickt></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Short Name</mat-label>
+                        <input matInput  value="" matTooltip="Short Name">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Description</mat-label>
+                        <textarea matInput matTooltip="Enter the Description"  rows="1"></textarea>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Contract Ref #</mat-label>
+                        <input matInput  value="" matTooltip="Contract Ref # " required="">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Contract Creation Date</mat-label>
+                        <input matInput [matDatepicker]="contractcreationdatepick" matTooltip="Contract Creation Date" required="">
+                        <mat-datepicker-toggle matSuffix [for]="contractcreationdatepick"></mat-datepicker-toggle>
+                        <mat-datepicker #contractcreationdatepick></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Payment Terms</mat-label>
+                        <mat-select required matTooltip="Select the Payment Terms" required="">
+                            <mat-option value="-- Select --">-- Select --</mat-option> 
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div> -->
+    
+         <!-- PO header formGroup -->
+         <!-- personalisation Setup grop -->
+         <!-- <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/setup.png" alt="" width="22">
+                    Personalize Setup
+                </div>                
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-checkbox class="coloumn-fix" checked>Item Level Discount</mat-checkbox>
+                    <mat-checkbox class="coloumn-fix" >Item Level Tax</mat-checkbox>
+                    <mat-checkbox class="coloumn-fix" checked>Inco/Other Cost</mat-checkbox>                   
+                    <mat-checkbox class="coloumn-fix" checked>ForEx Currency Txn</mat-checkbox>                   
+                    <mat-checkbox class="coloumn-fix" >Withold Tax Applicable</mat-checkbox>                   
+                    <mat-checkbox class="coloumn-fix" checked>Change Item Ship to Site</mat-checkbox>                   
+                    <mat-checkbox class="coloumn-fix" checked>Change Item Need by Date</mat-checkbox>                   
+                </div>
+            </div>
+        </div> -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/setup.png" alt="" width="22">
+                    Personalize Setup
+                </div>                
+            </h5>
+            <div class="widget-content">
+                <ng-container formGroupName="personalisationSetup">
+                    <div class="grid-5cols">
+                        <mat-checkbox class="coloumn-fix" formControlName="itemLevelDiscount">Item Level Discount</mat-checkbox>
+                        <mat-checkbox class="coloumn-fix" formControlName="itemLevelTax">Item Level Tax</mat-checkbox>
+                        <mat-checkbox class="coloumn-fix" formControlName="incoOtherCost">Inco/Other Cost</mat-checkbox>
+                        <mat-checkbox class="coloumn-fix" formControlName="forExCurrencyTxn">ForEx Currency Txn</mat-checkbox>
+                        <mat-checkbox class="coloumn-fix" formControlName="withholdTaxApplicable">Withhold Tax Applicable</mat-checkbox>
+                        <mat-checkbox class="coloumn-fix" formControlName="changeItemShipToSite">Change Item Ship to Site</mat-checkbox>
+                        <mat-checkbox class="coloumn-fix" formControlName="changeItemNeedByDate">Change Item Need by Date</mat-checkbox>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+         <!-- personalisation Setup grop -->
+          <!-- PO Address group -->
+        <!-- <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/address.png" alt="" width="22">
+                    Address
+                </div>                
+            </h5>
+            <div class="widget-content">
+                <div>
+                    <div class="grid-1cols">
+                        <div class="d-flex flex-row justify-content-start align-items-center sub-heading col">
+                            <h5>Bill to Address </h5>
+                        </div>  
+                    </div>
+                    <div class="grid-6cols">
+                        <mat-form-field>
+                            <mat-label>Address Line 1</mat-label>
+                            <input matInput  value="" matTooltip="Address Line 1" required="">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Address Line 2</mat-label>
+                            <input matInput  value="" matTooltip="Address Line 2">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Country</mat-label>
+                            <mat-select required matTooltip="Select Country" required="">
+                                <mat-option value="-- Select --">-- Select --</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>State/Province</mat-label>
+                            <mat-select required matTooltip="Select State/Province" required="">
+                                <mat-option value="-- Select --">-- Select --</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>City</mat-label>
+                            <mat-select required matTooltip="Select City" required="">
+                                <mat-option value="-- Select --">-- Select --</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Postal Code</mat-label>
+                            <input matInput matTooltip="Postal Code" required="">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <div class="grid-1cols">
+                            <div class="d-flex flex-row justify-content-start align-items-center sub-heading col">
+                                <h5>Bill to Address </h5>
+                                <mat-checkbox >Same as Bill to Address</mat-checkbox>
+                            </div>  
+                        </div>
+                        <div class="grid-6cols">
+                            <mat-form-field>
+                                <mat-label>Address Line 1</mat-label>
+                                <input matInput  value="" matTooltip="Address Line 1" required="">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Address Line 2</mat-label>
+                                <input matInput  value="" matTooltip="Address Line 2">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Country</mat-label>
+                                <mat-select required matTooltip="Select Country" required="">
+                                    <mat-option value="-- Select --">-- Select --</mat-option> 
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>State/Province</mat-label>
+                                <mat-select required matTooltip="Select State/Province" required="">
+                                    <mat-option value="-- Select --">-- Select --</mat-option> 
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>City</mat-label>
+                                <mat-select required matTooltip="Select City" required="">
+                                    <mat-option value="-- Select --">-- Select --</mat-option> 
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Postal Code</mat-label>
+                                <input matInput matTooltip="Postal Code" required="">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/address.png" alt="" width="22">
+                    Address
+                </div>                
+            </h5>
+            <div class="widget-content">
+                    <div>
+                        <div class="grid-1cols">
+                            <div class="d-flex flex-row justify-content-start align-items-center sub-heading col">
+                                <h5>Bill to Address </h5>
+                            </div>  
+                        </div>
+                        <div class="grid-6cols">
+                            <mat-form-field>
+                                <mat-label>Address Line 1</mat-label>
+                                <input matInput formControlName="billToAddressLine1" matTooltip="Address Line 1" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Address Line 2</mat-label>
+                                <input matInput formControlName="billToAddressLine2" matTooltip="Address Line 2">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Country</mat-label>
+                                <mat-select formControlName="billToCountry" required matTooltip="Select Country">
+                                    <mat-option value="-- Select --">-- Select --</mat-option> 
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>State/Province</mat-label>
+                                <mat-select formControlName="billToState" required matTooltip="Select State/Province">
+                                    <mat-option value="-- Select --">-- Select --</mat-option> 
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>City</mat-label>
+                                <mat-select formControlName="billToCity" required matTooltip="Select City">
+                                    <mat-option value="-- Select --">-- Select --</mat-option> 
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Postal Code</mat-label>
+                                <input matInput formControlName="billToPostalCode" matTooltip="Postal Code" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <div class="grid-1cols">
+                                <div class="d-flex flex-row justify-content-start align-items-center sub-heading col">
+                                    <h5>Ship to Address </h5>
+                                    <mat-checkbox formControlName="sameAsBillTo">Same as Bill to Address</mat-checkbox>
+                                </div>  
+                            </div>
+                            <div class="grid-6cols">
+                                <mat-form-field>
+                                    <mat-label>Address Line 1</mat-label>
+                                    <input matInput formControlName="shipToAddressLine1" matTooltip="Address Line 1" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Address Line 2</mat-label>
+                                    <input matInput formControlName="shipToAddressLine2" matTooltip="Address Line 2">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Country</mat-label>
+                                    <mat-select formControlName="shipToCountry" required matTooltip="Select Country">
+                                        <mat-option value="-- Select --">-- Select --</mat-option> 
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>State/Province</mat-label>
+                                    <mat-select formControlName="shipToState" required matTooltip="Select State/Province">
+                                        <mat-option value="-- Select --">-- Select --</mat-option> 
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>City</mat-label>
+                                    <mat-select formControlName="shipToCity" required matTooltip="Select City">
+                                        <mat-option value="-- Select --">-- Select --</mat-option> 
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Postal Code</mat-label>
+                                    <input matInput formControlName="shipToPostalCode" matTooltip="Postal Code" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+      
+            </div>
+        </div>
+      <!-- PO Address group -->
+      <!-- PO Supplier group -->
+        <!-- <div class="widget-box" >
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between"> 
+                <div>
+                    <img src="../../../assets/images/icons/Supplier.png" alt="" width="24">
+                    Supplier Details
+                </div>    
+            </h5>
+            <div class="widget-content">
+
+                <div class="grid-5cols">
+                    <div class="assets-display">
+                        <p class="display-label">Site ID</p>
+                        <p class="display-data">SI-304</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">Site Name</p>
+                        <p class="display-data">ABCD & CO</p>
+                    </div> 
+                
+                    <div class="assets-display">
+                        <p class="display-label">Supplier Name</p>
+                        <p class="display-data">Shell Oil</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">Commercial License #</p>
+                        <p class="display-data">265326</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">Tax Registration Number</p>
+                        <p class="display-data">625324326</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">Adress Line1</p>
+                        <p class="display-data">No:161, Periyaar Road, Hastinapuram</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">Country</p>
+                        <p class="display-data">India</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">State</p>
+                        <p class="display-data">Tamilnadu</p>
+                    </div>
+                
+                    <div class="assets-display">
+                        <p class="display-label">City</p>
+                        <p class="display-data">Chennai</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">Email</p>
+                        <p class="display-data">admin&commat;kryasolutions.com</p>
+                    </div>
+                    <div class="assets-display">
+                        <p class="display-label">Phone</p>
+                        <p class="display-data">+91 98401 98401</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div> -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between"> 
+                <div>
+                    <img src="../../../assets/images/icons/Supplier.png" alt="" width="24">
+                    Supplier Details
+                </div>    
+            </h5>
+            <div class="widget-content">
+                <ng-container >
+                    <div class="grid-5cols">
+                        <div class="assets-display">
+                            <p class="display-label">Site ID</p>
+                            <p class="display-data">{{ getSupplierDetails('siteId') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">Site Name</p>
+                            <p class="display-data">{{getSupplierDetails('siteName')  }}</p>
+                        </div> 
+                        <div class="assets-display">
+                            <p class="display-label">Supplier Name</p>
+                            <p class="display-data">{{ getSupplierDetails('supplierName') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">Commercial License #</p>
+                            <p class="display-data">{{ getSupplierDetails('commercialLicense') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">Tax Registration Number</p>
+                            <p class="display-data">{{ getSupplierDetails('taxRegistrationNumber') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">Address Line 1</p>
+                            <p class="display-data">{{ getSupplierDetails('addressLine1') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">Country</p>
+                            <p class="display-data">{{ getSupplierDetails('country') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">State</p>
+                            <p class="display-data">{{ getSupplierDetails('state') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">City</p>
+                            <p class="display-data">{{ getSupplierDetails('city') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">Email</p>
+                            <p class="display-data">{{ getSupplierDetails('email') }}</p>
+                        </div>
+                        <div class="assets-display">
+                            <p class="display-label">Phone</p>
+                            <p class="display-data">{{ getSupplierDetails('phone') }}</p>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <!-- PO Supplier group -->
+        <!-- PO BILL of Q group -->
+         <ng-container formGroupName="BOQ">
+            <div  class="widget-box">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between"> 
+                    <div>
+                        <img src="../../../assets/images/icons/quantity.png" alt="" width="24">
+                        Bill of Quantity (BOQ)
+                    </div>    
+                </h5>
+                <div  class="widget-content">
+                    <div class="grid-4cols">
+                        <mat-form-field>
+                            <mat-label>Functional Currency</mat-label>
+                            <mat-select formControlName="functionalCurrency" matTooltip="Select the Functional Currency">
+                                <mat-option value="CapEx Purchase">--Please Select--</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Transactional Currency</mat-label>
+                            <mat-select formControlName="transactionalCurrency"  matTooltip="Select the Transactional Currency">
+                                <mat-option value="CapEx Purchase">--Please Select--</mat-option> 
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="d-flex mt-2 pt-3 pb-3 d-flex align-items-center justify-content-end"> 
+                            <button class="header-level-btn-blue" matTooltip="Last Purchase Price ">
+                                <i class="fa fa-file-text-o pe-2"></i>Last Purchase Price</button>&nbsp;
+                            <button matTooltip="Add Item Table Row" class="Xsmall-btn-action header-level-btn-blue">
+                                <i class="fa fa-plus pe-2"></i> Add Item
+                            </button>                      
+                    </div>
+                    <div class="d-flex">                   
+                        <div class="table-responsive">
+                            <table class="content-table vw-100">
+                                <thead>
+                                    <tr>
+                                        <th scope="col"  width="10%">Serial #</th>
+                                        <th scope="col"  width="6%">Code</th> 
+                                        <th scope="col"  width="6%">Description</th>
+                                        <th scope="col"  width="6%">UOM</th>
+                                        <th scope="col"  width="6%">Quantity</th>
+                                        <th scope="col"  width="6%">Ship to Site</th>
+                                        <th scope="col"  width="6%">Need by Date</th>
+                                        <th scope="col"  width="6%">Delivery Date</th>
+                                        <th scope="col"  width="6%">Unit Rate</th>
+                                        <th scope="col"  width="6%">Item Value</th>
+                                        <th scope="col"  width="6%">Discount Mode</th> 
+                                        <th scope="col"  width="6%">Discount Rate</th>
+                                        <th scope="col"  width="6%">Discount Value</th>
+                                        <th scope="col"  width="6%">Tax Mode</th>
+                                        <th scope="col"  width="6%">Tax Rate</th>
+                                        <th scope="col"  width="6%">Tax Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   <ng-container formArrayName="items">
+                                    @for(item of getItems().controls;track item;let itemI =$index){
+                                        <tr [formGroupName]="itemI" class="cust-field-height">
+                                            <td>{{itemI + 1}}</td>
+                                            <td>
+                                                <mat-form-field> 
+                                                    <input formControlName="code" matInput matTooltip="Code" >
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <textarea formControlName="description" matInput matTooltip="Description"  rows="1"></textarea>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <mat-select formControlName="uom" matTooltip="Select the UOM" >
+                                                        <mat-option value="">-- Please Select --</mat-option>
+                                                        <mat-option value="">Dozen</mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </td>  
+                                            <td>
+                                                <mat-form-field class="mxW-120 ">
+                                                    <input matInput formControlName="quantity" value="" matTooltip="Quantity" class="text-end" >
+                                                </mat-form-field>
+                                            </td>     
+                                            <td>
+                                                <mat-form-field class="width-95p">
+                                                    <mat-select formControlName="shipToSite"  matTooltip="Select the Ship to Site" >
+                                                        <mat-option value="">-- Please Select --</mat-option> 
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field> 
+                                                    <input formControlName="needByDate" matInput [matDatepicker]="tbldpq" matTooltip="Need by Date">
+                                                    <mat-datepicker-toggle matSuffix [for]="tbldpq"></mat-datepicker-toggle>
+                                                    <mat-datepicker #tbldpq></mat-datepicker>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field> 
+                                                    <input formControlName="deliveryDate" matInput [matDatepicker]="delvidp" matTooltip="Delivery Date" >
+                                                    <mat-datepicker-toggle matSuffix [for]="delvidp"></mat-datepicker-toggle>
+                                                    <mat-datepicker #delvidp></mat-datepicker>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <input formControlName="unitRate" matInput matTooltip="Unit Rate" class="text-right" value="">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <input formControlName="itemValue" matInput matTooltip="Item Value" class="text-right" value="">
+                                                </mat-form-field>
+                                            </td>  
+                                            <td>
+                                                <mat-form-field class="width-95p">
+                                                    <mat-select formControlName="discountMode" matTooltip="Select">
+                                                        <mat-option value="">-- Please Select --</mat-option> 
+                                                    </mat-select>
+                                                </mat-form-field>
+                                             
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <input formControlName="discountRate" matInput matTooltip="Discount Rate" class="text-right">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <input formControlName="discountValue" matInput matTooltip="Discount Value" class="text-right" >
+                                                </mat-form-field>
+                                            </td>  
+                                            <td>
+                                                <mat-form-field class="width-95p">
+                                                    <mat-select formControlName="taxMode"  matTooltip="Select">
+                                                        <mat-option value="">-- Please Select --</mat-option> 
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <input formControlName="taxRate" matInput matTooltip="Tax Rate" class="text-right">
+                                                </mat-form-field>
+                                            </td>
+                                            <td>
+                                                <mat-form-field class="mxW-120">
+                                                    <input formControlName="taxValue" matInput matTooltip="Tax Value" class="text-right">
+                                                </mat-form-field>
+                                            </td>
+                                        </tr>
+    
+                                    }
+                                   </ng-container>
+                                    <tr class="cust-field-height">
+                                        <td colspan="6"  class="text-right ft-500">Total Items Value</td>
+                                        <td>
+                                          
+                                        </td>
+                                        <td class="text-right ft-500 pe-3">
+                                            10,000,00.00
+                                        </td>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr class="cust-field-height">
+                                        <td colspan="6" class="text-right ft-500">Discount Value</td>
+                                        <td>  <mat-form-field class="width-95p">
+                                            <mat-select formControlName="totDiscountMode" matTooltip="Select">
+                                                <mat-option value="">-- Please Select --</mat-option> 
+                                            </mat-select>
+                                        </mat-form-field></td>
+                                        <td class="text-right ft-500 pe-3">
+                                            10,000.00
+                                        </td>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr class="cust-field-height">
+                                        <td colspan="6" class="text-right ft-500">Net Value (after Discount)</td>
+                                        <td>
+                                            
+                                        </td>
+                                        <td class="text-right ft-500 pe-3">
+                                            90,000.00
+                                        </td>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr class="cust-field-height">
+                                        <td colspan="6" class="text-right ft-500">Tax</td>
+                                        <td>
+                                            <mat-form-field  class="width-95p">
+                                                <mat-select formControlName="totTaxMode" matTooltip="Select">
+                                                    <mat-option value="">18</mat-option> 
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </td>
+                                        <td class="text-right ft-500 pe-3">
+                                            16,200.00
+                                        </td>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr class="cust-field-height">
+                                        <td colspan="6" class="text-right ft-500">IncoTerms (Cost)</td>
+                                        <td> </td>
+                                        <td class="text-right ft-500 pe-3">
+                                            1,000.00
+                                        </td>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"  class="ft-500">Amount in words (INR)</td>
+                                        <td colspan="3"  class="text-right ft-500">One Lakh Seven Thousand Two hundred</td>
+                                        <td  class="text-right ft-500">Total&nbsp;Amount&nbsp;(including&nbsp;Tax)</td>
+                                        <td></td>
+                                        <td class="text-right ft-500 pe-3">
+                                            1,07,200.00
+                                        </td>
+                                        <td colspan="8"></td>
+                                    </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                
+                </div>
+            </div>
+         </ng-container>
+       
+        <!-- PO BILL of Q group -->
+        <!-- PO Milestone group -->
+        <!-- <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between"> 
+                <div>
+                    <img src="../../../assets/images/icons/milestones.png" alt="" width="24">
+                    Milestones
+                </div> 
+                <button matTooltip="Add Item" class="Xsmall-btn-action header-level-btn-blue">
+                    <i class="fa fa-plus pe-2"></i> Add Item
+                </button>      
+            </h5>
+            <div class="widget-content">
+                <div class="table-responsive">
+                    <table class="content-table rowcolspan-tbl">
+                    <thead>
+                            <tr>
+                                <th rowspan="2" >Serial #</th>
+                                <th rowspan="2">Description</th>
+                                <th rowspan="2">Milestone Description</th>
+                                <th colspan="3" class="text-center">Value</th>
+                                <th colspan="6" class="text-center">Milestone Tracking</th> 
+                                <th>Action</th>
+                            </tr>                   
+                            <tr> 
+                                <th>Fixed Value or %</th>
+                                <th>Value</th>
+                                <th>Expanded Value</th>
+                                <th>Allow Part Fulfillment</th>
+                                <th>Billable</th>
+                                <th>Adv Payable</th>
+                                <th>Reserve Fund</th>
+                                <th>Completion Date</th>
+                                <th>Milestone Status</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead> 
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>2</td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-select matTooltip="Description" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Description">Server RacksRouters</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-select matTooltip="Milestone Description" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Description">Milestone Description</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-select matTooltip="Fixed Value" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="pers">55%</mat-option>
+                                            <mat-option value="pers">5500</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td class="text-end">
+                                    120000
+                                </td>
+                                <td class="text-end">
+                                85000
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix"></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix" checked></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix" checked></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix"></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-form-field> 
+                                        <input matInput [matDatepicker]="tbldatep1" matTooltip="Completion Date" >
+                                        <mat-datepicker-toggle matSuffix [for]="tbldatep1"></mat-datepicker-toggle>
+                                        <mat-datepicker #tbldatep1></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    Pending
+                                </td>
+                                <td>
+                                    <button mat-button class="btn-small" matTooltip="Delete the row">
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </button>  
+                                </td>
+                            </tr>
+                            <tr class="cust-field-height">
+                                <td>1</td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-select matTooltip="Description" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Description">Server RacksRouters</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-select matTooltip="Milestone Description" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Description">Milestone Description</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-select matTooltip="Fixed Value" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="pers">55%</mat-option>
+                                            <mat-option value="pers">5500</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td class="text-end">
+                                    60000
+                                </td>
+                                <td class="text-end">
+                                    60000
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix" checked></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix"></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix"></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix"></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-form-field> 
+                                        <input matInput [matDatepicker]="tbldatepw" matTooltip="Completion Date" >
+                                        <mat-datepicker-toggle matSuffix [for]="tbldatepw"></mat-datepicker-toggle>
+                                        <mat-datepicker #tbldatepw></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    Completed
+                                </td>
+                                <td>
+                                    <button mat-button class="btn-small" matTooltip="Delete the row">
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </button>  
+                                </td>
+                            </tr>
+                            
+                    </tbody>
+                    
+                    </table>
+                </div>
+            </div>
+        </div> -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/milestones.png" alt="" width="24">
+                    Milestones
+                </div>
+                <button matTooltip="Add Item" (click)="addMilestone()" class="Xsmall-btn-action header-level-btn-blue">
+                    <i class="fa fa-plus pe-2"></i> Add Item
+                </button>
+            </h5>
+            <div class="widget-content">
+                <div class="table-responsive">
+                    <table class="content-table rowcolspan-tbl">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Serial #</th>
+                                <th rowspan="2">Description</th>
+                                <th rowspan="2">Milestone Description</th>
+                                <th colspan="3" class="text-center">Value</th>
+                                <th colspan="6" class="text-center">Milestone Tracking</th>
+                                <th>Action</th>
+                            </tr>
+                            <tr>
+                                <th>Fixed Value or %</th>
+                                <th>Value</th>
+                                <th>Expanded Value</th>
+                                <th>Allow Part Fulfillment</th>
+                                <th>Billable</th>
+                                <th>Adv<!--ance--> Payable</th>
+                                <th>Reserve Fund</th>
+                                <th>Completion Date</th>
+                                <th>Milestone Status</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="milestones">
+                            @for(milestone of getMilestones().controls;track milestone;let mIndex=$index; ){
+                                <tr [formGroupName]="mIndex" class="cust-field-height">
+                                    <td>{{ mIndex + 1 }}</td>
+                                    <td>
+                                        <mat-form-field class="width-95p">
+                                            <mat-select formControlName="description" matTooltip="Description" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="Server RacksRouters">Server Racks/Routers</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="width-95p">
+                                            <mat-select formControlName="milestoneDescription" matTooltip="Milestone Description" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="Milestone Description">Milestone Description</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="width-95p">
+                                            <mat-select formControlName="fixedValue" matTooltip="Fixed Value" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="pers">55%</mat-option>
+                                                <mat-option value="value">5500</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="text-end">
+                                        <input formControlName="value" matInput class="text-end" />
+                                    </td>
+                                    <td class="text-end">
+                                        <input formControlName="expandedValue" matInput class="text-end" />
+                                    </td>
+                                    <td>
+                                        <mat-checkbox formControlName="allowPartFulfillment" class="coloumn-fix"></mat-checkbox>
+                                    </td>
+                                    <td>
+                                        <mat-checkbox formControlName="billable" class="coloumn-fix"></mat-checkbox>
+                                    </td>
+                                    <td>
+                                        <mat-checkbox formControlName="advancePayable" class="coloumn-fix"></mat-checkbox>
+                                    </td>
+                                    <td>
+                                        <mat-checkbox formControlName="reserveFund" class="coloumn-fix"></mat-checkbox>
+                                    </td>
+                                    <td>
+                                        <mat-form-field>
+                                            <input matInput [matDatepicker]="tbldatep1" formControlName="completionDate" matTooltip="Completion Date" />
+                                            <mat-datepicker-toggle matSuffix [for]="tbldatep1"></mat-datepicker-toggle>
+                                            <mat-datepicker #tbldatep1></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-select formControlName="milestoneStatus">
+                                            <mat-option value="Pending">Pending</mat-option>
+                                            <mat-option value="Completed">Completed</mat-option>
+                                        </mat-select>
+                                    </td>
+                                    <td>
+                                        <button mat-button class="btn-small" matTooltip="Delete the row" (click)="removeMilestone(mIndex)">
+                                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PO Milestone group -->
+        <!-- PO Shipping Information group -->
+        <div formGroupName="shippingInformation" class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/shipping.png" alt="" width="26">
+                    Shipping Information
+                </div>
+                <div>
+                    Negotiable <mat-checkbox formControlName="negotiable" class="coloumn-fix"></mat-checkbox>
+                </div>
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-form-field>
+                        <mat-label>Shipping Method</mat-label>
+                        <mat-select formControlName="shippingMethod" required matTooltip="Shipping Method">
+                            <mat-option value="">-- Please Select --</mat-option>
+                            <mat-option value="ship">Shipping</mat-option>
+                            <!-- Add more options if necessary -->
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Shipping Term</mat-label>
+                        <mat-select formControlName="shippingTerm" required matTooltip="Shipping Term">
+                            <mat-option value="">-- Please Select --</mat-option>
+                            <mat-option value="shipTerm">Term</mat-option>
+                            <!-- Add more options if necessary -->
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description" matTooltip="Enter the Description" rows="1" cols="2"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/shipping.png" alt="" width="26"> 
+                    Shipping Information
+                </div> 
+                <div>
+                    Negotiable <mat-checkbox class="coloumn-fix" ></mat-checkbox>
+                </div>
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-form-field >
+                        <mat-label>Shipping Method</mat-label>
+                        <mat-select required matTooltip="Shipping Method">
+                            <mat-option value="ship">-- Please Select --</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Shipping Term</mat-label>
+                        <mat-select required matTooltip="Shipping Term">
+                            <mat-option value="shipTerm">-- Please Select --</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col">
+                        <mat-label>Description</mat-label>
+                           <textarea matInput matTooltip="Enter the Description"  rows="1" cols="2"></textarea>
+                    </mat-form-field>  
+                </div>
+            </div>
+        </div> -->
+        <!-- PO Shipping Information group -->
+        <!-- PO Other Terms and Conditions group -->
+
+        <div  class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/terms.png" alt="" width="22"> 
+                    Other Terms and Conditions
+                </div>  
+                <div>
+                    <a href="#termsandcondit" class="ft-size13"> Show Standard Terms and Conditions</a>
+                </div>
+            </h5>
+            <div class="widget-content mt-2 mb-2">
+                <angular-editor formControlName="otherTerms" required="" name="htmlText"></angular-editor>
+            </div>
+        </div> 
+        <!-- PO Other Terms and Conditions group -->
+        <!-- PO Other Terms and Conditions group -->
+   
+       
+
+   
+      
+
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/doc1.png" alt="" width="22"> 
+                    Documents <i class="fa fa-info-circle" aria-hidden="true" matTooltip="Attach any files for Supplier reference"></i> 
+                </div>   
+            </h5>
+            <div class="widget-content">
+                <div class="grid-2cols mb-2">
+                    <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <textarea matInput class="w-100" rows="1" required=""></textarea>
+                        </mat-form-field>
+                        <div class="custom-file-upload mt-4">
+                            <button class="file-upload-button">
+                                <input class="custom-file-input"
+                                    id="customFileLang" type="file" #fileInput
+                                    accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf"
+                                     multiple>
+                                <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
+                                    class="ps-2">Upload</span>
+                                    <span class="mandatory-star">*</span>
+                            </button>  
+                        </div>      
+                </div>
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="80">Serial #</th> 
+                                <th scope="col" width="180">Description</th>
+                                <th scope="col" width="220">File Name</th>
+                                <th scope="col" width="100">Uploaded By</th>
+                                <th scope="col" width="100">Uploaded Date</th>
+                                <th scope="col" width="80">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>1</td>                                                         
+                                <td>
+                                    for supplier ref Copy
+                                </td>
+                                <td>
+                                    invoice.pdf
+                                    </td>
+                                <td>
+                                    Krishnan
+                                </td>
+                                <td>
+                                    12-Mar-2025
+                                </td> 
+                                <td class="text-center">
+                                    <button mat-button class="btn-small" matTooltip="Delete">
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </button>  
+                                </td>                                
+                            </tr>                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/doc.png" alt="" width="22"> 
+                     Supplier Documents     
+                     <i class="fa fa-info-circle" aria-hidden="true" matTooltip="Add information on documents that the Supplier may have to provide"></i>                     
+                </div>   
+                <button matTooltip="Add" class="Xsmall-btn-action header-level-btn-blue">
+                    <i class="fa fa-plus pe-2"></i> Add
+                </button>  
+            </h5>
+            <div class="widget-content">
+                
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="80">Serial #</th> 
+                                <th scope="col" width="180">Document Name <span class="mandatory-star">*</span></th>
+                                <th scope="col" width="220">Description</th>
+                                <th scope="col" width="100">Mandatory</th>
+                                <th scope="col" width="100">Optional</th>
+                                <th scope="col" width="80">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>1</td>   
+                                <td>
+                                    <mat-form-field class="width-95p"> 
+                                        <mat-select required matTooltip="Shipping Method">
+                                            <mat-option value="ship">Product Specifications</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-label>Description</mat-label> 
+                                        <textarea matInput matTooltip="Enter the Description"  rows="1" cols="2"></textarea>
+                                    </mat-form-field> 
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix" checked></mat-checkbox>
+                                </td> 
+                                <td>
+                                    <mat-checkbox class="coloumn-fix" ></mat-checkbox>
+                                </td>
+                                <td class="text-center">
+                                    <button mat-button class="btn-small" matTooltip="Delete">
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </button>  
+                                </td>                                
+                            </tr> 
+                            <tr class="cust-field-height">
+                                <td>2</td>   
+                                <td>
+                                    <mat-form-field class="width-95p"> 
+                                        <mat-select required matTooltip="Shipping Method">
+                                            <mat-option value="CommercialT">Commercial Terms</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="width-95p">
+                                        <mat-label>Description</mat-label> 
+                                        <textarea matInput matTooltip="Enter the Description"  rows="1" cols="2"></textarea>
+                                    </mat-form-field> 
+                                </td>
+                                <td>
+                                    <mat-checkbox class="coloumn-fix"></mat-checkbox>
+                                </td> 
+                                <td>
+                                    <mat-checkbox class="coloumn-fix" checked=""></mat-checkbox>
+                                </td>
+                                <td class="text-center">
+                                    <button mat-button class="btn-small" matTooltip="Delete">
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </button>  
+                                </td>                                
+                            </tr>                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/notes.png" alt="" width="22">  
+                    Notes to Supplier <span class="ft-size11">Optional</span>
+                
+                </div>
+                
+            </h5>
+            <div class="widget-content">
+                <textarea matInput class="w-100" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/acceptance.png" alt="" width="26">
+                    Supplier Acceptance
+                </div>                
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-checkbox class="coloumn-fix" checked>Read &amp; Agree</mat-checkbox>
+                    <mat-checkbox class="coloumn-fix" >Read &amp; Disagree</mat-checkbox>
+                </div>
+                <div class="grid-3cols"> 
+                    <mat-form-field>
+                        <mat-label>Comments</mat-label>                       
+                        <textarea matInput matTooltip="Enter the Description"  rows="1"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                <div>
+                    <img src="../../../assets/images/icons/workflow.png" alt="" width="20"> 
+                    Workflow Status 
+                    <!-- <span class="ft-size11"> (Attach any files for Supplier reference)</span> -->
+                </div>   
+            </h5>
+            <div class="widget-content">
+                
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" width="80">WF Level #</th> 
+                                <th scope="col" width="180">Approver Name</th>
+                                <th scope="col" width="100">Approver Role</th>
+                                <th scope="col" width="220">Approver Comments</th>
+                                <th scope="col" width="100">Est. Complete Date</th>
+                                <th scope="col" width="100">Action Date</th>
+                                <th scope="col" width="80">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>1</td>                                                         
+                                <td>
+                                    Chirstoper G James
+                                </td>
+                                <td>
+                                    Procurement Officer
+                                </td>
+                                <td>
+                                    I approve the RFQ
+                                </td>
+                                <td>
+                                    <mat-form-field>                                        
+                                        <input matInput [matDatepicker]="tbldprek" matTooltip="Est. Complete Date">
+                                        <mat-datepicker-toggle matSuffix [for]="tbldprek"></mat-datepicker-toggle>
+                                        <mat-datepicker #tbldprek></mat-datepicker>
+                                    </mat-form-field>
+                                </td> 
+                                <td>
+                                    <mat-form-field>                                        
+                                        <input matInput [matDatepicker]="actiondat" matTooltip="Action Date">
+                                        <mat-datepicker-toggle matSuffix [for]="actiondat"></mat-datepicker-toggle>
+                                        <mat-datepicker #actiondat></mat-datepicker>
+                                    </mat-form-field>
+                                </td> 
+                                <td class="text-center">
+                                    <!-- <button mat-button class="btn-small" matTooltip="Delete">
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </button>   -->
+                                    Approved
+                                </td>                                                             
+                            </tr> 
+                            <tr class="cust-field-height">
+                                <td>1</td>                                                         
+                                <td>
+                                    Krishnan R Rama
+                                </td>
+                                <td>
+                                    Procure Head
+                                </td>
+                                <td>
+                                    RFQ approved
+                                </td>
+                                <td>
+                                    <mat-form-field>                                        
+                                        <input matInput [matDatepicker]="tbldprkq" matTooltip="Est. Complete Date">
+                                        <mat-datepicker-toggle matSuffix [for]="tbldprkq"></mat-datepicker-toggle>
+                                        <mat-datepicker #tbldprkq></mat-datepicker>
+                                    </mat-form-field>
+                                </td> 
+                                <td>
+                                    <mat-form-field>                                        
+                                        <input matInput [matDatepicker]="atetbldprkw" matTooltip="Action Date">
+                                        <mat-datepicker-toggle matSuffix [for]="atetbldprkw"></mat-datepicker-toggle>
+                                        <mat-datepicker #atetbldprkw></mat-datepicker>
+                                    </mat-form-field>
+                                </td> 
+                                <td class="text-center">
+                                    <!-- <button mat-button class="btn-small" matTooltip="Delete">
+                                        <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                    </button>   -->
+                                    Pending
+                                </td> 
+                                                            
+                            </tr>                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <div class="footer-action-btn">
+        <button   class="btn-gray"><i class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
+        <button   class="btn-blue"> <i class="fa fa-file-pdf-o pe-2" aria-hidden="true" ></i>Export To PDF</button>
+        <button   class="btn-blue"> <i class="fa fa-money pe-2" aria-hidden="true" ></i>Budget Check</button>
+        <div class="middle-spacer"></div>
+        <button   class="btn-blue"><i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>Save As Draft </button>
+        <button   class="btn-blue"><i class="fa fa-recycle pe-2" aria-hidden="true"></i>Process Workflow</button>
+        <button   class="btn-blue"><i class="fa fa-paper-plane pe-2" aria-hidden="true"></i>Send to Supplier</button>
+        <button   class="btn-blue"><i class="fa fa-toggle-on pe-2" aria-hidden="true"></i>Push To ERP</button>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+::ng-deep .mat-mdc-menu-panel {
+
+    .mat-mdc-menu-item {
+        min-height: 32px !important;
+        border-bottom: 1px solid #ccc !important;
+        .mat-mdc-menu-item-text {
+            font-size: 12px;
+            letter-spacing: 0px;
+            text-transform: capitalize;
+            font-weight: 400;
+        }
+    }
+}

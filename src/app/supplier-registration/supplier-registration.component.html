@@ -1,0 +1,543 @@
+<div class="dialog-container">
+    <div mat-dialog-title [ngClass]="{ rtl: isRtl, ltr: !isRtl }">
+        <div class="col-lg-11">
+            <h3>{{ "RegisterCreation.RegHeader" | translate }}</h3>
+        </div>
+        <div class="col-lg-1 text-end">
+            <button mat-icon-button  mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+    </div>
+    <mat-dialog-content>
+
+        <form [formGroup]="supplierForm" autocomplete="one-time-code">
+            <div class="widget-box">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                    {{ "RegisterCreation.RegTitle" | translate }}
+                </h5>
+                <div class="widget-content">
+                    <div class="grid-4cols">
+                        <mat-form-field class="col">
+                            <mat-label>
+                                @if(!isSubmitted ||
+                                !supplierForm.get('supplierClassificationId')?.hasError('required')){
+                                {{ "RegisterCreation.SupplierClassification" | translate }}
+                                }
+                                @if(isSubmitted && supplierForm.get('supplierClassificationId')?.hasError('required')){
+                                <span class="error-msg"> {{ 'Supplier Classification is required' | translate }}</span>
+                                }
+                            </mat-label>
+                            <mat-select formControlName="supplierClassificationId"
+                                matTooltip="{{ 'RegisterCreation.SupplierClassification' | translate }}">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option *ngFor="let data of supplierClassificationList"
+                                    [value]="data.supplierClassificId">
+                                    {{data.supplierClassificName}}
+                                </mat-option>
+                            </mat-select>
+                            <!-- Place mat-error directly inside mat-form-field -->
+                            <!-- <mat-error *ngIf="supplierForm.get('supplierClassificationId')?.hasError('required')">
+                                {{ 'Supplier Classification is required' | translate }}
+                            </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field class="col">
+                            <mat-label>
+                                @if(!isSubmitted || !supplierForm.get('supplierName')?.hasError('required')){
+                                {{
+                                "RegisterCreation.SupplierName" | translate
+                                }}
+                                }
+                                @if(isSubmitted && supplierForm.get('supplierName')?.hasError('required')){
+                                <span class="error-msg"> {{ 'Company Name is required' | translate }}</span>
+                                }
+                            </mat-label>
+                            <input uppercaseOnly appOnlyAllowedInput matInput formControlName="supplierName" matTooltip="{{
+                                        'RegisterCreation.SupplierName' | translate
+                                        }}" required />
+                            <!-- <mat-error *ngIf="supplierForm.get('supplierName')?.hasError('required')">
+                                {{ 'Company Name is required' | translate }}
+                            </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field class="col" *ngIf="multilanguageenable">
+                            <mat-label>{{
+                                "RegisterCreation.SupplierNameNativeLanguage" | translate
+                                }}</mat-label>
+                            <input matInput formControlName="supplierNameNativeLang" matTooltip="{{
+                                        'RegisterCreation.SupplierNameNativeLanguage' | translate
+                                        }}" />
+                        </mat-form-field>
+                        <mat-form-field class="col">
+                            <mat-label>
+                                @if(!isSubmitted || !supplierForm.get('tradeLicense')?.hasError('required')){
+                                {{ (managementDetails?.complianceRenewalBank?.captureBusinessLicenses && managementDetails?.licenseCertificate?.length > 0) ? managementDetails?.licenseCertificate[0]?.displayLabel : "RegisterCreation.CommercialTradeLicense" | translate }}
+                                }
+                                @if(isSubmitted && supplierForm.get('tradeLicense')?.hasError('required')){
+                                <span class="error-msg"> {{ 'Trade License is required' | translate }}</span>
+                                }
+                            </mat-label>
+                            <input matInput formControlName="tradeLicense" [matTooltip]="managementDetails?.complianceRenewalBank?.captureBusinessLicenses && managementDetails?.licenseCertificate?.length > 0 ? managementDetails?.licenseCertificate[0]?.displayLabel : 'Commercial / Trade License#'" required />
+
+                            <!-- <mat-error *ngIf="supplierForm.get('supplierName')?.hasError('required')">
+                                {{ 'Trade License is required' | translate }}
+                            </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field class="col">
+                            <mat-label>
+                                @if(!isSubmitted || !supplierForm.get('taxRegistration')?.hasError('required')){
+                                {{
+                                "RegisterCreation.Taxreg" | translate
+                                }}
+                                }
+                                @if(isSubmitted && supplierForm.get('taxRegistration')?.hasError('required')){
+                                <span class="error-msg"> {{ 'Tax Registration is required' | translate }}</span>
+                                }
+                            </mat-label>
+                            <input matInput formControlName="taxRegistration" matTooltip="{{
+                                        'RegisterCreation.Taxreg' | translate
+                                        }}" required />
+                            <!-- <mat-error *ngIf="supplierForm.get('taxRegistration')?.hasError('required')">
+                                {{ 'Tax Registration is required' | translate }}
+                            </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field class="col" *ngIf="multisitesuppliersetup">
+                            <mat-label>
+                                @if(!isSubmitted || !supplierForm.get('siteCode')?.hasError('required')){
+                                {{
+                                "RegisterCreation.SiteCode" | translate
+                                }}
+                                }
+                                @if(isSubmitted && supplierForm.get('siteCode')?.hasError('required')){
+                                <span class="error-msg"> {{ 'SiteCode is required' | translate }}</span>
+                                }
+                            </mat-label>
+                            <input matInput formControlName="siteCode"
+                                matTooltip="{{ 'RegisterCreation.SiteCode' | translate }}" />
+                            <!-- <mat-error *ngIf="supplierForm?.get('siteCode')?.hasError('required')">
+                                    {{ 'SiteCode is required' | translate }}
+                                </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field class="col" *ngIf="multisitesuppliersetup">
+                            <mat-label>
+                                @if(!isSubmitted || !supplierForm.get('siteName')?.hasError('required')){
+                                {{
+                                "RegisterCreation.SiteName" | translate
+                                }}
+                                }
+                                @if(isSubmitted && supplierForm.get('siteName')?.hasError('required')){
+                                <span class="error-msg"> {{ 'SiteName is required' | translate }}</span>
+                                }
+                            </mat-label>
+
+                            <input matInput matTooltip="{{
+                                'RegisterCreation.SiteName' | translate
+                                }}" formControlName="siteName" />
+                            <!-- <mat-error *ngIf="supplierForm?.get('siteName')?.hasError('required')">
+                                    {{ 'SiteName is required' | translate }}
+                                </mat-error> -->
+                        </mat-form-field>
+                        <mat-form-field class="col" *ngIf="multisitesuppliersetup">
+                            <mat-label>
+                                @if(!isSubmitted || !supplierForm.get('companyEmail')?.hasError('required')){
+                                {{ "RegisterCreation.CompanyEmail" | translate }}
+                                }
+                                @if(isSubmitted && supplierForm.get('companyEmail')?.hasError('required')){
+                                <span class="error-msg">{{ 'Company Email is required' | translate }}</span>
+                                }
+                                @if(isSubmitted && supplierForm.get('companyEmail')?.hasError('pattern')){
+                                <span class="error-msg"> Please enter a valid email address.</span>
+                                }
+                            </mat-label>
+                            <input matInput formControlName="companyEmail"
+                                matTooltip="{{ 'RegisterCreation.CompanyEmail' | translate }}" />
+
+                            <!-- <mat-error *ngIf="supplierForm?.get('companyEmail')?.hasError('required')">
+                                {{ 'Company Email is required' | translate }}
+                            </mat-error> -->
+                            <!-- <mat-error *ngIf="supplierForm.get('companyEmail')?.hasError('pattern')">
+                                Please enter a valid email address.
+                            </mat-error> -->
+                        </mat-form-field>
+
+                    </div>
+                </div>
+            </div>
+            <div class="grid-75-25">
+                <div class="widget-box">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        {{ "RegisterCreation.Salutation" | translate }}
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-4cols">
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('salutation')?.hasError('required')){
+                                    Salutation
+                                    }
+                                    @if(isSubmitted && supplierForm.get('salutation')?.hasError('required')){
+                                    <span class="error-msg">{{ 'Salutation is required' | translate }}</span>
+                                    }
+                                </mat-label>
+                                <mat-select formControlName="salutation" required>
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option *ngFor="let data of salutationList" [value]="data.salutationId">
+                                        {{data.salutationName}}
+                                    </mat-option>
+                                </mat-select>
+                                <!-- <mat-error *ngIf="supplierForm.get('salutation')?.hasError('required')">
+                                    {{ 'Salutation is required' | translate }}
+                                </mat-error> -->
+                            </mat-form-field>
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('firstName')?.hasError('required')){
+                                    {{
+                                    "RegisterCreation.FirstName" | translate
+                                    }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('firstName')?.hasError('required')){
+                                    <span class="error-msg">{{ 'First Name is required' | translate }}</span>
+                                    }
+                                </mat-label>
+                                <input matInput appOnlyAllowedSymbol formControlName="firstName"
+                                    matTooltip="{{ 'RegisterCreation.FirstName' | translate }}" required />
+                                <!-- <mat-error *ngIf="supplierForm.get('firstName')?.hasError('required')">
+                                    {{ 'First Name is required' | translate }}
+                                </mat-error> -->
+                            </mat-form-field>
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    {{
+                                    "RegisterCreation.MiddleName" | translate
+                                    }}</mat-label>
+                                <input matInput appOnlyAllowedSymbol formControlName="middleName"
+                                    matTooltip="{{ 'RegisterCreation.MiddleName' | translate }}" />
+                            </mat-form-field>
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('lastName')?.hasError('required')){
+                                    {{
+                                    "RegisterCreation.LastName" | translate
+                                    }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('lastName')?.hasError('required')){
+                                    <span class="error-msg">{{ 'Last Name is required' | translate }}</span>
+                                    }
+                                </mat-label>
+                                <input matInput appOnlyAllowedSymbol formControlName="lastName"
+                                    matTooltip="{{ 'RegisterCreation.LastName' | translate }}" required />
+                                <!-- <mat-error *ngIf="supplierForm.get('lastName')?.hasError('required')">
+                                    {{ 'Last Name is required' | translate }}
+                                </mat-error> -->
+                            </mat-form-field>
+                        </div>
+                        <div class="grid-user-2nd-row">
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('designation')?.hasError('required')){
+                                    {{
+                                    "RegisterCreation.Designation" | translate
+                                    }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('designation')?.hasError('required')){
+                                    <span class="error-msg"> {{ 'Designation is required' | translate }}</span>
+                                    }
+                                </mat-label>
+                                <input matInput formControlName="designation"
+                                    matTooltip="{{ 'RegisterCreation.Designation' | translate }}" required />
+                                <!-- <mat-error *ngIf="supplierForm.get('designation')?.hasError('required')">
+                                    {{ 'Designation is required' | translate }}
+                                </mat-error> -->
+                            </mat-form-field>
+
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('contactRoleId')?.hasError('required')){
+                                        {{
+                                            "RegisterCreation.ContactRole" | translate
+                                            }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('contactRoleId')?.hasError('required')){
+                                       <span class="error-msg"> {{ 'Role is required' | translate }}</span>
+                                    }
+                                    </mat-label>
+                                <mat-select formControlName="contactRoleId"
+                                    matTooltip="{{ 'RegisterCreation.ContactRole' | translate }}">
+                                    <mat-option value="">-- Please Select --</mat-option>
+                                    <mat-option *ngFor="let data of roleList" [value]="data.roleId">
+                                        {{data.roleName}}
+                                    </mat-option>
+                                </mat-select>
+                                <!-- <mat-error *ngIf="supplierForm.get('contactRoleId')?.hasError('required')">
+                                    {{ 'Role is required' | translate }}
+                                </mat-error> -->
+                            </mat-form-field>
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('emailId')?.hasError('required')){
+                                        {{
+                                            "RegisterCreation.EmailID" | translate
+                                            }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('emailId')?.hasError('required')){
+                                        <span class="error-msg"> {{ 'Email Id is required' | translate }}</span>
+                                     }
+                                    @if(isSubmitted && supplierForm.get('emailId')?.hasError('pattern')){
+                                       <span class="error-msg"> Please enter a valid email address.</span>
+                                    }
+                                   </mat-label>
+                                <input matInput formControlName="emailId"
+                                    matTooltip="{{ 'RegisterCreation.EmailID' | translate }}" />
+                                <!-- <mat-error *ngIf="supplierForm.get('emailId')?.hasError('required')">
+                                    {{ 'Email Id is required' | translate }}
+                                </mat-error> -->
+                                <!-- <mat-error *ngIf="supplierForm.get('emailId')?.hasError('pattern')">
+                                    Please enter a valid email address.
+                                </mat-error> -->
+                            </mat-form-field>
+
+
+                        </div>
+                        <div class="grid-3cols cust-field-height mt-2">
+                            <div class="w-100">
+                                <span class="ft-size11">Country Code - {{
+                                    "RegisterCreation.Mobile" | translate
+                                    }}<sup class="text-danger">*</sup></span>
+
+
+                                <div class="d-flex align-items-center">
+                                    <mat-form-field class="col">
+                                        <mat-select formControlName="mobileCode"
+                                            (selectionChange)="onCountryMobilePhoneChange($event.value, supplierForm)"
+                                            required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option *ngFor="let country of supplierPhoneCode"
+                                                [value]="country.mobileCode">
+                                                {{ country.countryCode | uppercase}} +{{ country.mobileCode }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!-- <mat-error *ngIf="supplierForm.get('mobileCode')?.hasError('required')">
+                                {{ 'Country Code is required' | translate }}
+                            </mat-error> -->
+                                    <mat-form-field  class="col">
+                                        <input matInput formControlName="mobileNumber"
+                                            (keypress)="allowOnlyNumbers($event)"
+                                            matTooltip="{{ 'RegisterCreation.Mobile' | translate }}" required
+                                            maxlength="10" />
+                                        <!-- <mat-error *ngIf="supplierForm.get('mobileNumber')?.hasError('required')">
+                                    {{ 'Mobile Number is required' | translate }}
+                                </mat-error> -->
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="w-100">
+                                <span class="ft-size11">Country Code - {{
+                                    "RegisterCreation.Landline" | translate
+                                    }}</span>
+
+
+                                <div class="d-flex align-items-center">
+                                    <mat-form-field  class="col">
+                                        <mat-select formControlName="landlineCode"
+                                            (selectionChange)="onCountryCodeChange($event.value, supplierForm)">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option *ngFor="let country of supplierPhoneCode"
+                                                [value]="country.landNumberCode">
+                                                {{ country.countryCode | uppercase}} +{{ country?.landNumberCode }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!-- <mat-error *ngIf="supplierForm.get('mobileCode')?.hasError('required')">
+                                {{ 'Country Code is required' | translate }}
+                            </mat-error> -->
+                                    <mat-form-field  class="col">
+                                        <input matInput formControlName="landlineNumber"
+                                            (keypress)="allowOnlyNumbers($event)"
+                                            matTooltip="{{ 'RegisterCreation.Landline' | translate }}" maxlength="10" />
+                                        <!-- <mat-error *ngIf="supplierForm.get('mobileNumber')?.hasError('required')">
+                                    {{ 'Mobile Number is required' | translate }}
+                                </mat-error> -->
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box pb-2" [formGroup]="supplierOtpValidationForm">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        {{ "RegisterCreation.UserDetails" | translate }}
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-1cols">
+                            <mat-form-field class="col">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('userName')?.hasError('required')){
+                                        {{
+                                            "RegisterCreation.UserName" | translate
+                                            }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('userName')?.hasError('required')){
+                                        <span class="error-msg"> {{ 'User Name is required' | translate }}</span>
+                                     }
+                                    @if(isSubmitted && supplierForm.get('userName')?.hasError('usernameExists')){
+                                       <span class="error-msg">{{ 'Username already exists, please enter a new username' | translate }}</span>
+                                    }
+                                </mat-label>
+                                <input matInput formControlName="userName" autocomplete="new-password"
+                                    matTooltip="{{ 'RegisterCreation.UserName' | translate }}" required
+                                    [readonly]="!enableAfterFieldsValid" (blur)="validateUserName()" />
+                                <!-- <mat-error *ngIf="supplierForm.get('userName')?.hasError('required')">
+                                    {{ 'User Name is required' | translate }}
+                                </mat-error>
+                                <mat-error *ngIf="supplierForm?.get('userName')?.hasError('usernameExists')">
+                                    {{ 'Username already exists, please enter a new username' | translate }}
+                                </mat-error> -->
+                            </mat-form-field>
+                            <mat-form-field class="col pwd-input">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('password')?.hasError('required') || !supplierForm.get('password')?.hasError('pattern')
+                                    || !supplierForm.get('password')?.hasError('confrmpasswordMismatch')){
+                                        {{ "RegisterCreation.Password" | translate }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('password')?.hasError('required')){
+                                        <span class="error-msg">{{ 'Password is required' | translate }}</span>
+                                     }
+                                    @if(isSubmitted && supplierForm.get('password')?.hasError('pattern')){
+                                       <span class="error-msg">{{ 'Password must contain at least 8 characters, includes special
+                                        character
+                                        (like @, # etc.), N, n, 1' | translate }}</span>
+                                    }
+                                    @if(isSubmitted && supplierForm.get('password')?.hasError('confrmpasswordMismatch')){
+                                        <span class="error-msg">Passwords do not match</span>
+                                     }
+                                    </mat-label>
+
+                                <input matInput matTooltip="{{ 'RegisterCreation.Password' | translate }}"
+                                    [type]="isPasswordVisible ? 'password' : 'text'" autocomplete="one-time-code"
+                                    formControlName="password" required [readonly]="!enableAfterFieldsValid" class="input-pr" />
+
+                                <!-- Eye icon inside the input field using matSuffix -->
+                                <mat-icon matSuffix (click)="togglePasswordVisibility()"
+                                    class="password-toggle eye-icon ieye">
+                                    {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                </mat-icon>
+                                <!-- @if (supplierForm.get('password')?.hasError('required') &&
+                                supplierForm.get('password')?.touched) {
+                                <mat-error> {{ 'Password is required' | translate }}</mat-error>
+                                }
+                                @if (supplierForm.get('password')?.hasError('pattern') &&
+                                supplierForm.get('password')?.touched) {
+                                <mat-error> {{ 'Password must contain at least 8 characters, includes special
+                                    character
+                                    (like @, # etc.), N, n, 1' | translate }} </mat-error>
+                                }
+                                <mat-error *ngIf="supplierForm?.get('password')?.hasError('confrmpasswordMismatch')">
+                                    Passwords do not match
+                                </mat-error> -->
+                            </mat-form-field>
+                            <mat-form-field class="col pwd-input">
+                                <mat-label>
+                                    @if(!isSubmitted || !supplierForm.get('confirmPassword')?.hasError('required') || !supplierForm.get('confirmPassword')?.hasError('passwordMismatch')){
+                                        {{
+                                            "RegisterCreation.ConfirmPassword" | translate
+                                            }}
+                                    }
+                                    @if(isSubmitted && supplierForm.get('confirmPassword')?.hasError('required')){
+                                        <span class="error-msg"> {{ 'Confirm Password is required' | translate }}</span>
+                                     }
+                                    @if(isSubmitted && supplierForm.get('confirmPassword')?.hasError('passwordMismatch')){
+                                        <span class="error-msg">Passwords do not match</span>
+                                     }
+                                     </mat-label>
+                                <input matInput type="password" formControlName="confirmPassword" matTooltip="{{
+                                                    'RegisterCreation.ConfirmPassword' | translate
+                                                    }}" [type]="isConformPasswordVisible ? 'password' : 'text'"
+                                    required type="password" autocomplete="new-password"
+                                    [readonly]="!enableAfterFieldsValid" (blur)="checkPasswordMatch()" class="input-pr" />
+
+                                <mat-icon matSuffix (click)="toggleConformPasswordVisibility()"
+                                    class="password-toggle eye-icon ieye">
+                                    {{ isConformPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                </mat-icon>
+                                <!-- <mat-error *ngIf="supplierForm.get('confirmPassword')?.hasError('required')">
+                                    {{ 'Confirm Password is required' | translate }}
+                                </mat-error>
+                                <mat-error *ngIf="supplierForm?.get('confirmPassword')?.hasError('passwordMismatch')">
+                                    Passwords do not match
+                                </mat-error> -->
+                            </mat-form-field>
+                            @if(getOTPBtn && !showMFA && supplierForm.valid && supplierOtpValidationForm.valid){
+                            <div class="col-md-12">
+                                <div class="d-flex justify-content-end w-100 mt-2">
+                                    <!-- <button mat-stroked-button  class="me-1" style="height: 35px;"
+                                        (click)="otpgenerate()">
+                                        <i class="fa fa-retweet" aria-hidden="true"></i>
+                                        <span></span>Get OTP
+                                    </button> -->
+
+                                    <div class="footer-action-btn btn-getOTP">
+                                        <button   class="btn-blue get-otp"
+                                            (click)="otpgenerate()">
+                                            <i class="fa fa-envelope-o pe-1" aria-hidden="true"></i> Get OTP
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+
+                            @if(showMFA){
+
+                            <div class="ft-size10 text-danger mt-1 mb-1">Please enter the code sent to your registered
+                                device.</div>
+                            <div class="grid-45-55">
+                                <div class="form-group cust-field-height">
+                                    <mat-form-field class="pwd-input col">
+                                        <!-- <span class="material-icons-outlined icons-place">lock_clock</span> -->
+                                        <img src="../../assets/images/icons/multi-factor-authentication-.png"
+                                            alt="MFA Code" width="24" class="icon-mfa">
+                                        <input matInput placeholder="MFA Code" [(ngModel)]="mfaCode"
+                                            style="padding-left: 35px;" [ngModelOptions]="{standalone: true}"
+                                            matTooltip="Enter the Multi-Factor Authentication Code" />
+                                        <p
+                                            *ngIf="supplierForm.get('mfaCode')?.hasError('required') && supplierForm.get('mfaCode')?.touched">
+                                            MFA Code is required.
+                                        </p>
+                                        <p
+                                            *ngIf="supplierForm.get('mfaCode')?.hasError('pattern') && supplierForm.get('mfaCode')?.touched">
+                                            MFA Code is invalid.
+                                        </p>
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex align-items-center otpgenerate">
+                                    <a *ngIf="showMFA === true" (click)="otpgenerate()" class="resendotp"
+                                        [class.disabledatag]="isResendDisabled">
+                                        Resend OTP </a>
+                                    <!--  <button class="m-0 p-0 border-0" [disabled]="isResendDisabled" (click)="otpgenerate()">Resend OTP</button> -->
+                                    <span class="resendotp-count" *ngIf="isResendDisabled">({{ resendCountdown
+                                        }}s)</span>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="footer-action-btn">
+            <button   class="btn-gray" (click)="onCancel()" cdkFocusInitial>
+                <i class="fa fa-ban pe-2"></i> {{ "RegisterCreation.Cancal" | translate }}
+            </button>
+            <div class="middle-spacer"></div>
+            <button   (click)="submitMFA()" class="btn-blue">
+                <i class="fa fa-hand-pointer-o pe-2"></i>{{ "RegisterCreation.Submit" | translate }}
+            </button>
+        </div>
+    </mat-dialog-actions>
+
+</div>

@@ -1,0 +1,41 @@
+$white : #ffffff;
+$black: #000000;
+$contentText: #464646;
+$pnt5Gray: #f2f2f2;
+$LightGray:#D3D3D3;
+$PlatinumGray: #E5E4E2;
+$SilverGray:#C0C0C0;
+$SlateGray:#708090;
+$SmokeGray:#848884;
+$SteelGray: #71797E;
+$pageContentBg: #f1f1f1;
+$pzenOrange: #ed6f29;
+$pzenBlue:#005cbb;
+$AirForceBlue:#00308F;
+$AstrosNavy:#002D62;
+$Azure:#007FFF;
+$AliceBlue:#F0F8FF;
+$BravesNavy:#13274F;
+$Independence: #4C516D;
+$header-title : #073867;
+$sidebarbg : #f3f4f4;
+$paraText : #464646;
+$accordHeaderBg :#A1E3F9;
+$tabHeader: #2985ac;
+$tableRowBg: #b6cec7; // #d8e0bb;
+
+// Font install
+
+
+@font-face {
+	font-family: 'segoa UI';
+	// src: url('../src/assets/fonts/segoeui.ttf');
+	src: url('../src/assets/fonts/segoeui.ttf') format('truetype');
+    // url('../fonts/YanoneKaffeesatz-Regular.woff2') format('woff2'), 
+    // url('../fonts/YanoneKaffeesatz-Regular.woff') format('woff'), 
+    // url('../src/assets/fonts/segoeui.ttf') format('truetype'), 
+    // url('../fonts/YanoneKaffeesatz-Regular.svg#YanoneKaffeesatz-Regular') format('svg'), 
+    // url('../fonts/YanoneKaffeesatz-Regular.eot?#iefix') format('embedded-opentype');
+	font-weight: normal;
+	font-style: normal;
+}

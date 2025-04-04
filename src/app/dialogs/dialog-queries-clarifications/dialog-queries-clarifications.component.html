@@ -1,0 +1,115 @@
+<div class="dialog-container ">
+    <div mat-dialog-title class="d-flex flex-row justify-content-start align-items-center">
+        <div class="col ps-2">Queries & Clarifications</div>
+        <button mat-icon-button mat-dialog-close>
+            <i class="material-icons" matTooltip="close">close</i>
+        </button>
+    </div>
+    <mat-dialog-content>
+        <div class="widget-box">
+
+            <div class="widget-content">
+
+                <div class="table-responsive">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Serial #</th>
+                                <th scope="col">Supplier Name</th>
+                                <th scope="col">Query Category</th>
+                                <th scope="col">Supplier Query</th>
+                                <th scope="col">Attachment Link</th>
+                                <th scope="col">Submission Date</th>
+                                <th scope="col">Response<sup>*</sup></th>
+                                <th scope="col">Attachment</th>
+                                <th scope="col">Response Date<sup>*</sup></th>
+                                <th scope="col">Response Type<sup>*</sup></th>
+                                <th scope="col">Publish</th>
+                                <th scope="col">Publish Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>1</td>
+                                <td>
+                                    <mat-form-field class="w-100">
+                                        <input matInput placeholder="" value="JBN TEKNICAL FZE">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="w-100">
+                                        <input matInput placeholder="" value="General">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="w-100">
+                                        <input matInput placeholder="" value="csv">
+                                    </mat-form-field>
+                                </td>
+                                <td style="width: 200px;"><a href="">Minimum response.png</a></td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="dp1">
+                                        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                        <mat-datepicker #dp1></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="w-100">
+                                        <input matInput placeholder="" value="csv">
+                                    </mat-form-field>
+                                </td>
+                                <td><a *ngIf="showUpload">Minimum response1.png <i class="fa ta-trash ps-2"></i></a> 
+                                <div class="custom-file-upload mt-3" *ngIf="!showUpload">
+                                    <button class="file-upload-button">
+                                        <input class="custom-file-input" id="customFileLang" type="file" #fileInput
+                                            accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf" multiple>
+                                        <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
+                                            class="ps-2">Upload</span>
+                                    </button>
+
+                                </div>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="dp1">
+                                        <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                                        <mat-datepicker #dp1></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="w-100">
+                                        <mat-select matTooltip="Fixed value %" placeholder="Select Fixed value">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="To Supplier">To Supplier</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-checkbox></mat-checkbox>
+                                </td>
+                                <td>
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="dp3">
+                                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                                        <mat-datepicker #dp3></mat-datepicker>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="footer-action-btn">
+            <button class="btn-gray"><i class="fa fa-ban pe-2" 
+                    ></i>Cancel</button>
+            <div class="middle-spacer"></div>
+            <button class="btn-blue" ><i class="fa fa- pe-2"></i>Save</button>
+        </div>
+    </mat-dialog-actions>
+</div>

@@ -1,0 +1,130 @@
+<div class="dialog-container">
+    <div mat-dialog-title>
+        <h3>Search and Add Suppliers</h3>
+        <button mat-icon-button mat-dialog-close>
+            <i class="material-icons" matTooltip="close">close</i>
+        </button> 
+    </div>   
+    <mat-dialog-content>
+        <div class="widget-box">
+
+            <div class="widget-content" [formGroup]="searchSupplierForm">
+                <div class="grid-4cols align-items-center">
+
+                    <mat-form-field>
+                        <mat-label>Spend Parent Category</mat-label>
+                        <input matInput value="Information Technology" disabled>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Spend Sub Category</mat-label>
+                        <input matInput value="Hardware Supplies" disabled>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Spend Child Category</mat-label>
+                        <input matInput value="IBM Hardware" disabled>
+                    </mat-form-field>
+                    <button class="header-level-btn-gray mt-3 mxw-120" matTooltip="Reset" style="width: 120px;"><i
+                            class="fa fa-reset pe-2"></i>Reset</button>
+                </div>
+                <div class="grid-4cols align-items-center">
+
+                    <mat-form-field>
+                        <mat-label>Supplier Code</mat-label>
+                        <input matInput formControlName="supplierCode">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Supplier Name</mat-label>
+                        <input matInput formControlName="supplierName">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Grade</mat-label>
+                        <mat-select required formControlName="grade">
+                            <mat-option value="">-- Please Select --</mat-option>
+                            <mat-option value="A">A</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button class="header-level-btn-blue mt-3 mxw-120" matTooltip="Create Template" style="width: 120px;"
+                        (click)="search()"><i class="fa fa-search pe-2"></i>Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">Supplier Details</h5>
+            <div class="widget-content">
+                <div class="table-responsive">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th>Serial #</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Grade</th>
+                                <th>Status</th>
+                                <th class="position-relative">
+                                    <mat-checkbox [formControlName]="'selectAll'"
+                                        (change)="toggleSelectAll($event)"></mat-checkbox>
+                                    <span style="margin-left: 20px">Select All</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let supplier of suppliers; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ supplier.supplierRefNo }}</td>
+                                <td>{{ supplier.supplierName }}</td>
+                                <td>{{ supplier.supplierGrade || 'A' }}</td>
+                                <td>{{ supplier.status }}</td>
+                                <td class="text-center">
+                                    <mat-checkbox [checked]="isSelected(supplier)"
+                                        (change)="toggleSelection(supplier, $event)"></mat-checkbox>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selected Suppliers Table -->
+        <div *ngIf="selectedSuppliers.length > 0" class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">Selected Suppliers</h5>
+            <div class="widget-content">
+                <div class="table-responsive">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th>Serial #</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>Grade</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let supplier of selectedSuppliers.controls; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ supplier.value.supplierRefNo }}</td>
+                                <td>{{ supplier.value.supplierName }}</td>
+                                <td>{{ supplier.value.supplierGrade || 'A'}}</td>
+                                <td>{{ supplier.value.status }}</td>
+                                <td class="text-center">
+                                    <i class="fa fa-trash text-danger" (click)="removeSupplier(i)"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="footer-action-btn">
+        <button class="btn-gray" mat-dialog-close cdkFocusInitial>
+            <i class="fa fa-ban pe-2"></i>Cancel</button>
+        <div class="middle-spacer"></div>
+        <button class="btn-blue" (click)="addAssignSupplier()"><i class="fa fa-plus pe-2"></i>Add</button>
+    </div>       
+    </mat-dialog-actions>    
+</div>

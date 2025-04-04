@@ -1,0 +1,474 @@
+import { Component, Input, signal, viewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
+import { CategoryScopeService } from '../services/category-scope.service';
+import { CommonService } from '../services/common.service';
+import { CategoryAndScopeVm, ChildCategoryVm, CategoryDocTypeMas, ParentCategoryVm, SubCategoryVm } from '../models/category-scope.model';
+import { LoginService } from '../services/login/login.service';
+import { SupplierUserFormService } from '../services/supplier.user.form.service';
+import { SupplierAttachmentService } from '../services/supplier-attachment.service';
+import { AttachmentDto } from '../models/supplier-attachment.model';
+import { LicenceActivityService } from '../services/licence-activity.service';
+import { ActivityVm, LicenseActivityDto, SubActivityVm } from '../models/licence-activities.model';
+import { DocumentInfoDto, FileInfoDto } from '../models/file-info.model';
+import { RelatedPartyDiscDto } from '../models/related-party-disc.model';
+import { SupplierDto } from '../models/supplier.model';
+import { LicenseCertificationDto } from '../models/licence-certificates.model';
+import { AdminService } from '../services/admin/admin.service';
+import { ComplianceCheckService } from '../services/supplier-compliance-checklist.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+
+@Component({
+  selector: 'app-supplier-form-preview',
+  templateUrl: './supplier-form-preview.component.html',
+  styleUrl: './supplier-form-preview.component.scss'
+})
+export class SupplierFormPreviewComponent {
+
+  @Input() supplierId: number;
+  readonly panelOpenStep1 = signal(true);
+  readonly panelOpenStep2 = signal(true);
+  readonly panelOpenStep3 = signal(true);
+  readonly panelOpenStep4 = signal(true);
+  readonly panelOpenStep5 = signal(true);
+  readonly panelOpenStep6 = signal(true);
+  readonly panelOpenStep7 = signal(true);
+  readonly panelOpenStep8 = signal(true);
+  readonly panelOpenStep9 = signal(true);
+  accordion = viewChild.required(MatAccordion);
+  filterParentCategoryOptions: ParentCategoryVm[] = new Array<ParentCategoryVm>();
+  filterSubCategoryOptions: SubCategoryVm[] = new Array<SubCategoryVm>();
+  filterChildCategoryOptions: ChildCategoryVm[] = new Array<ChildCategoryVm>();
+  savaAllCategoryAndScopeVm: CategoryAndScopeVm[] = new Array<CategoryAndScopeVm>();
+  supplierContacts: SupplierContact[] = [];
+  userData: any | null;
+  financialBusinessDetails: FinancialBusinessDetails = new FinancialBusinessDetails();
+  supplierBanks: SupplierBank[] = [];
+  manAttachmentDetail: AttachmentDto = new AttachmentDto();
+  optAttachmentDetail: AttachmentDto = new AttachmentDto();
+  supplier: SupplierDto = new SupplierDto();
+  optionalAttachFlag: boolean = true;
+  manFileInfo: DocumentInfoDto[] = new Array<DocumentInfoDto>();
+  optFileInfo: DocumentInfoDto[] = new Array<DocumentInfoDto>();
+  licenseActivityList: LicenseActivityDto[] = new Array<LicenseActivityDto>();
+  saveRelatedPartyVm: RelatedPartyDiscDto = new RelatedPartyDiscDto();
+  addressDetailsData: AddedData[] = [];
+  saveAllLicenseVm: LicenseCertificationDto[] = new Array<LicenseCertificationDto>();
+  complianceData: any[] = [];
+  pqQuestionnaries: any;
+  showPopup = false;
+  popupImage: SafeResourceUrl | null = null;
+
+  constructor(public categoryScopeService: CategoryScopeService, public commonService: CommonService,
+    private loginservice: LoginService, private SupplierUserForm: SupplierUserFormService,
+    private attachmentService: SupplierAttachmentService, private licenceActivityService: LicenceActivityService
+    , private adminService: AdminService, public supplierservice: ComplianceCheckService, private sanitizer: DomSanitizer) { }
+
+  ngOnInit() {
+    const storedData: any = localStorage.getItem('loginDetails');
+    this.userData = JSON.parse(storedData);
+    this.initStaticDropDown();
+    this.getSupplierInformation();
+    this.GetSupplierBank();
+    this.getAddressDetails(this.userData.supplierId);
+    this.GetContactDetails();
+    this.GetFinancialBusinessDetails();
+    this.getCategoryScopeList();
+    this.getAttachmentData();
+    this.getLicenseActivityDetails();
+    this.getPQquestionnaries();
+    // this.getRelatedPartyDetail();
+    this.getAllLicenseCertificationList();
+    this.getComplianceCheckListData(this.userData.supplierId);
+  }
+
+  initStaticDropDown() {
+    this.filterParentCategoryOptions = [
+      { id: 1, name: "Administration" },
+      { id: 2, name: "Finance" },
+      { id: 3, name: "Information Technology" },
+      { id: 4, name: "Engineering Contracts" },
+      { id: 5, name: "Human Resources" },
+      { id: 6, name: "Pantry" },
+      { id: 7, name: "Fuel & Lubricants" }
+    ];
+    this.filterSubCategoryOptions = [
+      { id: 1, name: "Supply of Office Supplies" },
+      { id: 2, name: "Manpower Services" },
+      { id: 3, name: "Services" },
+      { id: 4, name: "IT Hardware and Consumables" },
+      { id: 5, name: "IT Software" },
+      { id: 6, name: "Application Support Services" },
+      { id: 7, name: "Hardware Installation Services" },
+      { id: 8, name: "Hardware Supplies" },
+      { id: 9, name: "Buildings" },
+      { id: 10, name: "Bridges" },
+      { id: 11, name: "Elevators" },
+      { id: 12, name: "Services" },
+      { id: 13, name: "Refreshments" },
+      { id: 14, name: "Fuel" }
+    ];
+    this.filterChildCategoryOptions = [
+      { id: 1, name: "Stationery Supplies" },
+      { id: 2, name: "Master Service Agreement" },
+      { id: 3, name: "International Travels" },
+      { id: 4, name: "Consulting & Design Development" },
+      { id: 5, name: "Audit Services" },
+      { id: 6, name: "Computer Hardware" },
+      { id: 7, name: "Maintenance & Support" },
+      { id: 8, name: "Oracle Technology Components" },
+      { id: 9, name: "Oracle Hardware" },
+      { id: 10, name: "IBM Maximo" },
+      { id: 11, name: "Oracle Application EBS" },
+      { id: 12, name: "Huawei Hardware" },
+      { id: 13, name: "Facilities Management" },
+      { id: 14, name: "Consulting & Design Development" },
+      { id: 15, name: "Supply & Commissioning" },
+      { id: 16, name: "Constructions" },
+      { id: 17, name: "Legal Professional Services" },
+      { id: 18, name: "Recruitment Services" },
+      { id: 19, name: "General Kitchen Items" },
+      { id: 20, name: "CNG" }
+    ];    
+  }
+  getCategoryScopeList() {
+    this.categoryScopeService.getCategoryAndScopeDetails(this.supplierId)
+      .subscribe({
+        next: res => {
+          res.forEach((item, index) => {
+            item.parentCategory = this.filterParentCategoryOptions.find(ac => ac.id === item.parentCategoryId)?.name!;
+            item.subCategory = this.filterSubCategoryOptions.find(ac => ac.id === item.subCategoryId)?.name!;
+            item.childCategory = this.filterChildCategoryOptions.find(ac => ac.id === item.childCategoryId)?.name!;
+            
+          });
+          this.savaAllCategoryAndScopeVm = res;
+        }, error: error => this.adminService.showMessage(error),
+        complete: () => { }
+      });
+  }
+  getAttachmentData() {
+    this.attachmentService.getAttachmentDetails(this.supplierId)
+      .subscribe({
+        next: res => {
+          if (res.mandatoryAttachment) {
+            this.manAttachmentDetail = res.mandatoryAttachment;
+            this.manAttachmentDetail.uploadedDate = new Date(this.manAttachmentDetail.uploadedDate);
+            this.manFileInfo = res.mandatoryAttachment.fileInfo;
+            this.optionalAttachFlag = res.optionalAttachFlag;
+            if (this.optionalAttachFlag) {
+              this.optAttachmentDetail = res.optionalAttachment;
+              this.optAttachmentDetail.uploadedDate = new Date(this.optAttachmentDetail.uploadedDate);
+              this.optFileInfo = res.optionalAttachment.fileInfo;
+            }
+          }
+        }, error: error => this.adminService.showMessage(error),
+        complete: () => { }
+      });
+  }
+  getLicenseActivityDetails() {
+    this.licenceActivityService.getLicenseActivityDetails(this.supplierId)
+      .subscribe({
+        next: res => {
+          this.licenseActivityList = res;
+        }, error: error => this.adminService.showMessage(error),
+        complete: () => { }
+      });
+  }
+  // getRelatedPartyDetail() {
+  //   this.licenceActivityService.getRelatedPartyDiscDetail(this.supplierId)
+  //     .subscribe({
+  //       next: res => {
+  //         if (res.relatedPartyDiscId > 0) {
+  //           this.saveRelatedPartyVm = res;
+  //           this.saveRelatedPartyVm.startDate = new Date(this.saveRelatedPartyVm.startDate);
+  //         }
+  //       }, error: error => this.adminService.showMessage(error),
+  //       complete: () => { }
+  //     });
+  // }
+  getAllLicenseCertificationList() {
+    this.licenceActivityService.getLicenseCertifications(this.supplierId)
+      .subscribe({
+        next: res => {
+          res.forEach((item, index) => {
+            item.startDate = new Date(item.startDate);
+            item.expiryDate = new Date(item.expiryDate);
+            item.relatedParty.startDate = new Date(item.relatedParty.startDate);
+          });
+          this.saveAllLicenseVm = res;
+        }, error: error => this.adminService.showMessage(error),
+        complete: () => { }
+      });
+  }
+  downloadFile(path: string) {
+    this.commonService.downloadOrOpenFile(path);
+  }
+  GetContactDetails() {
+    this.loginservice.GetSupplierContact(this.userData.supplierId).subscribe(res => {
+      if (res && res.length > 0) {
+        this.supplierContacts = res.map((data: any) => ({
+          salutation: data.salutationName ?? 'N/A',
+          firstName: data.firstName ?? 'N/A',
+          middleName: data.middleName ?? 'N/A',
+          lastName: data.lastName ?? 'N/A',
+          jobTitle: data.jobTitle ?? 'N/A',
+          roleName: data.roleName ?? 'N/A',
+          email: data.email ?? 'N/A',
+          phoneNumber: data.phoneNumber ?? 'N/A',
+          mobileCode: data.mobileCode ?? 'N/A',
+          phoneCode: data.phoneCode ?? 'N/A',
+          mobileNumber: data.mobileNumber ?? 'N/A',
+          isPrimaryContact: data.isPrimaryContact || false
+        }));
+      } else {
+      }
+    }
+    );
+  }
+  GetFinancialBusinessDetails() {
+    this.SupplierUserForm.GetFinancialBusinessDetails(this.userData.supplierId).subscribe(data => {
+      if (data) {
+        this.financialBusinessDetails = data;
+      }
+    });
+  }
+  GetSupplierBank() {
+    this.loginservice.GetSupplierBank(this.userData.supplierId).subscribe(res => {
+      if (res && res.length > 0) {
+        this.supplierBanks = res.map((item: any) => ({
+          bankName: item.bankName,
+          branch: item.branch,
+          currency: item.currency,
+          country: item.country,
+          state: item.state,
+          city: item.city,
+          accountNumber: item.accountNumber,
+          swiftCodeBIC: item.swiftCodeBIC,
+          iban: item.iban,
+          bSB: item.bsb,
+          routing: item.routing,
+          iFSCCode: item.ifscCode,
+          correspondentBank: item.correspondentBank,
+          defaultBank: item.defaultBank,
+        }));
+      } else {
+      }
+    }
+    );
+  }
+  getAddressDetails(supplierId: number) {
+    this.SupplierUserForm.getAddressDetails(supplierId).subscribe((res: any) => {
+      if (res) {
+        this.addressDetailsData = res;
+      }
+    })
+  }
+  getSupplierInformation(): void {
+    this.commonService.getSupplier(this.userData.supplierId).subscribe({
+      next: (data) => {
+        this.supplier = data;
+      },
+      error: (err) => {
+        console.error('Error fetching supplier types', err);
+      }
+    });
+  }
+  getComplianceCheckListData(supplierId: number) {
+    this.supplierservice.GetComplianceCheckListData(supplierId).subscribe({
+      next: (data) => {
+        this.complianceData = data;
+      },
+      error: (err) => {
+        console.error('Error fetching compliance data', err);
+      }
+    });
+  }
+
+  getPQquestionnaries() {
+
+    this.commonService.GetpqquetionariesSupplier(this.commonService.SupplierId).subscribe({
+      next: (responses: any) => {
+        this.commonService.getpqQuestionnariesList().subscribe({
+          next: (template: any) => {
+            this.pqQuestionnaries = this.mergeTemplateAndResponses(template[0], responses);
+          },
+          error: (err: any) => {
+            console.error('Error fetching Quetionnaries data', err);
+          }
+        })
+      }
+    })
+
+  }
+
+
+   mergeTemplateAndResponses(template: any, responses: any[]): any {
+    // Iterate through sections in the template
+    template.sections.forEach((templateSection: any) => {
+      // Find corresponding section in responses
+      const responseSection = responses
+        .flatMap(response => response.sections)
+        .find(responseSec => responseSec.sectionID === templateSection.sectionID);
+  
+      if (responseSection) {
+        // Iterate through questions in the template section
+        templateSection.questions.forEach((templateQuestion: any) => {
+          // Find corresponding question in responses
+          const responseQuestion = responseSection.questions.find(
+            (respQues: any) => respQues.questionID === templateQuestion.questionID
+          );
+  
+          if (responseQuestion) {
+            // Merge question responses
+            templateQuestion.userResponse = responseQuestion.userResponse || "";
+            templateQuestion.userResponseOption = responseQuestion.userResponseOption || "";
+            templateQuestion.attachmentPath = responseQuestion.attachmentPath || "";
+            templateQuestion.attachmentBase64 = responseQuestion.attachmentBase64 || "";
+            templateQuestion.attachmentNamePath = responseQuestion.attachmentNamePath || "";
+  
+            // Handle child questions and responses
+            templateQuestion.childQuestion.forEach((templateChild: any) => {
+              const responseChild = responseQuestion.childResponses.find(
+                (respChild: any) => respChild.childQuestionID === templateChild.childQuestionID
+              );
+  
+              if (responseChild) {
+                templateChild.userResponse = responseChild.userResponse || "";
+                templateChild.userResponseOption = responseChild.userResponseOption || "";
+                templateChild.attachmentPath = responseChild.attachmentPath || "";
+                templateChild.attachmentBase64 = responseChild.attachmentBase64 || "";
+                templateChild.attachmentNamePath = responseChild.attachmentNamePath || "";
+              }
+            });
+          }
+        });
+      }
+    });
+  
+    return template;
+  }  
+
+   // Method to open the popup with the image
+   openImagePopup(base64Image: string): void {
+    this.popupImage = this.sanitizer.bypassSecurityTrustResourceUrl(base64Image); 
+    this.showPopup = true;
+  }
+
+  // Method to close the popup
+  closePopup(): void {
+    this.showPopup = false;
+    this.popupImage = null;
+  }
+
+  parseDate(establishmentDate: string): any {
+    throw new Error('Method not implemented.');
+  }
+
+}
+
+export class SupplierBank {
+
+  bankName: string;
+  branch: string;
+  currency: string;
+  country: string;
+  state: string;
+  city: string;
+  accountNumber: string;
+  swiftCodeBIC?: string;
+  iban: string;
+  bSB?: string;
+  routing?: string;
+  iFSCCode?: string;
+  correspondentBank: boolean;
+  defaultBank: boolean;
+}
+export class SupplierContact {
+
+  salutation: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  jobTitle: string;
+  roleName?: string;
+  email: string;
+  phoneNumber?: string;
+  mobileCode: string;
+  phoneCode?: string;
+  mobileNumber: string;
+  isPrimaryContact: boolean;
+}
+
+export class FinancialHealthDocsInfo {
+  fileName: string;
+  fileType: string;
+  finDocId: number;
+  financialHealthId: number;
+}
+
+export class FinancialHealthInfo {
+  netProfitLast3Year: boolean;
+  isFinancialStatementRequired: boolean;
+  financialHealthDocsInfo: FinancialHealthDocsInfo;
+}
+
+export class ProjectDetail {
+  projectName: string;
+  projectDescription: string;
+  customerName: string;
+  startDate: string;
+  endDate: string;
+  countryName: string;
+  currencyCode: string;
+  value: number;
+
+}
+
+export class BusinessCreditInfo {
+  experienceName: string;
+  currencyCode: string;
+  aggregateValueProjects: number;
+  maxValueOfProjectUndertake: number;
+  creditLimit: number;
+  creditExposureLimit: number;
+  projectLimit: number;
+}
+export class AssetLiabilitieInfo {
+  description: string;
+  fromDateYear1: string;
+  fromDateYear2: string;
+  valueYear1: string;
+  fromDateYear3: string;
+  toDateYear1: string;
+  valueYear2: string;
+  toDateYear2: string;
+  toDateYear3: string;
+  valueYear3: string;
+
+}
+export class FinancialBusinessDetails {
+  businessCreditInfos: BusinessCreditInfo;
+  assetLiabilitieInfos: AssetLiabilitieInfo[] = new Array<AssetLiabilitieInfo>();
+  financialHealthInfo: FinancialHealthInfo = new FinancialHealthInfo();
+  projectDetailsInfos: ProjectDetail[] = new Array<ProjectDetail>();
+
+}
+interface AddedData {
+  addressLine1: string;
+  addressLine2: string;
+  addressLine3: string;
+  addressType: string;
+  cityName: string;
+  countryName: string;
+  stateName: string;
+  deleteFlag: boolean;
+  mainOffixe: boolean;
+  poBox: string;
+  zipCode: string;
+  taxInfo: TaxDetail[];
+}
+interface TaxDetail {
+  taxType: string;
+  registrationNumber: string;
+  taxExemption: boolean;
+}

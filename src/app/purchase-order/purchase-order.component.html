@@ -1,0 +1,42 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-home me-2" aria-hidden="true"></i><i class="fa fa-angle-double-right" aria-hidden="true"></i> Order Management <i class="fa fa-angle-double-right" aria-hidden="true"></i> Purchase Order</h2>
+    </div>
+    <div class="content-box p-2">
+        <!-- PO List  -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+               <div>
+                <img src="../../assets/images/icons/icon-po.png" alt="" width="22">  Purchase Order List
+               </div>
+                <button class="header-level-btn-blue" [routerLink]="['/krya/addpurchaseorder']"><i class="fa fa-plus pe-2"></i>New PO</button> 
+            </h5>
+            <div class="widget-content">
+              <div class="mt-2">
+                    <ag-grid-angular [theme]="theme" [rowData]="rowData" [columnDefs]="colDefs"
+                    [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+                    [paginationPageSizeSelector]="paginationPageSizeSelector" />
+              </div>
+            </div>
+        </div>
+
+        <!-- Supplier PO List (login based on show hide) -->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+               <div>
+                <img src="../../assets/images/icons/Supplier.png" alt="" width="22">  Supplier Purchase Order List
+               </div>
+                <button class="header-level-btn-blue" [routerLink]="['/krya/addsupplierpurchaseorder']"><i class="fa fa-plus pe-2"></i>Create New</button> 
+            </h5>
+            <div class="widget-content">
+              <div class="mt-2">
+                    <ag-grid-angular [theme]="theme" [rowData]="SupplierrowData" [columnDefs]="SuppliercolDefs"
+                    [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+                    [paginationPageSizeSelector]="paginationPageSizeSelector" />
+              </div>
+            </div>
+        </div>
+        <!-- Supplier PO List (login based on show hide) end -->
+    </div>
+
+</div>

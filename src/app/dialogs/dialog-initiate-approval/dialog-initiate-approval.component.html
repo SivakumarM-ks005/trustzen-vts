@@ -1,0 +1,144 @@
+<div class="dialog-container">
+  @if(!isInsideDialog()){
+    <div mat-dialog-title>
+      <h3>{{ "Workflow Approval" | translate }}</h3>
+      <button mat-icon-button  mat-dialog-close>
+        <i class="material-icons" matTooltip="close">close</i>
+      </button>
+    </div>
+  }
+  <mat-dialog-content>
+
+        <form [formGroup]="initalApprovel">
+          <div class="widget-box" formArrayName="supplierWF">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+              Add Workflow Approval
+              @if(initalApprovel.get('supplierWF')?.value?.length > 0){
+              <button class="small-btn-action" matTooltip="Add approval" (click)="createWFFormGroup()"><i class="fa fa-plus"
+                  aria-hidden="true"></i></button>
+              }
+            </h5>
+            <div class="widget-content p-0">
+              <div class="table-responsive">
+                <table class="content-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">WF Level</th>
+                      <th scope="col">Participant Type</th>
+                      <th scope="col">WF Role/Group</th>
+                      <th scope="col">User(s)</th>
+                      <th scope="col" class="text-center">All</th>
+                      <th scope="col" class="text-center">Only Approve</th>
+                      <th scope="col" class="text-center">Only Req Info</th>
+                      <th scope="col" class="text-center">Only Reject</th>
+                      <th scope="col" class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody class="list">
+                    @if(initalApprovel.get('supplierWF')?.value?.length > 0){
+                    @for(data of supplierWF.controls; track data; let i=$index){
+                    <tr class="cust-field-height" [formGroupName]="i">
+                      <td><span class="mwx-30 pt-2">{{data.get('wfLevel')?.value}}</span></td>
+                      <td>
+                        <mat-form-field style="width: 150px;">
+                          <mat-select formControlName="participantType" placeholder="" (selectionChange)="endDateValidate(i)">
+                            <mat-option value="">-- Please Select --</mat-option>
+                            @for(action of participantData; track action;){
+                            <mat-option [value]="action?.wfRoleType">{{action?.wfRoleType}}</mat-option>
+                            }
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <mat-form-field style="width: 150px;">
+                          <mat-select formControlName="wfRole" required (selectionChange)="callUserList(i)">
+                            <mat-option value="">-- Please Select --</mat-option>
+                            @for(action of roleDataAll; track action;){
+                            <mat-option [value]="action?.roleName">{{action?.roleName}}</mat-option>
+                            }
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+                      <td>
+                        <mat-form-field style="width: 140px;">
+                          <mat-select formControlName="assignedToUserId">
+                            @for(user of data?.get('assignedUserList')?.value; track user){
+                            <mat-option [value]="user?.userId">{{user?.userName | titlecase}}</mat-option>
+                            }
+                          </mat-select>
+                        </mat-form-field>
+                      </td>
+        
+                      <td class="text-center">
+                        <mat-checkbox class="mwx-30" formControlName="checkedAll" (change)="checkAll(i)"></mat-checkbox>
+                      </td>
+                      <td class="text-center">
+                        <mat-checkbox class="mwx-50" formControlName="onlyApprove"
+                          (change)="checkAllSelected(i)"></mat-checkbox>
+                      </td>
+                      <td class="text-center">
+                        <mat-checkbox class="mwx-50" formControlName="onlyReqInfo"
+                          (change)="checkAllSelected(i)"></mat-checkbox>
+                      </td>
+                      <td class="text-center">
+                        <mat-checkbox class="mwx-50" formControlName="onlyReject" (change)="checkAllSelected(i)"></mat-checkbox>
+                      </td>
+        
+                      <td class="text-center">
+                        @if(!data.get('workflowConfigId')?.value){
+                        <i class="fa fa-arrow-up" style="margin-right: 5px;" (click)="moveUp(i)"></i>
+                        <i class="fa fa-arrow-down" style="margin-right: 5px;" (click)="moveDown(i)"></i>
+                        <i class="fa fa-trash text-danger" (click)="deleteLevel(i)"></i>
+                        }
+                      </td>
+                      <!-- <td class="text-center"><mat-icon>delete</mat-icon></td> -->
+                    </tr>
+                    }
+                    }
+                    @else{
+                    <div>No workflow found</div>
+                    }
+                    <!-- <tr>
+                                              <td>2</td>
+                                              <td>Procurement Officer</td>
+                                              <td>Procure</td>
+                                              <td><mat-form-field>
+                                                  <mat-select placeholder="Select Users" class="w-100" [formControl]="users" [(value)]="selectedUsers" multiple>
+                                                    <mat-option *ngFor="let user of usersList" [value]="user">{{user}}</mat-option>
+                                                  </mat-select>
+                                                </mat-form-field></td>
+                                              <td class="text-center"><mat-icon>delete</mat-icon></td>
+                                            
+                                            </tr> -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            @if(isInsideDialog()){
+              <div class="footer-action-btn">
+                <div class="middle-spacer"></div>
+                @if(initalApprovel.get('supplierWF')?.value?.length > 0){
+                  <button   class="btn-blue" (click)="submit()">
+                    <i class="fa fa-hand-pointer-o pe-2" aria-hidden="true"></i>Submit
+                  </button>
+                }
+              </div>
+            }
+          </div>
+        </form>
+  </mat-dialog-content>
+  @if(!isInsideDialog()){
+    <mat-dialog-actions>
+      <div class="footer-action-btn">
+        <button  color="warn" class="btn-gray" mat-dialog-close cdkFocusInitial><i class="fa fa-ban pe-2"></i>Cancel</button>
+        <div class="middle-spacer"></div>
+        @if(initalApprovel.get('supplierWF')?.value?.length > 0){
+          <button   class="btn-blue" (click)="submit()">
+            <i class="fa fa-hand-pointer-o pe-2" aria-hidden="true"></i>Submit
+          </button>
+        }
+      </div>
+    </mat-dialog-actions>
+  }
+</div>

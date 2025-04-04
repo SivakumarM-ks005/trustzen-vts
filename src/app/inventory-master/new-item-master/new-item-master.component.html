@@ -1,0 +1,563 @@
+<div class="content-container">
+
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Inventory Specification</h2>
+    </div>
+    <div class="content-box p-2">
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Item Master
+                <div class="d-flex">
+                    <a mat-button [ngClass]="!isOpen? 'show':'hide'" matTooltip="Expand All"
+                        style="height: 30px; width: 30px; text-align: center;" (click)="openAccordionAll()"><i
+                            class="fa fa-expand" style="font-size: 20px;" aria-hidden="true"></i></a>
+                    <a mat-button [ngClass]="isOpen? 'show':'hide'" matTooltip="Collapse All"
+                        style="height: 30px ;width: 30px; text-align: center;" (click)="closeAccordionAll()"><i
+                            class="fa fa-compress" aria-hidden="true" style="font-size: 20px;"></i></a>
+                </div>
+            </h5>
+            <div class="widget-content" [formGroup]="inventoryFrom">
+                <div class="widget-box">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        Header
+                        <span class="status-label">Status: <span class="status-state"> {{ shared.getActionValue().componentName !== ''&& inventoryFrom.get('inventryItemHeader.inventorySubmitStatus')?.value ? (inventoryFrom.get('inventryItemHeader.active')?.value ? "Active" : "InActive") : "Draft"}} </span></span>
+                    </h5>
+                    <div class="widget-content" formGroupName="inventryItemHeader">
+                        <div class="grid-5cols">
+                            <mat-form-field>
+                                <mat-label>Code
+                                    @if(inventoryFrom.get('inventryItemHeader')?.get('code')?.hasError('codeDuplicate')
+                                    && inventoryFrom.get('inventryItemHeader')?.get('code')?.touched){
+                                    <span class="error-msg">
+                                        already exists
+                                    </span>
+                                    }
+                                </mat-label>
+                                <input matInput required maxlength="20" formControlName="code">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Short Name</mat-label>
+                                <input matInput required formControlName="shortName">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Description
+                                    @if(inventoryFrom.get('inventryItemHeader')?.get('description')?.hasError('descriptionDuplicate')
+                                    &&
+                                    inventoryFrom.get('inventryItemHeader')?.get('description')?.touched){
+                                    <span class="error-msg">
+                                        already exists
+                                    </span>
+                                    }
+                                </mat-label>
+                                <input matInput required formControlName="description">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Item Category</mat-label>
+                                <mat-select formControlName="itemCategoryId" (selectionChange)="categoryEvent($event)">
+                                    @for(data of getItemCategoryList; track data;){
+                                    <mat-option id={{data?.categoryType}}
+                                        [value]="data?.categoryTypeId">{{data?.categoryType}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Item Sub-Category </mat-label>
+                                <mat-select formControlName="itemSubCategoryId">
+                                    @for(data of getItemSubCategoryList; track data;){
+                                    <mat-option id={{data?.subCategoryType}}
+                                        [value]="data?.subCategoryTypeId">{{data?.subCategoryType}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <mat-form-field>
+                                <mat-label>Item Status</mat-label>
+                                <mat-select formControlName="itemTypeId" #itemStatus
+                                    (selectionChange)="itemStatusEvent(itemStatus)">
+                                    @for(data of getItemStatusList; track data;){
+                                    <mat-option id={{data?.itemStatus}}
+                                        [value]="data?.itemStatusId">{{data?.itemStatus}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field> -->
+                            <mat-form-field>
+                                <mat-label>Item Type</mat-label>
+                                <mat-select #itemType formControlName="itemTypeId"
+                                    (selectionChange)="itemTypeEvent(itemType)">
+                                    @for(data of getItemTypeList; track data;){
+                                    <mat-option id={{data?.itemType}}
+                                        [value]="data?.itemTypeId">{{data?.itemType}}</mat-option>
+                                    }
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>HSN Code </mat-label>
+                                <input matInput formControlName="hsnCode">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Custom Code</mat-label>
+                                <input matInput formControlName="customCode">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Costing Method </mat-label>
+                                @if(adminSettingsAttb?.inventoryCost?.itemCompanyLevel === 1){
+                                    <mat-select formControlName="costingMethodId" #costingMethod (selectionChange)="costingMethodEvent(costingMethod)">
+                                        <mat-option id="Wt-Avg-Simple-Avg" [value]="1">Wt-Avg-Simple-Avg</mat-option>
+                                        <mat-option id="LIFO" [value]="2">LIFO</mat-option>
+                                    </mat-select>
+                                }@else {
+                                    <mat-select formControlName="costingMethodId" #costingMethod (selectionChange)="costingMethodEvent(costingMethod)">
+                                        @for(data of getCostingMethodTypeList; track data;){
+                                            <mat-option id={{data?.costingMethodType}} [value]="data?.costingMethodTypeId">{{data?.costingMethodType}}</mat-option>
+                                        }
+                                    </mat-select>
+                                }
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <mat-accordion multi class="custom-accordion">
+                    @if(adminSettingsAttb?.inventoryMaster?.enableEngineeringSpecs){
+                    <mat-expansion-panel [expanded]="isOpen">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Specification</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="widget-box " formGroupName="inventryItemSpecification">
+
+                            <div class="widget-content">
+                                <div class="grid-3cols">
+
+                                    <mat-form-field>
+                                        <mat-label>Detail Specification</mat-label>
+                                        <textarea matInput rows="1" formControlName="detailSpecification"></textarea>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Make / Brand</mat-label>
+                                        <input matInput formControlName="makeBrand">
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Grade</mat-label>
+                                        <input matInput formControlName="grade">
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                    }
+                    <mat-expansion-panel [expanded]="isOpen">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Unit of Measure (UOM)</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="widget-box" formGroupName="inventryItemUOM">
+
+                            <div class="widget-content">
+                                <div class="grid-2cols cust-field-height mt-2">
+                                    <div class="d-flex">
+                                        <P class="ft-size13 me-3 d-block">Primary Unit of Measure<sup>*</sup>: </P>
+                                        <mat-form-field class="col">
+                                            <mat-select formControlName="primaryUOMId" #primaryUOM
+                                                (selectionChange)="primaryUOMEvent(primaryUOM)">
+                                                @for(data of getUnitMeasureTypeList; track data;){
+                                                <mat-option id={{data?.unitMeasureType}}
+                                                    [value]="data?.unitMeasureTypeId">{{data?.unitMeasureType}}</mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    @if(adminSettingsAttb?.inventoryMaster?.enableSecondaryUOM){
+                                    <div class="d-flex">
+                                        <P class="ft-size13 me-3 d-block">Secondary Unit of Measure :</P>
+                                        <mat-form-field class="col">
+                                            <mat-select formControlName="secondaryUOMId" #secondaryUOM
+                                                (selectionChange)="secondaryUOMEvent(secondaryUOM)">
+                                                @for(data of getUnitMeasureTypeList; track data;){
+                                                <mat-option id={{data?.unitMeasureType}}
+                                                    [value]="data?.unitMeasureTypeId">{{data?.unitMeasureType}}</mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="isOpen">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Storage Location</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="widget-box" formGroupName="inventryItemStorageLocation">
+
+                            <div class="widget-content">
+                                <div class="grid-4cols">
+                                    <mat-form-field>
+                                        <mat-label>Location </mat-label>
+                                        <mat-select formControlName="locationId" #locationType
+                                            (selectionChange)="locationTypeEvent(locationType)">
+                                            @for(data of getStoreLocationTypeList; track data;){
+                                            <mat-option id={{data?.storeLocationType}}
+                                                [value]="data?.storeLocationTypeId">{{data?.storeLocationType}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Shelf </mat-label>
+                                        <mat-select formControlName="shelf" #shelfType
+                                            (selectionChange)="shelfTypeEvent(shelfType)">
+                                            @for(data of getShelfAiselBinTypeList; track data;){
+                                            <mat-option id={{data?.shelfAiselBinType}}
+                                                [value]="data?.shelfAiselBinTypeId">{{data?.shelfAiselBinType}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Aisle </mat-label>
+                                        <mat-select formControlName="aisle" #aisleType
+                                            (selectionChange)="aisleTypeEvent(aisleType)">
+                                            @for(data of getShelfAiselBinTypeList; track data;){
+                                            <mat-option id={{data?.shelfAiselBinType}}
+                                                [value]="data?.shelfAiselBinTypeId">{{data?.shelfAiselBinType}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Climate Storage </mat-label>
+                                        <mat-select formControlName="climateStorageId" #climateStorageType
+                                            (selectionChange)="climateStorageTypeEvent(climateStorageType)">
+                                            @for(data of getClimateStorageTypeList; track data;){
+                                            <mat-option id={{data?.climateStorageType}}
+                                                [value]="data?.climateStorageTypeId">{{data?.climateStorageType}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Secured Storage </mat-label>
+                                        <mat-select formControlName="securedStorageId" #securedStorageType
+                                            (selectionChange)="securedStorageTypeEvent(securedStorageType)">
+                                            @for(data of getSecuredStorageTypeList; track data;){
+                                            <mat-option id={{data?.securedStorageType}}
+                                                [value]="data?.securedStorageTypeId">{{data?.securedStorageType}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                    @if(adminSettingsAttb?.inventoryMaster?.enableShelfLifeControl){
+                                    <div class="grid-2cols">
+                                        <mat-form-field>
+                                            <mat-label>shelf life </mat-label>
+                                            <input matInput formControlName="ShelfPeriod" allowNumberOnly>
+                                        </mat-form-field>
+                                        <mat-form-field>
+                                            <mat-select formControlName="shelfLife" #shelfLifeType
+                                                (selectionChange)="shelfLifeTypeEvent(shelfLifeType)">
+                                                @for(data of getShelfFileTypeList; track data;){
+                                                <mat-option id={{data?.shelflifeType}}
+                                                    [value]="data?.shelflifeTypeId">{{data?.shelflifeType}}</mat-option>
+                                                }
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                    }
+                                    <mat-form-field>
+                                        <mat-label>Zone</mat-label>
+                                        <mat-select formControlName="zone" #zoneType
+                                            (selectionChange)="zoneTypeEvent(zoneType)">
+                                            @for(data of getZoneTypeList; track data;){
+                                            <mat-option id={{data?.zoneType}}
+                                                [value]="data?.zoneTypeId">{{data?.zoneType}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Bin #</mat-label>
+                                        <mat-select formControlName="binNumber" #binNumberType
+                                            (selectionChange)="binNumberTypeEvent(binNumberType)">
+                                            @for(data of getShelfAiselBinTypeList; track data;){
+                                            <mat-option id={{data?.shelfAiselBinType}}
+                                                [value]="data?.shelfAiselBinTypeId">{{data?.shelfAiselBinType}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="isOpen">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Stock Status</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="widget-box" formGroupName="inventryItemStockStatus">
+                            <div class="widget-content">
+                                <div class="grid-3cols align-items-center">
+                                    <mat-form-field>
+                                        <mat-label>Current Free Stock</mat-label>
+                                        <input matInput formControlName="currentFreeStock">
+                                    </mat-form-field>
+                                    @if(adminSettingsAttb?.inventoryMaster?.enableReservationOfStock){
+                                    <mat-form-field>
+                                        <mat-label>Reserved Stock</mat-label>
+                                        <input matInput formControlName="reservedStock">
+                                    </mat-form-field>
+                                    }
+                                    <mat-checkbox class="mt-2" formControlName="receiptsConsumed">Receipts Considered
+                                        Consumed</mat-checkbox>
+                                </div>
+
+                                <div
+                                    ngClass="adminSettingsAttb?.inventoryMaster?.enableMinMaxQty ? 'grid-5cols mt-3 : grid-3cols mt-3'">
+                                    <div class="widget-box">
+                                        <h5
+                                            class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                            Safety Stock Level
+                                        </h5>
+                                        <div class="widget-content">
+                                            <div class="grid-2cols">
+                                                <mat-form-field>
+                                                    <mat-label>UOM </mat-label>
+                                                    <mat-select formControlName="safetyStockLevelUoM">
+                                                        @for(data of getUnitMeasureTypeList; track data;){
+                                                        <mat-option
+                                                            [value]="data?.unitMeasureTypeId">{{data?.unitMeasureType}}</mat-option>
+                                                        }
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <mat-label>Quantity</mat-label>
+                                                    <input matInput formControlName="safetyStockLevelQty"
+                                                        allowNumberOnly>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-box">
+                                        <h5
+                                            class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                            Re-Order Level
+                                        </h5>
+                                        <div class="widget-content">
+                                            <div class="grid-2cols">
+                                                <mat-form-field>
+                                                    <mat-label>UOM </mat-label>
+                                                    <mat-select formControlName="reOrderLevelUoM">
+                                                        @for(data of getUnitMeasureTypeList; track data;){
+                                                        <mat-option
+                                                            [value]="data?.unitMeasureTypeId">{{data?.unitMeasureType}}</mat-option>
+                                                        }
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <mat-label>Quantity</mat-label>
+                                                    <input matInput formControlName="reOrderLevelQty" allowNumberOnly>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-box">
+                                        <h5
+                                            class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                            Economic Order Quantity
+                                        </h5>
+                                        <div class="widget-content">
+                                            <div class="grid-2cols">
+                                                <mat-form-field>
+                                                    <mat-label>UOM </mat-label>
+                                                    <mat-select formControlName="economicOrderUoM">
+                                                        @for(data of getUnitMeasureTypeList; track data;){
+                                                        <mat-option
+                                                            [value]="data?.unitMeasureTypeId">{{data?.unitMeasureType}}</mat-option>
+                                                        }
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <mat-label>Quantity</mat-label>
+                                                    <input matInput formControlName="economicOrderQty" allowNumberOnly>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @if(adminSettingsAttb?.inventoryMaster?.enableMinMaxQty){
+                                    <div class="widget-box">
+                                        <h5
+                                            class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                            Minimum Quantity
+                                        </h5>
+                                        <div class="widget-content">
+                                            <div class="grid-2cols">
+                                                <mat-form-field>
+                                                    <mat-label>UOM </mat-label>
+                                                    <mat-select formControlName="minOrderUoM">
+                                                        @for(data of getUnitMeasureTypeList; track data;){
+                                                        <mat-option
+                                                            [value]="data?.unitMeasureTypeId">{{data?.unitMeasureType}}</mat-option>
+                                                        }
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <mat-label>Quantity</mat-label>
+                                                    <input matInput formControlName="minOrderQty" allowNumberOnly>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="widget-box">
+                                        <h5
+                                            class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                            Maximum Quantity
+                                        </h5>
+                                        <div class="widget-content">
+                                            <div class="grid-2cols">
+                                                <mat-form-field>
+                                                    <mat-label>UOM </mat-label>
+                                                    <mat-select formControlName="maxOrderUoM">
+                                                        @for(data of getUnitMeasureTypeList; track data;){
+                                                        <mat-option
+                                                            [value]="data?.unitMeasureTypeId">{{data?.unitMeasureType}}</mat-option>
+                                                        }
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field>
+                                                    <mat-label>Quantity</mat-label>
+                                                    <input matInput formControlName="maxOrderQty" allowNumberOnly>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="isOpen">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Accounting Distribution</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="widget-box">
+                            <div class="widget-content">
+                                <div class="table-responsive ">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 120px;" scope="col">Account</th>
+                                                <th style="width: 200px;" scope="col">Code</th>
+                                                <th scope="col">Description </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody formArrayName="inventryItemAccountingDistribution">
+                                            @for(list of inventryItemAccountingDistribution.controls; track list; let
+                                            i=$index){
+                                            <tr class="cust-field-height" [formGroupName]="i">
+                                                <td>{{list.get('account')?.value}}</td>
+                                                <td>
+                                                    <mat-form-field class="w-100">
+                                                        <input matInput formControlName="code">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td> <mat-form-field class="w-100">
+                                                        <textarea matInput rows="1"
+                                                            formControlName="description"></textarea>
+                                                    </mat-form-field></td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="isOpen">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Substitute Item </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="widget-box">
+                            <div class="widget-content">
+                                <div class="grid-4cols " formGroupName="inventryItemHeader">
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Item Code</mat-label>
+                                        <mat-select formControlName="substituteCode">
+                                            @for(data of getCodeDescList; track data;){
+                                            <mat-option [value]="data?.code">{{data?.code}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field class="w-100">
+                                        <mat-label>Description</mat-label>
+                                        <mat-select formControlName="substituteDescription">
+                                            @for(data of getCodeDescList; track data;){
+                                            <mat-option [value]="data?.description">{{data?.description}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+
+                    <mat-expansion-panel [expanded]="isOpen">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>Spend Category</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <div class="widget-box" formGroupName="inventryItemHeader">
+
+                            <div class="widget-content">
+                                <div class="grid-3cols mt-2">
+
+                                    <mat-form-field class="col">
+                                        <mat-label>Parent Category</mat-label>
+                                        <mat-select formControlName="parentCategoryId"
+                                            (selectionChange)="parentCategoryEvent($event)" required>
+                                            @for(data of getParentCategory; track data;){
+                                            <mat-option
+                                                [value]="data?.parentCategoryId">{{data?.parentCategory}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col">
+                                        <mat-label>Sub Category</mat-label>
+                                        <mat-select formControlName="subCategoryId"
+                                            (selectionChange)="subCategoryEvent($event)" required>
+                                            @for(data of getSubCategoryList; track data;){
+                                            <mat-option [value]="data?.subCategoryId">{{data?.subCategory}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field class="col">
+                                        <mat-label>Child Category</mat-label>
+                                        <mat-select formControlName="childCategoryId" required>
+                                            @for(data of getChildCategoryList; track data;){
+                                            <mat-option
+                                                [value]="data?.childCategoryId">{{data?.childCategory}}</mat-option>
+                                            }
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+
+    </div>
+    <div class="footer-action-btn">
+        <button class="btn-gray" (click)="cancel()"><i class="fa fa-ban pe-2"></i>Cancel</button>
+        <button class="btn-blue" [disabled]="!isAssignEntityBtnEnable" (click)="assignEntity()"><i
+                class="fa fa-check pe-2"></i>Assign Entity</button>
+        <button class="btn-blue" [disabled]="true"><i
+                class="fa fa-check pe-2"></i>Material Issue Note</button>
+        <button class="btn-blue" [disabled]="true"><i
+                class="fa fa-check pe-2"></i>Material Receipts</button>
+        <div class="middle-spacer"></div>
+
+        <button class="btn-blue" [disabled]="!isSaveBtnEnable" (click)="saveAsDraft('save')"><i
+                class="fa fa-floppy-o pe-2"></i>Save As Draft</button>
+        <button class="btn-blue" [disabled]="!isSubmitBtnEnable" (click)="saveAsDraft('submit')"><i
+                class="fa fa-hand-pointer-o pe-2"></i>submit</button>
+        <button class="btn-blue" [disabled]="!isActiveBtnEnable" (click)="saveAsDraft('active')"><i
+                class="fa fa-check-circle-o pe-2"></i>Active</button>
+        <button class="btn-blue" [disabled]="!isInActiveBtnEnable" (click)="saveAsDraft('inActive')"><i
+                class="fa fa-times-circle-o pe-2"></i>Inactive</button>
+    </div>
+</div>

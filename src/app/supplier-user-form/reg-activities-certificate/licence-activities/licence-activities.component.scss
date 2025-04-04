@@ -1,0 +1,11 @@
+.data-table-css { 
+    table tr th {
+        min-width:200px;
+        &:first-child,
+     &:last-child{
+         width: 70px !important;
+     }
+    }  
+   
+    
+ }

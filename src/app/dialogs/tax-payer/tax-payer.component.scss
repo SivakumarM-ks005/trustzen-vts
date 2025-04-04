@@ -1,0 +1,48 @@
+@import "../../../--theme-variables.scss";
+
+.display-box {
+  display: grid;
+  grid-template-columns: 40% 60%;
+
+  p {
+    margin-bottom: 0;
+    span {
+        display: block;
+        text-align: left;
+    }
+  }
+
+  border-left: 1px dotted $AirForceBlue;
+  padding-left: 10px;
+
+  &:first-child {
+    border: 0;
+    padding-left: 0px;
+  }
+
+}
+
+.display-box-tax {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  align-items: start;
+
+  p {
+    margin-bottom: 0;
+    line-height: 25px !important;
+    display: flex;
+    span {
+        display: block;
+        text-align: left;
+    }
+  }
+
+  border-left: 1px dotted $AirForceBlue;
+  padding-left: 10px;
+
+  &:first-child {
+    border: 0;
+    padding-left: 0px;
+  }
+
+}

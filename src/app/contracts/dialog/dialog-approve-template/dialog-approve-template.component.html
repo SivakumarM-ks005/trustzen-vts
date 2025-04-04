@@ -1,0 +1,99 @@
+<div class="dialog-container">
+    <div mat-dialog-title>
+        <div class="col-lg-11">
+            <h3>{{ "Approval Workflow" | translate }}</h3>
+        </div>
+        <div class="col-lg-1 text-end">
+            <button mat-icon-button mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+    </div> 
+    <mat-dialog-content>
+            <div class="widget-box">
+              <h5 class="widget-title">Template Details</h5>
+              <div class="widget-content">
+                <div class="d-flex flex-row w-100">
+                    <div class="col col-separator">
+                        <mat-label class="preLabel">Template ID</mat-label>
+                        <p class="preData">{{templateData.templateId}}</p>
+                    </div>
+                    <div class="col col-separator">
+                        <mat-label class="preLabel">Short Name</mat-label>
+                        <p class="preData">{{templateData.shortName}}</p>
+                    </div>
+                    <div class="col col-separator">
+                        <mat-label class="preLabel">Decription</mat-label>
+                        <p class="preData">{{templateData.description}}</p>
+                    </div>
+
+                    <div class="col col-separator">
+                        <mat-label class="preLabel">Contract Type</mat-label>
+                        <p class="preData">{{templateData.contractType}}</p>
+                    </div>
+                    <div class="col col-separator">
+                        <mat-label class="preLabel">Contract Classification</mat-label>
+                        <p class="preData">{{templateData.contractClassification}}</p>
+                    </div>
+                    <div class="col col-separator">
+                        <mat-label class="preLabel">Version</mat-label>
+                        <p class="preData">{{templateData.version}}</p>
+                    </div>
+                    <div class="col col-separator">
+                        <mat-label class="preLabel">Create Date</mat-label>
+                        <p class="preData">{{templateData.createDate | date: (commonService.showFormat)}}</p>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="widget-box">
+                <h5 class="widget-title">Template Approval</h5>
+                <div class="widget-content">
+                    <div class="category-row">
+                        @if(userComment){
+                        <mat-form-field class="col">
+                            <mat-label>User Comments</mat-label>
+                            <input matInput matTooltip="Enter the Version" placeholder="" [(ngModel)]="userComment"
+                                #versionControl="ngModel" name="versionVal" disabled="true">
+                        </mat-form-field>
+                        }
+                        <mat-form-field>
+                            <mat-label>Comments</mat-label>
+                            <textarea matInput matTooltip="Enter the Comments" [(ngModel)]="workflowComments"
+                                #comments="ngModel" #commentsHint name="comment" cdkTextareaAutosize
+                                cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                cdkAutosizeMaxRows="1" placeholder=""></textarea>
+                            <mat-hint align="end">{{commentsHint.value.length > 0 ? commentsHint.value.length : 0}}
+                                of
+                                1500</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Approve Status</mat-label>
+                            <mat-select [(ngModel)]="workFlowStatus" name="subval" #approveControl="ngModel"
+                                [required]="true" matTooltip="Select Approve Status" placeholder="">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                @for (doc of workFlowStatusList; track doc) {
+                                <mat-option [value]="doc.statusName">{{doc.statusName}}</mat-option>
+                                }
+                            </mat-select>
+                            @if (approveControl.errors?.required) {
+                            <mat-error matTooltip="Select a Approve Status">
+                                Approve Status is required</mat-error>
+                            }
+                        </mat-form-field>
+
+                    </div>
+                </div>
+            </div>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+		<div class="footer-action-btn">
+				<button    class="btn-gray" mat-dialog-close cdkFocusInitial>
+					<i class="fa fa-ban pe-2"></i>Close</button> 
+			<div class="middle-spacer"></div>
+			<button   class="btn-blue"[disabled]="disableSave" (click)="approvalSubmit()">
+				<i class="fa fa-floppy-o pe-2"></i> Submit
+			</button>
+		</div>
+	</mat-dialog-actions>
+</div>

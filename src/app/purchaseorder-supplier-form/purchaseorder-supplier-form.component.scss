@@ -1,0 +1,35 @@
+.content-table th {
+    white-space: nowrap !important;
+   padding: 10px 15px 10px 10px;
+}
+.width-95p {
+   width: 95% !important;
+}
+.content-table {
+   &.rowcolspan-tbl {
+       border-collapse: collapse;        
+       border-inline-style: hidden !important;
+       thead tr th {
+           min-width: auto;
+           font-size: 13px;
+           font-weight: normal !important;
+           letter-spacing: 0;
+           padding: 10px 6px !important;
+           text-indent: 0;
+           line-height: 13px;
+           vertical-align: text-top;
+           background: #d9ccdd;
+           white-space: unset;
+           color: #000;
+           border: 1px solid #bfe5ea !important; 
+       }
+       th:first-child::before {
+           content: "" !important;
+       }
+       th::before {
+           content: "" !important;
+          
+       }
+       
+   }
+}

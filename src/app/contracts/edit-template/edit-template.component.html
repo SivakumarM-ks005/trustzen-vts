@@ -1,0 +1,128 @@
+<div class="container-fluid">
+    <div class="pageContainer">
+        <div class="pageHeader pb-0 pt-0">
+            <h1 class="heading">Edit Template</h1>
+            <div class="d-flex align-items-center">
+                <mat-checkbox [disabled]="isDisabled"  checked>Freeze Template</mat-checkbox>
+                <div class="d-flex ft-size13 ps-2">Status: <span class="ft-bold ps-1">Active</span></div>
+            </div>
+        </div>
+        <div class="pageContent">
+        <div class="commonWidget">
+            <div class="widgetHeader">
+                <h5 class="widgetHeading">Template Details</h5>
+            </div>
+            <div class="widgetContent p-2">
+                <div class="d-flex">
+                    <div class="col-md-2">
+                        <mat-form-field class="col">
+                            <mat-label>Template ID</mat-label>
+                            <input matInput matTooltip="Enter the company name"  placeholder="FY2024-2050"
+                                formControlName="companyName" readonly="true" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="col">
+                            <mat-label>Short Name</mat-label>
+                            <input matInput matTooltip="Enter the Short Name"  placeholder="Info and co"
+                                formControlName="companyName" readonly="true" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="col">
+                            <mat-label>Description</mat-label>
+                            <input matInput matTooltip="Enter the Description"  placeholder="Template for equipment"
+                                formControlName="Description" readonly="true" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                        <mat-form-field class="col ">
+                            <mat-label>Create Date</mat-label>
+                            <input matInput  [matDatepicker]="dp">
+                            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                            <mat-datepicker #dp required></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="col-md-2">
+                        <mat-form-field class="col">
+                            <mat-label>Version</mat-label>
+                            <input matInput matTooltip="Enter the Version"  placeholder="1.0"
+                                formControlName="Version" readonly="true" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="col">
+                            <mat-label>Contract Type</mat-label>
+                            <mat-select matTooltip="Select Contract Type" >
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="Expense contract">Expense contract</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field class="col">
+                            <mat-label>Contract Classification</mat-label>
+                            <mat-select matTooltip="Select Contract Type" >
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="Expense contract">Expense contract</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-2">
+                        <mat-form-field class="col">
+                            <mat-label>Amend Date</mat-label>
+                            <input matInput  [matDatepicker]="dp1">
+                            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                            <mat-datepicker #dp1 required></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <mat-accordion class="custom-accordion">
+                <mat-expansion-panel class="cust-panel">
+                    <mat-expansion-panel-header class="accordion-cust-header">
+                        <mat-panel-title class="custom-panel-header">Standard Term and Conditions </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        <div class="mt-2 mb-2">
+            <mat-accordion class="custom-accordion">
+                <mat-expansion-panel class="cust-panel">
+                    <mat-expansion-panel-header class="accordion-cust-header">
+                        <mat-panel-title class="custom-panel-header">Approval Workflow</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="pq-score-card">
+                        <div class="table-responsive">                            
+                           <app-workflow-history></app-workflow-history>
+                        </div>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </div>
+    </div>
+    <footer>
+        <div>
+            <button  >Back</button>
+            <span class="me-2"></span>
+            <button mat-stroked-button >Save as Draft</button>          
+            <span class="me-2"></span>
+            <button   (click)="assignCategory()">Assign Category</button>
+            <span class="me-2"></span>
+            <button   (click)="assignEntity()">Assign Entity</button>
+            <span class="me-2"></span>
+            <button   (click)="initiateWorkFlow()">Intiate Workflow</button>           
+            <span class="me-2"></span>
+            <button   (click)="deactivateTemplate()">Deactivate Template</button>
+            <!-- <span class="me-2"></span>
+            <button   (click)="freezeTemplate()">Freeze Template</button> -->
+        </div>
+    </footer>
+</div>

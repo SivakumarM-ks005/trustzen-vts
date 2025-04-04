@@ -1,0 +1,20 @@
+<div class="content-container">
+
+  <div class="bread-crumbs">
+    <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Workflow Management</h2>
+  </div>
+  <div class="content-box p-2">
+    <div class="widget-box">
+      <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+        Approval Workflow
+      </h5>
+      <div class="widget-content">
+        <div class="pageContent">
+          <ag-grid-angular [theme]="theme" [columnDefs]="colDefs" [defaultColDef]="defaultColDef"
+            [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+            [paginationPageSizeSelector]="paginationPageSizeSelector" [rowData]="workFlowList"/>
+        </div>
+      </div>
+    </div>
+
+  </div>

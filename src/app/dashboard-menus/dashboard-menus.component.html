@@ -1,0 +1,375 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Dashboard Quick Menu</h2>
+    </div>
+    <div class="content-box p-3">
+        <div [ngClass]="loginData?.businessRole !== BUYER ? 'grid-1-3' : 'grid-3'">
+            @if(loginData?.userType === 2){
+            <div class="menu-widget">
+                <div class="menu-main-title">
+                    <div class="icon-circle">
+                        <mat-icon>group</mat-icon>
+                    </div>
+                    My Profile
+                </div>
+                <div class="menu-content">
+                    <div class="grid-1cols">
+                        <a class="navi-menu" (click)="dasboardmenus()">
+                            <i class="fa fa-user"></i>
+                            <!-- <span>Supplier</span> -->
+                            <span>My Profile</span>
+                        </a>
+                    </div>
+                <!-- </div> -->
+                <!-- <div class="menu-content"> -->
+                    <div class="grid-1cols">
+                        <a class="navi-menu" (click)="rfqList()">
+                            <i class="fa fa-user"></i>
+                            <!-- <span>Supplier</span> -->
+                            <span>Request for Quotation</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- <button mat-menu-item *ngIf="!isSublistVisible" [routerLink]="['/krya/rfq-list']">Request for Quotation</button> -->
+            </div>
+            }
+
+            @if(loginData?.businessRole === 'PQ Rep' && getImplementationConfigDataRes?.supplierManagement ||
+            loginData?.businessRole === 'PQ Rep Approver' && getImplementationConfigDataRes?.supplierManagement){
+            <div class="menu-widget">
+                <div class="menu-main-title">
+                    <div class="icon-circle">
+                        <mat-icon>group</mat-icon>
+                    </div>
+                    Supplier Management
+                </div>
+                <div class="menu-content">
+                    <div class="grid-2cols">
+                        <a class="navi-menu" (click)="dasboardmenus()">
+                            <i class="fa fa-user"></i>
+                            <span>Supplier</span>
+                            <span>Pre-Qualification</span>
+                        </a>
+                        <a class="navi-menu" (click)="pqAssesmentList()">
+                            <i class="fa fa-user"></i>
+                            <span>Supplier</span>
+                            <span>Directory</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            }
+
+            @if(loginData?.businessRole === 'PQ Rep' && getImplementationConfigDataRes?.insightAnalytics || loginData?.businessRole === 'PQ Rep Approver' && getImplementationConfigDataRes?.insightAnalytics){
+            <div class="menu-widget">
+                <div class="menu-main-title">
+                    <div class="icon-circle">
+                        <mat-icon>group</mat-icon>
+                    </div>
+                    Analytics
+                </div>
+                <div class="menu-content">
+                    <div class="grid-1cols">
+                        <!-- <iframe title="Supplier Management Analytics" width="1140" height="541.25"
+                            src="https://app.powerbi.com/reportEmbed?reportId=db8c744a-897a-47cb-868e-c1d6d0b87eba&autoAuth=true&ctid=156177ee-e0ac-4518-ad35-c4d064ab9a9b"
+                            frameborder="0" allowFullScreen="true"></iframe> -->
+                        <app-power-bi-reports />
+                    </div>
+                </div>
+            </div>
+            }
+
+            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.sourcingManagement || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
+            <div class="menu-widget">
+                <div class="menu-main-title">
+                    <div class="icon-circle">
+                        <i class="fa fa-sitemap" aria-hidden="true"></i>
+                    </div>
+                    Sourcing Management
+                </div>
+                <div class="menu-content">
+                    <div class="d-flex">
+                        <a class="navi-menu" (click)="materialrequisition()">
+                            <i class="fa fa-user"></i>
+                            <!-- <img src="assets/images/icons/shipping.png"> -->
+                            <span>Material Requisition</span>
+                        </a>
+                        <a class="navi-menu" (click)="purchaserequisition()">
+                            <i class="fa fa-user"></i>
+                            <span>Purchase Requisition</span>
+                        </a>
+                        <a class="navi-menu" (click)="rfqList()">
+                            <i class="fa fa-user"></i>
+                            <span>Request for Quotation</span>
+                        </a>
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Request for Proposal</span>
+                        </a>
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Request for Tender</span>
+                        </a>
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Auction & Reverse Auctions</span>
+                        </a>
+                        <!-- <a class="navi-menu">
+                                    <i class="fa fa-user"></i>
+                                    <span>Auction & Reverse Auctions</span>
+                                </a> -->
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>E-Commerce</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+        <div class="grid-1-3 " style="margin-top: 10px;">
+            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.contractsManagement || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
+            <div class="menu-widget">
+                <div class="menu-main-title">
+                    <div class="icon-circle">
+                        <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    </div>
+                    Contact Management
+                </div>
+                <div class="menu-content">
+                    <div class="grid-2cols">
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Template</span>
+                            <span>Management</span>
+                        </a>
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Contracts</span>
+                            <span>Transactions</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            }
+            <div class="grid-3cols">
+                @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.orderManagement || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
+                <div class="menu-widget">
+                    <div class="menu-main-title">
+                        <div class="icon-circle">
+                            <mat-icon>gavel</mat-icon>
+                        </div>
+                        Order Management
+                    </div>
+                    <div class="menu-content">
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Purchase Orders</span>
+                        </a>
+                    </div>
+                </div>
+                }
+                @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.workCompletionCertificate || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
+                <div class="menu-widget">
+                    <div class="menu-main-title">
+                        <div class="icon-circle">
+                            <i class="fa fa-line-chart" aria-hidden="true"></i>
+                        </div>
+                        Milestone Completion
+                    </div>
+                    <div class="menu-content">
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Requests</span>
+                        </a>
+                    </div>
+                </div>
+                }
+                @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.paymentsAndInvoices || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
+                <div class="menu-widget">
+                    <div class="menu-main-title">
+                        <div class="icon-circle">
+                            <i class="fa fa-wpforms" aria-hidden="true"></i>
+                        </div>
+                        Invoice & Payments
+                    </div>
+                    <div class="menu-content">
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Invoice</span>
+                        </a>
+                    </div>
+                </div>
+                }
+
+
+            </div>
+        </div>
+        <div class="grid-1-3 " style="margin-top: 10px;">
+            <!-- @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.productCatalogueMaster){
+            <div class="menu-widget">
+                <div class="menu-main-title">
+                    <div class="icon-circle">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    Master Services
+                </div>
+                <div class="menu-content">
+                    <div class="grid-2cols">
+                        <a class="navi-menu" (click)="serviceReq()">
+                            <i class="fa fa-user"></i>
+                            <span>Service</span>
+                            <span>Request</span>
+                        </a>
+                        <a class="navi-menu">
+                            <i class="fa fa-user"></i>
+                            <span>Form 60</span>
+                            <span></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            } -->
+
+        </div>
+    </div>
+</div>
+<!-- <div class="m-4">
+
+    <div class="row" *ngIf="loginData.userType === 2">
+        <div class="col-md-3 ">
+            <div class="nav-icons card" style="padding: 5px;" mat-button [matMenuTriggerFor]="supplierManagement" (click)="manageProfile('manageprofile')">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-icon style="height: 61px; width: 75px; font-size: 78px; color: #fb6340;">person_add</mat-icon>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center align-items-center"
+                        style="font-size: larger; color: #11116f; font-weight: 500;">
+                        Supplier Registration
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="loginData.userType === 4 || loginData.userType === 5">
+        <div class="col-md-3 ">
+            <div class="nav-icons card" style="padding: 5px;" mat-button [matMenuTriggerFor]="supplierManagement">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-icon style="height: 61px; width: 75px; font-size: 78px; color: #fb6340;">group</mat-icon>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center align-items-center"
+                        style="font-size: larger; color: #11116f; font-weight: 500;">
+                        Supplier Management
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-menu #supplierManagement="matMenu" xPosition="after" class="level1Menu">
+            <button mat-menu-item *ngIf="!isSublistVisible" [routerLink]="['/krya/dashboard']">Supplier
+                Pre-Qualification</button>
+            <button mat-menu-item *ngIf="!isSublistVisible" [routerLink]="['/krya/PQAssesmentList']">Supplier
+                Directory</button>
+        </mat-menu>
+
+        <div class="col-md-3 ">
+            <div class="nav-icons card" style="padding: 5px;" mat-button [matMenuTriggerFor]="sourcingManagement">
+                <div class="row">
+                    <div class="col-md-3">
+                        <i style="font-size: 68px; color: #fb6340;" class="fa fa-sitemap" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center align-items-center"
+                        style="font-size: larger; color: #11116f; font-weight: 500;">
+                        Sourcing Management
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-menu #sourcingManagement="matMenu" xPosition="after" class="level1Menu">
+            <button mat-menu-item *ngIf="!isSublistVisible">Purchase Requisition</button>
+            <button mat-menu-item *ngIf="!isSublistVisible">Request for Quotation</button>
+            <button mat-menu-item *ngIf="!isSublistVisible">Request for Proposal</button>
+            <button mat-menu-item *ngIf="!isSublistVisible">Request for Tender</button>
+            <button mat-menu-item *ngIf="!isSublistVisible">Auctions & Reverse Auctions</button>
+            <button mat-menu-item *ngIf="!isSublistVisible">E-Commerce</button>
+        </mat-menu>
+
+        <div class="col-md-3">
+            <div class="nav-icons card" style="padding: 5px;" mat-button [matMenuTriggerFor]="contractManagement">
+                <div class="row">
+                    <div class="col-md-3">
+                        <i style="font-size: 68px; color: #fb6340;" class="fa fa-handshake-o" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center align-items-center"
+                        style="font-size: larger; color: #11116f; font-weight: 500;">
+                        Contract Management
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-menu #contractManagement="matMenu" xPosition="after" class="level1Menu">
+            <button mat-menu-item *ngIf="!isSublistVisible">Template Management</button>
+            <button mat-menu-item *ngIf="!isSublistVisible">Contracts Transactions</button>
+        </mat-menu>
+
+        <div class="col-md-3">
+            <div class="nav-icons card" style="padding: 5px;" mat-button [matMenuTriggerFor]="orderManagement">
+                <div class="row">
+                    <div class="col-md-3">
+                        <mat-icon style="height: 63px; width: 71px; font-size: 82px; color: #fb6340;">gavel</mat-icon>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center align-items-center"
+                        style="font-size: larger; color: #11116f; font-weight: 500;">
+                        Order Management
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-menu #orderManagement="matMenu" xPosition="after" class="level1Menu">
+            <button mat-menu-item *ngIf="!isSublistVisible">Purchase Orders</button>
+        </mat-menu>
+
+        <div class="col-md-3">
+            <div class="nav-icons card" style="padding: 5px;" mat-button [matMenuTriggerFor]="milestoneCompletion">
+                <div class="row">
+                    <div class="col-md-3">
+                        <i style="font-size: 68px; color: #fb6340;" class="fa fa-line-chart" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center align-items-center"
+                        style="font-size: larger; color: #11116f; font-weight: 500;">
+                        Milestone Completion
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-menu #milestoneCompletion="matMenu" xPosition="after" class="level1Menu">
+            <button mat-menu-item *ngIf="!isSublistVisible">Requests</button>
+        </mat-menu>
+
+        <div class="col-md-3">
+            <div class="nav-icons card" style="padding: 5px;" mat-button [matMenuTriggerFor]="invoicePayments">
+                <div class="row">
+                    <div class="col-md-3">
+                        <i style="font-size: 68px; color: #fb6340;" class="fa fa-wpforms" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-md-9 d-flex justify-content-center align-items-center"
+                        style="font-size: larger; color: #11116f; font-weight: 500;">
+                        Invoice & Payments
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <mat-menu #invoicePayments="matMenu" xPosition="after" class="level1Menu">
+            <button mat-menu-item *ngIf="!isSublistVisible">Invoice
+            </button>
+        </mat-menu>
+
+    </div>
+</div> -->

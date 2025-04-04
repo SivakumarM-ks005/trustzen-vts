@@ -1,0 +1,722 @@
+<form  [formGroup]="rfqBillOfQuantityTransForm">
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            RFQ Response
+            <span class="status-label">Status: <span class="status-state">Draft</span></span>
+        </h5>
+        <div class="widget-content">
+    
+            <div class="grid-5cols">
+                <div class="display-box">
+                    <p class="display-label">Entity Name</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.entityid || "N/A"}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">Level 1</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.level1 || "N/A"}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">Level 2</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.level2 || "N/A"}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">Level 3</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.level3 || "N/A"}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">Level 4</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.level4 || "N/A"}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Header
+            <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+        </h5>
+        <div class="widget-content">
+    
+            <div class="grid-4cols">
+                <div class="display-box">
+                    <p class="display-label">Ref #</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.ref || "N/A"}}</p>
+    
+                    <p class="display-label">Creation Date</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.createdDate | date: (commonService.showFormat) ||
+                        "N/A"}}</p>
+    
+                    <p class="display-label">Buyer</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.buyer || "N/A"}}</p>
+                    <p class="display-label">Buyer Email</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.buyerEmail || "N/A"}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">Participation Type</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.participantType || "N/A"}}</p>
+                    <!-- <p class="display-label">Buyer</p>
+                            <p class="display-data">Direct</p> -->
+                    <p class="display-label">Short Name</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.shortName || "N/A"}}</p>
+                    <p class="display-label">Description</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.description || "N/A"}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">Response Ref</p>
+                    <p class="display-data">{{shared.getRefValue()}}</p>
+                    <p class="display-label">Purchase Classification</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.purchaseClarification || "N/A"}}</p>
+                    <p class="display-label">Spend Type</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.spendTypeName || "N/A"}}</p>
+                    <p class="display-label">Rate Type</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.rateType || "N/A"}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">Sourcing Type</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.sourcingTypeName || "N/A"}}</p>
+                    <p class="display-label">Purchase Type</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.purchaseTypeName || "N/A"}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Address
+            <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+        </h5>
+        <div class="widget-content">
+            <h5 class="widget-title" style="background: transparent !important; padding-left: 0;">
+                Bill to Address <sup>*</sup>
+            </h5>
+            <div class="grid-2cols mt-2">
+                <div class="display-box">
+                    <p class="display-label">Address Line 1</p>
+                    <p class="display-data">{{billAddressDetails?.addressLine1 || 'N/A'}} </p>
+                    <p class="display-label">Address Line 2</p>
+                    <p class="display-data">{{billAddressDetails?.addressLine2 || 'N/A'}}</p>
+                    <p class="display-label">Country</p>
+                    <p class="display-data">{{billAddressDetails?.countryName || 'N/A'}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">State/Province</p>
+                    <p class="display-data">{{billAddressDetails?.stateName || 'N/A'}}</p>
+                    <p class="display-label">City</p>
+                    <p class="display-data">{{billAddressDetails?.cityName || 'N/A'}}</p>
+                    <p class="display-label">Postal Code</p>
+                    <p class="display-data">{{billAddressDetails?.postalCode || 'N/A'}}</p>
+                </div>
+            </div>
+            <h5 class="widget-title d-flex border-top mt-3" style="background: transparent !important; padding-left: 0;">
+                Ship to Addres <sup>*</sup> <mat-checkbox checked class="ms-2" disabled>Same as Bill to
+                    Address</mat-checkbox>
+                <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+            </h5>
+            <div class="grid-2cols mt-2">
+                <div class="display-box">
+                    <p class="display-label">Address Line 1</p>
+                    <p class="display-data">{{shipAddressDetails?.addressLine1 || 'N/A'}}</p>
+                    <p class="display-label">Address Line 2</p>
+                    <p class="display-data">{{shipAddressDetails?.addressLine2 || 'N/A'}}</p>
+                    <p class="display-label">Country</p>
+                    <p class="display-data">{{shipAddressDetails?.countryName || 'N/A'}}</p>
+                </div>
+                <div class="display-box">
+                    <p class="display-label">State/Province</p>
+                    <p class="display-data">{{shipAddressDetails?.stateName || 'N/A'}}</p>
+                    <p class="display-label">City</p>
+                    <p class="display-data">{{shipAddressDetails?.cityName || 'N/A'}}</p>
+                    <p class="display-label">Postal Code</p>
+                    <p class="display-data">{{shipAddressDetails?.postalCode || 'N/A'}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Timelines
+        </h5>
+        <div class="widget-content">
+    
+            <div class="grid-2cols">
+                <div class="display-box">
+                    <p class="display-label">Publish Date</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.publishDate | date: (commonService.showFormat) ||
+                        "N/A"}}</p>
+                    <p class="display-label">Submission Due Date</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.submissionDueDate | date:
+                        (commonService.showFormat) || "N/A"}}</p>
+                    <p class="display-label">Response Open Date</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.responseOpenDate | date:
+                        (commonService.showFormat) || "N/A"}}</p>
+                </div>
+                <div class="display-box" formGroupName="sourcingSupplierRFQ">
+                    <p class="display-label">Need By Date</p>
+                    <p class="display-data">{{getDataFromRow?.sourcingRFQ?.needByDate | date: (commonService.showFormat) ||
+                        "N/A"}}</p>
+                    <!-- <p class="display-label">Expected Validity of Response</p> -->
+    
+                    <div>
+                        @if(getDataFromRow?.sourcingRFQ?.validityofResponseNegotiable){
+                        <span class="ft-size11">Expected Validity of Response<sup>*</sup></span>
+                        <div class="d-flex cust-field-height">
+                            <mat-form-field style="width: 140px;">
+                                <input matInput formControlName="expectedResponseValidity">
+                            </mat-form-field>
+                            <mat-form-field class="w-100">
+                                <mat-select formControlName="expectedResponseDuration">
+                                    <mat-option value="hours">Hours</mat-option>
+                                    <mat-option value="month">Month</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        }@else {
+                        <p class="display-label">Expected Validity of Response</p>
+                        <p class="display-data"><span>{{getDataFromRow?.sourcingRFQ?.expectedValidity || "N/A"}}</span>
+                            Hours</p>
+                        }
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Bill of Quantity (BOQ)
+        </h5>
+        <div class="widget-content" formGroupName="sourcingSupplierRFQ">
+            <div class="grid-5cols">
+                <mat-form-field>
+                    <mat-label>Functional Currency </mat-label>
+                    <mat-select required disabled [(value)]="functionalCurrency">
+                        <mat-option selected
+                            [value]="getDataFromRow?.sourcingRFQ?.functionalCurrencyId">{{getDataFromRow?.sourcingRFQ?.functionalCurrencyId
+                            || "N/A"}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                @if(getDataFromRow?.sourcingRFQ?.forExCurrencyTxn){
+                <mat-form-field>
+                    <mat-label>Transactional Currency </mat-label>
+                    <mat-select required formControlName="transactionalCurrency">
+                        <mat-option value="INR">INR</mat-option>
+                        <mat-option value="USD">USD</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                }
+                <!-- <mat-form-field>
+                            <mat-label>Spend Category </mat-label>
+                            <mat-select required>
+                                <mat-option value="ERP System">CapEx Purchase</mat-option>
+                                <mat-option value="Direct"> CapEx Purchase</mat-option>
+                            </mat-select>
+                        </mat-form-field> -->
+            </div>
+            <div class="table-responsive mt-2" [formGroup]="rfqBillOfQuantityTransForm">
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 80px;">Serial #</th>
+                            <th scope="col" style="width: 80px;">Code</th>
+                            <th scope="col" style="min-width: 120px;">Description</th>
+                            <th scope="col">UOM</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Ship to Site</th>
+                            <th scope="col">Need By Date</th>
+                            <th scope="col">Delivery Date</th>
+                            <th scope="col">Unit Rate</th>
+                            <th scope="col">Item Value</th>
+                            @if(showItemDiscount){
+                            <th scope="col">Discount Mode</th>
+                            <th scope="col">Discount Rate</th>
+                            <th scope="col">Discount Value</th>
+                            }
+                            @if(showItemTax){
+                            <th scope="col">Tax Mode</th>
+                            <th scope="col">Tax Rate</th>
+                            <th scope="col">Tax Value</th>
+                            }
+                            <th scope="col" style="width: 80px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="supplierRFQBillOfQuantityTrans">
+                        @for(boq of supplierRFQBillOfQuantityTrans.controls; let i = $index; track boq){
+                        <tr class="cust-field-height" [formGroupName]="i">
+                            <td>{{i+1}}</td>
+                            <td>
+                                {{boq?.get('code')?.value || 'N/A'}}
+                            </td>
+                            <td>
+                                {{boq?.get('description')?.value || 'N/A'}}
+                            </td>
+                            <td style="width: 100px;">
+                                {{boq?.get('uomId')?.value || 'N/A'}}
+                            </td>
+                            <td style="width: 100px;">
+                                {{boq?.get('quantity')?.value || 'N/A'}}
+                            </td>
+                            <td style="width: 100px;">
+                                {{boq?.get('shiptoSite')?.value || 'N/A'}}
+                            </td>
+                            <td style="width: 100px;">
+                                {{boq?.get('needByDate')?.value | date: (commonService.showFormat) || 'N/A'}}
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="mxW-120">
+                                    <input matInput [matDatepicker]="ActionstartDate" formControlName="deliveryDate"
+                                        matTooltip="Select the delivery date" required>
+                                    <mat-datepicker-toggle matSuffix [for]="ActionstartDate"
+                                        class="dp-btm-line"></mat-datepicker-toggle>
+                                    <mat-datepicker #ActionstartDate required></mat-datepicker>
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="unitRate"
+                                        (input)="updateItemValue(i)">
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="itemValue" readonly>
+                                </mat-form-field>
+                            </td>
+                            @if(showItemDiscount){
+                            <td style="width: 100px;">
+                                <mat-form-field>
+                                    <mat-select matTooltip="Select the Discount type" required
+                                        formControlName="discountModeValue">
+                                        @for(val of discountMode; track val){
+                                        <mat-option [value]="val">{{val}}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="discountRate"
+                                        (input)="updateDiscountValue(i)">
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="discountValue" readonly="">
+                                </mat-form-field>
+                            </td>
+                            }
+                            @if(showItemTax){
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <mat-select matTooltip="Select the Discount type" required formControlName="taxModeValue">
+                                        @for(val of taxMode; track val){
+                                        <mat-option [value]="val">{{val}}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="taxRate"
+                                        (input)="updateTaxValue(i)">
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="taxValue">
+                                </mat-form-field>
+                            </td>
+                            }
+                            <td class="text-center">
+                                <i class="fa fa-trash text-danger"></i>
+                            </td>
+                        </tr>
+                        }
+                        <tr>
+                            <td colspan="5" rowspan="7" class="bg-row"></td>
+                            <td colspan="2">Total Items Value</td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">
+                                {{rfqBillOfQuantityTransForm.get('supplierRFQBillOfQuantityDetailTrans.totalItemsValue')?.value}}
+                            </td>
+                            <td colspan="7" rowspan="7" class="bg-row"></td>
+                        </tr>
+                        <tr class="cust-field-height">
+                            <td colspan="2">Discount Value</td>
+                            <td> <mat-form-field class="w-100">
+                                    <mat-select matTooltip="Select the discount mode" required formControllName="discountType" [disabled]="getDataFromRow?.sourcingRFQ?.itemLevelDiscount">
+                                        @for(val of discountMode; track val){
+                                        <mat-option [value]="val">{{val}}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="discountTypeValue" [readOnly]="getDataFromRow?.sourcingRFQ?.itemLevelDiscount">
+                                </mat-form-field>
+                            </td>
+                            <td class="text-right">
+                                {{rfqBillOfQuantityTransForm.get('supplierRFQBillOfQuantityDetailTrans.discountValue')?.value}}
+                            </td>
+                        </tr>
+                        <tr class="cust-field-height">
+                            <td colspan="2">Net Value (after Discount)</td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">{{
+                                rfqBillOfQuantityTransForm.get('supplierRFQBillOfQuantityDetailTrans.netValue')?.value }}
+                            </td>
+                        </tr>
+                        <tr class="cust-field-height">
+                            <td colspan="2">Tax</td>
+                            <td> <mat-form-field class="w-100">
+                                    <mat-select matTooltip="Select the tax mode" required formControlName="taxType" [disabled]="getDataFromRow?.sourcingRFQ?.itemLevelTax">
+                                        @for(val of taxMode; track val){
+                                            <mat-option [value]="val">{{val}}</mat-option>
+                                        }
+                                    </mat-select>
+                                </mat-form-field>
+                            </td>
+                            <td style="width: 100px;">
+                                <mat-form-field class="w-100">
+                                    <input matInput class="text-right" formControlName="taxTypeValue" [readonly]="getDataFromRow?.sourcingRFQ?.itemLevelTax">
+                                </mat-form-field>
+                            </td>
+                            <td class="text-right">{{ rfqBillOfQuantityTransForm.get('supplierRFQBillOfQuantityDetailTrans.tax')?.value }}</td>
+                        </tr>
+                        <tr class="cust-field-height">
+                            <td colspan="2"><a>IncoTerms (Cost)</a></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">
+                                {{rfqBillOfQuantityTransForm.get('supplierRFQBillOfQuantityDetailTrans.incoTerms')?.value}}
+                            </td>
+                        </tr>
+                        <tr class="cust-field-height">
+                            <td colspan="2">Total Amount (including Tax)</td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">{{rfqBillOfQuantityTransForm.get('supplierRFQBillOfQuantityDetailTrans.totalAmount')?.value}}</td>
+                        </tr>
+                        <tr class="cust-field-height">
+                            <td colspan="2">Amount in words (INR)</td>
+                            <td colspan="3" class="text-right">{{rfqBillOfQuantityTransForm.get('supplierRFQBillOfQuantityDetailTrans.totalAmount')?.value | numberToWords}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
+            Shipping Information*
+            <mat-checkbox class="ms-3" disabled
+                [checked]="getDataFromRow?.rfqShippingInfoTrans?.negotiable">Negotiable</mat-checkbox>
+        </h5>
+        <div class="widget-content" formGroupName="supplierRFQShippingInfoTrans">
+            <div class="grid-1-1-3">
+                <mat-form-field>
+                    <mat-label>Shipping Method</mat-label>
+                    <mat-select required formControlName="shippingMethodId"
+                        [disabled]="!getDataFromRow?.rfqShippingInfoTrans?.negotiable">
+                        @for(val of shippingMethod; track val){
+                        <mat-option [value]="val">{{val}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Shipping Term</mat-label>
+                    <mat-select required formControlName="shippingTermId"
+                        [disabled]="!getDataFromRow?.rfqShippingInfoTrans?.negotiable">
+                        @for(val of shippingTerm; track val){
+                        <mat-option [value]="val">{{val}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+    
+                <mat-form-field>
+                    <mat-label>Shipping Remarks </mat-label>
+                    <textarea matInput rows="1" formControlName="description"
+                        [disabled]="!getDataFromRow?.rfqShippingInfoTrans?.negotiable"></textarea>
+                </mat-form-field>
+    
+            </div>
+        </div>
+    </div>
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Document Section
+        </h5>
+        <div class="widget-content">
+    
+            <div class="">
+                <table class="content-table">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="min-width: 10px;">Serial #</th>
+                            <th scope="col" width="20%">Document Type</th>
+                            <th scope="col" width="30%">Description</th>
+                            <th scope="col">File Name</th>
+                            <th scope="col">Uploaded By</th>
+                            <th scope="col">Uploaded Date</th>
+                            <th scope="col">Action</th>
+    
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(doc of getDataFromRow?.rfqDocumentSectionTrans; let i = $index; track doc){
+    
+                        <tr>
+                            <td>{{i+1}}</td>
+                            <td>
+                                {{doc?.docType || "N/A"}}
+                            </td>
+                            <td>
+                                {{doc?.docDescription || "N/A"}}
+                            </td>
+                            <td>
+                                {{doc?.fileName || "N/A"}}
+                            </td>
+                            <td>
+                                {{doc?.uploadedBy || "N/A"}}
+                            </td>
+                            <td>
+                                {{doc?.uploadedDate | date: (commonService.showFormat) || "N/A"}}
+                            </td>
+                            <td class="text-center">
+                                <button mat-button class="btn-small" matTooltip="Download">
+                                    <i class="fa fa-download"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="widget-box">
+        <div formArrayName="supplierRFQSupplierDocumentSectionTrans" class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Document Section
+            </h5>
+            <div class="widget-content">
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="min-width: 100px">Serial #</th>
+                                <th scope="col">Document Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">File Type</th>
+                                <th scope="col">File Name</th>
+                                <th scope="col">Uploaded By</th>
+                                <th scope="col">Uploaded Date</th>
+                                <th scope="col">
+                                    Upload
+                                    <input type="file" multiple #fileUploadInput id="PRfileUpload"
+                                        style="height: 1px; width: 1px; pointer-events: none" hidden />
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(doc of supplierRFQSupplierDocumentSectionTrans().controls; track doc;let ind = $index){
+                            <tr [formGroupName]="ind" class="cust-field-height">
+                                <td>{{ ind + 1 }}</td>
+                                <td>
+                                    {{ doc.get("docName")?.value }}
+                                </td>
+                                <td>
+                                    <textarea matInput class="w-100" formControlName="docDescription" rows="1"></textarea>
+                                </td>
+                                <td>
+                                    {{ doc.get("fileType")?.value }}
+                                </td>
+    
+                                <td>
+                                    {{ doc.get("fileName")?.value }}
+                                </td>
+                                <td>
+                                    {{ doc.get("uploadedByName")?.value || "karthick" }}
+                                </td>
+                                <td>
+                                    {{ doc.get("uploadedDate")?.value }}
+                                </td>
+                                <td>
+                                    <!-- Upload Start Jawahar-->
+    
+                                    <div class="custom-file-upload" style="float: left; margin-top: 5px;">
+                                        <button class="file-upload-button">
+                                            <!-- <input class="custom-file-input" type="file"> -->
+                                            <i [id]="'prDoc_'+ind" (click)="onUploadClick($event, ind, doc)"
+                                                class="fa fa-cloud-upload custom-badge" aria-hidden="true"
+                                                style="color: #5f7184;"></i>
+                                            @if(doc.errors){
+                                            <sup style="color:red;">*</sup>
+                                            }
+                                        </button>
+                                    </div>
+                                    <div class="attach-section col position-relative"
+                                        style=" width: 50px; margin-left: 20px; float: left;">
+                                        <mat-icon matBadge=2 id="sidebarToggle" appDocIcon
+                                            (filesChange)="uploadedFilesOnChange($event, doc)"
+                                            [files]="doc.get('upload')?.value || []"
+                                            [matBadge]="(doc.get('upload')?.value || []).length" matBadgeOverlap="false">
+                                            <span class="material-icons-outlined">ballot</span>
+                                        </mat-icon>
+                                    </div>
+    
+                                    <!-- Upload End -->
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Notes to Supplier
+        </h5>
+        <div class="widget-content">
+            <textarea matInput class="w-100" placeholder="" disabled>{{getDataFromRow?.sourcingRFQ?.notestoSupplier}}</textarea>
+        </div>
+    </div>
+    <div class="widget-box" formGroupName="sourcingSupplierRFQ">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Supplier Remarks
+        </h5>
+        <div class="widget-content">
+            <textarea matInput class="w-100" formControlName="supplierRemarks"></textarea>
+        </div>
+    </div>
+
+    <div class="footer-action-btn">
+        <button class="btn-gray" (click)="cancelBtn()"><i class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
+        <div class="middle-spacer"> </div>
+        <button class="btn-blue" (click)="saveBtn()"><i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>Save as Draft </button>
+        <button class="btn-blue" (click)="submitBtn()"><i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>Submit </button>
+    </div>
+</form>
+
+<ng-template #incoTermsPopup>
+    <div class="dialog-container">
+        <div mat-dialog-title>
+            <h3> Search and Add Suppliers</h3>
+            <button mat-icon-button mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+        <mat-dialog-content>
+            <div class="widget-box">
+
+                <div class="widget-content">
+                    <div class="grid-4cols align-items-center">
+
+                        <mat-form-field>
+                            <mat-label>Spend Parent Category</mat-label>
+                            <input matInput value="Information Technology" disabled>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Spend Sub Category</mat-label>
+                            <input matInput value="Hardware Supplies" disabled>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Spend Child Category</mat-label>
+                            <input matInput value="IBM Hardware" disabled>
+                        </mat-form-field>
+                        <button class="header-level-btn-gray mt-3 mxw-120" matTooltip="Reset"><i
+                                class="fa fa-reset pe-2"></i>Reset</button>
+                    </div>
+                    <div class="grid-4cols align-items-center">
+
+                        <mat-form-field>
+                            <mat-label>Supplier Code</mat-label>
+                            <input matInput value="">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Supplier Name</mat-label>
+                            <input matInput value="">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Grade</mat-label>
+                            <mat-select required formControlName="">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="A">A</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button class="header-level-btn-blue mt-3 mxw-120" matTooltip="Create Template"><i
+                                class="fa fa-search pe-2"></i>Search</button>
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                    Supplier Details
+                </h5>
+                <div class="widget-content">
+                    <div class="table-responsive">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Serial #</th>
+                                    <th scope="col">Code</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Grade</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col" class="position-relative" style="width: 140px;"><mat-checkbox
+                                            style="position: absolute; left: 5px; top:-2px;"></mat-checkbox><span
+                                            style="margin-left:20px">Select All</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>LSUPP-21298</td>
+                                    <td>Eastern Network Service Private Limted</td>
+                                    <td>A</td>
+                                    <td>Active</td>
+                                    <td class="text-center"><mat-checkbox class="p-0"></mat-checkbox></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>LSUPP-21298</td>
+                                    <td>Eastern Network Service Private Limted</td>
+                                    <td>A</td>
+                                    <td>Active</td>
+                                    <td class="text-center"><mat-checkbox class="p-0"></mat-checkbox></td>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>LSUPP-21298</td>
+                                    <td>Eastern Network Service Private Limted</td>
+                                    <td>A</td>
+                                    <td>Active</td>
+                                    <td class="text-center"><mat-checkbox class="p-0"></mat-checkbox></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <div class="footer-cta-btn">
+                <div class="cta-leftside-btn">
+                    <button class="btn-gray" mat-dialog-close cdkFocusInitial>
+                        <i class="fa fa-ban pe-2"></i>Cancel</button>
+                </div>
+
+                <div class="cta-rightside-btn">
+                    <button class="btn-blue"><i class="fa fa-plus pe-2"></i>Add
+                    </button>
+                </div>
+            </div>
+        </mat-dialog-actions>
+    </div>
+</ng-template>

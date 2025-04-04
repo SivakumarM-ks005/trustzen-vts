@@ -1,0 +1,50 @@
+<div class="dialog-container">
+    <div mat-dialog-title>         
+            <h3>WorkFlow History</h3>        
+            <button mat-icon-button  mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+       
+    </div> 
+    <mat-dialog-content>
+        <div class="widget-box mt-3">
+            <div class="table-responsive " >
+                <table class="content-table">
+                <thead>
+                        <tr>
+                            <th scope="col">WF Level #</th>
+                            <th scope="col">Assigned User</th>
+                            <th scope="col">Action Date</th>
+                            <th scope="col">Comments</th>
+                            <th scope="col">Estimated Date of Completion</th>
+                            <th scope="col">Action Taken</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(val of workFlowHistory; track val; let i = $index){
+                            <tr>
+                                <td class="text-center">{{ val?.wfLevel }}</td>
+                                <td> {{ val?.assignedToUser }} </td>
+                                <td> {{ val?.actionDate }} </td>
+                                <td> {{val?.comments }} </td>
+                                <td> {{val?.estDate || "N/A" }} </td>
+                                <td> {{val?.actionTaken}} </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div> 
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions> 
+
+        <div class="footer-action-btn">
+            <button class="btn-gray"  mat-dialog-close cdkFocusInitial><i class="fa fa-ban pe-2"></i>Close</button>
+            <div class="middle-spacer"></div>
+        </div>
+
+
+    </mat-dialog-actions>
+
+</div>

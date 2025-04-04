@@ -1,0 +1,739 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Supplier Suspension /
+            Termination</h2>
+    </div>
+    <div class="content-box p-2  h-100">
+        <div class="widget-box">
+            <h5 class="widget-title d-flex justify-content-between">
+                Header
+                <div class="status-label">Status: <span class="status-state">Active</span></div>
+            </h5>
+            <div class="widget-content">
+
+                <div class="grid-2cols">
+                    <div class="display-box">
+                        <p class="display-label">Ref #</p>
+                        <p class="display-data">{{SupDetails?.supplierRefNo ? SupDetails?.supplierRefNo : ""}}</p>
+                        <p class="display-label">Supplier Name</p>
+                        <p class="display-data">{{SupDetails?.supplierName}}</p>
+                        <p class="display-label">{{ (SupplierManagement?.complianceRenewalBank?.captureBusinessLicenses
+                            && SupplierManagement?.licenseCertificate?.length > 0) ?
+                            SupplierManagement?.licenseCertificate[0]?.displayLabel : "Commercial License #" }}</p>
+                        <p class="display-data">{{SupDetails?.comLicName}}</p>
+                        @if(SupDetails?.siteId){
+                            <p class="display-label">Site ID #</p>
+                            <p class="display-data">{{SupDetails?.siteId}}</p>
+                        }
+                    </div>
+                    <div class="display-box">
+                        @if(SupDetails?.siteName){
+                            <p class="display-label">Site Name</p>
+                            <p class="display-data">{{SupDetails?.siteName}}</p>
+                        }
+                        <p class="display-label">Tax Registration #</p>
+                        <p class="display-data">{{SupDetails?.taxRegistertion}}</p>
+                        <p class="display-label">Submitted Date</p>
+                        <p class="display-data">{{SupDetails?.submittedDate | date:'dd-MMM-yyyy'}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @if(getSusTermEntityListArray?.length > 0){
+            <div class="widget-box">
+                <h5 class="widget-title">
+                    Suspended/Terminated Entites </h5>
+                <div class="widget-content">
+                    <form [formGroup]="assignEntity">
+                        <div class="table-responsive">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th>Serial #</th>
+                                        <th>Entity Code </th>
+                                        <th>Entity Name</th>
+                                        <th>Status</th>
+                                        <th>Reason</th>
+                                        <th>Action Start Date</th>
+                                        <th>Action End Date</th>
+                                        <th>Action</th>
+                                        <th colspan="2">Revoke</th>
+    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for(list of getSusTermEntityListArray; let i = $index; track list){
+                                        <tr>
+                                            <td>{{i+1}}</td>
+                                            <td>{{list?.historyRecord?.entityIds}}</td>
+                                            <td>{{list?.historyRecord?.entityName}}</td>
+                                            <td>{{list?.historyRecord?.status}}</td>
+                                            <td>{{list?.historyRecord?.reason}} <a class="ms-2" matTooltip={{list?.historyRecord?.description}}><i
+                                                        class="fa fa-info-circle"></i></a></td>
+                                            <td>{{list?.historyRecord?.actionStartDate | date: 'dd-MMM-yy'}}</td>
+                                            <td>{{list?.historyRecord?.actionEndDate ? (list?.historyRecord?.actionEndDate | date: 'dd-MMM-yy') : 'N/A'}}</td>
+                                            <td>
+                                                <div>
+                                                    <button class="btn-small" mat-button matTooltip="Edit {{list?.historyRecord?.suspensionType}}" [disabled]="statusBasedDisable" (click)="updateOrViewDetails(list, 'update')"><a><i class="fa fa-edit"></i></a></button>
+                                                    <button class="btn-small" mat-button matTooltip="View {{list?.historyRecord?.suspensionType}}"  (click)="updateOrViewDetails(list, 'view')"><a><i class="fa fa-eye"></i></a></button>
+                                                </div>
+                                            </td>
+                                            <td><mat-checkbox [checked]="suspensionHistoryId === list?.historyRecord?.suspensionHistoryId" (change)="getRevokeCheckbox(list)" [disabled]="statusBasedDisable || checkUpdateReqInfo"></mat-checkbox></td>
+                                            @if(i === getSusTermEntityListArray?.length - 1){
+                                                <td rowspan="2">
+                                                    <div class="d-flex align-items-center Justify-content-center">
+                                                        <button (click)="revokePopup()" [disabled]="statusBasedDisable || checkUpdateReqInfo"
+                                                            class="header-level-btn-blue">Revoke</button>
+                                                    </div>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        }
+
+        @if(entitydata?.length > 0){
+        <div class="widget-box">
+            <h5 class="widget-title">
+                Assigned Entities </h5>
+            <div class="widget-content">
+                <form [formGroup]="assignEntity">
+                    <div class="table-responsive">
+                        <table class="content-table ">
+                            <thead>
+                                <tr>
+                                    <th width="5%">Serial #</th>
+                                    <th width="10%">Entity Code </th>
+                                    <th width="20%">Entity Name</th>
+                                    <th width="10%">Status</th>
+                                    <!-- <th width="15%">Reason</th>
+                                        <th width="30%">Description</th> -->
+
+                                    <th width="3%">
+                                        <mat-checkbox class="" formControlName="assignAll" (change)="toggleAssignAll($event)"></mat-checkbox> Select All
+                                        <!-- <span class="text-right"><input type="checkbox" class="tbl-chk" formcontrolname="SelectAll"> </span>  -->
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody formArrayName="entityArray">
+                                @for(entity of entityArray.controls; let i = $index; track entity){
+                                <tr [formGroupName]="i">
+                                    <td>{{ i + 1 }}</td>
+                                    <!-- @if(entity.get('entitySuspended')?.value){
+                                        <td>
+                                            <a href="javascript:void(0)"
+                                                (click)="clickMethod(entity.get('retrivalData')?.value)" class="linkTag">{{
+                                                entity.get('entityId')?.value }}</a>
+                                        </td>
+                                        <td>{{ entity.get('entityName')?.value }}</td>
+                                        <td>
+                                            <span
+                                                class="badge text-bg-secondary green">{{entity.get('retrivalData')?.value?.status}}</span>
+                                        </td>
+                                        }@else{ -->
+                                    <td>{{ entity.get('entityId')?.value }}</td>
+                                    <td>{{ entity.get('entityName')?.value }}</td>
+                                    <td>
+                                        <span class="badge text-bg-secondary green">{{entity.get('status')?.value}}</span>
+                                    </td>
+                                    <!-- } -->
+                                    <td class="text-left">
+                                        <!-- @if(entity.get('status')?.value === 'Active' &&
+                                            !entity.get('entitySuspended')?.value){ -->
+                                        <mat-checkbox class="tbl-chk" (change)="onIndividualAssignChange()"
+                                            formControlName="entityAssign"></mat-checkbox>
+                                        <!-- } -->
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+        }
+
+
+
+        <!-- Suspension / Termination Process-->
+
+        <form [formGroup]="processData" #susTerProcessElem>
+            <div class="widget-box">
+                <h5 class="widget-title">Suspension / Termination Process</h5>
+                <div class="widget-content">
+                    <div class="d-flex flex-row flex-wrap Justify-content-center align-items-center mb-3">
+                        <span class="ft-size13">Termination Type <sup class="text-danger; ft-size10">*</sup> :-</span>
+                        <mat-radio-group class="Justify-content-center align-items-top radiobtn-top"
+                            formControlName="suspensionType">
+                            <mat-radio-button value="termination" checked="true">Termination
+                                (Permanent)</mat-radio-button>
+                            <mat-radio-button value="suspension">Suspension (Temporary)</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div class="grid-4cols">
+
+                        <mat-form-field class="col">
+                            <mat-label>Reason</mat-label>
+                            <mat-select matTooltip="Select the Reason" formControlName="reason" required="">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                @for(reason of reasonList; track reason){
+                                <mat-option [value]=reason.value>{{ reason?.value }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field class="col">
+                            <mat-label>Description</mat-label>
+                            <input matInput matTooltip="Enter the Description" placeholder="Enter the Description"
+                                formControlName="description">
+                        </mat-form-field>
+
+
+                        <mat-form-field class="col">
+                            <mat-label>{{processData.get('suspensionType')?.value ==='suspension' ? 'Start Date' : 'Effective
+                                Date'}}</mat-label>
+                            <input matInput [matDatepicker]="ActionstartDate" matTooltip="Select the Action Start Date"
+                                [min]="todayDate" [formControl]="startDate" formControlName="actionStartDate" required>
+                            <mat-datepicker-toggle matSuffix [for]="ActionstartDate"
+                                class="dp-btm-line"></mat-datepicker-toggle>
+                            <mat-datepicker #ActionstartDate required></mat-datepicker>
+                        </mat-form-field>
+
+                        @if(processData.get('suspensionType')?.value ==='suspension'){
+                        <mat-form-field class="col">
+                            <mat-label><!-- Action --> End Date</mat-label>
+                            <input matInput [matDatepicker]="ActionEndDate" matTooltip="Select the End Date"
+                                [required]="processData.get('suspensionType')?.value ==='suspension' ? true : false"
+                                [disabled]="processData.get('suspensionType')?.value ==='termination' ? true : false"
+                                formControlName="actionEndDate" [min]="todayDate">
+                            <mat-datepicker-toggle matSuffix [for]="ActionEndDate"
+                                class="dp-btm-line"></mat-datepicker-toggle>
+                            <mat-datepicker #ActionEndDate required></mat-datepicker>
+                        </mat-form-field>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                    Consequences - Stop Allowing
+                </h5>
+                <div class="widget-content">
+                    <div class="grid-3cols">
+                        @for(first of arrayFirstHalf; track first.id; let i = $index){
+                        <div>
+                            <mat-checkbox [(ngModel)]="first.flag" [ngModelOptions]="{standalone: true}"
+                                (change)="onIndividualConsequenceChange($event,first,'firstSet')"
+                                [disabled]="(disableAllOption && first.id !== 1)|| first.disabled || statusBasedDisable">{{
+                                first.value
+                                }}</mat-checkbox>
+                        </div>
+                        }
+                        @for(second of arraySecondHalf; track second){
+                        <div>
+                            <mat-checkbox [(ngModel)]="second.flag" [ngModelOptions]="{standalone: true}"
+                                (change)="onIndividualConsequenceChange($event, second, 'secondSet')"
+                                [disabled]="(disableAllOption) || second.disabled || statusBasedDisable">{{ second.value
+                                }}</mat-checkbox>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- Documents (Attach files if needed)-->
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Documents
+            </h5>
+            <div class="widget-content">
+                @if(!statusBasedDisable){
+                <div class="grid-3-1 align-items-center">
+                    <mat-form-field class="col">
+                        <mat-label>Description</mat-label>
+                        <input matInput matTooltip="Enter the Description" placeholder="Enter the Description"
+                            [(ngModel)]="uploadDescription">
+                    </mat-form-field>
+                    <div class="custom-file-upload mt-2">
+                        <button class="file-upload-button">
+                            <input class="custom-file-input" id="customFileLang" type="file" #fileInput multiple
+                                (change)="onFileChange($event)" (click)="checkDescription($event)">
+                            <i class="fa fa-cloud-upload" aria-hidden="true"></i><span class="ps-2">Upload</span>
+                        </button>
+                    </div>
+                </div>
+
+                }
+                @if(listOfFiles.length > 0){
+                <div class="widget-box mt-2">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        Attached Files
+                    </h5>
+                    <div class="widget-content">
+                        <div class="table-responsive">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">Serial #</th>
+                                        <th width="25%">Description</th>
+                                        <th width="40%">File Name</th>
+                                        <th width="20%">Uploaded By</th>
+                                        <th width="10%">Uploaded Date</th>
+                                        <!-- <td class="text-center"> 
+                                                <a class="card-action pointer" matTooltip="View/Edit">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </a>  
+                                        </td> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for(uploadedList of listOfFilesToShown; track uploadedList;let i = $index){
+                                    <tr>
+                                        <td>{{ i +1}}</td>
+                                        <td>{{ uploadedList?.description }}</td>
+                                        <td>
+                                            <a href='javascript:void(0)' (click)="downloadFile(uploadedList)"
+                                                target="_blank">
+                                                {{ uploadedList?.fileInfo.name }}
+                                            </a>
+                                            <a (click)="removeFileFromList(i)" class="ms-3"><i
+                                                    class="fa fa-trash text-danger"></i></a>
+
+                                        </td>
+                                        <td> {{ uploadedList?.uploadedBy }}</td>
+                                        <td>{{ uploadedList?.fileInfo?.lastModifiedDate | date:'dd-MMM-yyyy'
+                                            }}</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                }
+                @if(retrieveListOfFiles.length > 0){
+                <div class="widget-box mt-2">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        Saved Files
+                    </h5>
+                    <div class="widget-content">
+                        <div class="table-responsive">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th width="5%">Serial #</th>
+                                        <th width="25%">Description</th>
+                                        <th width="40%">File Name</th>
+                                        <th width="20%">Uploaded By</th>
+                                        <th width="10%">Uploaded Date</th>
+                                        <!--<td class="text-center"> 
+                                                <a class="card-action pointer" matTooltip="View/Edit">
+                                                <i class="fa fa-pencil-square-o"></i>
+                                            </a>  
+                                        </td> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for(uploadedList of retrieveListOfFiles; track uploadedList;let i =
+                                    $index){
+                                    <tr>
+                                        <td>{{ i +1}}</td>
+                                        <td>{{ uploadedList?.description }}</td>
+                                        <td>
+                                            <a href="#link">
+                                                {{ uploadedList?.fileName }}
+                                            </a>
+                                            <!--<a (click)="removeFileFromList(i)" class="ms-3"><i class="fa fa-trash text-danger"></i></a> -->
+
+                                        </td>
+                                        <td> {{ uploadedList?.uploadedBy }}</td>
+                                        <td>{{ uploadedList?.uploadedDate | date:'dd-MMM-yyyy' }}</td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                }
+
+
+            </div>
+        </div>
+        @if(!revokeWFFlag){
+            <mat-accordion multi class="custom-accordion">
+                <div class="widget-box">
+                    <div #commentSection>
+                        <div *ngFor="let wfHistory of checkIfWFLevelAvialbale;">
+                            @if(userId === wfHistory?.assignedToUserId
+                            && wfHistory?.actionTaken === WorkFlowStatusForLevelWise.LEVELPENDING
+                            && wfHistory?.keyValue === SupDetails?.supplierRefNo
+                            ){
+                            <mat-expansion-panel [expanded]="isOpen" class="pq-fee-details" (opened)="wfDetailsPanel.set(false)"
+                                (closed)="wfDetailsPanel.set(true)">
+                                <mat-expansion-panel-header>
+                                    <mat-panel-title class="Xcustom-panel-header">WorkFlow Details</mat-panel-title>
+            
+                                </mat-expansion-panel-header>
+                                <mat-label class="ft-size13">Comments</mat-label>
+                                <mat-form-field class="w-100">
+                                    <textarea matInput [(ngModel)]="wfDetailsComments"
+                                        [ngModelOptions]="{standalone: true}"></textarea>
+                                </mat-form-field>
+                                @if(!showReqInfoTabs){
+                                <div class="footer-action-btn">
+                                    @if(wfHistory?.onlyReject){
+                                    <button matTooltip="Reject" class="btn-gray" (click)="rejectVerifyPopup(wfHistory)"><i
+                                            class="fa fa-thumbs-down pe-2"></i>Reject</button>
+                                    }
+                                    <div class="middle-spacer"></div>
+                                    @if(wfHistory?.onlyApprove){
+                                    <button class="btn-blue" matTooltip="Approve"
+                                        (click)="updateWFStatus(WorkFlowStatusForLevelWise.LEVELAPPROVED,wfHistory,false,false)"><i
+                                            class="fa fa-thumbs-up pe-2" aria-hidden="true"></i>Approve</button>
+                                    }
+                                    @if(wfHistory?.onlyReqInfo){
+                                    <button class="btn-blue" matTooltip="Request Info" (click)="showReqInfoTabs = true"><i
+                                            class="fa fa-info-circle pe-2" aria-hidden="true"></i>Request Info</button>
+                                    }
+            
+                                </div>
+                                }
+                                <!-- Show req for Info data -->
+                                @if(showReqInfoTabs){
+                                <div class="footer-action-btn">
+                                    <div class="d-flex flex-row justify-content-start mt-2" style="margin-left: -10px;">
+                                        <mat-checkbox class="ml-0" style="font-size: 13px !important;" checked="true"
+                                            disabled="true">
+                                            Req Info to initiator
+                                        </mat-checkbox>
+                                        <mat-checkbox style="font-size: 13px !important;" class="ml-0 ft" disabled="true">
+                                            Req Info to specific user
+                                        </mat-checkbox>
+                                        <mat-checkbox style="font-size: 13px !important;" class="ml-0 ft" disabled="true">
+                                            Req Info to any user
+                                        </mat-checkbox>
+                                    </div>
+            
+                                    <div class="middle-spacer"></div>
+                                    <button color="warn" matTooltip="Cancel" class="btn-gray" (click)="showReqInfoTabs = false"><i
+                                            class="fa fa-arrow-left-o pe-2" aria-hidden="true"></i>Cancel</button>
+                                    <button class="btn-blue" matTooltip="Ok"
+                                        (click)="updateWFStatus(WorkFlowStatusForLevelWise.LEVELREQFORINFO ,wfHistory,false,false)"><i
+                                            class="fa fa-thumbs-up pe-2" aria-hidden="true"></i>Ok</button>
+                                </div>
+                                }
+                            </mat-expansion-panel>
+                            }
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="widget-box">
+                    <mat-expansion-panel [expanded]="isOpen" class="pq-fee-details" (opened)="wfStatusPanel.set(false)"
+                        (closed)="wfStatusPanel.set(true)" *ngIf="workFlowRowData?.length !== 0">
+                        <mat-expansion-panel-header>
+                            <div class="my-panel" (click)="$event.stopPropagation();">
+                                <mat-panel-title>WorkFlow Status</mat-panel-title>
+                                <mat-panel-description>
+                                    <button class="header-level-btn-blue" (click)="wfHistory()"><i
+                                            class="fa fa-info-circle pe-2"></i>
+                                        History
+                                    </button>
+                                </mat-panel-description>
+                            </div>
+                        </mat-expansion-panel-header>
+                        <div class="widget-content p-0">
+                            <ag-grid-angular [theme]="theme" [rowData]="workFlowRowData" [columnDefs]="workFlowStatuscolDefs"
+                                [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+                                [paginationPageSizeSelector]="paginationPageSizeSelector" />
+                        </div>
+                    </mat-expansion-panel>
+                </div>
+            </mat-accordion>
+        }
+
+    </div>
+
+    @if(checkBtnsEnable){
+        <div class="footer-action-btn">
+            <button class="btn-gray" mat-dialog-close cdkFocusInitial (click)="pqAssesmentList()">
+                <i class="fa fa-ban pe-2"></i>Cancel</button>
+            <button class="btn-blue" matTooltip="Notify Supplier" [disabled]="!isNotifyEnable" (click)="notifySupplier()">
+                <i class="fa fa-bell pe-2" aria-hidden="true"></i>Notify Supplier</button>
+            <div class="middle-spacer"> </div>
+            <button class="btn-blue" matTooltip="Save" [disabled]="!isSaveEnable" (click)="saveBtn()">
+                <i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>Save</button>
+            <button class="btn-blue" matTooltip="Initiate Approval" [disabled]="!isProcessWorkflowEnable" (click)="processWorkflow()">
+                <i class="fa fa-check-circle pe-2"></i> Process workflow</button>
+        </div>
+    }
+</div>
+
+<ng-template #revokeEntity>
+
+    <div class="dialog-container">
+        <div mat-dialog-title>
+            <h3>Revoke Suspension / Termination Details</h3>
+            <button mat-icon-button mat-dialog-close (click)="closeRevokePopup()">
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+        <mat-dialog-content>
+            <div class="widget-box">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                    Header
+                </h5>
+                <div class="widget-content" [formGroup]="revokeForm">
+                    <div class="grid-1-2-1">
+                        <mat-form-field>
+                            <mat-label>Reason</mat-label>
+                            <mat-select matTooltip="Select the Reason" formControlName="reason" required="">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                @for(reason of reasonList; track reason){
+                                <mat-option [value]=reason.value>{{ reason?.value }}</mat-option>
+                                }
+                            </mat-select>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <textarea matInput rows="1" formControlName="description"></textarea>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Effective Date</mat-label>
+                            <input matInput [matDatepicker]="dp1" [min]="todayDate" required formControlName="effectiveDate">
+                            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                            <mat-datepicker #dp1></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+                </div>
+            </div>
+            <div class="widget-box">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                    Document Section
+                </h5>
+                <div class="widget-content">
+                    <div class="grid-25-55-18 align-items-center">
+                        <mat-form-field>
+                            <mat-label>Document Type</mat-label>
+                            <mat-select >
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="pdf">pdf</mat-option>
+                                <mat-option value="jpg">jpg</mat-option>
+                                <mat-option value="png">png</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+    
+                        <mat-form-field>
+                            <mat-label>Description</mat-label>
+                            <textarea matInput class="w-100" rows="1"></textarea>
+                        </mat-form-field>
+                        <div class="custom-file-upload mt-2">
+                            <button class="file-upload-button">
+                                <input class="custom-file-input"
+                                    id="customFileLang" type="file" #fileInput
+                                    accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf"
+                                     multiple (change)="onRevokeFileChange($event)">
+                                <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
+                                    class="ps-2">Upload</span>
+                            </button>
+    
+                        </div>
+                    </div>
+                    <div class="table-responsive mt-2">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="min-width: 100px;">Serial #</th>
+                                    <th scope="col">Document Type</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">File Name</th>
+                                    <th scope="col">Uploaded By</th>
+                                    <th scope="col">Uploaded Date</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for(uploadedList of listOfFilesRevokeToShown; track uploadedList;let i = $index){
+                                    <tr class="cust-field-height">
+                                        <td>{{i+1}}</td>
+                                        <td>
+                                           image file
+                                        </td>
+                                        <td>
+                                           Invoice Copy
+                                        </td>
+                                        <td>
+                                            {{uploadedList?.fileName}}
+                                         </td>
+                                        <td>
+                                            {{uploadedList?.uploadedBy}}
+                                        </td>
+                                        <td>
+                                            {{ uploadedList?.fileInfo?.lastModifiedDate | date:'dd-MMM-yyyy'}}
+                                        </td> 
+                                        <td class="text-center">
+                                          <a><i class="fa fa-trash text-danger"></i></a>
+                                        </td>                                
+                                    </tr>                          
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @if(isShowRevokeProcessWF){
+            
+            <div class="widget-box">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                    Approval Workflow Details
+                </h5>
+                <div class="widget-content">
+                    <!-- <ag-grid-angular [theme]="theme" [rowData]="rowData" [columnDefs]="colDefs"
+                                                [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+                                                [paginationPageSizeSelector]="paginationPageSizeSelector" /> -->
+            
+                    <ng-container>
+                        <app-dialog-initiate-approval [isInsideDialog]="true" [SupDetails]="revokeWFRequestObject" screenId="3"
+                            (submitCheck)="revokeInitiateWF($event)" />
+                    </ng-container>
+                </div>
+            </div>
+            }
+            @if(showWFDetailsPopup){
+                <mat-accordion multi class="custom-accordion">
+                    <div class="widget-box">
+                        <div #commentSection>
+                            <div *ngFor="let wfHistory of checkIfWFLevelAvialbale;">
+                                @if(userId === wfHistory?.assignedToUserId
+                                && wfHistory?.actionTaken === WorkFlowStatusForLevelWise.LEVELPENDING
+                                && wfHistory?.keyValue === revokeWFRequestObject?.supplierRefNo
+                                ){
+                                <mat-expansion-panel [expanded]="isOpen" class="pq-fee-details"
+                                    (opened)="wfDetailsPanel.set(false)" (closed)="wfDetailsPanel.set(true)">
+                                    <mat-expansion-panel-header>
+                                        <mat-panel-title class="Xcustom-panel-header">WorkFlow Details</mat-panel-title>
+        
+                                    </mat-expansion-panel-header>
+                                    <mat-label class="ft-size13">Comments</mat-label>
+                                    <mat-form-field class="w-100">
+                                        <textarea matInput [(ngModel)]="wfDetailsComments"
+                                            [ngModelOptions]="{standalone: true}"></textarea>
+                                    </mat-form-field>
+                                    @if(!showReqInfoTabs){
+                                    <div class="footer-action-btn">
+                                        @if(wfHistory?.onlyReject){
+                                        <button matTooltip="Reject" class="btn-gray" (click)="rejectVerifyPopup(wfHistory, true)"><i
+                                                class="fa fa-thumbs-down pe-2"></i>Reject</button>
+                                        }
+                                        <div class="middle-spacer"></div>
+                                        @if(wfHistory?.onlyApprove){
+                                        <button class="btn-blue" matTooltip="Approve"
+                                            (click)="updateWFStatus(WorkFlowStatusForLevelWise.LEVELAPPROVED,wfHistory,false,true)"><i
+                                                class="fa fa-thumbs-up pe-2" aria-hidden="true"></i>Approve</button>
+                                        }
+                                        @if(wfHistory?.onlyReqInfo){
+                                        <button class="btn-blue" matTooltip="Request Info" (click)="showReqInfoTabs = true"><i
+                                                class="fa fa-info-circle pe-2" aria-hidden="true"></i>Request Info</button>
+                                        }
+        
+                                    </div>
+                                    }
+                                    <!-- Show req for Info data -->
+                                    @if(showReqInfoTabs){
+                                    <div class="footer-action-btn">
+                                        <div class="d-flex flex-row justify-content-start mt-2" style="margin-left: -10px;">
+                                            <mat-checkbox class="ml-0" style="font-size: 13px !important;" checked="true"
+                                                disabled="true">
+                                                Req Info to initiator
+                                            </mat-checkbox>
+                                            <mat-checkbox style="font-size: 13px !important;" class="ml-0 ft" disabled="true">
+                                                Req Info to specific user
+                                            </mat-checkbox>
+                                            <mat-checkbox style="font-size: 13px !important;" class="ml-0 ft" disabled="true">
+                                                Req Info to any user
+                                            </mat-checkbox>
+                                        </div>
+        
+                                        <div class="middle-spacer"></div>
+                                        <button color="warn" matTooltip="Cancel" class="btn-gray"
+                                            (click)="showReqInfoTabs = false"><i class="fa fa-arrow-left-o pe-2"
+                                                aria-hidden="true"></i>Cancel</button>
+                                        <button class="btn-blue" matTooltip="Ok"
+                                            (click)="updateWFStatus(WorkFlowStatusForLevelWise.LEVELREQFORINFO ,wfHistory,false,true)"><i
+                                                class="fa fa-thumbs-up pe-2" aria-hidden="true"></i>Ok</button>
+                                    </div>
+                                    }
+                                </mat-expansion-panel>
+                                }
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="widget-box">
+                        <mat-expansion-panel [expanded]="isOpen" class="pq-fee-details" (opened)="wfStatusPanel.set(false)"
+                            (closed)="wfStatusPanel.set(true)" *ngIf="workFlowRowData?.length !== 0">
+                            <mat-expansion-panel-header>
+                                <div class="my-panel" (click)="$event.stopPropagation();">
+                                    <mat-panel-title>WorkFlow Status</mat-panel-title>
+                                    <mat-panel-description>
+                                        <button class="header-level-btn-blue" (click)="wfHistory()"><i
+                                                class="fa fa-info-circle pe-2"></i>
+                                            History
+                                        </button>
+                                    </mat-panel-description>
+                                </div>
+                            </mat-expansion-panel-header>
+                            <div class="widget-content p-0">
+                                <ag-grid-angular [theme]="theme" [rowData]="workFlowRowData"
+                                    [columnDefs]="workFlowStatuscolDefs" [defaultColDef]="defaultColDef"
+                                    [pagination]="pagination" [paginationPageSize]="paginationPageSize"
+                                    [paginationPageSizeSelector]="paginationPageSizeSelector" />
+                            </div>
+                        </mat-expansion-panel>
+                    </div>
+                </mat-accordion>
+            }
+        </mat-dialog-content>
+        @if(checkBtnsEnable){
+            <mat-dialog-actions>
+                <!--<div class="footer-cta-btn">
+                    <div class="cta-leftside-btn">
+                        <button class="btn-gray" mat-dialog-close cdkFocusInitial (click)="closeRevokePopup()">
+                            <i class="fa fa-ban pe-2"></i>Close</button>
+                    </div>
+    
+                    <div class="cta-rightside-btn">
+                        <button class="btn-blue"><i class="fa fa-hand-pointer-o pe-2"></i>Submit
+                        </button>
+                    </div>
+                </div> -->
+                <div class="footer-action-btn">
+                    <button class="btn-gray" mat-dialog-close cdkFocusInitial>
+                        <i class="fa fa-ban pe-2"></i>Cancel</button>
+                    <button class="btn-blue" matTooltip="Notify Supplier" [disabled]="!isRevokeNotifyEnable" (click)="notifySupplier(true)">
+                        <i class="fa fa-bell pe-2" aria-hidden="true"></i>Notify Supplier</button>
+                    <div class="middle-spacer"> </div>
+                    <button class="btn-blue" matTooltip="Save" [disabled]="!isRevokeSaveEnable" (click)="saveRevokeBtn()">
+                        <i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>Save</button>
+                    <button class="btn-blue" matTooltip="Initiate Approval" [disabled]="!isRevokeProcessWorkflowEnable"
+                        (click)="revokeProcessWorkflow()">
+                        <i class="fa fa-check-circle pe-2"></i> Process workflow</button>
+                </div>
+            </mat-dialog-actions>
+        }
+    </div>
+</ng-template>

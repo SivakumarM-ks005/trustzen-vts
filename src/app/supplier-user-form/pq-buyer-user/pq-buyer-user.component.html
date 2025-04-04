@@ -1,0 +1,587 @@
+<div class="content-container">
+
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Supplier Management</h2>
+    </div>
+    @if(loggedDetails?.userType === 2 && status || loggedDetails?.userType === 2 && profile){
+    <div class="container-fluid mt--5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 card-wrapper">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="mb-0 fw-medium">Supplier Registration </div>
+                    </div>
+                    <!--  class="normalTab"-->
+                    <div class="card-body p-0">
+                        <mat-tab-group class="verticalTabs" #tabGroup style="background-color: #fff;"
+                            (selectedTabChange)="tabClick($event)">
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Supplier Information</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div>
+                                    @if (tabGroup.selectedIndex === 0) {
+                                    <app-supplier-information [readonly]="false" [supplierId]="supplierId"
+                                        (tabValidCheckEmit)="getScreenCompleteDetails()"
+                                        (nextTabEmit)="gotoNextTab()"></app-supplier-information>
+                                    }
+                                </div>
+                                <footer class="dSSijWhR">
+                                    <div>
+                                        <button [disabled]="disableStatusBased == false" mat-stroked-button
+                                             (click)="onSupplyInfoSubmit()">
+                                            Save as Draft </button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="onSupplyInfoSubmit(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Address Details</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent">
+                                    @if (tabGroup.selectedIndex === 1) {
+                                    <app-address-details #addressDetails [supplierId]="supplierId"
+                                        (nextTabEmit)="gotoNextTab()" (tabValidCheckEmit)="getScreenCompleteDetails()"
+                                        (SaveDraftFlag)="getSaveDraftFlag($event)"
+                                        (dialogResult)="handleDialogResult($event)"></app-address-details>
+                                    }
+                                </div>
+                                <footer>
+                                    <div>
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'addressDetails')">Previous</button>
+                                        <!-- <button   (click)="goto(false)">Previous</button> -->
+                                        
+                                        <button [disabled]="SaveDraftFlag == false || disableStatusBased == false"
+                                            mat-stroked-button  (click)="saveAddressDetails()">Save
+                                            as Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveAddressDetails(true)">Next</button>
+                                        <!-- <button   (click)="goto(true, 'addressDetails')">Next</button> -->
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Contact Details</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent">
+                                    <div class="previewBox">
+                                        @if (tabGroup.selectedIndex === 2) {
+                                        <app-contact-details #Contact [supplierId]="supplierId"
+                                            (nextTabEmit)="gotoNextTab()"
+                                            (tabValidCheckEmit)="getScreenCompleteDetails()"
+                                            (SaveDraftFlag)="getSaveDraftFlag($event)"
+                                            (dialogResult)="handleDialogResult($event)"></app-contact-details>
+                                        }
+                                    </div>
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'contactDetails')">Previous</button>
+                                        
+                                        <button [disabled]="SaveDraftFlag == false || disableStatusBased == false"
+                                            mat-stroked-button  (click)="saveContactDetails()">Save
+                                            as Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveContactDetails(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Financial & Business</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent">
+                                    @if (tabGroup.selectedIndex === 3){
+                                    <app-financial-health-details #financialHealth [supplierId]="supplierId"
+                                        (nextTabEmit)="gotoNextTab()" (tabValidCheckEmit)="getScreenCompleteDetails()"
+                                        (SaveDraftFlag)="getSaveDraftFlag($event)"
+                                        (dialogResult)="handleDialogResult($event)"></app-financial-health-details>
+                                    }
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'financialHealth')">Previous</button>
+                                        
+                                        <button mat-stroked-button 
+                                            [disabled]="SaveDraftFlag == false || disableStatusBased == false"
+                                            (click)="saveFinancialandBusiness()">Save as Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveFinancialandBusiness(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType  || loggedDetails?.userType !== 5">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Bank Details</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent previewBox">
+                                    @if (tabGroup.selectedIndex === 4){
+                                    <app-bank-details #Bank [supplierId]="supplierId" (nextTabEmit)="gotoNextTab()"
+                                        (tabValidCheckEmit)="getScreenCompleteDetails()"
+                                        (SaveDraftFlag)="getSaveDraftFlag($event)"
+                                        (dialogResult)="handleDialogResult($event)"></app-bank-details>
+                                    }
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'bankDetails')">Previous</button>
+                                        
+                                        <button [disabled]="SaveDraftFlag == false || disableStatusBased == false"
+                                            mat-stroked-button  (click)="saveBankDetails()">
+                                            Save as Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveBankDetails(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Category and Scope Management</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent">
+                                    <div class="previewBox">
+                                        @if (tabGroup.selectedIndex === 5) {
+                                        <app-category-scope-management #childCategoryScope (nextTabEmit)="gotoNextTab()"
+                                            (dialogResult)="handleDialogResult($event)" [supplierId]="supplierId"
+                                            (tabValidCheckEmit)="getScreenCompleteDetails()" [userId]="userId"
+                                            (SaveDraftFlag)="getSaveDraftFlag($event)"
+                                            (disableSaveCategoryEmit)="disableOrEnableCategorySave($event)">
+                                        </app-category-scope-management>
+                                        }
+                                    </div>
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'categoryAndScope')">Previous</button>
+                                        
+                                        <button mat-stroked-button 
+                                            [disabled]="SaveDraftFlag === false || disableStatusBased == false"
+                                            (click)="saveCategoryAndScope()">Save
+                                            as Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveCategoryAndScope(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">PQ Questionnaire</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent">
+                                    @if (tabGroup.selectedIndex === 6) {
+                                    <app-pq-questionnaries #pqquestionaries [supplierId]="supplierId"
+                                        (nextTabEmit)="gotoNextTab()" (tabValidCheckEmit)="getScreenCompleteDetails()"
+                                        (dialogResult)="handleDialogResult($event)"></app-pq-questionnaries>
+                                    }
+                                </div>
+                                <footer>
+                                    <div>
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'pqquestionaries')">Previous</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false" mat-stroked-button
+                                             (click)="savePQquestionnaries()">Save
+                                            as Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="savePQquestionnaries(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2" [disabled]="disableComplianceTab">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Compliance 
+                                        </div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent previewBox">
+                                    @if (tabGroup.selectedIndex === 7) {
+                                    <app-reg-activities-certificate (tabValidCheckEmit)="getScreenCompleteDetails()"
+                                        (dialogResult)="handleDialogResult($event)" (nextTabEmit)="gotoNextTab()"
+                                        (SaveDraftFlag)="getSaveDraftFlag($event)" [userId]="userId"
+                                        [supplierId]="supplierId"></app-reg-activities-certificate>
+                                    }
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goToPreviousRegActivitities()">Previous</button>
+                                        
+                                        <button mat-stroked-button 
+                                            [disabled]="SaveDraftFlag == false || disableStatusBased == false"
+                                            (click)="saveRegActivitities()">Save
+                                            as
+                                            Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveRegActivitities(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Attachment</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent previewBox">
+                                    @if (tabGroup.selectedIndex === 8) {
+                                    <app-supplier-attachment #attachment (dialogResult)="handleDialogResult($event)"
+                                        [supplierId]="supplierId" (nextTabEmit)="gotoNextTab()"
+                                        (tabValidCheckEmit)="getScreenCompleteDetails()" [userId]="userId"
+                                        (disableSaveAttachEmit)="disableOrEnableAttachSave($event)"></app-supplier-attachment>
+                                    }
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'attachment')">Previous</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false" mat-stroked-button
+                                             (click)="saveAttachments()">Save as
+                                            Draft</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveAttachments(true)">Next</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Application Preview</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div>
+                                    @if (loggedDetails?.userType === 1) {
+                                    @if (tabGroup.selectedIndex === 0) {
+                                    <app-supplier-form-preview [supplierId]="supplierId"></app-supplier-form-preview>
+                                    }
+                                    } @else {
+                                    @if (tabGroup.selectedIndex === 9) {
+                                    <app-supplier-form-preview [supplierId]="supplierId"></app-supplier-form-preview>
+                                    }
+                                    }
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        @if (loggedDetails?.userType === 1) {
+                                        @if (tabGroup.selectedIndex === 0) {
+
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="tabGroup.selectedIndex=1">Next</button>
+
+                                        }}@else {
+                                        @if (tabGroup.selectedIndex === 9) {
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="tabGroup.selectedIndex=8">Previous</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="tabGroup.selectedIndex=10">Next</button>
+                                        }}
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                            <!-- <mat-tab *ngIf="loggedDetails.roleId === 5">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Pre-Qualification Assessment</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent previewBox">
+                                    @if (tabGroup.selectedIndex === 1) {
+                                    <app-pq-assesment-list #pqattachment (dialogResult)="handleDialogResult($event)"
+                                        [supplierId]="supplierId" (nextTabEmit)="gotoNextTab()"></app-pq-assesment-list>
+                                    }
+                                </div>
+                                <footer>
+                                    <div class="mt-2">
+                                        <div>
+                                            <button  
+                                                (click)="goto(false, 'pqattachment')">Previous</button>
+                                            
+                                            <button mat-stroked-button >Save as Draft</button>
+                                            
+                                            <button  
+                                                (click)="initiateApproval()">Initiate Approval
+                                            </button>
+                                        </div>
+                                        <div class="mt-2 justify-content-end">
+                                            <div>
+                                                <button  
+                                                    (click)="seekClarification()">Seek Clarifications</button>
+                                                
+                                                <button  >Engagements</button>
+                                                
+                                                <button  
+                                                    (click)="supplierManualMap()">Map ERP Supplier</button>
+                                                
+                                                <button  
+                                                    (click)="supplierAssignEntity()">Assign Entity</button>
+                                                
+                                                <button  >Notify Supplier </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </footer>
+                            </mat-tab> -->
+                            <mat-tab *ngIf="loggedDetails?.userType === 2">
+                                <ng-template mat-tab-label>
+                                    <div class="d-flex justify-content-start align-items-center col">
+                                        <div class="col">Declaration</div>
+                                        <span class="material-icons-outlined">arrow_right</span>
+                                    </div>
+                                </ng-template>
+                                <div class="tabContent">
+                                    @if (tabGroup.selectedIndex === 10){
+                                    <app-final-submission #final [supplierId]="supplierId"
+                                        (dialogResult)="handleDialogResult($event)"></app-final-submission>
+                                    }
+                                </div>
+
+                                <footer>
+                                    <div class="mt-2">
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="goto(false, 'final')">Previous</button>
+                                        
+                                        <button [disabled]="disableStatusBased == false"  
+                                            (click)="saveFinalSubmission()">Submit</button>
+                                    </div>
+                                </footer>
+                            </mat-tab>
+                        </mat-tab-group>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    <!-- This is Buyer User login TAB details-->
+    @if(loggedDetails?.userType === 1 || id){
+    <div class="container-fluid mt--5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 card-wrapper">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="mb-0 fw-medium">Supplier Pre-Qualification Details </div>
+                    </div>
+                    <!--  class="normalTab"-->
+                    <div class="card-body p-0">
+                        <div class="pq-buyer">
+                            <mat-tab-group class="horizontalTab" #tabGroup style="background-color: #fff;"
+                                (selectedTabChange)="tabClick($event)">
+                                <mat-tab>
+                                    <ng-template mat-tab-label>
+                                        <div class="d-flex justify-content-start align-items-center col">
+                                            <div class="col">Application Preview</div>
+                                            <!-- <span class="material-icons-outlined">arrow_right</span> -->
+                                        </div>
+                                    </ng-template>
+                                    <div>
+                                        <app-supplier-form-preview
+                                            [supplierId]="supplierId"></app-supplier-form-preview>
+                                    </div>
+                                    <div class="footer-action-btn">
+                                        <div class="middle-spacer"></div>
+                                        <button   class="btn-gray"
+                                            (click)="tabGroup.selectedIndex=1">Next<i
+                                                class="fa fa-chevron-circle-right ps-2"></i></button>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab>
+                                    <ng-template mat-tab-label>
+                                        <div class="d-flex justify-content-start align-items-center col">
+                                            <div class="col">Pre-Qualification Assessment</div>
+                                            <span class="material-icons-outlined">arrow_right</span>
+                                        </div>
+                                    </ng-template>
+                                    <div class="tabContent previewBox" style="padding: 5px 10px; ">
+                                        @if (tabGroup.selectedIndex === 1) {
+                                        <app-pq-assesment-list #pqattachment (dialogResult)="handleDialogResult($event)"
+                                            [supplierId]="supplierId"
+                                            (nextTabEmit)="gotoNextTab()"></app-pq-assesment-list>
+                                        }
+                                    </div>
+                                    <div class="footer-action-btn">
+                                        <button   class="btn-gray"
+                                            *ngIf="loggedDetails?.userType === 1" (click)="previousAlert()"><i
+                                                class="fa fa-chevron-circle-left pe-2"></i>Previous</button>
+                                        <div *ngIf="loggedDetails?.userType === 1">
+                                            <button  *ngIf="statusData !== 'Request for Information'"
+                                                [disabled]="workFlowHistory?.length !== 0" 
+                                                class="btn-blue" (click)="initiateApproval()"><i
+                                                    class="fa fa-check pe-2" aria-hidden="true"></i>Initiate Approval
+                                            </button>
+                                        </div>
+                                        <div *ngIf="loggedDetails?.userType === 1">
+                                            <button  *ngIf="statusData === 'Request for Information'"
+                                                 (click)="initiateApproval()"><i class="fa fa-check pe-2"
+                                                    aria-hidden="true"></i>Initiate Approval
+                                            </button>
+                                        </div>
+                                        <div class="middle-spacer"></div>
+                                        <div *ngIf="loggedDetails?.userType === 1">
+                                            <button mat-stroked-button  class="btn-blue"
+                                                *ngIf="statusData !== 'Request for Information'"
+                                                (click)="SavePQAssesment()" [disabled]="statusData === 'Reject'"><i
+                                                    class="fa-floppy-o pe-2"></i>Save as Draft</button>
+                                        </div>
+                                        <div *ngIf="loggedDetails?.userType === 1">
+                                            <button mat-stroked-button  class="btn-blue"
+                                                *ngIf="statusData === 'Request for Information'"
+                                                (click)="SavePQAssesment()"><i class="fa-floppy-o pe-2"></i>Save as
+                                                Draft</button>
+                                        </div>
+                                        <button  [disabled]="statusData === 'Reject'" *ngIf="loggedDetails?.userType === 1"
+                                                     (click)="seekClarification()">Seek
+                                                    Clarifications</button>
+                                                
+                                                <button   disabled>Engagements</button>
+                                                
+                                                <span *ngIf="statusData !== 'Request for Information' && loggedDetails?.userType === 1">
+                                                    <button *ngIf="statusData === 'Qualified'"
+                                                        [disabled]="workFlowHistory?.length === 0" 
+                                                         (click)="supplierManualMap()">Map ERP
+                                                        Supplier</button>
+                                                    <button *ngIf="statusData !== 'Qualified' && loggedDetails?.userType === 1"
+                                                        [disabled]="statusData !== 'Qualified'" 
+                                                         (click)="supplierManualMap()">Map ERP
+                                                        Supplier</button>
+                                                </span>
+                                                <button *ngIf="statusData === 'Request for Information' && loggedDetails?.userType === 1" 
+                                                     (click)="supplierManualMap()">Map ERP
+                                                    Supplier</button>
+
+                                                
+                                                <span *ngIf="statusData !== 'Request for Information' && loggedDetails?.userType === 1">
+                                                    <button *ngIf="statusData === 'Qualified'"
+                                                        [disabled]="childPQAttachmentmapErp?.length === 0"
+                                                         
+                                                        (click)="supplierAssignEntity()">Assign Entity</button>
+                                                    <button *ngIf="statusData !== 'Qualified' && loggedDetails?.userType === 1"
+                                                        [disabled]="statusData !== 'Qualified'" 
+                                                         (click)="supplierAssignEntity()">Assign
+                                                        Entity</button>
+                                                </span>
+                                                <button *ngIf="statusData === 'Request for Information' && loggedDetails?.userType === 1" 
+                                                     (click)="supplierAssignEntity()">Assign
+                                                    Entity</button>
+                                                
+                                                <span *ngIf="statusData !== 'Request for Information' && loggedDetails?.userType === 1">
+                                                    <button  *ngIf="statusData === 'Qualified'"
+                                                        [disabled]="notifiySupplier === true" 
+                                                        (click)="notifySupplier()">Notify Supplier
+                                                    </button>
+                                                    <button  *ngIf="statusData !== 'Qualified' && loggedDetails?.userType === 1"
+                                                        [disabled]="statusData !== 'Qualified'" 
+                                                        (click)="notifySupplier()">Notify Supplier
+                                                    </button>
+                                                </span>
+                                                <button  *ngIf="statusData === 'Request for Information' && loggedDetails?.userType === 1"
+                                                     (click)="notifySupplier()">Notify Supplier
+                                                </button>
+                                    </div>
+
+
+
+                                    <!-- ---------------------------   user type 4 --------------------------- -->
+                                    <div class="footer-action-btn">
+                                        <button  disabled  class="btn-blue"
+                                            *ngIf="loggedDetails?.userType === 1" (click)="seekClarification()"><i
+                                                class="fa fa-search-plus pe-2" aria-hidden="true"></i>Seek
+                                            Clarifications</button>
+                                        <button  disabled  class="btn-blue"
+                                            *ngIf="loggedDetails?.userType === 1" (click)="notifySupplier()"><i
+                                                class="fa fa-bell pe-2" aria-hidden="true"></i>Notify Supplier </button>
+                                        <div class="middle-spacer"> </div>
+                                        <button  disabled  class="btn-blue"
+                                            *ngIf="loggedDetails?.userType === 1" disabled><i
+                                                class="fa fa-handshake-o pe-2" aria-hidden="true"></i>
+                                            Engagements</button>
+                                        
+                                        <button disabled   class="btn-blue"
+                                            *ngIf="loggedDetails?.userType === 1" (click)="supplierManualMap()"><i
+                                                class="fa fa-street-view pe-2" aria-hidden="true"></i> Map ERP
+                                            Supplier</button>
+                                        
+                                        <button disabled   class="btn-blue"
+                                            *ngIf="loggedDetails?.userType === 1" (click)="supplierAssignEntity()"><i
+                                                class="fa fa-check pe-2" aria-hidden="true"></i> Assign Entity</button>
+                                        
+                                        <button  disabled  class="btn-gray" *ngIf="loggedDetails?.userType === 1"
+                                                (click)="previousAlert()"><i
+                                                    class="fa fa-chevron-circle-left pe-2"></i>Previous</button>
+                                            <button  disabled  class="btn-blue"  *ngIf="loggedDetails?.userType === 1"
+                                                (click)="initiateApproval()"><i class="fa fa-check pe-2"
+                                                    aria-hidden="true"></i>Initiate Approval
+                                            </button>
+                                            <div class="middle-spacer"></div>
+                                            <button   class="btn-blue" *ngIf="loggedDetails?.userType === 1"
+                                                (click)="approval('3')"><i class="fa fa-check pe-2"
+                                                    aria-hidden="true"></i>Approve</button>
+                                            <button   class="btn-blue" *ngIf="loggedDetails?.userType === 1"
+                                                (click)="reject('4')"><i class="fa fa-times pe-2"
+                                                    aria-hidden="true"></i>Reject</button>
+                                            <button   class="btn-blue" *ngIf="loggedDetails?.userType === 1"
+                                                (click)="request('2')"><i class="fa fa-times pe-2"
+                                                    aria-hidden="true"></i>Request
+                                                for
+                                                Information</button>
+
+                                            <button mat-stroked-button disabled  class="btn-blue" *ngIf="loggedDetails?.userType === 1"
+                                                (click)="SavePQAssesment()"><i class="fa-floppy-o pe-2"></i>Save as
+                                                Draft</button>
+                                    </div>
+                                </mat-tab>
+                            </mat-tab-group>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

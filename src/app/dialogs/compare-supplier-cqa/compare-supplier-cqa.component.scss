@@ -1,0 +1,79 @@
+@import "../../../--theme-variables.scss";
+.p5w {
+    width: 5%;
+    text-align: center;
+}
+.p15w {
+    width: 20%;
+}
+.p15w {
+    width: 20%;
+}
+.p65w {
+    width: 55%;
+}
+
+table, th, td {
+    border: 1px solid $PlatinumGray;
+    border-collapse: collapse;
+    min-width: 120px;
+  }
+/* cqaTable.com */
+.carousel-inner {
+    table{
+        display: table;
+        width: 100%;
+        border-spacing: 0;
+      
+        th, td {
+            min-width: 120px;
+            padding: 0px;
+        }
+    }
+}
+.award-strategy {
+    table{
+        display: table;
+        width: 100%;
+        border-spacing: 0;
+      
+        th{
+            min-width: 120px;
+            padding: 5px;
+        }
+         td {
+            min-width: 120px;
+            padding:0 5px;
+        }
+    }
+}
+
+.carousel-control-next, .carousel-control-prev {
+    height: 25px;
+    width: 25px;
+    top:-25px
+}
+
+p {
+   line-height: 25px !important;
+    margin-bottom: 0;
+    padding-left: 5px;
+    padding-right: 10px;
+    border-bottom: 1px solid $PlatinumGray;
+    &:nth-child(even){
+        background: $pnt5Gray;
+        
+    }
+}
+
+.bg-table-color {
+    background: $PlatinumGray;
+}
+
+a {
+    color: $pzenBlue !important;
+    text-decoration: underline !important;
+    &:hover {
+        cursor: pointer;
+    }
+}

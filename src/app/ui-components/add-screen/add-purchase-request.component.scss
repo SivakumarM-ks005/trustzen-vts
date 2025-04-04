@@ -1,0 +1,25 @@
+.mxW-150 {
+    width: 150px !important;
+}
+
+.mxW-120 {
+    width: 120px !important;
+}
+
+.mxW-100 {
+    width: 100px !important;
+}
+.mxW-180 {
+    width: 180px !important;
+    display: inline-block;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.grid-25-55-18 {
+    display: grid;
+    grid-template-columns: 25% 55% 18%;
+    gap:10px;
+}

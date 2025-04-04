@@ -1,0 +1,31 @@
+<div class="content-box p-0">
+    <div class="content-body-box height-auto">
+        <div class="widget-box mt-2">
+            <h5 class="widget-title Xpt-4 Xpb-4 Xd-flex Xjustify-content-between">
+                Invoice Status
+            </h5>
+            <div class="widget-content"> 
+
+
+                <div class="mt-2">
+                                    
+                    <ag-grid-angular [theme]="theme" [columnDefs]="colDefs" [defaultColDef]="defaultColDef"
+                    [pagination]="pagination" [paginationPageSize]="paginationPageSize"   
+                    [paginationPageSizeSelector]="paginationPageSizeSelector" [rowData]="rowData"/>
+
+                  </div> 
+            </div>
+        </div> 
+    </div>
+    <div class="footer-cta-btn">
+        <div class="cta-leftside-btn">
+            <button   class="btn-gray" matTooltip="Go Next">
+                <i class="fa fa-chevron-circle-left pe-2"></i>Previous</button>
+        </div>
+        <div class="cta-rightside-btn">           
+            <button   class="btn-gray" matTooltip="Go Next">Next
+                <i class="fa fa-chevron-circle-right ps-2"></i></button> 
+        </div>
+    </div>
+</div>  
+ 

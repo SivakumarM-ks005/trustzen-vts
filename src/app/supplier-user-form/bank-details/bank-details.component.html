@@ -1,0 +1,665 @@
+<div [formGroup]="BankForm" #target class="me-2">
+
+  <div class="widget-box">
+    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+      Supplier Bank Information <span *ngIf="NextButtonValidation()"></span>
+      <div class="w-25 justify-content-end text-right d-flex">
+        <button [disabled]="disableStatusBased == false" *ngIf="ClearValues()" class="header-level-btn-gray me-2"
+          (click)="resetForm()"><i class="fa fa-refresh pe-2"></i>Clear</button> &nbsp;
+        <!-- <button [disabled]="disableStatusBased == false" class="header-level-btn-blue" matTooltip="Save Bank details"
+          (click)="AddUpdateBank()"><i class="fa fa-floppy-o pe-2"></i>{{editFlag == true ? 'Update' :
+          'Save'}}</button> -->
+      </div>
+    </h5>
+    <div class="widget-content">
+      <div class="grid-5cols">
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !BankForm.get('bankName')?.hasError('required')){
+            Bank Name
+            }
+            @if(isSubmitted && BankForm.get('bankName')?.hasError('required')){
+            <span class="error-msg">Bank Name is required.</span>
+            }
+          </mat-label>
+          <input matInput matTooltip="Enter the bank name" formControlName="bankName" required
+            (change)="enableBankButton()">
+          <!-- <mat-error *ngIf="BankForm.get('bankName')?.hasError('required')">
+            BankName is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !BankForm.get('branch')?.hasError('required')){
+            Branch
+            }
+            @if(isSubmitted && BankForm.get('branch')?.hasError('required')){
+            <span class="error-msg">
+              Branch is required.
+            </span>
+            }
+          </mat-label>
+          <input matInput matTooltip="Enter the branch" formControlName="branch" required (change)="enableBankButton()">
+          <!-- <mat-error *ngIf="BankForm.get('branch')?.hasError('required')">
+            Branch is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !BankForm.get('currencyId')?.hasError('required')){
+            Currency
+            }
+            @if(isSubmitted && BankForm.get('currencyId')?.hasError('required')){
+            <span class="error-msg">
+              Currency Name is required.
+            </span>
+            }
+          </mat-label>
+          <mat-select formControlName="currencyId" matTooltip="Select Currency" (selectionChange)="enableBankButton()">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let currency of BankCurrencyList" [value]="currency.currencyId">
+              {{ currency.currencyName }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="BankForm.get('currencyId')?.hasError('required')">
+            CurrencyName is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !BankForm.get('countryId')?.hasError('required')){
+            Country
+            }
+            @if(isSubmitted && BankForm.get('countryId')?.hasError('required')){
+            <span class="error-msg">Country Name is required.</span>
+            }
+          </mat-label>
+          <mat-select formControlName="countryId"
+            (selectionChange)="getStates(BankForm.get('countryId')?.value ); enableBankButton()"
+            matTooltip="Select Country">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let country of BankCountryList" [value]="country.countryId">
+              {{ country.countryName }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="BankForm.get('countryId')?.hasError('required')">
+            CountryName is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !BankForm.get('stateId')?.hasError('required')){
+            State
+            }
+            @if(isSubmitted && BankForm.get('stateId')?.hasError('required')){
+            <span class="error-msg">State Name is required.</span>
+            }
+          </mat-label>
+          <mat-select formControlName="stateId"
+            (selectionChange)="getCities(BankForm.get('stateId')?.value); enableBankButton()" matTooltip="Select State">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let state of BankStateList" [value]="state.stateId">
+              {{ state.stateName }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="BankForm.get('stateId')?.hasError('required')">
+            StateName is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !BankForm.get('cityId')?.hasError('required')){
+            City
+            }
+            @if(isSubmitted && BankForm.get('cityId')?.hasError('required')){
+            <span class="error-msg">City is required.</span>
+            }
+          </mat-label>
+          <mat-select formControlName="cityId" matTooltip="Select City" (selectionChange)="enableBankButton()">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let city of BankCityList" [value]="city.cityId">
+              {{ city.cityName }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="BankForm.get('cityId')?.hasError('required')">
+            City is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!AccManantory || !BankForm.get('accountNumber')?.hasError('maxlength') &&
+            !BankForm.get('accountNumber')?.hasError('minlength')){
+            Account Number
+            }
+            @if(BankForm.get('accountNumber')?.touched && BankForm.get('accountNumber')?.hasError('required')){
+            <span class="error-msg">
+              is required.
+            </span>
+            }
+            @if(AccManantory && BankForm.get('accountNumber')?.hasError('minlength')){
+            <span class="error-msg">
+              Min {{ AccNoMinchar }} char Required
+            </span>
+            }
+            @if(AccManantory && BankForm.get('accountNumber')?.hasError('maxlength')){
+            <span class="error-msg">
+              max {{ AccNomaxChar }} char Required
+            </span>
+            }
+          </mat-label>
+          <input matInput matTooltip="Enter the account number" style="text-align: right;"
+            formControlName="accountNumber" (keypress)="allowOnlyNumbers($event)" [minlength]="AccNoMinchar"
+            [maxlength]="AccNomaxChar" [required]="AccManantory? true : false" (change)="enableBankButton()" />
+        </mat-form-field>
+        <mat-form-field class="col">
+          <!-- <mat-label>Swift Code / BIC</mat-label> -->
+          <mat-label>
+            @if(!SwiftManantory || !BankForm.get('swiftCodeBIC')?.hasError('minlength') &&
+            !BankForm.get('swiftCodeBIC')?.hasError('maxlength')){
+            <span>Swift Code / BIC</span>
+            }
+            @if(BankForm.get('swiftCodeBIC')?.touched && BankForm.get('swiftCodeBIC')?.hasError('required')){
+            <span class="error-msg">
+              is required.
+            </span>
+            }
+            @if(SwiftManantory && BankForm.get('swiftCodeBIC')?.hasError('minlength')){
+            <span class="error-msg">
+              Min {{ SwiftminChar }} char Required
+            </span>
+            }
+            @if(SwiftManantory && BankForm.get('swiftCodeBIC')?.hasError('maxlength')){
+            <span class="error-msg">
+              max {{ SwiftmaxChar }} char Required
+            </span>
+            }
+          </mat-label>
+          <input matInput formControlName="swiftCodeBIC" [required]="SwiftManantory? true : false"
+            matTooltip="Enter the swift code / BIC" [minlength]="SwiftminChar" [maxlength]="SwiftmaxChar" />
+        </mat-form-field>
+        <mat-form-field class="col">
+          <!-- <mat-label>IBAN</mat-label> -->
+          <mat-label>
+            @if(!IbanManantory || !BankForm.get('iban')?.hasError('minlength') &&
+            !BankForm.get('iban')?.hasError('maxlength')){
+            <span>IBAN</span>
+            }
+            @if(BankForm.get('iban')?.touched && BankForm.get('iban')?.hasError('required')){
+            <span class="error-msg">
+              is required.
+            </span>
+            }
+            @if(IbanManantory && BankForm.get('iban')?.hasError('minlength')){
+            <span class="error-msg">
+              Min {{ IbanminChar }} char Required
+            </span>
+            }
+            @if(IbanManantory && BankForm.get('iban')?.hasError('maxlength')){
+            <span class="error-msg">
+              max {{ IbanmaxChar }} char Required
+            </span>
+            }
+          </mat-label>
+          <input matInput matTooltip="Enter the IBAN" [required]="IbanManantory? true : false" formControlName="iban"
+            [minlength]="IbanminChar" [maxlength]="IbanmaxChar" (change)="enableBankButton()" />
+        </mat-form-field>
+        <mat-form-field class="col">
+          <!-- <mat-label>BSB</mat-label> -->
+          <mat-label>
+            @if(!BsbManantory || !BankForm.get('bsb')?.hasError('minlength') &&
+            !BankForm.get('bsb')?.hasError('maxlength')){
+            <span>BSB</span>
+            }
+            @if(BankForm.get('bsb')?.touched && BankForm.get('bsb')?.hasError('required')){
+            <span class="error-msg">
+              is required.
+            </span>
+            }
+            @if(BsbManantory && BankForm.get('bsb')?.hasError('minlength')){
+            <span class="error-msg">
+              Min {{ BsbminChar }} char Required
+            </span>
+            }
+            @if(BsbManantory && BankForm.get('bsb')?.hasError('maxlength')){
+            <span class="error-msg">
+              max {{ BsbmaxChar }} char Required
+            </span>
+            }
+          </mat-label>
+          <input matInput matTooltip="Enter the BSB" [required]="BsbManantory? true : false" formControlName="bsb"
+            [minlength]="BsbminChar" [maxlength]="BsbmaxChar" />
+        </mat-form-field>
+        <mat-form-field class="col">
+          <!-- <mat-label>Routing</mat-label> -->
+          <mat-label>
+            @if(!RouteManantory || !BankForm.get('routing')?.hasError('minlength') &&
+            !BankForm.get('routing')?.hasError('maxlength')){
+            <span>Routing</span>
+            }
+            @if(BankForm.get('routing')?.touched && BankForm.get('routing')?.hasError('required')){
+            <span class="error-msg">
+              is required.
+            </span>
+            }
+            @if(RouteManantory && BankForm.get('routing')?.hasError('minlength')){
+            <span class="error-msg">
+              Min {{ RouteminChar }} char Required
+            </span>
+            }
+            @if(RouteManantory && BankForm.get('routing')?.hasError('maxlength')){
+            <span class="error-msg">
+              max {{ RoutemaxChar }} char Required
+            </span>
+            }
+          </mat-label>
+          <input matInput matTooltip="Enter the Routing" [required]="RouteManantory? true : false"
+            formControlName="routing" [minlength]="RouteminChar" [maxlength]="RoutemaxChar" />
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>IFSC Code</mat-label>
+          <input matInput matTooltip="Enter the IFSC code" formControlName="ifscCode">
+        </mat-form-field>
+        <mat-checkbox  class="col mt-3" (click)="checkbank()" formControlName="defaultBank">Default&nbsp;Bank</mat-checkbox>
+        <mat-checkbox  class="mt-3 col" formControlName="correspondentBank"
+          (change)="checkCorBan($event)">Correspondent&nbsp;Bank</mat-checkbox>
+      </div>
+    </div>
+    @if(BankForm.get('correspondentBank')?.value){
+
+    <div class="widget-box mt-2 border-1-0-0-0 ">
+      <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+        Correspondent Bank
+      </h5>
+      <div class="widget-content">
+        <div class="grid-5cols" formGroupName="correspondentBankObject">
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!isSubmitted || !BankForm.get('correspondentBankObject')?.get('bankName')?.hasError('required')){
+              Bank Name
+              }
+              @if(isSubmitted && BankForm.get('correspondentBankObject')?.get('bankName')?.hasError('required')){
+              <span class="error-msg">
+                Bank Name is required.
+              </span>
+              }
+            </mat-label>
+            <input matInput matTooltip="Enter the bank name" formControlName="bankName" required>
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('bankName')?.hasError('required')">
+                    BankName is required.
+                  </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!isSubmitted || !BankForm.get('correspondentBankObject')?.get('branch')?.hasError('required')){
+              Branch
+              }
+              @if(isSubmitted && BankForm.get('correspondentBankObject')?.get('branch')?.hasError('required')){
+              <span class="error-msg">
+                Branch is required.
+              </span>
+              }
+            </mat-label>
+            <input matInput matTooltip="Enter the branch" formControlName="branch" required>
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('branch')?.hasError('required')">
+                    Branch is required.
+                  </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!isSubmitted || !BankForm.get('correspondentBankObject')?.get('currencyId')?.hasError('required')){
+              Currency
+              }
+              @if(isSubmitted && BankForm.get('correspondentBankObject')?.get('currencyId')?.hasError('required')){
+              <span class="error-msg">
+                Currency Name is required.
+              </span>
+              }
+            </mat-label>
+            <mat-select formControlName="currencyId" matTooltip="Select Currency">
+              <mat-option value="">-- Please Select --</mat-option>
+              <mat-option *ngFor="let currency of BankCurrencyListForCorrespondanceBank" [value]="currency.currencyId">
+                {{ currency.currencyName }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('currencyId')?.hasError('required')">
+                    CurrencyName is required.
+                  </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!isSubmitted || !BankForm.get('correspondentBankObject')?.get('countryId')?.hasError('required')){
+              Country
+              }
+              @if(isSubmitted && BankForm.get('correspondentBankObject')?.get('countryId')?.hasError('required')){
+              <span class="error-msg">
+                Country Name is required.
+              </span>
+              }
+            </mat-label>
+            <mat-select formControlName="countryId"
+              (selectionChange)="getStatesForCorrespondanceBank(BankForm.get('correspondentBankObject')?.get('countryId')?.value)"
+              matTooltip="Select Country">
+              <mat-option value="">-- Please Select --</mat-option>
+              <mat-option *ngFor="let country of BankCountryListForCorrespondanceBank" [value]="country.countryId">
+                {{ country.countryName }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('countryId')?.hasError('required')">
+                    CountryName is required.
+                  </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!isSubmitted || !BankForm.get('correspondentBankObject')?.get('stateId')?.hasError('required')){
+              State
+              }
+              @if(isSubmitted && BankForm.get('correspondentBankObject')?.get('stateId')?.hasError('required')){
+              <span class="error-msg">
+                State Name is required.
+              </span>
+              }
+            </mat-label>
+            <mat-select formControlName="stateId"
+              (selectionChange)="getCitiesForCorrespondanceBank(BankForm.get('correspondentBankObject')?.get('stateId')?.value)"
+              matTooltip="Select State">
+              <mat-option value="">-- Please Select --</mat-option>
+              <mat-option *ngFor="let state of BankStateListForCorrespondanceBank" [value]="state.stateId">
+                {{ state.stateName }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('stateId')?.hasError('required')">
+                    StateName is required.
+                  </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!isSubmitted || !BankForm.get('correspondentBankObject')?.get('cityId')?.hasError('required')){
+              City
+              }
+              @if(isSubmitted && BankForm.get('correspondentBankObject')?.get('cityId')?.hasError('required')){
+              <span class="error-msg">
+                City is required.
+              </span>
+              }
+            </mat-label>
+            <mat-select formControlName="cityId" matTooltip="Select City">
+              <mat-option value="">-- Please Select --</mat-option>
+              <mat-option *ngFor="let city of BankCityListForCorrespondanceBank" [value]="city.cityId">
+                {{ city.cityName }}
+              </mat-option>
+            </mat-select>
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('cityId')?.hasError('required')">
+                    City is required.
+                  </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!AccManantory || !BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('maxlength')
+              &&
+              !BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('minlength')){
+              Account Number
+              }
+              @if( BankForm.get('correspondentBankObject')?.get('accountNumber')?.touched &&
+              BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('required')){
+              <span class="error-msg">
+                is required.
+              </span>
+              }
+              @if(AccManantory && BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('minlength')){
+              <span class="error-msg">
+                Min {{ AccNoMinchar }} char Required
+              </span>
+              }
+              @if(AccManantory && BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('maxlength')){
+              <span class="error-msg">
+                max {{ AccNomaxChar }} char Required
+              </span>
+              }
+            </mat-label>
+            <input matInput matTooltip="Enter the account number" [required]="AccManantory? true : false"
+              style="text-align: right;" formControlName="accountNumber" (keypress)="allowOnlyNumbers($event)"
+              [minlength]="AccNoMinchar" [maxlength]="AccNomaxChar" />
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('required')">
+                                  Account Number is required.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('minlength')">
+                                  At least {{ AccNoMinchar }} characters.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('accountNumber')?.hasError('maxlength')">
+                                  At most {{ AccNomaxChar }} characters.
+                                </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!SwiftManantory ||
+              !BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('minlength') &&
+              !BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('maxlength')){
+              <span>Swift Code / BIC</span>
+              }
+              @if(BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.touched &&
+              BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('required')){
+              <span class="error-msg">
+                is required.
+              </span>
+              }
+              @if(SwiftManantory &&
+              BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('minlength')){
+              <span class="error-msg">
+                Min {{ SwiftminChar }} char Required
+              </span>
+              }
+              @if(SwiftManantory &&
+              BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('maxlength')){
+              <span class="error-msg">
+                max {{ SwiftmaxChar }} char Required
+              </span>
+              }
+            </mat-label>
+            <input matInput formControlName="swiftCodeBIC" [required]="SwiftManantory? true : false"
+              matTooltip="Enter the swift code / BIC" [minlength]="SwiftminChar" [maxlength]="SwiftmaxChar" />
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('required')">
+                                  Swift Code / BIC is required.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('minlength')">
+                                  At least {{ SwiftminChar }} characters.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('swiftCodeBIC')?.hasError('maxlength')">
+                                  At most {{ SwiftmaxChar }} characters.
+                                </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!IbanManantory || !BankForm.get('correspondentBankObject')?.get('iban')?.hasError('minlength') &&
+              !BankForm.get('correspondentBankObject')?.get('iban')?.hasError('maxlength')){
+              <span>IBAN</span>
+              }
+              @if( BankForm.get('correspondentBankObject')?.get('iban')?.touched &&
+              BankForm.get('correspondentBankObject')?.get('iban')?.hasError('required')){
+              <span class="error-msg">
+                is required.
+              </span>
+              }
+              @if(IbanManantory && BankForm.get('correspondentBankObject')?.get('iban')?.hasError('minlength')){
+              <span class="error-msg">
+                Min {{ IbanminChar }} char Required
+              </span>
+              }
+              @if(IbanManantory && BankForm.get('correspondentBankObject')?.get('iban')?.hasError('maxlength')){
+              <span class="error-msg">
+                max {{ IbanmaxChar }} char Required
+              </span>
+              }
+            </mat-label>
+            <input matInput matTooltip="Enter the IBAN" [required]="IbanManantory? true : false"
+              formControlName="iban" [minlength]="IbanminChar" [maxlength]="IbanmaxChar" />
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('iban')?.hasError('required')">
+                                  IBAN is required.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('iban')?.hasError('minlength')">
+                                  At least {{ IbanminChar }} characters.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('iban')?.hasError('maxlength')">
+                                  At most {{ IbanmaxChar }} characters.
+                                </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!BsbManantory || !BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('minlength') &&
+              !BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('maxlength')){
+              <span>BSB</span>
+              }
+              @if(BankForm.get('correspondentBankObject')?.get('bsb')?.touched &&
+              BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('required')){
+              <span class="error-msg">
+                is required.
+              </span>
+              }
+              @if(BsbManantory && BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('minlength')){
+              <span class="error-msg">
+                Min {{ BsbminChar }} char Required
+              </span>
+              }
+              @if(BsbManantory && BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('maxlength')){
+              <span class="error-msg">
+                max {{ BsbmaxChar }} char Required
+              </span>
+              }
+            </mat-label>
+            <input matInput matTooltip="Enter the BSB" [required]="BsbManantory? true : false" formControlName="bsb"
+              [minlength]="BsbminChar" [maxlength]="BsbmaxChar" />
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('required')">
+                                  BSB is required.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('minlength')">
+                                  At least {{ BsbminChar }} characters.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('bsb')?.hasError('maxlength')">
+                                  At most {{ BsbmaxChar }} characters.
+                                </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>
+              @if(!RouteManantory || !BankForm.get('correspondentBankObject')?.get('routing')?.hasError('minlength') &&
+              !BankForm.get('correspondentBankObject')?.get('routing')?.hasError('maxlength')){
+              <span>Routing</span>
+              }
+              @if(BankForm.get('correspondentBankObject')?.get('routing')?.touched &&
+              BankForm.get('correspondentBankObject')?.get('routing')?.hasError('required')){
+              <span class="error-msg">
+                is required.
+              </span>
+              }
+              @if(RouteManantory && BankForm.get('correspondentBankObject')?.get('routing')?.hasError('minlength')){
+              <span class="error-msg">
+                Min {{ RouteminChar }} char Required
+              </span>
+              }
+              @if(RouteManantory && BankForm.get('correspondentBankObject')?.get('routing')?.hasError('maxlength')){
+              <span class="error-msg">
+                max {{ RoutemaxChar }} char Required
+              </span>
+              }
+            </mat-label>
+            <input matInput matTooltip="Enter the Routing" [required]="RouteManantory? true : false"
+              formControlName="routing" [minlength]="RouteminChar" [maxlength]="RoutemaxChar" />
+            <!-- <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('routing')?.hasError('required')">
+                                  Routing is required.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('routing')?.hasError('minlength')">
+                                  At least {{ RouteminChar }} characters.
+                                </mat-error>
+                                <mat-error *ngIf="BankForm.get('correspondentBankObject')?.get('routing')?.hasError('maxlength')">
+                                  At most {{ RoutemaxChar }} characters.
+                                </mat-error> -->
+          </mat-form-field>
+          <mat-form-field class="col">
+            <mat-label>IFSC Code</mat-label>
+            <input matInput matTooltip="Enter the IFSC code" formControlName="ifscCode">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    }
+
+  </div>
+  <div class="widget-box">
+    <div class="table-responsive table-col-control">
+      <table class="content-table">
+        <thead>
+          <tr class="thead-light">
+            <th scope="col">Serial #</th>
+            <th scope="col">Default Bank</th>
+            <th scope="col">Correspondent Bank</th>
+            <!-- <th  *ngFor="let bank of bankDetails; let i = index"  >
+                     <span *ngIf="bank.defaultBank">Bank Type</span>
+                     <span *ngIf="bank.correspondentBank">Bank Type</span>
+                    </th> -->
+            <th scope="col">Bank Name</th>
+            <th scope="col">Branch</th>
+            <th scope="col">Country</th>
+            <th scope="col" width="80">Account #</th>
+            <th scope="col" width="80">Bank IBAN</th>
+            <th scope="col" width="60" class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody class="list" *ngFor="let bank of bankDetails; let i = index">
+          <tr>
+            <td> Bank {{i + 1}}</td>
+            <td>
+              <mat-checkbox *ngIf="bank.defaultBank" [checked]="bank.defaultBank" [disabled]="bank.defaultBank">
+              </mat-checkbox>
+              <!-- <span *ngIf="bank.defaultBank" class="badge text-bg-secondary">Default Bank</span> -->
+              <!-- <span *ngIf="bank.correspondentBank" class="badge text-bg-secondary ms-2">Correspondent Bank</span> -->
+            </td>
+            <td></td>
+            <td>{{bank.bankName}}</td>
+            <td>{{bank.branch}}</td>
+            <td>{{bank.country}}</td>
+            <td>{{bank.accountNumber}}</td>
+            <td>{{ bank.iban }}</td>
+            <td>
+              <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === false" mat-button
+                class="btn-small" (click)="EditBank(bank , i, target)" matTooltip="Edit">
+                <i class="fa fa-eye"></i>
+              </button>
+              <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === true" mat-button
+                class="btn-small" (click)="EditBank(bank , i, target)" matTooltip="Edit">
+                <i class="fa fa-edit"></i>
+              </button>
+              <button [disabled]="disableStatusBased === false" *ngIf="bank.defaultBank === false"
+                (click)="deletePopUp(i)" Xclass="btn btn-danger btn-sm smBtn" mat-button class="btn-small"
+                matTooltip="Delete">
+                <i class="fa fa-trash text-danger"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="bank?.correspondentBank">
+            <td></td>
+            <td></td>
+            <td>
+              <mat-checkbox *ngIf="bank.correspondentBank" [checked]="bank.correspondentBank"
+                [disabled]="bank.correspondentBank">
+              </mat-checkbox>
+              <!-- <span *ngIf="bank.correspondentBank" class="badge text-bg-secondary ms-2">Correspondent Bank</span> -->
+            </td>
+            <td>{{bank?.correspondentBankObject?.bankName}}</td>
+            <td>{{bank?.correspondentBankObject?.branch}}</td>
+            <td>{{bank?.correspondentBankObject?.country}}</td>
+            <td>{{bank?.correspondentBankObject?.accountNumber}}</td>
+            <td>{{ bank?.correspondentBankObject?.iban }}</td>
+            <td>
+              <!-- <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small"
+                (click)="EditBank(bank , i, target)" matTooltip="Edit">
+                <i class="fa fa-edit"></i>
+              </button> -->
+              <!-- <button [disabled]="editFlag == true" *ngIf="bank.defaultBank === false"
+                Xclass="btn btn-danger btn-sm smBtn" mat-button class="btn-small" matTooltip="Delete">
+                <i class="fa fa-trash text-danger"></i>
+              </button> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

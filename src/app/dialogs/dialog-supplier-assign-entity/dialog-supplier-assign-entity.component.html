@@ -1,0 +1,122 @@
+<div class="dialog-container">
+    <div mat-dialog-title>
+        <div class="col-lg-11">
+            <h3>{{ "Supplier Entity Assignment" | translate }}</h3>
+        </div>
+        <div class="col-lg-1 text-end">
+            <button mat-icon-button  mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+    </div>
+    <mat-dialog-content>
+
+        <div class="content-box">
+            <div class="content-body-box p-0 ">
+        
+                <div class="widget-box mb-2">
+                    <h5 class="widget-title d-flex justify-content-between align-items-center">Header Details
+                        <!-- <span class="status-list"> Status: <span>Draft</span></span> -->
+                    </h5>
+                    <div class="widget-content"> 
+                        <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
+                            <div class="d-flex flex-row w-100">
+                                <div class="col col-separator">
+                                    <mat-label class="preLabel">Ref #</mat-label>
+                                    <p class="preData">{{SupDetails?.supplierRefNo}}</p>
+                                </div>
+                                <div class="col col-separator">
+                                    <mat-label class="preLabel">Supplier Name</mat-label>
+                                    <p class="preData">{{SupDetails?.supplierName | titlecase}}</p>
+                                </div>
+                                <div class="col col-separator">
+                                    <mat-label class="preLabel">Commercial License #</mat-label>
+                                    <p class="preData">{{SupDetails?.comLicName}}</p>
+                                </div>
+                                @if(SupDetails?.siteId){
+                                    <div class="col col-separator">
+                                        <mat-label class="preLabel">Site ID #</mat-label>
+                                        <p class="preData">{{SupDetails?.siteId}}</p>
+                                    </div>
+                                }
+                                @if(SupDetails?.siteName){
+                                    <div class="col col-separator">
+                                        <mat-label class="preLabel">Site Name</mat-label>
+                                        <p class="preData">{{SupDetails?.siteName}}</p>
+                                    </div>
+                                }
+                                <div class="col col-separator">
+                                    <mat-label class="preLabel">Tax Registration #</mat-label>
+                                    <p class="preData">{{SupDetails?.taxRegistertion}}</p>
+                                </div>
+                                <div class="col col-separator">
+                                    <mat-label class="preLabel">Submitted Date</mat-label>
+                                    <p class="preData">{{SupDetails?.submittedDate | date:'dd-MMM-yy'}}</p>
+                                </div>
+                                <div class="col col-separator">
+                                    <mat-label class="preLabel">Status</mat-label>
+                                    <p class="preData">{{SupDetails?.status}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box mb-2">
+                    <h5 class="widget-title d-flex justify-content-between align-items-center">Assign Entity</h5>
+                    <div class="widget-content">
+                      
+                <div class="mb-2">
+                                <form [formGroup]="assignEntity">
+                                <table class="content-table mt-2">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Serial #</th>
+                                            <th scope="col">Entity Code</th>
+                                            <th scope="col">Entity Name</th> 
+                                            <th scope="col">
+                                                <!-- <div class="d-flex w-100 ms-1 me-2"> -->
+                                                    <input type="checkbox" formControlName="assignAll" class="tbl-chk"
+                                                        (change)="toggleAssignAll($event)"> Assign All
+                                                <!-- </div> -->
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody  formArrayName="entityArray">
+                                        <tr *ngFor="let entity of entityArray.controls; let i = index" [formGroupName]="i">
+                                            <td>{{ i + 1 }}</td>
+                                            <td>{{ entity.get('entityCode')?.value }}</td>
+                                            <td>{{ entity.get('entityName')?.value }}</td> 
+                                            <td> <input type="checkbox"
+                                                    (change)="onIndividualAssignChange()" formControlName="isChecked">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    <div class="table-footer">
+                                        <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                                            aria-label="Select page">
+                                        </mat-paginator>
+                                    </div>
+                                </form>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+       
+    </mat-dialog-content> 
+
+    <mat-dialog-actions>
+      <div class="footer-action-btn">
+        <button class="btn-gray" mat-dialog-close cdkFocusInitial>
+            <i class="fa fa-ban pe-2"></i>Cancel</button>
+        <div class="middle-spacer"></div>
+        <button class="btn-blue"  (click)="submit()">
+            <i class="fa fa-paper-plane pe-2"></i>Submit</button>
+    </div>
+    </mat-dialog-actions>
+</div> 

@@ -1,0 +1,138 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Contract Management</h2>
+    </div>
+    <div class="content-box p-2">
+
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Registered Address
+            </h5>
+            <div class="widget-content">
+                <div class="grid-4cols"></div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<h5 style="height: 35px;" class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+    Registered Address
+    <div class="w-25 justify-content-end text-right d-flex">
+        <button *ngIf="ClearValues()" class="header-level-btn-gray me-2" [disabled]="disableStatusBased == false"
+            (click)="resetForm()">
+            <i class="fa fa-refresh pe-2" aria-hidden="true"></i>Clear</button>
+        <button [disabled]="disableStatusBased == false" class="header-level-btn-blue" matTooltip="Save address details"
+            (click)="onAddClick()">
+            <i class="fa fa-floppy-o pe-2" aria-hidden="true"></i> {{editFlag == true ? 'Update' : 'Save'}}
+        </button>
+    </div>
+</h5>
+
+
+<div class="footer-action-btn">
+
+    <div class="middle-spacer"></div>
+
+</div>
+
+  class="btn-gray"
+
+
+<!--<div class="table-responsive comman-table-style">
+                                    <table class="table table-flush ">
+                                        <thead >
+                                            <tr class="thead-light">
+                                                <th scope="col">Serial  #</th>
+                                                <th scope="col" >Resource Id</th>
+                                                <th scope="col" >Resource Name</th>
+                                                <th scope="col">Currency</th>
+                                                <th scope="col" >Existing Rate</th>
+                                                <th scope="col" >To Rate</th>
+                                                <th scope="col">Effective Date</th>
+                                                <th scope="col" >Reason Code</th>
+                                                <th scope="col" >Description</th>
+                                                <th scope="col" >Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                            <tr class="cust-field-height">
+                                                <td>1</td>
+                                                <td> <mat-form-field class="col">
+                                                    <mat-select matTooltip="Resource Id" placeholder="RO19992">
+                                                        <mat-option value="">-- Please Select --</mat-option>
+                                                        <mat-option >
+                                                            RO19992
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field></td>
+                                                <td>
+                                                    <mat-form-field >
+                                                        <input matInput placeholder=""   value="Christopher">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td> <mat-form-field class="col">
+                                                    <mat-select matTooltip="Resource Id" placeholder="USD">
+                                                        <mat-option value="">-- Please Select --</mat-option>
+                                                        <mat-option >
+                                                            USD
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field></td>
+                                                <td>
+                                                    <mat-form-field class="table-numeric">
+                                                        <input matInput placeholder="" class="text-right"   value="100">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    <mat-form-field class="table-numeric">
+                                                        <input matInput placeholder="" class="text-right"   value="1000">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    <mat-form-field class="table-date">
+                                                        <input matInput [matDatepicker]="efdate"
+                                                            matTooltip="Enter the Issued Date" >
+                                                        <mat-datepicker-toggle matIconSuffix [for]="efdate"></mat-datepicker-toggle>
+                                                        <mat-datepicker #efdate></mat-datepicker>
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    <mat-form-field >
+                                                        <input matInput placeholder="" value="Newly added">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td>
+                                                    <mat-form-field >
+                                                        <input matInput placeholder="" value="for development ">
+                                                    </mat-form-field>
+                                                </td>
+                                                <td class="text-center">
+                                                    <button mat-button 
+                                                    class="btn-small border-0" matTooltip="Delete" >
+                                                   <i class="fa fa-trash text-danger"></i>
+                                                </button>
+                                                </td>                                               
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div> -->
+<div class="content-box p-2">
+    <div class="widget-box">
+        <h5 class="widget-title">
+            Clause Library
+
+        </h5>
+        <div class="widget-content">
+
+        </div>
+    </div>
+
+</div>
+
+<div class="footer-cta-btn">
+    <div class="cta-leftside-btn">
+    </div>
+    <div class="cta-rightside-btn">
+    </div>
+</div>

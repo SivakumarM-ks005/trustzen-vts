@@ -1,0 +1,83 @@
+<div mat-dialog-title class="d-flex flex-row justify-content-start align-items-center">
+    <div class="col">Add Contact Details</div>
+    <div class="helper-text-align-right">
+        <button mat-icon-button  mat-dialog-close>
+            <i class="material-icons" matTooltip="close">close</i>
+        </button>
+    </div>
+</div>
+<mat-dialog-content>
+
+    <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
+        <mat-form-field class="w-80">
+            <mat-label>Salutation</mat-label>
+            <input matInput matTooltip="Enter the salutation" required>
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+            <mat-label>First Name</mat-label>
+            <input matInput matTooltip="Enter the first name" required>
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+            <mat-label>Middle Name</mat-label>
+            <input matInput matTooltip="Enter the middle name">
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+            <mat-label>Last Name</mat-label>
+            <input matInput matTooltip="Enter the last name" required>
+        </mat-form-field>
+    </div>
+    <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
+        <div class="w-80"></div>
+        <mat-form-field class="col-md-3">
+            <mat-label>Job Title</mat-label>
+            <input matInput matTooltip="Enter the job title" required>
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+            <mat-label>Role</mat-label>
+            <mat-select required>
+                <mat-option value="Manager">Account Manager</mat-option>
+                <mat-option value="Administrator">Administrator</mat-option>
+                <mat-option value="Development">Business Development</mat-option>
+                <mat-option value="CXO">CXO Level</mat-option>
+                <mat-option value="Finance">Finance Representative</mat-option>
+                <mat-option value="Legal">Legal Representative</mat-option>
+                <mat-option value="POA">POA Holder</mat-option>
+                <mat-option value="Sales">Sales Representative</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+            <mat-label>Email</mat-label>
+            <input matInput matTooltip="Enter the email">
+        </mat-form-field>
+    </div>
+
+    <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
+        <mat-form-field class="w-80">
+            <mat-label>Code</mat-label>
+            <input matInput matTooltip="Enter the standard country code ">
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+            <mat-label>Work Phone #</mat-label>
+            <input matInput matTooltip="Enter the work phone #">
+        </mat-form-field>
+    </div>
+
+    <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
+        <mat-form-field class="w-80">
+            <mat-label>Code</mat-label>
+            <input matInput matTooltip="Enter the standard country code ">
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+            <mat-label>Mobile Phone #</mat-label>
+            <input matInput matTooltip="Enter the mobile phone #">
+        </mat-form-field>
+    </div>
+    <div class="d-flex">
+        <mat-checkbox >Primary Contact</mat-checkbox>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button   mat-dialog-close>Add</button>
+    <button mat-stroked-button color="warn" mat-dialog-close cdkFocusInitial>Cancel</button>
+</mat-dialog-actions>

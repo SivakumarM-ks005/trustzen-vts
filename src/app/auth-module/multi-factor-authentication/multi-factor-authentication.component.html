@@ -1,0 +1,41 @@
+<div class="dialog-container">
+
+    <div mat-dialog-title>
+        <div class="col-lg-11">
+            <h3>Multi-Factor Authentication</h3>
+        </div>
+        <div class="col-lg-1 text-end">
+            <button mat-icon-button mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div>Please enter the code sent to your registered device.</div>
+        <form (ngSubmit)="onSubmitMfa()" #mfaForm="ngForm">
+            <div class="form-group">
+                <mat-form-field class="col-8 mt-2">
+                    <mat-label>MFA Code</mat-label>
+                    <input name="mfaCode" [(ngModel)]="mfaCode" #mfaCodeInput="ngModel" matInput placeholder=""
+                        required>
+                    <mat-error *ngIf="mfaCodeInput.invalid">Enter MFA Code</mat-error>
+                </mat-form-field>
+
+                <div class="resend-otp">
+                    <button mat-button [disabled]="isResendDisabled" (click)="resendOtp()">
+                        Resend OTP
+                    </button>
+                    <span *ngIf="isResendDisabled">({{ resendCountdown }}s)</span>
+                </div>
+            </div>
+        </form>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="footer-action-btn">
+            <button class="btn-gray"><i class="fa fa-ban pe-2" mat-dialog-close cdkFocusInitial
+                    (click)="onCancelMfa()"></i>Cancel</button>
+            <div class="middle-spacer"></div>
+            <button class="btn-blue" (click)="submitMfa()"><i class="fa fa-paper-plane pe-2"></i>Send</button>
+        </div>
+    </mat-dialog-actions>
+</div>

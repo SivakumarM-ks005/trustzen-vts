@@ -1,0 +1,171 @@
+<div class="borderBox mt-2">
+    <div class="boxHeader">
+        <div class="subHeading">Compliance Checklist1</div>
+    </div>
+
+    <!-- <div class="d-flex flex-row flex-wrap justify-content-start align-items-start mt-2">
+    <div class="col-md-12 reviewBox">
+        <div class="reviewBody">
+
+            <table class="formbBased">
+                <tr>
+                    <th colspan="2">Heading 1</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">1. Question 1</div>
+                    </td>
+                    <td style="width: 300px">
+                        <mat-checkbox ></mat-checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">2. Question 2</div>
+                    </td>
+                    <td style="width: 300px">
+                        <mat-checkbox ></mat-checkbox>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="formbBased">
+                <tr>
+                    <th colspan="2">Heading 2</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">1. Question 1</div>
+                    </td>
+                    <td style="width: 300px">
+                        <mat-radio-group class="d-flex flex-row">
+                            <mat-radio-button value="1">Yes</mat-radio-button>
+                            <mat-radio-button value="2">No</mat-radio-button>
+                        </mat-radio-group>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">1a. Question 1</div>
+                    </td>
+                    <td style="width: 300px">
+                        <mat-radio-group class="d-flex flex-row">
+                            <mat-radio-button value="1">Yes</mat-radio-button>
+                            <mat-radio-button value="2">No</mat-radio-button>
+                        </mat-radio-group>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">1b. Question 1</div>
+                    </td>
+                    <td style="width: 300px">
+                        <div class="d-flex">
+                            <mat-form-field class="col">
+                                <input type="text" placeholder="Enter the Question 1"
+                                    matTooltip="Search the parent category" matInput>
+                            </mat-form-field>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="formbBased">
+                <tr>
+                    <th colspan="2">Heading 3</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">1. Question 1</div>
+                    </td>
+                    <td style="width: 300px">
+                        <mat-radio-group class="d-flex flex-row">
+                            <mat-radio-button value="1">Yes</mat-radio-button>
+                            <mat-radio-button value="2">No</mat-radio-button>
+                        </mat-radio-group>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">1a. Question 1</div>
+                    </td>
+                    <td style="width: 300px">
+                        <mat-checkbox ></mat-checkbox>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="preData">1b. Question 1</div>
+                    </td>
+                    <td style="width: 300px">
+                        <div>Sample text new</div>
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+</div> -->
+    <div class="boxBody">
+        <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
+            <form [formGroup]="dynamicForm" class="col">
+                @for(field of fields; track field; let idx = $index){
+                <div>
+                    <!-- TextBox -->
+                    @if(field.fieldType === 'TextBox'){
+                    <div class="col-md-5 d-flex flex-column">
+                        <div class="alertText mt-1">{{ field.fieldName }}</div>
+                        <mat-form-field class="col">
+                            <input type="text" [formControlName]="field.controlName" [required]="field.mandatoryFlag"
+                                placeholder="{{ field.fieldName }}" matInput />
+                        </mat-form-field>
+                    </div>
+                    }
+                    <!-- Date -->
+                    @if(field.fieldType === 'Date'){
+                    <div class="col-md-5 d-flex flex-column">
+                        <div class="alertText mt-2">{{ field.fieldName }}</div>
+                        <mat-form-field class="w-140">
+                            <mat-label>Date</mat-label>
+                            <input matInput [matDatepicker]="datePicker" [formControlName]="field.controlName"
+                                [required]="field.mandatoryFlag">
+                            <mat-datepicker-toggle matIconSuffix [for]="datePicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datePicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    }
+                    <!-- RadioButton -->
+                    @if(field.fieldType === 'RadioButton'){
+                    <div>
+                        <div class="alertText mt-1">{{ field.fieldName }}
+                            @if(field.mandatoryFlag){
+                            <strong class="asterick">*</strong>
+                            }
+                        </div>
+                        <!-- <mat-radio-group [formControlName]="field.controlName" [required]="field.mandatoryFlag">
+                            <mat-radio-button *ngFor="let option of field.options" [value]="option">
+                                {{ option }}
+                            </mat-radio-button>
+                        </mat-radio-group> -->
+                        <mat-radio-group class="d-flex flex-row" [formControlName]="field.controlName"
+                            [required]="field.mandatoryFlag">
+                            <mat-radio-button value="Yes">Yes</mat-radio-button>
+                            <mat-radio-button value="No">No</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    }
+                    <!-- CheckBox -->
+                    @if(field.fieldType === 'CheckBox'){
+                    <div>
+                        <mat-checkbox  [formControlName]="field.controlName"
+                            [required]="field.mandatoryFlag">
+                            {{ field.fieldName }}</mat-checkbox>
+                    </div>
+                    }
+                </div>
+                }
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,115 @@
+<div mat-dialog-title class="d-flex flex-row justify-content-start align-items-center">
+    <div class="col-md-12">{{ "Contract Cancellation Details" | translate }}</div>
+    <!-- <div class="helper-text-align-right">
+        <button mat-icon-button  mat-dialog-close>
+            <i class="material-icons" matTooltip="close">close</i>
+        </button>
+    </div> -->
+</div>
+<mat-dialog-content class="bg-white">
+
+    <div class="commonDialogWidget">
+        <div class="widgetHeader">
+            <h5 class="widgetHeading">Header Details</h5>
+        </div>
+        <div class="widgetContent p-2">
+            <div class="header">
+                <div>
+                    <mat-label class="preLabel">Contract Ref#</mat-label>
+                    <p class="preData">CN/2055</p>
+                </div>
+                <div>
+                    <mat-label class="preLabel">Contract Name</mat-label>
+                    <p class="preData">Contract for Servers and Server Hardware</p>
+                </div>
+                <div>
+                    <mat-label class="preLabel">Start Date</mat-label>
+                    <p class="preData">01-Nov-2024</p>
+                </div>
+                <div>
+                    <mat-label class="preLabel">End Date</mat-label>
+                    <p class="preData">01-Dec-2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="commonDialogWidget">
+        <div class="widgetHeader">
+            <h5 class="widgetHeading">Cancellation Details</h5>
+        </div>
+        <div class="widgetContent p-2">
+            <section class="col-grid">
+                <mat-form-field>
+                    <mat-label>Initiate Date</mat-label>
+                    <input matInput [matDatepicker]="dp1" required>
+                    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                    <mat-datepicker #dp1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Effective Date</mat-label>
+                    <input matInput [matDatepicker]="dp2">
+                    <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                    <mat-datepicker #dp2></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Reason</mat-label>
+                    <mat-select required>
+                        <mat-option value="">-- Please Select --</mat-option>
+                        <mat-option value="Parent Category"> Legally Oriented Decision</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="cancel-text-height">
+                    <mat-label>Remarks</mat-label>
+                    <textarea matInput required style="min-height: 25px !important;"></textarea>
+                </mat-form-field>
+            </section>
+       
+            <div class="row-2nd">
+                <div class="d-flex align-items-center justify-content-between border">
+                    <mat-checkbox>Allow Material Receipts until</mat-checkbox>
+                    <mat-form-field class="mxw-120">
+                        <mat-label>Capture Date</mat-label>
+                        <input matInput [matDatepicker]="dp3" placeholder="capture Date">
+                        <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                        <mat-datepicker #dp3></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="d-flex align-items-center justify-content-between border">
+                    <mat-checkbox>Allow Service Fulfillments until</mat-checkbox>
+                    <mat-form-field class="mxw-120">
+                        <mat-label>Capture Date</mat-label>
+                        <input matInput [matDatepicker]="dp4">
+                        <mat-datepicker-toggle matSuffix [for]="dp4"></mat-datepicker-toggle>
+                        <mat-datepicker #dp4></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="d-flex align-items-center justify-content-between border">
+                    <mat-checkbox>Stop all Contracts with Party From
+                    </mat-checkbox>
+                    <mat-form-field class="mxw-120">
+                        <mat-label>Capture Date</mat-label>
+                        <input matInput [matDatepicker]="dp5">
+                        <mat-datepicker-toggle matSuffix [for]="dp5"></mat-datepicker-toggle>
+                        <mat-datepicker #dp5></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        <mat-checkbox>Pay Overdue Invoices</mat-checkbox>
+        <mat-checkbox>Allow Invoice of Completed Milestones</mat-checkbox>
+        <mat-checkbox>Blacklist Party in Contract Transaction</mat-checkbox>
+    </div>
+
+
+      
+
+    </div>
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button  >
+        Save
+    </button>
+    <button mat-stroked-button color="warn" mat-dialog-close cdkFocusInitial>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,16 @@
+.data-table-css { 
+   table tr th {
+    &:last-child, &:first-child{
+        width: 70px;
+    }
+   }  
+   table tr td {
+    &:last-child{
+        .mdc-button.mat-mdc-button-base {
+            min-height: 20px; 
+           min-width: 20px;
+        }
+    }
+   }  
+   
+}

@@ -1,0 +1,174 @@
+<div class="dialog-container ">
+    <div mat-dialog-title>
+        <div class="col-lg-11">
+            <h3>
+                @if(mode === 'add'){
+                    <span >{{ "Clause Details" | translate }}</span>
+                    }
+                    @if(mode === 'edit'){
+                    <span >{{ "Edit Clause Details" | translate }}</span>
+                    }
+                    @if(mode === 'addTag'){
+                    <span >{{ "Add Tag" | translate }}</span>
+                    }
+            </h3>
+        </div>
+        <div class="col-lg-1 text-end">
+            <button mat-icon-button mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+    </div> 
+
+<mat-dialog-content>
+ 
+    <form #clauseLibraryForm="ngForm" id="clauseLibraryFormId">
+        <div class="widget-box mt-2">
+            <h5 class="widget-title d-flex justify-content-between align-items-center">Header
+                @if(mode === 'edit'){
+                    <span class="status-list">Status: 
+                        <span class="ft-bold ps-1">{{dataValue.status}}</span>
+                    </span>
+                }
+            </h5>
+            <div class="widget-content">
+                <div class="grid-3cols">
+                    <mat-form-field>
+                        <mat-label>Ref #</mat-label>
+                        <input matInput matTooltip="Ref#" [(ngModel)]="saveClauseVm.refId" #refIdControl="ngModel"
+                            [required]="true" name="refNo" [disabled]="true">
+                        @if (refIdControl.errors?.required) {
+                        <mat-error matTooltip="Enter Ref No">
+                            Ref No is required</mat-error>
+                        }
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Clause Name</mat-label>
+                        <input matInput matTooltip="Enter the Clause Name" [(ngModel)]="saveClauseVm.clauseName"
+                            #clauseNameControl="ngModel" [required]="true" name="clauseName" [disabled]="isAddTag">
+                        @if (clauseNameControl.errors?.required) {
+                        <mat-error matTooltip="Enter the Clause Name">
+                            Clause Name is required</mat-error>
+                        }
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput matTooltip="Enter the description" [(ngModel)]="saveClauseVm.description"
+                            #optDesc="ngModel" #noteHint name="clauseDesc" cdkTextareaAutosize cdkTextareaAutosize
+                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="1"
+                            [required]="true" [disabled]="isAddTag"></textarea>
+                        <mat-hint align="end">{{noteHint.value.length > 0 ? noteHint.value.length : 0}} of
+                            1500</mat-hint>
+                        @if (optDesc.errors?.required) {
+                        <mat-error matTooltip="Enter the Description">
+                            Description is required</mat-error>
+                        }
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Category</mat-label>
+                        <mat-select [(ngModel)]="saveClauseVm.categoryId" name="catval" #categoryControl="ngModel"
+                            [required]="true" matTooltip="Select Category" [disabled]="isAddTag">
+                            <mat-option value="">-- Please Select --</mat-option>
+                            @for (doc of categoryData; track doc) {
+                            <mat-option [value]="doc.categoryId">{{doc.categoryName}}</mat-option>
+                            }
+                        </mat-select>
+                        @if (categoryControl.errors?.required) {
+                        <mat-error matTooltip="Select a Type">
+                            Category is required</mat-error>
+                        }
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Type</mat-label>
+                        <mat-select [(ngModel)]="saveClauseVm.typeId" name="typeval" #clauseTypeControl="ngModel"
+                            [required]="true" matTooltip="Select Type" [disabled]="isAddTag">
+                            <mat-option value="">-- Please Select --</mat-option>
+                            @for (doc of clauseTypeData; track doc) {
+                            <mat-option [value]="doc.typeId">{{doc.typeName}}</mat-option>
+                            }
+                        </mat-select>
+                        @if (clauseTypeControl.errors?.required) {
+                        <mat-error matTooltip="Select a Type">
+                            Type is required</mat-error>
+                        }
+                    </mat-form-field>
+                    <mat-form-field >
+                        <mat-label>Contract Classification</mat-label>
+                        <mat-select #select multiple [(ngModel)]="this.saveClauseVm.contractClassification"
+                            name="classifyVal" #clauseClassifyControl="ngModel" [required]="true"
+                            matTooltip="Select Contract Classifications" [disabled]="isAddTag">
+                            <div class="select-all">
+                                <mat-checkbox [(ngModel)]="allSelected" 
+                                    class="checkbox-custom fontNormal" [ngModelOptions]="{standalone: true}"
+                                    (change)="toggleAllSelection()">Select All</mat-checkbox>
+                            </div>
+                            @for (cl of clauseClassifyData; track cl) {
+                            <mat-option (click)="optionClick()" [value]="cl.classificationName">
+                                {{cl.classificationName}}
+                            </mat-option>
+                            }
+                        </mat-select>
+                        @if (clauseClassifyControl.errors?.required) {
+                        <mat-error matTooltip="Select Contract Classifications">
+                            Contract Classification is required</mat-error>
+                        }
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        @if(!isAddTag){
+        <div class="widget-box mt-2">
+            <h5 class="widget-title">Clause Text <strong class="asterick">*</strong></h5>
+            <div class="widget-content p-0">
+                <!-- <angular-editor [(ngModel)]="htmlContent" [placeholder]="'The Receiving Party agrees to keep all Confidential Information disclosed by the Disclosing Party in strict confidence and not to disclose or use such information for any purpose other than as expressly permitted under this Agreement. The Receiving Party shall take all reasonable measures to protect the confidentiality of the information, and shall limit access to its employees, agents, or contractors who need to know the information for the purposes of this Agreement. 
+            '" [config]="config"></angular-editor> -->
+                <angular-editor [(ngModel)]="saveClauseVm.htmlContent" [config]="config" #clauseTextControl="ngModel"
+                    [required]="true" name="htmlText"></angular-editor>
+                @if (clauseTextControl.errors?.required) {
+                <mat-error matTooltip="Select a Type">
+                    Clause Text is required</mat-error>
+                }
+            </div>
+        </div>
+        }
+        <div class="widget-box mt-2 mb-3">
+            <h5 class="widget-title">Tags (Add tags, separated by commas)</h5>
+            <div class="widget-content p-0 cust-field-height">
+                <mat-form-field class="w-100 p-1 m-0 pt-0">
+                    <textarea class="w-100 p-0 border-0" matInput matTooltip="Add tags, separated by commas"
+                        [(ngModel)]="saveClauseVm.tagValue" #tagValues="ngModel" #noteTags name="clauseTags"
+                        placeholder=""></textarea>
+
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="footer-action-btn">
+        <button   class="btn-gray" mat-dialog-close cdkFocusInitial><i
+            class="fa fa-ban pe-2"></i>Close</button>
+        <div class="middle-spacer"></div>
+        @if(mode === 'edit'){
+            <button   class="btn-blue" (click)="activeOrDeActivate()">
+                <i class="fa fa-check-square-o pe-2"></i> {{dataValue.active ? 'Deactivate' : 'Activate'}}
+            </button>
+            }
+            <button   class="btn-blue" [disabled]="disableSave"
+                (click)="saveClauseLibrary()">
+                <i class="fa fa-floppy-o pe-2" aria-hidden="true"></i> {{(isEditMode && !isAddTag) ?
+                'Update':'Save'}}
+            </button>
+    </div>
+    <!-- @if(mode === 'edit'){
+    <button   (click)="activeOrDeActivate()">
+        {{dataValue.active ? 'Deactivate' : 'Activate'}}
+    </button>
+    }
+    <button   [disabled]="disableSave" (click)="saveClauseLibrary()">
+        {{(isEditMode && !isAddTag) ? 'Update':'Save'}}
+    </button>
+    <button mat-stroked-button color="warn" mat-dialog-close cdkFocusInitial>Close</button> -->
+</mat-dialog-actions>
+</div>

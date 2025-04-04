@@ -1,0 +1,904 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Sourcing Management >> Purchase
+            Request</h2>
+    </div>
+    <div class="content-box p-2">
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Select Entity Level1
+                <span class="status-label">Status: <span class="status-state">Draft</span></span>
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-form-field>
+                        <mat-label>Entity Name</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">Info sys</mat-option>
+                            <mat-option value="Direct">CTS</mat-option>
+                            <mat-option value="Direct">TATA</mat-option>
+                            <mat-option value="Direct">Maruthi</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 1</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 2</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 3</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Level 4</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">ERP System</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Add Request for Quotation
+                <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-form-field>
+                        <mat-label>Source</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">PR</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>PR Ref #</mat-label>
+                        <input matInput value="PR-125" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>PR Date</mat-label>
+                        <input matInput [matDatepicker]="dp1" required>
+                        <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="dp1"></mat-datepicker-toggle>
+                        <mat-datepicker #dp1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>PR Created by</mat-label>
+                        <input matInput value="Jimmy Carter" required>
+                    </mat-form-field>
+                    <mat-form-field class="numeric-right-align">
+                        <mat-label>PR Approved Value</mat-label>
+                        <input matInput  value="100,000,00" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Ref #</mat-label>
+                        <input matInput value="Jimmy Carter" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Creation Date</mat-label>
+                        <input matInput [matDatepicker]="dp2" required>
+                        <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                        <mat-datepicker #dp2></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Purchase Classification</mat-label>
+                        <input matInput value="General" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Spend Type </mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">CapEx Purchase</mat-option>
+                            <mat-option value="Direct"> CapEx Purchase</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Buyer</mat-label>
+                        <input matInput value="Michael Anderson" required>
+                    </mat-form-field>
+                    </div>
+                    <div class="grid-1-1-3">
+                    <mat-form-field>
+                        <mat-label>Rate Type </mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">USD</mat-option>
+                            <mat-option value="Direct">Fail</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Short Name</mat-label>
+                        <input matInput value="Michael Anderson" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Description</mat-label>
+                        <textarea matInput rows="1" required></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="grid-5cols">
+                    <mat-form-field>
+                        <mat-label>Sourcing Type</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">PR</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Purchase Type</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">PR</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Participation Type</mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">PR</mat-option>
+                            <mat-option value="Direct">Direct</mat-option>
+                            <mat-option value="Direct">Mat Request</mat-option>
+                            <mat-option value="Direct">Auto-Requisition</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Personalize  Setup
+                <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+            </h5>
+            <div class="widget-content">
+                <div class="grid-3cols">
+                    <mat-checkbox  >Item Level Discount</mat-checkbox>
+                    <mat-checkbox  >Item Level Tax</mat-checkbox>
+                    <mat-checkbox  >Inco/Other Cost</mat-checkbox>
+                    <mat-checkbox  >ForEx Currency Txn</mat-checkbox>
+                    <mat-checkbox  >Allow Partial Qty Response</mat-checkbox>
+                    <mat-checkbox  >Validity of Response Negotiable</mat-checkbox>
+                    <mat-checkbox  >Withold Tax Applicable</mat-checkbox>
+                    <mat-checkbox  >Change Item Ship to Site</mat-checkbox>
+                    <mat-checkbox  >Change Item Need by Date</mat-checkbox>
+                </div>
+                  
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Address
+                <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+            </h5>
+            <div class="widget-content">
+                <h5 class="widget-title" style="background: transparent !important; padding-left: 0;">
+                    Bill to Address <sup>*</sup>
+                    <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+                </h5>
+                <div class="grid-2cols">
+                    <mat-form-field>
+                        <mat-label>Address Line 1</mat-label>
+                        <input matInput value="" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Address Line 2</mat-label>
+                        <input matInput value="" required>
+                    </mat-form-field>
+                    </div>
+                    <div class="grid-4cols">
+                        <mat-form-field>
+                            <mat-label>Country</mat-label>
+                            <mat-select required >
+                                <mat-option value="ERP System">PR</mat-option>
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="Direct">Mat Request</mat-option>
+                                <mat-option value="Direct">Auto-Requisition</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>State/Province</mat-label>
+                            <mat-select required >
+                                <mat-option value="ERP System">PR</mat-option>
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="Direct">Mat Request</mat-option>
+                                <mat-option value="Direct">Auto-Requisition</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>City</mat-label>
+                            <mat-select required >
+                                <mat-option value="ERP System">PR</mat-option>
+                                <mat-option value="Direct">Direct</mat-option>
+                                <mat-option value="Direct">Mat Request</mat-option>
+                                <mat-option value="Direct">Auto-Requisition</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Postal Code</mat-label>
+                        <input matInput value="" >
+                    </mat-form-field>
+                   
+                    </div>
+                    <h5 class="widget-title d-flex border-top mt-3" style="background: transparent !important; padding-left: 0;">
+                        Ship to Addres <sup>*</sup>    <mat-checkbox  class="ms-2">Same as Bill to Address</mat-checkbox>
+                        <!-- <span class="status-label">Status: <span class="status-state">Draft</span></span> -->
+                    </h5>
+                    <div class="grid-2cols">
+                        <mat-form-field>
+                            <mat-label>Address Line 1</mat-label>
+                            <input matInput value="" required>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Address Line 2</mat-label>
+                            <input matInput value="" required>
+                        </mat-form-field>
+                        </div>
+                        <div class="grid-4cols">
+                            <mat-form-field>
+                                <mat-label>Country</mat-label>
+                                <mat-select required >
+                                    <mat-option value="ERP System">PR</mat-option>
+                                    <mat-option value="Direct">Direct</mat-option>
+                                    <mat-option value="Direct">Mat Request</mat-option>
+                                    <mat-option value="Direct">Auto-Requisition</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>State/Province</mat-label>
+                                <mat-select required >
+                                    <mat-option value="ERP System">PR</mat-option>
+                                    <mat-option value="Direct">Direct</mat-option>
+                                    <mat-option value="Direct">Mat Request</mat-option>
+                                    <mat-option value="Direct">Auto-Requisition</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>City</mat-label>
+                                <mat-select required >
+                                    <mat-option value="ERP System">PR</mat-option>
+                                    <mat-option value="Direct">Direct</mat-option>
+                                    <mat-option value="Direct">Mat Request</mat-option>
+                                    <mat-option value="Direct">Auto-Requisition</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Postal Code</mat-label>
+                            <input matInput value="" >
+                        </mat-form-field>
+                       
+                        </div>
+                   
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Timelines
+            </h5>
+            <div class="widget-content">
+             <div class="grid-5cols">
+                <mat-form-field>
+                    <mat-label>Approved Date</mat-label>
+                    <input matInput [matDatepicker]="tdp1" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="tdp1"></mat-datepicker-toggle>
+                    <mat-datepicker #tdp1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Publish Date</mat-label>
+                    <input matInput [matDatepicker]="tdp2" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="tdp2"></mat-datepicker-toggle>
+                    <mat-datepicker #tdp2></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Clarification Date</mat-label>
+                    <input matInput [matDatepicker]="tdp3" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="tdp3"></mat-datepicker-toggle>
+                    <mat-datepicker #tdp3></mat-datepicker>
+                </mat-form-field>
+              
+                <mat-form-field>
+                    <mat-label>Response Date</mat-label>
+                    <input matInput [matDatepicker]="tdp5" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="tdp5"></mat-datepicker-toggle>
+                    <mat-datepicker #tdp5></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Submission Due Date</mat-label>
+                    <input matInput [matDatepicker]="t1dp1" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="t1dp1"></mat-datepicker-toggle>
+                    <mat-datepicker #t1dp1></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Response Open Date</mat-label>
+                    <input matInput [matDatepicker]="t1dp2" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="t1dp2"></mat-datepicker-toggle>
+                    <mat-datepicker #t1dp2></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Award Processing Date</mat-label>
+                    <input matInput [matDatepicker]="t1dp3" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="t1dp3"></mat-datepicker-toggle>
+                    <mat-datepicker #t1dp3></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Award Date</mat-label>
+                    <input matInput [matDatepicker]="t1dp4" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="t1dp4"></mat-datepicker-toggle>
+                    <mat-datepicker #t1dp4></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Need By Date</mat-label>
+                    <input matInput [matDatepicker]="tdp4" required>
+                    <mat-datepicker-toggle value="10-Jan-2025" matSuffix [for]="tdp4"></mat-datepicker-toggle>
+                    <mat-datepicker #tdp4></mat-datepicker>
+                </mat-form-field>
+                <div>
+                    <span class="ft-size11">Expected Validity of Response<sup>*</sup></span>
+                    <div class="d-flex cust-field-height">
+                    <mat-form-field style="width: 140px;">
+                        <input matInput  value="">                        
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-select  >
+                            <mat-option value="ERP System">Hours</mat-option>
+                            <mat-option value="Direct">Month</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+             </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Bill of Quantity (BOQ)
+            </h5>
+            <div class="widget-content">
+                <div class="grid-5cols">
+                    <mat-form-field>
+                        <mat-label>Functional Currency </mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">INR</mat-option>
+                            <mat-option value="Direct">USD</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Transactional Currency </mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">INR</mat-option>
+                            <mat-option value="Direct">USD</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Spend Category </mat-label>
+                        <mat-select required >
+                            <mat-option value="ERP System">CapEx Purchase</mat-option>
+                            <mat-option value="Direct"> CapEx Purchase</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    </div>
+                    <div class="table-responsive mt-2">
+                        <table class="content-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 80px;">Serial #</th>
+                                    <th scope="col" style="width: 80px;">Code</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">UOM</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Ship to Site</th>
+                                    <th scope="col">Need By Date</th>
+                                    <th scope="col" style="width: 80px;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="cust-field-height">
+                                    <td>1</td>
+                                    <td>
+                                        1965
+                                    </td>
+                                    <td>
+                                        Server Racks
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <mat-form-field class="w-100">
+                                            <mat-select matTooltip="Select the UOM" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">NOS</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <mat-form-field class="w-100">
+                                            <input matInput  class="text-right" value="">
+                                        </mat-form-field>
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <mat-form-field>
+                                            <mat-select matTooltip="Select the UOM" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">Ship to Address</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td style="width: 100px;">
+                                        <mat-form-field class="mxW-120">
+                                            <input matInput  class="text-right" value="20-Feb-2025">
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="fa fa-trash"></i>
+                                    </td>
+                                </tr>
+                                <tr class="cust-field-height">
+                                    <td>2</td>
+                                    <td>
+                                        1965
+                                    </td>
+                                    <td>
+                                        Server Racks
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <mat-select matTooltip="Select the UOM" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">NOS</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <input matInput  class="text-right" value="">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <mat-select matTooltip="Select the UOM" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">Ship to Address</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <input matInput  class="text-right" value="20-Feb-2025">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                                <tr class="cust-field-height">
+                                    <td>3</td>
+                                    <td>
+                                        1965
+                                    </td>
+                                    <td>
+                                        Server Racks
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <mat-select matTooltip="Select the UOM" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">NOS</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <input matInput  class="text-right" value="">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <mat-select matTooltip="Select the UOM" required>
+                                                <mat-option value="">-- Please Select --</mat-option>
+                                                <mat-option value="">Ship to Address</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="mxW-120">
+                                            <input matInput  class="text-right" value="20-Feb-2025">
+                                        </mat-form-field>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="fa fa-trash"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                 </div>
+               
+          
+       
+   
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Assign Suppliers
+                <button  class="small-btn-action" (click)="addSupplierPopup()" matTooltip="Search & Add Suppliers"
+               ><i class="fa fa-plus"></i></button>
+            </h5>
+            <div class="widget-content">
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 80px;">Serial #</th>
+                                <th scope="col">Supplier Code</th>
+                                <th scope="col">Supplier Name</th>
+                                <th scope="col">Grade</th>
+                                <th scope="col">Status</th>
+                                <th scope="col" style="width: 80px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>1</td>
+                                <td>
+                                    <mat-form-field class="mxW-120">
+                                        <input matInput  class="text-right" value="LSUPP-21298">
+                                    </mat-form-field>
+                                </td>
+                                <td>
+                                    <mat-form-field class="mxW-120">
+                                        <input matInput  class="text-right" value="Eastern Network Service Private Limted">
+                                    </mat-form-field>
+                                </td>
+                                <td style="width: 100px;">
+                                    <mat-form-field class="w-100">
+                                        <mat-select matTooltip="Select the UOM" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="">A</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                               
+                                <td style="width: 100px;">
+                                    <mat-form-field>
+                                        <mat-select matTooltip="Select the UOM" required>
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="">Active</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </td>
+                                <td style="width: 80px;" class="text-center">
+                                 <i class="fa fa-trash"></i>
+                                </td>
+                            </tr>
+                      
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
+                Shipping Information*
+                <mat-checkbox  class="ms-3" >Negotiable</mat-checkbox>
+            </h5>
+            <div class="widget-content">
+              <div class="grid-1-1-3">
+                <mat-form-field>
+                    <mat-label>Shipping Method</mat-label>
+                    <mat-select required  >
+                        <mat-option value="">-- Please Select --</mat-option>
+                        <mat-option  value=""></mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Shipping Term</mat-label>
+                    <mat-select required  >
+                        <mat-option value="">-- Please Select --</mat-option>
+                        <mat-option  value=""></mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+    <mat-form-field >
+        <mat-label>Description</mat-label>
+        <textarea matInput rows="1" ></textarea>
+      </mat-form-field>
+
+              </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Document Section
+            </h5>
+            <div class="widget-content">
+                <div class="grid-25-55-18 align-items-center">
+                    <mat-form-field>
+                        <mat-label>Document Type</mat-label>
+                        <mat-select required >
+                            <mat-option value="">-- Please Select --</mat-option>
+                            <mat-option value=""></mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-label>Description</mat-label>
+                        <textarea matInput class="w-100" rows="1"></textarea>
+                    </mat-form-field>
+                    <div class="custom-file-upload mt-3">
+                        <button class="file-upload-button">
+                            <input class="custom-file-input"
+                                id="customFileLang" type="file" #fileInput
+                                accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf"
+                                 multiple>
+                            <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
+                                class="ps-2">Upload</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="min-width: 100px;">Serial #</th>
+                                <th scope="col">Document Type</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">File Name</th>
+                                <th scope="col">Uploaded By</th>
+                                <th scope="col">Uploaded Date</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>1</td>
+                                <td>
+                                   image file
+                                </td>
+                                <td>
+                                   Invoice Copy
+                                </td>
+                                <td>
+                                    invoice.pdf
+                                 </td>
+                                <td>
+                                    Karthick
+                                </td>
+                                <td>
+                                    10-Jan-2025
+                                </td>                                
+                            </tr>                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title  d-flex align-items-center justify-content-between">
+               <div>Supplier Documents <i class="fa fa-info-circle ps-2"></i></div> 
+               <button  class="small-btn-action" matTooltip="Add"
+               ><i class="fa fa-plus"></i></button>
+            </h5>
+            <div class="widget-content">            
+                <div class="table-responsive mt-2">
+                    <table class="content-table">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="min-width: 100px;">Serial #</th>
+                                <th scope="col">Document Name</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Mandatory</th>
+                                <th scope="col">Optional</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td>1</td>
+                                <td>
+                                    <mat-form-field class="w-100">
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                
+                                </td>
+                                <td>
+                                    <mat-form-field class="w-100">
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                
+                                </td>
+                                <td class="text-center">
+                                    <mat-checkbox ></mat-checkbox>
+                                 </td>
+                                 <td class="text-center">
+                                    <mat-checkbox ></mat-checkbox>
+                                 </td>
+                                 <td class="text-center">
+                                    <i class="fa fa-trash"></i>
+                                </td>                                
+                            </tr>                          
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Notes to Supplier
+            </h5>
+            <div class="widget-content">
+                <textarea matInput class="w-100" placeholder=""></textarea>
+            </div>
+        </div>
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Workflow Status
+            </h5>
+            <div class="widget-content">
+                <div class="table-responsive" >
+                    <table class="content-table">
+                    <thead>
+                            <tr>
+                                <th scope="col">WF Level #</th>
+                                <th scope="col">Approver Name</th>
+                                <th scope="col">Approver Role</th>
+                                <th scope="col">Approver Comments</th>
+                                <th scope="col">Est. Complete Date</th>
+                                <th scope="col">Action Date</th>
+                                <th scope="col" >Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="cust-field-height">
+                                <td> 
+                                   1
+                                </td>
+                                <td> 
+                                    <mat-form-field>
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                </td>
+                                <td> 
+                                    <mat-form-field>
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                </td>
+                                <td> 
+                                    <mat-form-field>
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                </td>
+                               <td> 
+                                <mat-form-field >
+                                <input matInput [matDatepicker]="d1p1">
+                                <mat-datepicker-toggle matSuffix [for]="d1p1"></mat-datepicker-toggle>
+                                <mat-datepicker #d1p1></mat-datepicker>
+                            </mat-form-field>
+                            </td>
+                            <td> 
+                                <mat-form-field >
+                                <input matInput [matDatepicker]="d1p2">
+                                <mat-datepicker-toggle matSuffix [for]="d1p2"></mat-datepicker-toggle>
+                                <mat-datepicker #d1p2></mat-datepicker>
+                            </mat-form-field>
+                            </td>
+                            <td> 
+                                Approved
+                            </td>
+                            </tr>
+                            <tr class="cust-field-height">
+                                <td> 
+                                   2
+                                </td>
+                                <td> 
+                                    <mat-form-field>
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                </td>
+                                <td> 
+                                    <mat-form-field>
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                </td>
+                                <td> 
+                                    <mat-form-field>
+                                        <input matInput  value="">
+                                    </mat-form-field>
+                                </td>
+                               <td> 
+                                <mat-form-field >
+                                <input matInput [matDatepicker]="d1p3">
+                                <mat-datepicker-toggle matSuffix [for]="d1p3"></mat-datepicker-toggle>
+                                <mat-datepicker #d1p3></mat-datepicker>
+                            </mat-form-field>
+                            </td>
+                            <td> 
+                                <mat-form-field >
+                                <input matInput [matDatepicker]="d1p4">
+                                <mat-datepicker-toggle matSuffix [for]="d1p4"></mat-datepicker-toggle>
+                                <mat-datepicker #d1p4></mat-datepicker>
+                            </mat-form-field>
+                            </td>
+                            <td> 
+                                Pending
+                            </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    <div class="footer-action-btn">
+  
+        <button   class="btn-gray" (click)="goBack()"><i
+                class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
+                <div class="middle-spacer"> </div>
+        <button   class="btn-blue" >
+            <i class="fa fa-floppy-o pe-2" aria-hidden="true"></i>Save As Draft </button>
+            <button   class="btn-blue" >
+                <i class="fa fa-recycle pe-2" aria-hidden="true"></i>Process Workflow</button>
+                <button   class="btn-blue" >
+                    <i class="fa fa-newspaper-o pe-2" aria-hidden="true"></i>Publish</button>
+           
+</div>
+</div>
+<ng-template #addSupplier>
+
+    <div class="dialog-container">
+        <div mat-dialog-title>
+            <div class="col-lg-11">
+                <h3>Download Centre</h3>
+            </div>
+            <div class="col-lg-1 text-end">
+                <button mat-icon-button  mat-dialog-close>
+                    <i class="material-icons" matTooltip="close">close</i>
+                </button>
+            </div>
+        </div>
+        <mat-dialog-content>
+            <div class="widget-box">
+                      <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        Search and Add Suppliers
+                      </h5>
+                      <div class="widget-content">
+                        <div class="grid-4cols">
+                            
+                        </div>
+                      </div>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+        <div class="footer-cta-btn">
+          <div class="cta-leftside-btn">
+            <button   class="btn-gray" mat-dialog-close cdkFocusInitial>
+              <i class="fa fa-ban pe-2"></i>Close</button>
+          </div>
+    
+          <div class="cta-rightside-btn">
+            <button  class="btn-blue" 
+              ><i class="fa fa-download pe-2"></i>Download
+            </button>
+          </div>
+        </div>
+      </mat-dialog-actions>
+    </div>  
+    </ng-template>
+    

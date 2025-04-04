@@ -1,0 +1,300 @@
+<div #target class="me-2">
+
+    <form #categoryAndScopeForm="ngForm" id="categoryAndScope">
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Category Information <span *ngIf="NextButtonValidation()"></span>
+                <div class="w-25 justify-content-end text-right d-flex">
+                    <button [disabled]="disableStatusBased == false" *ngIf="clearValues()"
+                        class="header-level-btn-gray me-2" (click)="clearCategories()" matTooltip="Clear Category"><i
+                            class="fa fa-refresh pe-2" aria-hidden="true"></i>Clear</button>
+
+                    <!-- <button class="header-level-btn-blue" (click)="addCategories()" matTooltip="Add Category"
+                [disabled]="disableSave || disableStatusBased == false || !categoryAndScopeForm.valid"><i class="fa fa-floppy-o pe-2" aria-hidden="true"></i> 
+                {{editedCategoryFlag ? 'Update':'Save'}}</button> -->
+                </div>
+            </h5>
+
+            <div class="widget-content">
+
+                <div class="grid-3cols">
+                    <mat-form-field class="col">
+                        <mat-label>
+                            @if (!isSubmitted || !parentCategoryControl.errors?.required) {
+                            Parent Category
+                            }
+                            @if (isSubmitted && parentCategoryControl.errors?.required) {
+                            <span class="error-msg">Parent Category is required</span>
+                            }
+                        </mat-label>
+                        <input matInput placeholder="" [matAutocomplete]="parentCategoryAuto" id="parentCategory"
+                            #parentCategoryControl="ngModel" required matTooltip="Select a Parent Category"
+                            [(ngModel)]="saveCategoryAndScopeVm.parentCategoryId" [required]="true"
+                            name="parentCategory" [dataList]="parentCategory" [autoCompleteDirective]="'parentCatgeory'"
+                            (sendVal)="filterParentCategoryOptions =$event"
+                            (dataValue)="saveCategoryAndScopeVm.parentCategoryId = $event?.parentCategoryId"
+                            (ngModelChange)="getSubCategories(saveCategoryAndScopeVm.parentCategoryId)"
+                            class="input-pr">
+                        <mat-icon matSuffix class="icon-search">
+                            <span class="material-icons-outlined">manage_search</span>
+                        </mat-icon>
+                        <mat-autocomplete #parentCategoryAuto="matAutocomplete"
+                            [displayWith]="displayFnParent.bind(this)"
+                            (optionSelected)="getSubCategories(saveCategoryAndScopeVm.parentCategoryId)">
+                            @for (value of filterParentCategoryOptions; track value) {
+                            <mat-option [value]="value.parentCategoryId">
+                                {{value.parentCatgeory}}
+                            </mat-option>
+                            }
+                        </mat-autocomplete>
+                        <!-- @if (parentCategoryControl.errors?.required) {
+                                    <mat-error matTooltip="Select a Parent Category">
+                                        Parent Category is required</mat-error>
+                                    } -->
+
+                    </mat-form-field>
+
+                    <mat-form-field class="col">
+                        <mat-label>
+                            @if (!isSubmitted || !subCategoryControl.errors?.required) {
+                            Sub Category
+                            }
+                            @if (isSubmitted && subCategoryControl.errors?.required) {
+                            <span class="error-msg">Sub Category is required</span>
+                            }
+                        </mat-label>
+                        <input matInput placeholder="" [matAutocomplete]="subCategoryAuto" id="subCategory"
+                            #subCategoryControl="ngModel" required matTooltip="Select a Sub Category"
+                            [(ngModel)]="saveCategoryAndScopeVm.subCategoryId" [required]="true" name="subCategory"
+                            [dataList]="subCategory" [autoCompleteDirective]="'subCatgeory'"
+                            (sendVal)="filterSubCategoryOptions =$event"
+                            (dataValue)="saveCategoryAndScopeVm.subCategoryId = $event?.subCategoryId"
+                            (ngModelChange)="getChildCategories(saveCategoryAndScopeVm.subCategoryId!)"
+                            class="input-pr">
+                        <mat-icon matSuffix class="icon-search">
+                            <span class="material-icons-outlined">manage_search</span>
+                        </mat-icon>
+                        <mat-autocomplete #subCategoryAuto="matAutocomplete" [displayWith]="displayFnSub.bind(this)"
+                            (optionSelected)="getChildCategories(saveCategoryAndScopeVm.subCategoryId!)">
+                            @for (value of filterSubCategoryOptions; track value) {
+                            <mat-option [value]="value.subCategoryId">
+                                {{value.subCatgeory}}
+                            </mat-option>
+                            }
+                        </mat-autocomplete>
+                        <!-- @if (subCategoryControl.errors?.required) {
+                                    <mat-error matTooltip="Select a Sub Category">
+                                        Sub Category is required</mat-error>
+                                    } -->
+                    </mat-form-field>
+
+                    <mat-form-field class="col">
+                        <mat-label>
+                            @if (!isSubmitted || !childCategoryControl.errors?.required) {
+                            Child Category
+                            }
+                            @if (isSubmitted && childCategoryControl.errors?.required) {
+                            <span class="error-msg">Child Category is required</span>
+                            }</mat-label>
+                        <input matInput placeholder="" [matAutocomplete]="childCategoryAuto" id="childCatId"
+                            #childCategoryControl="ngModel" required matTooltip="Select a Child Category"
+                            [(ngModel)]="saveCategoryAndScopeVm.childCategoryId" [required]="true" name="childCategory"
+                            [dataList]="childCategory" [autoCompleteDirective]="'childCatgeory'"
+                            (sendVal)="filterChildCategoryOptions =$event"
+                            (dataValue)="saveCategoryAndScopeVm.childCategoryId = $event?.childCategoryId"
+                            class="input-pr">
+                        <mat-icon matSuffix class="icon-search">
+                            <span class="material-icons-outlined">manage_search</span>
+                        </mat-icon>
+                        <mat-autocomplete #childCategoryAuto="matAutocomplete"
+                            [displayWith]="displayFnChild.bind(this)">
+                            @for (value of filterChildCategoryOptions; track value) {
+                            <mat-option [value]="value.childCategoryId">
+                                {{value.childCatgeory}}
+                            </mat-option>
+                            }
+                        </mat-autocomplete>
+                        <!-- @if (childCategoryControl.errors?.required) {
+                                    <mat-error matTooltip="Select a Child Category">
+                                        Child Category is required</mat-error>
+                                    } -->
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="widget-box mt-2 border-1-0-0-0">
+                <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">Supporting
+                    Documents</h5>
+
+                <div class="widget-content">
+                    <div class="grid-1-2-1">
+                        <mat-form-field class="col">
+                            <mat-label>
+                                Type
+                            </mat-label>
+                            <mat-select [(ngModel)]="saveCategoryAndScopeVm.typeId" name="typeval"
+                                #typeControl="ngModel" matTooltip="Select Type" (selectionChange)="onTypeChange()">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                @for (doc of documentType; track doc) {
+                                <mat-option [value]="doc.documentTypeId">{{doc.documentType}}</mat-option>
+                                }
+                            </mat-select>
+                            <!-- @if (typeControl.errors?.required) {
+                                            <mat-error matTooltip="Select a Type">
+                                                Type is required</mat-error>
+                                            } -->
+                        </mat-form-field>
+
+                        <mat-form-field class="col">
+                            <mat-label>
+                                @if (!isSubmitted || !optDesc.errors?.required) {
+                                Description
+                                }
+                                @if (isSubmitted && optDesc.errors?.required) {
+                                <span class="error-msg">Description is required</span>
+                                }
+                            </mat-label>
+                            <textarea matInput matTooltip="Enter the description" [required]="discriptionValidtion"
+                                [(ngModel)]="saveCategoryAndScopeVm.description" #optDesc="ngModel" #noteHint
+                                name="optTextArea" rows="1"></textarea>
+                            <mat-hint align="end">{{noteHint.value.length > 0 ? noteHint.value.length : 0}} of
+                                1500</mat-hint>
+                        </mat-form-field>
+                        <div>
+                            <div class=" d-flex w-100 justify-content-between align-items-center pt-4">
+
+                                <div class="custom-file-upload">
+                                    <button class="file-upload-button">
+                                        <input class="custom-file-input"
+                                            [disabled]="!saveCategoryAndScopeVm.typeId || disableStatusBased === false"
+                                            id="customFileLang" type="file" #fileInput
+                                            accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf"
+                                            (change)="onFileChange($event)" multiple>
+                                        <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
+                                            class="ps-2">Upload</span>
+                                    </button>
+
+                                </div>
+
+                                <div class="attach-section col" style="width: 50px; margin-left: 20px;">
+                                    <mat-icon matBadge={{listOfFiles.length}} id="sidebarToggle"
+                                        (click)="toggleAttach()">
+                                        <span class="material-icons-outlined">ballot</span>
+                                    </mat-icon>
+                                    <div class="sidebar navbar-nav" style="display: none;"
+                                        [class.toggled]="attachToggle">
+                                        <div class="close-icon">
+                                            <div class="subHeading">Category Documents</div>
+                                            <mat-icon class="icon-close" (click)="closeAttach()">
+                                                <span class="material-icons-outlined">close</span>
+                                            </mat-icon>
+                                        </div>
+                                        @if(listOfFiles.length === 0){
+                                        <div class="smText noData">Files not available.</div>
+                                        }
+                                        @if(listOfFiles.length > 0){
+                                        <div>
+                                            @for (file of listOfFiles; track file; let idx = $index) {
+                                            <div class="upload-file-row">
+                                                <div class="d-flex flex-row align-items-top">
+
+                                                    <div style="width: fit-content;" class="subHeading2 pe-1">{{ idx+1
+                                                        }}. </div>
+                                                    <div class="subHeading2 col">
+                                                        <div style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                            @if (file.docId > 0) {
+                                                            <span class="helper-underline pointer me-1"
+                                                                style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;"
+                                                                matTooltip="{{file.fileInfo.name}}">
+                                                                {{file.fileInfo.name}}
+                                                            </span>
+                                                            <small>{{commonService.transformFileSize(file.fileInfo.size)}}</small>
+                                                            <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadFile(file.fileInfo.filePath)">download</span> ✅ Download Icon -->
+                                                            } @else{
+                                                            <span
+                                                                style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;">
+                                                                {{file.fileInfo.name}}
+                                                            </span>
+                                                            <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
+                                                            <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadFile(file.fileInfo.filePath)">download</span> ✅ Download Icon -->
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto">
+                                                        <button class="btn btn-sm smBtn btn-download"
+                                                            matTooltip="Download File"
+                                                            (click)="downloadFile(file.fileInfo.filePath)">
+                                                            <span class="material-icons-outlined">file_download</span>
+                                                        </button>
+
+                                                        <button class="btn btn-danger btn-sm smBtn"
+                                                            [disabled]="disableStatusBased === false" type="button"
+                                                            matTooltip="Delete" (click)="deleteFile(file)">
+                                                            <span class="material-icons-outlined">delete</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                        </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-danger ft-size11">Supported Formates: jpg, jpeg, gif, png, pdf</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <div class="widget-box">
+        @if (this.savaAllCategoryAndScopeVm.length > 0) {
+        <div class="table-responsive table-col-control">
+            <table class="content-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Serial #</th>
+                        <th scope="col">Parent Category</th>
+                        <th scope="col">Sub Category</th>
+                        <th scope="col">Child Category</th>
+                        <th scope="col">Type</th>
+                        <th scope="col" class="ms-4">Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (category of savaAllCategoryAndScopeVm; track category; let idx = $index) {
+
+
+                    <tr>
+                        <td> Category {{idx + 1}}</td>
+                        <td>{{category.parentCategory}}</td>
+                        <td>{{category.subCategory}}</td>
+                        <td>{{category.childCategory}}</td>
+                        <td>{{category.typeName}}</td>
+                        <td>
+                            <div>
+                                <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small"
+                                    matTooltip="Edit" (click)="editCategoryScope(idx, target)"
+                                    [disabled]="existingNotEditable === false">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button Xclass="btn btn-danger btn-sm smBtn"
+                                    [disabled]="disableStatusBased == false || existingNotEditable === false"
+                                    class="btn-small" mat-button matTooltip="Delete"
+                                    (click)="deleteCategoryScope(idx,category.fileNameId,category.categoryScopeId)">
+                                    <i class="fa fa-trash text-danger"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+        }
+    </div>
+</div>

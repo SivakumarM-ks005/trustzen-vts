@@ -1,0 +1,71 @@
+<div class="dialog-container">
+    <div mat-dialog-title>
+        <div class="col-lg-11">
+            <h3>{{ assignedUserd > 0 ? "Update Workflow Approval" : 'Workflow Approval' | translate }}</h3>
+        </div>
+        <div class="col-lg-1 text-end">
+            <button mat-icon-button mat-dialog-close>
+                <i class="material-icons" matTooltip="close">close</i>
+            </button>
+        </div>
+    </div> 
+    <mat-dialog-content>
+      <div class="Xwidget-box bg-fff">
+              <!-- <h5 class="widget-title">Header Details</h5> -->
+              <div class="widget-content">
+                <div>
+                  <form [formGroup]="initalApprovel">
+                    <table class="content-table">
+                      <thead>
+                        <tr>
+                          <th scope="col" width="10%">WF Level</th>
+                          <th scope="col" width="15%">WF Role</th>
+                          <th scope="col" width="15%">Participant Type</th>
+                          <th scope="col" width="15%">User(s)</th>
+                          <th scope="col" width="30%">Comments</th> 
+                        </tr>
+                      </thead>
+                      <tbody> 
+                        <tr class="cust-field-height">
+                          <td>1</td>
+                          <td>{{supplier?.roleName}}</td>
+                          <td>{{supplier?.typeOfOwnership}}</td>
+                          <td>
+                            <mat-form-field style="width:200px">
+                              <mat-select placeholder="" class="w-100" formControlName="assignedUser">
+                                <mat-option *ngFor="let user of usersList" [value]="user?.userId">{{user.userName |
+                                  titlecase}}</mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </td>
+                          <td>
+                            <mat-form-field appearance="fill" class="example-full-width" style="width:300px">
+                              <textarea matInput formControlName="comments" placeholder=""></textarea>
+                            </mat-form-field>
+                          </td>
+                          <!-- <td class="text-center"><mat-icon>delete</mat-icon></td> -->
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="table-footer w-100">
+                      <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                        aria-label="Select page">
+                      </mat-paginator>
+                    </div>
+                  </form>
+                </div>
+              </div>
+          </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="footer-action-btn">
+          <button    class="btn-gray" mat-dialog-close cdkFocusInitial>
+            <i class="fa fa-ban pe-2"></i>Close</button> 
+        <div class="middle-spacer"></div>
+        <button   class="btn-blue"  (click)="submit()">
+          <i class="fa fa-floppy-o pe-2"></i>Save
+        </button>
+      </div>
+    </mat-dialog-actions>
+</div> 
+ 

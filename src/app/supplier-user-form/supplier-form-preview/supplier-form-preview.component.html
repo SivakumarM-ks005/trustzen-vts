@@ -1,0 +1,1021 @@
+<div class="widget-box border-0">
+    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+        Application Preview
+        <div class="d-flex">
+            <button  class="header-level-btn-blue me-5" matTooltip="Search Tax Payer" (click)="taxPayer()"><i class="fa fa-search pe-2"></i>Search Tax Payer</button>
+
+            <a mat-button [ngClass]="!isOpen? 'show':'hide'" matTooltip="Expand All"
+                style="height: 30px; width: 30px; text-align: center;" (click)="openAccordionAll()"><i
+                    class="fa fa-expand" style="font-size: 20px;" aria-hidden="true"></i></a>
+            <a mat-button [ngClass]="isOpen? 'show':'hide'" matTooltip="Collapse All"
+                style="height: 30px ;width: 30px; text-align: center;" (click)="closeAccordionAll()"><i
+                    class="fa fa-compress" aria-hidden="true" style="font-size: 20px;"></i></a>
+        </div>
+    </h5> 
+    <div class="widget-content">
+        <mat-accordion multi class="custom-accordion ">
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep1.set(true)"
+                (closed)="panelOpenStep1.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>1. Supplier Information </mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep1()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <div class="widget-box">
+                    <h5 class="widget-title">
+                        Company Details
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-2cols">
+                            <div class="display-box">
+                                <p class="display-label">Company Name</p>
+                                <p class="display-data">{{this.supplier.companyName || 'N/A'}}</p>
+                                <p class="display-label">Company Name in Native</p>
+                                <p class="display-data">{{this.supplier.companyNameNative|| 'N/A'}}</p>
+                                <p class="display-label">Parent Company Name</p>
+                                <p class="display-data">{{this.supplier.parentCompanyName|| 'N/A'}}</p>
+                            </div>
+                            <div class="display-box">
+                                <p class="display-label">Supplier Classification</p>
+                                <p class="display-data">{{this.supplier.supplierClassification|| 'N/A'}}</p>
+                                <p class="display-label">Supplier Type</p>
+                                <p class="display-data">{{this.supplier.supplierType|| 'N/A'}}</p>
+                                <p class="display-label">Organization Website</p>
+                                <p class="display-data">{{this.supplier.organizationWebsite|| 'N/A'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <h5 class="widget-title">
+                        {{ (managementDetails?.complianceRenewalBank?.captureBusinessLicenses && managementDetails?.licenseCertificate?.length > 0) ? managementDetails?.licenseCertificate[0]?.displayLabel : "Commercial License" }} Details
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-2cols">
+                            <div class="display-box">
+                                <p class="display-label">{{ (managementDetails?.complianceRenewalBank?.captureBusinessLicenses && managementDetails?.licenseCertificate?.length > 0) ? managementDetails?.licenseCertificate[0]?.displayLabel : "Commercial License #" }}</p>
+                                <p class="display-data">{{this.supplier.commercialLicenseNo|| 'N/A'}}</p>
+                                <p class="display-label">Establishment Date</p>
+                                <p class="display-data">
+                                    {{this.supplier.establishmentDate|date:(commonService.showFormat)|| 'N/A'}}</p>
+                                <p class="display-label">Issued Date</p>
+                                <p class="display-data"> {{this.supplier.issuedDate|date:(commonService.showFormat)||
+                                    'N/A'}}</p>
+                                <p class="display-label">Expiry Date</p>
+                                <p class="display-data">{{this.supplier.expiryDate |date:(commonService.showFormat) ||
+                                    'N/A'}}</p>
+                            </div>
+                            <div class="display-box">
+                                <p class="display-label">Issued By</p>
+                                <p class="display-data">{{this.supplier.issuedBy|| 'N/A'}}</p>
+                                <p class="display-label">Type Of Ownership</p>
+                                <p class="display-data">{{this.supplier.typeOfOwnership|| 'N/A'}}</p>
+                                <p class="display-label">Location</p>
+                                <p class="display-data">{{this.supplier.location|| 'N/A'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <h5 class="widget-title">
+                        Manager in Commercial Licenses
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-2cols">
+                            <div class="display-box">
+                                <p class="display-label">First Name</p>
+                                <p class="display-data">{{this.supplier.managerFirstName|| 'N/A'}}</p>
+                                <p class="display-label">Middle Name</p>
+                                <p class="display-data">{{this.supplier.managerMiddleName|| 'N/A'}}</p>
+                                <p class="display-label">Last Name</p>
+                                <p class="display-data">{{this.supplier.managerLastName|| 'N/A'}}</p>
+                            </div>
+                            <div class="display-box">
+                                <p class="display-label">Role</p>
+                                <p class="display-data">{{this.supplier.roleName|| 'N/A'}}</p>
+                                <p class="display-label">Job Title</p>
+                                <p class="display-data">{{this.supplier.managerJobTitle|| 'N/A'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep2.set(true)"
+                (closed)="panelOpenStep2.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>2. Address Details</mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep2()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngIf="addressDetailsData.length === 0" class="noRecordsMessage">
+                    <div class="ft-size11 text-danger">No data available.</div>
+                </div>
+                <div class="widget-box" *ngFor="let address of addressDetailsData; let i = index">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
+                        Address {{ i + 1 }}
+                        @if (address.mainOffixe === true){
+                        <span class="badge text-bg-secondary ms-3">Main Office</span>
+                        }
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-30-70">
+                            <div class="display-address-box">
+                                <p class="display-label" style="margin-bottom: 0px;">Address Type</p>
+                                <p class="display-data no-colon">{{ address.addressType || 'N/A'}}</p>
+                            </div>
+                            <div class="display-address-box">
+                                <p class="display-label" style="margin-bottom: 0px;">Address</p>
+                                <p class="display-data no-colon"><span matTooltip="Address Line 1">{{ address.addressLine1 ? (address.addressLine1 + ', ') : '' }} </span> <span matTooltip="Address Line 2">{{ address.addressLine2 ? (address.addressLine2 + ', ') : ''}} </span> <span matTooltip="Address Line 3">{{ address.addressLine3 ? (address.addressLine3 + ', ') : ''}} </span> <span matTooltip="City">{{ address.cityName ? (address.cityName + ',') : ''}} </span>
+                                    <span matTooltip="State / Province">{{ address.stateName ?                                         (address.stateName + ', ') : ''}} </span>                                     <span matTooltip="Country">{{ address.countryName ?                                         (address.countryName + ', ') : ''}} </span>                                     <span matTooltip="Zip Code / Pin">{{ address.zipCode ?                                         (address.zipCode + ', ') : ''}} </span>                                     <span matTooltip="P.O. Box">{{ address.poBox ? (address.poBox +'.') : ''}}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="widget-title mt-2">
+                        Tax Details
+                    </h5>
+                    <div class="widget-content">
+                        <div class="table-responsive">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th>Count</th>
+                                        <th>Tax Type</th>
+                                        <th>Tax and Duties Registration</th>
+                                        <th>Tax Exemption</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tax of address.taxInfo; let ind = index">
+                                        <td>{{ ind + 1 }}</td>
+                                        <td>{{ tax.taxType || 'N/A'}}</td>
+                                        <td>{{ tax.registrationNumber || 'N/A'}}</td>
+                                        <td>{{ tax.taxExemption === true ? 'Yes' : 'No' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep3.set(true)"
+                (closed)="panelOpenStep3.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>3. Contact Details</mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep3()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="widget-box" *ngFor="let contact of supplierContacts; let i = index">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
+                        Contact {{ i + 1 }}
+                        <span *ngIf="contact.isPrimaryContact" class="badge text-bg-secondary ms-3">Primary
+                            Contact</span>
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-2cols">
+                            <div class="display-box">
+                                <p class="display-label">Salutation</p>
+                                <p class="display-data">{{ contact.salutation || 'N/A'}}</p>
+                                <p class="display-label">First Name</p>
+                                <p class="display-data">{{ contact.firstName|| 'N/A' }}</p>
+                                <p class="display-label">Middle Name</p>
+                                <p class="display-data">{{ contact.middleName || 'N/A'}}</p>
+                                <p class="display-label">Last Name</p>
+                                <p class="display-data">{{ contact.lastName|| 'N/A' }}</p>
+                                <p class="display-label">Job Title</p>
+                                <p class="display-data">{{ contact.jobTitle|| 'N/A' }}</p>
+                                <p class="display-label">Role</p>
+                                <p class="display-data">{{ contact.roleName ||'N/A' }}</p>
+                            </div>
+                            <div class="display-box">
+                                <p class="display-label">Phone Code</p>
+                                <p class="display-data">{{ contact.phoneCode ||'N/A' }}</p>
+                                <p class="display-label">Phone Number</p>
+                                <p class="display-data">{{ contact.phoneNumber || 'N/A' }}</p>
+                                <p class="display-label">Country Code</p>
+                                <p class="display-data">{{ contact.mobileCode || 'N/A'}}</p>
+                                <p class="display-label">Mobile Number</p>
+                                <p class="display-data">{{ contact.mobileNumber ||'N/A' }}</p>
+                                <p class="display-label">Email</p>
+                                <p class="display-data">{{ contact.email || 'N/A' }}</p>
+                                <!-- <p class="display-label">Primary Contact</p>
+                                <p class="display-data">{{ contact.isPrimaryContact|| 'N/A' }}</p> -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep4.set(true)"
+                (closed)="panelOpenStep4.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>4. Financial & Business</mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep4()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="grid-2cols">
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            Business Capability
+                        </h5>
+                        <div class="widget-content" *ngIf="financialBusinessDetails?.businessCreditInfos">
+                            <div class="display-grid-70-30">
+                                <p class="display-label">Experience History</p>
+                                <p class="display-data">{{ financialBusinessDetails.businessCreditInfos.experienceName
+                                    || 'N/A' }}</p>
+                                <p class="display-label">Currency</p>
+                                <p class="display-data">{{ FinCurrencyList[0]?.currencyName ||
+                                    'N/A' }}</p>
+                                <p class="display-label">Aggregate Value of Projects at Hand</p>
+                                <p class="display-data">{{
+                                    financialBusinessDetails.businessCreditInfos.aggregateValueProjects || 'N/A'}}</p>
+                                <p class="display-label">Max Value of Projects that you can Undertake</p>
+                                <p class="display-data">{{
+                                    financialBusinessDetails.businessCreditInfos.maxValueOfProjectUndertake ||'N/A' }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            Financial Health
+                        </h5>
+                        <div class="widget-content">
+                            <div class="display-grid-70-30">
+                                <p class="display-label">Did you make Net Profit in the last 3 years?</p>
+                                <p class="display-data">{{
+                                    financialBusinessDetails.financialHealthInfo.netProfitLast3Year ? 'Yes' : 'No' }}</p>
+                                <p class="display-label">Financial Audited statements for last 3 years?</p>
+                                <p class="display-data">{{
+                                    financialBusinessDetails.financialHealthInfo.isFinancialStatementRequired ? 'Yes' :
+                                    'No' }}</p>
+                                 <p class="display-label">
+                                    Document
+                                 </p> 
+                                 <p class="display-data">&nbsp;</p>   
+                            </div>
+                            <div class="d-flex">
+                                <!-- <p class="display-label" style="margin-bottom: 0;" >Document </p> -->
+                                
+<span class="display-data no-colon">
+    <div class="d-flex flex-row align-items-center"  *ngFor="let file of financialBusinessDetails.financialHealthInfo.financialHealthDocsInfo; let idx = index">
+        <!-- <div class="col-auto subHeading2 pe-1">{{ idx+1 }}. </div> -->
+        <div class="col subHeading2">
+            <a class="helper-underline pointer me-1" (click)="downloadFile(file.folderPath)">{{ idx+1 }}. {{file.fileName}}<!-- {{file.fileType}} --></a>
+        </div>                                   
+    </div> 
+</span> 
+ 
+   
+
+                                     
+                                        
+                                             
+                                    
+
+
+
+                                     
+                                    
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid-1-2">
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            Credit Limit
+                        </h5>
+                        <div class="widget-content">
+                            <div class="display-grid-60-40" *ngIf="financialBusinessDetails?.businessCreditInfos">
+                                <p class="display-label">Credit Limit</p>
+                                <p class="display-data">{{financialBusinessDetails.businessCreditInfos.creditLimit||
+                                    'N/A' }}</p>
+                                <p class="display-label">Credit Exposure Limit</p>
+                                <p class="display-data">{{
+                                    financialBusinessDetails.businessCreditInfos.creditExposureLimit|| 'N/A' }}</p>
+                                <p class="display-label">Project Limit</p>
+                                <p class="display-data">{{financialBusinessDetails.businessCreditInfos.projectLimit ||
+                                    'N/A'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            Project Details
+                        </h5>
+                        <div class="widget-content">
+                            <div *ngIf="financialBusinessDetails.projectDetailsInfos.length === 0"
+                                class="noRecordsMessage">
+                                <div class="smText noData">No data available.</div>
+                            </div>
+                            @if(financialBusinessDetails.projectDetailsInfos.length > 0){
+                           
+                                <div class="grid-2cols" >
+                                    <div class="display-box" *ngFor="let project of financialBusinessDetails.projectDetailsInfos">
+                                        <p class="display-label">Project Name</p>
+                                        <p class="display-data">{{ project.projectName || 'N/A'}}</p>
+                                        <p class="display-label">Project Description&nbsp;</p>
+                                        <p class="url display-data ">
+                                            {{ project.projectDescription || 'N/A' }}
+                                        </p>
+                                        <p class="display-label">Customer Name</p>
+                                        <p class="display-data">{{ project.customerName || 'N/A'}}</p>
+                                        <p class="display-label">Start Date</p>
+                                        <p class="display-data">{{ project.startDate |date:(commonService.showFormat) }}</p>
+                                        <p class="display-label">End Date</p>
+                                        <p class="display-data">{{ project.endDate ? (project.endDate | date:(commonService.showFormat)) : 'N/A' }}</p>
+                                        <p class="display-label">Country</p>
+                                        <p class="display-data">{{ project.countryName || 'N/A'}}</p>
+                                        <p class="display-label">Currency</p>
+                                        <p class="display-data">{{ project.currencyCode || 'N/A'}}</p>
+                                        <p class="display-label">Value</p>
+                                        <p class="display-data">{{ project.value || 'N/A' }}</p>
+                                    </div>                                  
+                                </div>
+                            }
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="widget-box">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        Assets and Liabilities
+                    </h5>
+                    <div class="widget-content">
+                        <div *ngFor="let assetLiab of financialBusinessDetails.assetLiabilitieInfos">
+
+                            <div class="grid-3cols">
+                                <div class="widget-box">
+                                    <h5
+                                        class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                        {{ assetLiab.description || 'N/A' }} - Year 1
+                                    </h5>
+                                    <div class="widget-content">
+                                        <div class="display-grid-3">
+                                            <div class="assets-display">
+                                                <p class="display-label">From Date</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.fromDateYear1 ? (assetLiab.fromDateYear1 |
+                                                    date:(commonService.showFormat)) :
+                                                    'N/A' }}
+                                                </p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">To Date</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.toDateYear1 ? (assetLiab.toDateYear1 |
+                                                    date:(commonService.showFormat)) : 'N/A'
+                                                    }}
+                                                </p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">Value</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.valueYear1 ? (assetLiab.valueYear1 ) : 'N/A'}}
+                                                </p>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="widget-box">
+                                    <h5
+                                        class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                        {{ assetLiab.description || 'N/A' }} - Year 2
+                                    </h5>
+                                    <div class="widget-content">
+                                        <div class="display-grid-3">
+                                            <div class="assets-display">
+                                                <p class="display-label">From Date</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.fromDateYear2 ? (assetLiab.fromDateYear2 |
+                                                    date:(commonService.showFormat)) :
+                                                    'N/A' }}
+                                                </p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">To Date</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.toDateYear2 ? (assetLiab.toDateYear2 |
+                                                    date:(commonService.showFormat)) : 'N/A'
+                                                    }}
+                                                </p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">Value</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.valueYear2 ? (assetLiab.valueYear2 ) : 'N/A'}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="widget-box">
+                                    <h5
+                                        class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                        {{ assetLiab.description || 'N/A' }} - Year 3
+                                    </h5>
+                                    <div class="widget-content">
+                                        <div class="display-grid-3">
+                                            <div class="assets-display">
+                                                <p class="display-label">From Date</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.fromDateYear3 ? (assetLiab.fromDateYear3 |
+                                                    date:(commonService.showFormat)) :
+                                                    'N/A' }}
+                                                </p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">To Date</p>
+                                                <p class="display-data">
+                                                    {{ assetLiab.toDateYear3 ? (assetLiab.toDateYear3 |
+                                                    date:(commonService.showFormat)) : 'N/A'
+                                                    }}
+                                                </p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">Value</p>
+
+                                                <p class="display-data">
+                                                    {{ assetLiab.valueYear3 ? (assetLiab.valueYear3 ) : 'N/A'}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep5.set(true)"
+                (closed)="panelOpenStep5.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        5. Bank Details
+                    </mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep5()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngIf="supplierBanks.length === 0" class="noRecordsMessage">
+                    <div class="smText noData">No data available.</div>
+                </div>
+                <div *ngFor="let bank of supplierBanks; let i = index">
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
+                            Bank {{ i + 1 }}
+                            <span *ngIf="bank.defaultBank" class="badge text-bg-secondary">Default Bank</span>
+                        </h5>
+                        <div class="widget-content">
+                            <div class="grid-3cols">
+                                <div class="display-grid-40-60">
+                                    <p class="display-label">Bank Name</p>
+                                    <p class="display-data">{{ bank.bankName || 'N/A' }}</p>
+                                    <p class="display-label">Branch</p>
+                                    <p class="display-data">{{ bank.branch || 'N/A'}}</p>
+                                    <p class="display-label">Currency</p>
+                                    <p class="display-data">{{ bank.currency || 'N/A' }}</p>
+                                    <p class="display-label">IBAN</p>
+                                    <p class="display-data">{{ bank.iban || 'N/A'}}</p>
+                                    <p class="display-label">BSB</p>
+                                    <p class="display-data">{{ bank.bSB || 'N/A' }}</p>
+                                </div>
+                                <div class="display-grid-40-60">
+                                    <p class="display-label">Routing</p>
+                                    <p class="display-data">{{ bank.routing || 'N/A' }}</p>
+                                    <p class="display-label">IFSC Code</p>
+                                    <p class="display-data">{{ bank.iFSCCode || 'N/A'}}</p>
+                                    <p class="display-label">Account</p>
+                                    <p class="display-data">{{ bank.accountNumber || 'N/A' }}</p>
+                                    <p class="display-label">Swift Code / BIC</p>
+                                    <p class="display-data">{{ bank.swiftCodeBIC ||'N/A' }}</p>
+                                </div>
+                                <div class="display-grid-40-60">
+                                    <p class="display-label">Correspondent Bank</p>
+                                    <p class="display-data">{{ bank.correspondentBank ?'Yes' : 'No' }}</p>
+                                    <p class="display-label">Default Bank</p>
+                                    <p class="display-data">{{ bank.defaultBank ? 'Yes': 'No' }}</p>
+                                    <p class="display-label">Country</p>
+                                    <p class="display-data">{{ bank.country || 'N/A' }}</p>
+                                    <p class="display-label">State</p>
+                                    <p class="display-data">{{ bank.state || 'N/A' }}</p>
+                                    <p class="display-label">City</p>
+                                    <p class="display-data">{{ bank.city || 'N/A' }}</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep6.set(true)"
+                (closed)="panelOpenStep6.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>6. Category and Scope Management</mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep6()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngIf="savaAllCategoryAndScopeVm.length === 0" class="noRecordsMessage">
+                    <div class="smText noData">No data available.</div>
+                </div>
+
+
+                @for (category of savaAllCategoryAndScopeVm; track category; let idx = $index) {
+                <div class="widget-box">
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                        Category Information {{idx + 1}}
+                    </h5>
+                    <div class="widget-content">
+                        <div class="grid-3cols" style="grid-template-columns: 0.5fr 1fr 1fr;">
+                            <div class="assets-display">
+                                <p class="display-label">Parent Category</p>
+                                <p class="display-data">{{category.parentCategory}}</p>
+                            </div>
+                            <div class="assets-display">
+                                <p class="display-label">Sub Category</p>
+                                <p class="display-data">{{category.subCategory}}</p>
+                            </div>
+                            <div class="assets-display">
+                                <p class="display-label">Child Category</p>
+                                <p class="display-data">{{category.childCategory}}</p>
+                            </div>
+                            
+                        </div>
+                        <div class="grid-3cols" style="grid-template-columns: 0.5fr 1fr 1fr;">
+                            <div class="assets-display">
+                                <p class="display-label">Type</p>
+                                <p class="display-data" *ngIf="category.typeName">{{category.typeName}}</p>
+                                <p class="display-data" *ngIf="!category.typeName">N/A</p>
+                            </div>
+                         
+                            <div class="assets-display">
+                                <p class="display-label">Description</p>
+                                <p class="display-data" *ngIf="category.description">{{category.description}}</p>
+                                <p class="display-data" *ngIf="!category.description">N/A</p>
+                            </div>
+
+                            <div class="assets-display mt-2">
+                                <p class="display-label">Attachments</p>
+                                <p class="display-data">@for (file of category.categoryAndScopeDocs; track file; let idx =  $index) {
+                                <div class="d-flex flex-row align-items-center me-3">
+                                    <div class="col-auto subHeading2 pe-1">{{idx+1}}.</div>
+                                    <div class="display-data d-flex">
+                                        <a class="helper-underline pointer me-1"
+                                            (click)="downloadFile(file.fileInfo.filePath)">
+                                            {{file.fileInfo.name}}
+                                        </a>
+                                        <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
+                                    </div>
+                                </div>
+                                }
+                            </p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                }
+
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep7.set(true)"
+                (closed)="panelOpenStep7.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>7. PQ Questionnaire</mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep7()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div *ngIf="pqQuestionnaries?.sections.length === 0" class="noRecordsMessage">
+                    <div class="smText noData">No data available.</div>
+                </div>
+
+                <div class="grid-2cols">
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            PQ Questionnaire
+                        </h5>
+                        <div class="widget-content">
+                            <div *ngFor="let section of pqQuestionnaries?.sections">
+                                <div *ngFor="let question of section?.questions">
+                                    <span class="display-label">{{ question.questions }} </span>
+                                    <span class="display-data" *ngIf="question?.userResponseOption">
+                                        {{question.userResponseOption}}
+                                    </span>
+                                    <span class="display-data"
+                                        *ngIf="question?.userResponse && question?.responseType === 'date'">
+                                        {{question.userResponse | date:(commonService.showFormat)}}
+                                    </span>
+                                    <span class="display-data"
+                                        *ngIf="question?.userResponse && question?.responseType === 'text'">
+                                        {{question.userResponse}}
+                                    </span>
+                                    <!-- <span class="display-data ms-2 pointer" *ngIf="question?.attachmentNamePath"
+                                                                        (click)="openImagePopup(question.attachmentBase64)">
+                                                                        {{question.attachmentNamePath}}
+                                                                    </span> -->
+                                    <div *ngFor="let childQuestion of question?.childQuestion">
+                                        <span class="display-label">{{ childQuestion.childQuestions }}
+                                        </span>
+                                        <span class="display-data"
+                                            *ngIf="childQuestion?.userResponseOption && childQuestion?.userResponseOption">
+                                            {{childQuestion.userResponseOption}}
+                                        </span>
+                                        <span class="display-data"
+                                            *ngIf="childQuestion?.userResponse && childQuestion?.responseType === 'date'">
+                                            {{childQuestion.userResponse|date:(commonService.showFormat)}}
+                                        </span>
+                                        <span class="display-data"
+                                            *ngIf="childQuestion?.userResponse && childQuestion?.responseType === 'text'">
+                                            {{childQuestion.userResponse}}
+                                        </span>
+                                        <span class="display-data" *ngIf="childQuestion?.attachmentPath">
+                                            {{childQuestion.attachmentPath}}
+                                        </span>
+                                        <!-- <span class="display-data ms-2 pointer"
+                                                                            *ngIf="childQuestion?.attachmentNamePath"
+                                                                            (click)="openImagePopup(childQuestion.attachmentBase64)">
+                                                                            {{childQuestion.attachmentNamePath}}
+                                                                        </span> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            Attachments
+                        </h5>
+                        <div class="widget-content">
+                            <div *ngFor="let section of pqQuestionnaries?.sections">
+                                <div *ngFor="let question of section?.questions">
+                                    <span class="display-data ms-2 pointer attachment-link" style="text-align: center;"
+                                        *ngIf="question?.attachmentNamePath"
+                                        (click)="openImagePopup(question.attachmentBase64)">
+                                        {{question.attachmentNamePath}}
+                                    </span>
+                                    <div *ngFor="let childQuestion of question?.childQuestion">
+                                        <span class="display-data ms-2 pointer attachment-link"
+                                            *ngIf="childQuestion?.attachmentNamePath"
+                                            (click)="openImagePopup(childQuestion.attachmentBase64)">
+                                            {{childQuestion.attachmentNamePath}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep8.set(true)"
+                (closed)="panelOpenStep8.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>8. Compliance</mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep8()) {
+                        } @else {
+                        <div class="status-label">
+                            Status: <span class="status-state text-success">Completed</span>
+                        </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+
+
+                <div *ngIf="licensedActivitiesAndSubActivities">
+                    <div class="widget-box">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            1. Licensed Activities and Sub-Activities
+                        </h5>
+                        <div class="widget-content">
+                            @if (licenseActivityList.length === 0){
+                            <div class="smText noData ps-1">No data available.</div>
+                            }
+
+                            <div class="table-responsive" >
+                                <table class="content-table">
+                                <thead>
+                                        <tr>
+                                            <th scope="col">Activity #</th>
+                                            <th scope="col">Activity</th>
+                                            <th scope="col">Sub Activity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (activity of licenseActivityList; track activity; let idx = $index) {
+                                        <tr>
+                                            <td>{{idx + 1}}</td>
+                                            <td>{{activity.activityName || 'N/A'}}</td>
+                                            <td>{{activity.subActivityName || 'N/A'}}</td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                       
+                        </div>
+                    </div>
+                    <div class="widget-box" *ngIf="businessLicensesAndCertificates">
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            2. Business Licenses and Certificates
+                        </h5>
+                        <div class="widget-content">
+                            @if (saveAllLicenseVm.length === 0){
+                            <div class="smText noData ps-1">No data available.</div>
+                            }
+                            @for(license of saveAllLicenseVm; track license; let idx = $index) {
+                            <div class="grid-2cols">
+                                <div class="display-grid-40-60">  
+                                    <p class="display-label">Business License</p>
+                                    <p class="display-data">{{idx + 1}}</p>
+                                    <p class="display-label">Category:</p>
+                                    <p class="display-data">{{license.categoryName || 'N/A'}}</p>
+                                    <p class="display-label">License Type:</p>
+                                    <p class="display-data">{{license.licenseTypeName || 'N/A'}}</p>
+                                    <p class="display-label">License / Certificate Name</p>
+                                    <p class="display-data">
+                                        {{license.licenseOrCertificateAccreditationNumber || 'N/A'}}
+                                    </p>
+                                    <p class="display-label">License / Certificate #
+                                    </p>
+                                    <!-- <p class="display-label">License / Certificate Accreditation#
+                                    </p> -->
+                                    <p class="display-data">
+                                        {{license.licenseOrCertificateAccreditationNumber || 'N/A'}}
+                                    </p>
+                                    <p class="display-label">Issue Date:</p>
+                                        <p class="display-data">{{license.issueDate
+                                            |date:(commonService.showFormat)}}</p>
+                                            <p class="display-label">Expiry Date:</p>
+                                            <p class="display-data">{{license.expiryDate
+                                                |date:(commonService.showFormat)}}</p>
+                                                <p class="display-label">Issuing Authority:</p>
+                                    <p class="display-data">{{license.issuingAuthority || 'N/A'}}</p>
+                                </div>
+                                <div class="display-grid-30-70">
+                                           
+                                    <p class="display-label">Issuing Country:</p>
+                                    <p class="display-data">{{license.issuingCountry || 'N/A'}}</p>
+                                    <p class="display-label">Issuing State:</p>
+                                    <p class="display-data">{{license.issuingState || 'N/A'}}</p>
+                                    <p class="display-label">Status:</p>
+                                    <p class="display-data">{{license.status || 'N/A'}}</p>
+                                    <p class="display-label">Related Activity:</p>
+                                    <p class="display-data">{{license.relatedActivity || 'N/A'}}</p>
+                                    <p class="display-label">Remarks:</p>
+                                    <p class="display-data">{{license.remarks || 'N/A'}}</p>
+                                    <p class="display-label">Attachment: </p>
+                                    <div class="display-data d-flex flex-row flex-wrap align-items-center">
+                                        @for (file of license.fileInfo; track file; let idx =
+                                        $index) {
+                                        <div class="d-flex flex-row align-items-center me-3">
+                                            <div class="col-auto subHeading2 pe-1">{{idx+1}}.
+                                            </div>
+                                            <div class="col subHeading2">
+                                                <a class="helper-underline pointer me-1"
+                                                    (click)="downloadFile(file.fileInfo.filePath)">
+                                                    {{file.fileInfo.name}}
+                                                </a>
+                                                <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
+                                            </div>
+                                        </div>
+                                        }
+                                    </div>
+                                        
+                                        <p class="display-label">Remarks:</p>
+                                        <p class="display-data">{{license.remarks || 'N/A'}}</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div *ngIf="relatedPartyInformation">
+                    <div class="widget-box">    
+                        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                            3. Related Party Disclosures
+                        </h5>
+                                <div class="widget-content">
+                                    <div class="grid-5cols">
+                                        @for (activity of saveAllRelatedPartyVm; track activity; let idx = $index) {
+                                            <div class="assets-display">
+                                                <p class="display-label">Related Party Disclosures</p>
+                                                <p class="display-data">{{idx + 1}}</p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">Related Party Details</p>
+                                                <p class="display-data">{{activity.relatedPartyDetails || 'N/A'}}</p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">% Of Ownership</p>
+                                                <p class="display-data">{{activity.percentOfOwnership}}</p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">Type of Relationship</p>
+                                                <p class="display-data">{{activity.typeofRelationship ||
+                                                    'N/A'}}</p>
+                                            </div>
+                                            <div class="assets-display">
+                                                <p class="display-label">Start Date</p>
+                                                <p class="display-data">{{activity.startDate
+                                                    |date:(commonService.showFormat)}}</p>
+                                            </div>                                               
+                                            }
+                                    </div>
+                                </div>
+                        </div>
+                    
+                </div>
+            </div>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel [expanded]="isOpen" (opened)="panelOpenStep9.set(true)"
+                (closed)="panelOpenStep9.set(false)">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>9. Attachment</mat-panel-title>
+                    <mat-panel-description class=" justify-content-end">
+                        @if (panelOpenStep9()) {
+                        } @else {
+                            <div class="status-label">
+                                Status: <span class="status-state text-success">Completed</span>
+                            </div>
+                        }
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                  
+                        <div class="widget-box">    
+                            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                Mandatory Attachment 
+                            </h5>
+                                    <div class="widget-content">
+                                        <div class="table-responsive" >
+                                            <table class="content-table">
+                                              <thead>
+                                                  <tr>
+                                                      <th scope="col">Serial #</th>
+                                                      <th scope="col">Type</th>
+                                                      <th scope="col">Uploaded By</th>
+                                                      <th>Uploaded Date</th>
+                                                      <th>Description</th>
+                                                      <th>Attachment</th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody>
+                                                @for(manAttach of manAttachmentDetail; track manAttach; let idx = $index) {
+                                                  <tr >
+                                                    <td>{{ idx+1 }}</td>
+                                                    <td>{{manAttach.attachmentType || 'N/A'}}</td>
+                                                    <td>{{manAttach.uploadedUserName || 'N/A'}}</td>
+                                                    <td>{{manAttach.uploadedDate
+                                                        |date:(commonService.showFormat)}}</td>
+                                                    <td>{{manAttach.description || 'N/A'}}</td>
+                                                    <td>
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            @for (file of manAttach.fileInfo; track file; let idx = $index) {
+                                                            <div class="col-auto subHeading2 pe-1">{{ idx+1 }}.</div>
+                                                            <div class="col subHeading2">
+                                                                <a class="helper-underline pointer me-1"
+                                                                    (click)="downloadFile(file.fileInfo.filePath)">
+                                                                    {{file.fileInfo.name}}
+                                                                </a>
+                                                                <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
+                                                            </div>
+                                                            }
+                                                        </div>
+                                                    </td>
+
+                                                  </tr>
+                                                }
+                                              </tbody>
+                                          </table>
+                                      </div>  
+                                       
+                                    </div>
+                            </div>
+
+                @if(optionalAttachFlag){
+               
+                   
+                        <div class="widget-box">    
+                            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                                Optional Attachment
+                            </h5>
+                                    <div class="widget-content">
+                                        <div class="table-responsive" >
+                                            <table class="content-table">
+                                              <thead>
+                                                  <tr>
+                                                      <th scope="col">Serial #</th>
+                                                      <th scope="col">Type</th>
+                                                      <th scope="col">Uploaded By</th>
+                                                      <th>Uploaded Date</th>
+                                                      <th>Description</th>
+                                                      <th>Attachment</th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody>
+                                                @for(optAttach of optAttachmentDetail; track optAttach; let idx = $index) {
+                                                  <tr >
+                                                    <td>{{idx + 1}}</td>
+                                                    <td>{{optAttach.attachmentType || 'N/A'}}</td>
+                                                    <td>{{optAttach.uploadedUserName || 'N/A'}}</td>
+                                                    <td>{{optAttach.uploadedDate
+                                                        |date:(commonService.showFormat)}}</td>
+                                                    <td>{{optAttach.description}}</td>
+                                                    <td>
+                                                        <div class="d-flex flex-row align-items-center">
+                                                            @for (file of optAttach.fileInfo; track file; let idx = $index) {
+                                                            <div class="col-auto subHeading2 pe-1">{{ idx+1 }}.</div>
+                                                            <div class="col subHeading2">
+                                                                <a class="helper-underline pointer me-1"
+                                                                    (click)="downloadFile(file.fileInfo.filePath)">
+                                                                    {{file.fileInfo.name}}
+                                                                </a>
+                                                                <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
+                                                            </div>
+                                                            }
+                                                        </div>
+                                                    </td>
+
+                                                  </tr>
+                                                }
+                                              </tbody>
+                                          </table>
+                                      </div>  
+                                       
+                                    </div>
+                            </div>
+                  
+                    }
+                
+            </mat-expansion-panel>
+
+        </mat-accordion>
+    </div>
+    </div>
+
+    <!-- Popup Modal -->
+    <!-- <div  class="popup-overlay" (click)="closePopup()"> -->
+    <div class="popup-container" *ngIf="showPopup" (click)="$event.stopPropagation()">
+        <button class="close-btn" (click)="closePopup()">×</button>
+        <iframe [src]="popupImage" frameborder="0" width="300%" height="500px"></iframe>
+    </div>
+    <!-- </div> -->
+     

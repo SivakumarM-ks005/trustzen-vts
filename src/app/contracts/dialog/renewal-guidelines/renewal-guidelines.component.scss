@@ -1,0 +1,27 @@
+.guideline {
+    display: grid;
+    grid-template-columns: 27% 27% 46%;
+    //grid-gap: 10px;
+}
+
+.commonDialogWidget {
+    margin: 8px;
+}
+
+.preLabel {
+    font-size: 12px;
+    font-weight: normal;
+}
+p {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+.mat-typography p.preData {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+.col-grid {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}

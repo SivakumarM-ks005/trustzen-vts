@@ -1,0 +1,119 @@
+<div class="common-widgets">
+    <div mat-dialog-title class="d-flex flex-row justify-content-start align-items-center">
+        <div class="col">{{ "Supplier Entity Assignment" | translate }}</div>
+        <button mat-icon-button  mat-dialog-close>
+            <i class="material-icons" matTooltip="close">close</i>
+        </button>
+       </div>
+
+<mat-dialog-content>
+
+    <div class="d-flex flex-row flex-wrap align-items-top">
+        <div class="col-md-12">
+            <div class="borderBox">
+                <div class="boxHeader">
+                    <div class="subHeading">Header Details</div>
+                </div>
+                <div class="boxBody">
+                    <div class="d-flex flex-row flex-wrap justify-content-start align-items-center">
+                        <div class="d-flex flex-row w-100">
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Template ID</mat-label>
+                                <p class="preData">FY2024-2025</p>
+                            </div>
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Template Name</mat-label>
+                                <p class="preData">Build Max FY2024-2025</p>
+                            </div>
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Create Date</mat-label>
+                                <p class="preData">01-Nov-2024</p>
+                            </div>
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Contract Type</mat-label>
+                                <p class="preData">Expense Contract</p>
+                            </div>
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Contract Classification</mat-label>
+                                <p class="preData">Development Progress</p>
+                            </div>
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Amend Date</mat-label>
+                                <p class="preData">10-Nov-2024</p>
+                            </div>
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Versions</mat-label>
+                                <p class="preData">1.0</p>
+                            </div>
+                            <div class="col col-separator">
+                                <mat-label class="preLabel">Decription</mat-label>
+                                <p class="preData">Initiated</p>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-2">
+            <div class="borderBox">
+                <div class="boxHeader">
+                    <div class="subHeading">Assign Entity</div>
+                </div>
+                <div class="boxBody p-0">
+                    <div class="d-flex flex-row flex-wrap justify-content-start align-items-center comman-table-style">
+                        <table class="table table-flush normal-table">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col">Serial #</th>
+                                <th scope="col">Entity Code</th>
+                                <th scope="col">Entity Name</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Reason</th>
+                                <th scope="col">Description</th>
+                                <th scope="col"><div class="d-flex w-100 justify-content-between ms-1 me-2"><input  type="checkbox"> Assign All </div></th>
+                              </tr>
+                            </thead>
+                            <tbody class="list">
+                              <tr>
+                                <td>1</td>
+                                <td>ATC001</td>
+                                <td>Asian Trading Company</td>
+                                <td> <span class="badge text-bg-success ms-1 px-2">Active</span></td>
+                                <td></td>
+                                <td>Electronics items seller</td>
+                                <td class="text-center"> <input type="checkbox"></td>
+                              </tr>
+                              <tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>BA098</td>
+                                    <td>Best appliances</td>
+                                    <td> <span class="badge text-bg-success ms-1 px-2">Active</span></td>
+                                    <td></td>
+                                    <td>Industry equipments</td>
+                                    <td class="text-center"> <input type="checkbox"></td>
+                                  </tr>
+                                  <tr>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <div class="table-footer">
+                            <mat-paginator [length]="100" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"
+                              aria-label="Select page">
+                            </mat-paginator>
+                          </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button  >
+        Submit
+    </button>
+    <button mat-stroked-button color="warn" mat-dialog-close cdkFocusInitial>Close</button>
+  </mat-dialog-actions>
+</div>

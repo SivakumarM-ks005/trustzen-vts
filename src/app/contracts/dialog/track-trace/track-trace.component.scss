@@ -1,0 +1,13 @@
+.tt-box {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 0 5%;
+    p {
+        display: flex;
+    }
+}
+
+.w-75px {
+    display: block;
+    width: 75px !important;
+}

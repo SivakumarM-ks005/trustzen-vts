@@ -1,0 +1,24 @@
+<!-- Loading progress start -->
+<!-- *ngIf="show" [fullScreen]="true"-->
+<!-- @if (show) {
+<mat-progress-bar mode="query">
+
+</mat-progress-bar>
+} -->
+
+
+<router-outlet>
+    <!-- <mat-progress-bar mode="query"></mat-progress-bar> -->
+    <!-- <app-progress-bar></app-progress-bar> -->
+     <!-- <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <div class="spinner-container">
+        <mat-progress-spinner  diameter="50"></mat-progress-spinner>
+        </div>
+     </div> -->
+
+     <div class="loader" *ngIf="loaderService.isLoading | async">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <div class="loader-letter">Loading....</div>
+    </div>
+</router-outlet>

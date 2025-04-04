@@ -1,0 +1,252 @@
+<div class="content-container">
+    <div class="bread-crumbs">
+        <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Contract Management</h2>
+    </div>
+    <div class="content-box p-2">
+        <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                Contract Creation
+                <div>
+                <button   class="header-level-btn-blue">History of Review
+                    Tracking</button>
+                <button   class="header-level-btn-blue ms-2">Track & Trace</button>
+            </div>
+            </h5>
+            <div class="widget-content">
+                <div class="widget-box">    
+                    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+                       Header
+                    </h5>
+                            <div class="widget-content">
+                                <div class="grid-5cols">
+                                    <mat-form-field>
+                                        <mat-label>Company Name</mat-label>
+                                        <mat-select matTooltip="Select Contract Type">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Expense contract">Info System</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Level 1</mat-label>
+                                        <mat-select matTooltip="Select Contract Type">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Expense contract">Info Level1</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Level 2</mat-label>
+                                        <mat-select matTooltip="Select Contract Type">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Expense contract">Info Level2</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Level 3</mat-label>
+                                        <mat-select matTooltip="Select Contract Type">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Expense contract">Info Level3</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Level 4</mat-label>
+                                        <mat-select matTooltip="Select Contract Type">
+                                            <mat-option value="">-- Please Select --</mat-option>
+                                            <mat-option value="Expense contract">Info Level4</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                    </div>
+               
+            </div>
+            <div class="p-2">
+            <mat-accordion class="custom-accordion">
+                <mat-expansion-panel [expanded]="isAccordionState">
+                    <mat-expansion-panel-header class="accordion-cust-header">
+                        <mat-panel-title class="custom-panel-header">Header Details</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="grid-5cols">
+                        <mat-form-field>
+                            <mat-label>Source Txn</mat-label>
+                            <mat-select matTooltip="Select Source" placeholder="Direct">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="Expense contract">Direct</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Source Txn Ref #</mat-label>
+                            <input matInput placeholder="">
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Contract #</mat-label>
+                            <input matInput placeholder="CN/20244" formControlName="Version">
+                        </mat-form-field>
+                        <mat-form-field class="version">
+                            <mat-label>Version</mat-label>
+                            <input matInput placeholder="1.0">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Creation Date</mat-label>
+                            <input matInput [matDatepicker]="dp1" placeholder="01-Nov-2024" value="">
+                            <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+                            <mat-datepicker #dp1></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Contract Admin</mat-label>
+                            <mat-select placeholder="Sam Williams">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="Expense contract">Sam Williams</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Contract Name</mat-label>
+                            <input matInput placeholder="Contract Serve">
+                        </mat-form-field>
+                        <mat-form-field class="description">
+                            <mat-label>Description</mat-label>
+                            <input matInput placeholder="Contract Serve Contract Serve">
+                        </mat-form-field>
+
+
+                        <mat-form-field>
+                            <mat-label>Start Date</mat-label>
+                            <input matInput [matDatepicker]="dp2" placeholder="05-Nov-2024" value="">
+                            <mat-datepicker-toggle matSuffix [for]="dp2"></mat-datepicker-toggle>
+                            <mat-datepicker #dp2 required></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>End Date</mat-label>
+                            <input matInput [matDatepicker]="dp3" placeholder="31-Dec-2024" value="">
+                            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                            <mat-datepicker #dp3 required></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Functional Currency</mat-label>
+                            <mat-select placeholder="USD">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="Expense contract">USD</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Contract Classification</mat-label>
+                            <mat-select placeholder="General">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="Expense contract">General</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Contract Type</mat-label>
+                            <mat-select placeholder="Expense Contract">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="">Expense Contract</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Spend Type</mat-label>
+                            <mat-select placeholder="Expense Contract">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="">Expense Contract</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Template ID</mat-label>
+                            <mat-select placeholder="Temp0001">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="">Temp0001</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="grid-5cols">
+                        <mat-form-field>
+                            <mat-label>Parent Category</mat-label>
+                            <mat-select placeholder="Information Technology">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value=""></mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Sub Category</mat-label>
+                            <mat-select placeholder="Application Support Service">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="">Application Support Service</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Child Category</mat-label>
+                            <mat-select placeholder="IBM Maximo">
+                                <mat-option value="">-- Please Select --</mat-option>
+                                <mat-option value="">IBM Maximo</mat-option>
+                            </mat-select>
+                        </mat-form-field>                       
+                    </div>
+                <div class="grid-5cols">
+                    <mat-checkbox class="coloumn-fix" checked>Allow Partial Response</mat-checkbox>
+                    <mat-checkbox class="coloumn-fix" checked>Allow Substitute Items</mat-checkbox>
+                    <mat-checkbox class="coloumn-fix" checked>Child Contract</mat-checkbox>                   
+                </div>
+
+                </mat-expansion-panel>
+            </mat-accordion>
+            <mat-accordion class="custom-accordion">
+                <mat-expansion-panel class="cust-panel">
+                    <mat-expansion-panel-header class="accordion-cust-header">
+                        <mat-panel-title class="custom-panel-header">Details</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <mat-tab-group class="horizontalTab mt-2">
+                        <mat-tab label="Parties in Transaction">
+                            <app-party-information></app-party-information>
+                        </mat-tab>
+                        <mat-tab label="Roles & Responsibilities">
+                            <app-roles-responsibilities></app-roles-responsibilities></mat-tab>
+                        <mat-tab label="Standard - T & C">
+                            <div class="p-2">
+                                <app-terms-condition></app-terms-condition>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Transaction Specific - T & C">
+                            <app-transaction-specific-tc></app-transaction-specific-tc>
+                        </mat-tab>
+                        <mat-tab label="Commercials">
+                            <app-commercials></app-commercials>
+                        </mat-tab>
+                        <mat-tab label="Milestone">
+                            <app-milestone></app-milestone>
+                        </mat-tab>
+                        <mat-tab label="Compliance">
+                            <app-compliance></app-compliance>
+                        </mat-tab>
+                        <mat-tab label="Documents">
+                            <app-documents></app-documents>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <mat-accordion class="custom-accordion">
+                <mat-expansion-panel class="cust-panel">
+                    <mat-expansion-panel-header class="accordion-cust-header">
+                        <mat-panel-title class="custom-panel-header">Approval Workflow</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="pq-score-card">
+                        <app-workflow-history></app-workflow-history>
+                    </div>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+        </div>
+    </div>
+
+
+<div class="footer-action-btn">
+    <button   class="btn-gray" (click)="contarctRep()"><i
+            class="fa fa-arrow-left-o pe-2"></i>Cancel</button>
+    <div class="middle-spacer"></div>
+    <button mat-stroked-button  class="btn-blue"><i class="f fa-floppy-o pe-2"></i>Save as Draft</button>
+    <!-- <span class="me-2"></span>
+    <button  >Initiate Internal Review</button>
+    <span class="me-2"></span>
+    <button  >Initiate Review with Supplier</button>
+    <span class="me-2"></span>
+    <button   (click)="freezeTemplate()">Freeze Contract</button> -->
+</div>

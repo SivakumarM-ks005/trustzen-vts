@@ -1,0 +1,60 @@
+.logout-dialog {
+    width: 400px;
+    padding: 16px;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .dialog-title {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .dialog-message {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #555;
+    padding: 10px 0;
+  }
+  
+  .warning-icon {
+    margin-right: 10px;
+    color: #ff9800; /* Yellow warning icon */
+  }
+  
+  mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 8px 16px;
+    font-weight: 500;
+  }
+  
+  button:hover {
+    background-color: #f1f1f1;
+  }
+  
+  button.mat-button.color-primary {
+    background-color: #3f51b5;
+    color: white;
+  }
+  
+  button.mat-button.color-warn {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  button.mat-button.color-primary:hover {
+    background-color: #303f9f;
+  }
+  
+  button.mat-button.color-warn:hover {
+    background-color: #d32f2f;
+  }
+  

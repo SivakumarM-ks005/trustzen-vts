@@ -1,0 +1,48 @@
+.header {
+    display: grid;
+    grid-template-columns: 15% 35% 25% 25%; 
+}
+
+.commonDialogWidget {
+    margin: 8px;
+}
+
+.preLabel {
+    font-size: 12px;
+    font-weight: normal;
+}
+p {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+.mat-typography p.preData {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+
+.col-grid {
+    display: grid;
+    grid-template-columns: 25%  25%  25%  25%;
+    align-items: center;
+}
+
+.col-grid {
+    display: grid;
+    grid-template-columns: 25%  25%  25%  25%;
+    align-items: center;
+}
+
+.cancel-text-height{
+    textarea {
+        height: 25px !important;
+    }
+} 
+
+.row-2nd {
+    display: grid;
+    grid-template-columns: 33% 33% 34%;
+    align-items: center;
+}
+.mxw-120 {
+    width: 120px;
+}

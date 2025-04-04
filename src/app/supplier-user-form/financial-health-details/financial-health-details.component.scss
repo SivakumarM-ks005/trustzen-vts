@@ -1,0 +1,153 @@
+@import "../../../--theme-variables.scss";
+
+// below classes moved in to procurezen-theme.scss
+// .toggled {
+
+//   display: block !important;
+//   position: absolute;
+//   right: 0;
+//   border: 1px solid #ccc;
+//   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+//   border-radius: 3px;
+//   min-width: 300px;
+//   min-height: auto;
+//   padding: 0px;
+//   background:white ;
+//   z-index: 99999;
+  
+//   .close-icon{
+//       position: relative;
+//       height: 25px;
+//       width: 100%;
+//       margin-bottom: 0px;
+//       border-bottom: 1px solid #ccc;
+//       background: #e6f1ff;
+//       .icon-close{
+//           position: absolute; 
+//           right: -5px;
+//           top: -4px;
+//       }
+//       .mat-icon {
+//           .material-icons-outlined {
+//               font-size: 13px;
+//               cursor: pointer;
+//           }
+//       }
+//       .subHeading {
+//         padding: 0px 10px;
+//         font-weight: 500;
+//         color: #202020;
+//       }
+//   }
+//   .upload-file-row {
+//       padding: 3px 10px 0px 10px;
+//       border-bottom: 1px solid #ccc;
+//   }
+//   &:first-child {
+//     border-bottom: none !important;
+//     padding-top: 50px !important;
+//   }
+//   &:last-child {
+//     border-bottom: none !important;
+//     padding-bottom: 0px !important;
+//   }
+// }
+
+  .financial-section{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    .profit-check {
+        width: fit-content;
+        text-align: left;
+    }
+    .statement-upload {
+        display: flex;
+        justify-content: space-between;
+        width: fit-content;
+        text-align: left;
+    }
+    
+    .custom-file-upload {
+        position: relative;
+        display: flex;
+        margin-top: -20px;
+        text-align: center;
+        width: 125px;
+        .hindText {
+          right: -50px;
+          width: 210px;
+            position: absolute;
+            bottom: -25px;
+            z-index: 9999;
+        }
+     }
+    
+  }
+
+  @media (max-width:900px) {
+    .financial-section{ 
+        flex-direction: column !important;
+        align-items: start;
+        .custom-file-upload {
+            margin: 10px 0 !important;
+        }
+        .custom-file-upload {
+            .hindText {
+                left: 57px;
+            }
+        }
+    }
+}
+
+
+.project-panel {
+  margin-bottom: 8px;
+  .mat-expansion-panel-header-title,
+  .mat-expansion-panel-header-description {
+    flex-basis: 0;
+  }
+  .mat-expansion-panel-header {
+      background: $AliceBlue !important;
+      font-size: 13px !important;
+      height: 30px;
+      display: flex;
+      align-items: center;
+
+      background: #A1E3F9 !important;
+      font-size: 13px !important;
+      height: 30px;  
+      font-weight: 400 !important;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .my-panel { 
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+    } 
+    .my-panel button {
+      margin-right: 20px;
+       .fa {
+          color: red;
+       }
+      } 
+    
+}
+
+// for Project details 
+.del-icon-position {
+  
+  a .material-icons-outlined {
+      padding-right: 5px;
+      position: relative;
+      top: 4px;
+      font-size: 22px; 
+      color: rgba(255, 29, 29, 1) !important;
+    } 
+}
+

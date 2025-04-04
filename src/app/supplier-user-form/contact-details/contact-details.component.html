@@ -1,0 +1,230 @@
+
+  <div class="widget-box">
+
+    <h5 style="height: 35px;" class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+      Supplier Contact Information <span *ngIf="NextButtonValidation()"></span>
+      <div class="w-25 justify-content-end text-right d-flex">
+        <button class="header-level-btn-gray me-2" [disabled]="disableStatusBased == false"
+          *ngIf="SecondarycontactDetails[0]?.firstContactFlag !== true && ClearValues()" (click)="resetForm()">
+          <i class="fa fa-refresh pe-2" aria-hidden="true"></i>Clear</button>
+        <!-- <button [disabled]="disableStatusBased == false || !contactForm.valid" class="header-level-btn-blue" matTooltip="Save address details"
+          (click)="saveUpdateContact()">
+          <i class="fa fa-floppy-o pe-2" aria-hidden="true"></i> {{editFlag == true ? 'Update' :'Save'}}
+        </button> -->
+      </div>
+    </h5>
+
+    <form [formGroup]="contactForm" #target class="me-2">
+    <div class="widget-content">
+      <div class="grid-4cols">
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !contactForm.get('salutationId')?.hasError('required')){
+            Salutation
+            }
+            @if(isSubmitted && contactForm.get('salutationId')?.hasError('required')){
+              <span class="error-msg"> Salutation Name is required.</span>
+              }
+          </mat-label>
+          <mat-select formControlName="salutationId" required matTooltip="Select Salutation"
+            (selectionChange)="enablePrimaryContactButton()">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let salutation of suppliersalutation" [value]="salutation.salutationId">
+              {{ salutation.salutationName }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="contactForm.get('salutationId')?.hasError('required')">
+            Salutation Name is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !contactForm.get('firstName')?.hasError('required')){
+              First Name
+              }
+              @if(isSubmitted && contactForm.get('firstName')?.hasError('required')){
+                <span class="error-msg"> First name is required.</span>
+                }
+              </mat-label>
+          <input matInput appOnlyAllowedSymbol matTooltip="Enter the first name" formControlName="firstName" required
+            (change)="enablePrimaryContactButton()">
+          <!-- <mat-error *ngIf="contactForm.get('firstName')?.hasError('required')">
+            First name is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>Middle Name</mat-label>
+          <input matInput appOnlyAllowedSymbol matTooltip="Enter the middle name" formControlName="middleName">
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !contactForm.get('lastName')?.hasError('required')){
+              Last Name
+              }
+              @if(isSubmitted && contactForm.get('lastName')?.hasError('required')){
+                <span class="error-msg"> Last name is required.</span>
+                }
+                </mat-label>
+          <input matInput appOnlyAllowedSymbol matTooltip="Enter the last name" formControlName="lastName" required
+            (change)="enablePrimaryContactButton()">
+          <!-- <mat-error *ngIf="contactForm.get('lastName')?.hasError('required')">
+            Last name is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !contactForm.get('jobTitle')?.hasError('required')){
+              Job Title
+              }
+              @if(isSubmitted && contactForm.get('jobTitle')?.hasError('required')){
+                <span class="error-msg"> Job title is required.</span>
+                }
+               </mat-label>
+          <input matInput matTooltip="Enter the job title" formControlName="jobTitle" required
+            (change)="enablePrimaryContactButton()">
+          <!-- <mat-error *ngIf="contactForm.get('jobTitle')?.hasError('required')">
+            Job title is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !contactForm.get('roleId')?.hasError('required')){
+              Role
+              }
+              @if(isSubmitted && contactForm.get('roleId')?.hasError('required')){
+                <span class="error-msg"> Role Name is required.</span>
+                }
+                </mat-label>
+          <mat-select formControlName="roleId" required matTooltip="Select Role"
+            (selectionChange)="enablePrimaryContactButton()">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let role of supplierRole" [value]="role.roleId">
+              {{ role.roleName }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="contactForm.get('roleId')?.hasError('required')">
+            Rolename is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !contactForm.get('email')?.hasError('required')){
+              Email
+              }
+              @if(isSubmitted && contactForm.get('email')?.hasError('required')){
+                <span class="error-msg">Company Email is required.</span>
+                }
+                @if(isSubmitted && contactForm.get('email')?.hasError('pattern')){
+                  <span class="error-msg">Please enter a valid email address.</span>
+                  }
+                </mat-label>
+          <input matInput matTooltip="Enter the email" formControlName="email" (change)="enablePrimaryContactButton()">
+          <!-- <mat-error *ngIf="contactForm.get('email')?.hasError('required')">
+            Company Email is required.
+          </mat-error>
+          <mat-error *ngIf="contactForm.get('email')?.hasError('pattern')">
+            Please enter a valid email address.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>Country Code</mat-label>
+          <mat-select formControlName="phoneCode" (selectionChange)="onCountryCodeChange($event.value, contactForm)"
+            matTooltip="Select Country Code">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let country of supplierPhoneCode" [value]="country.landNumberCode">
+              {{ country.countryCode | uppercase }} +{{ country.landNumberCode }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>Work Phone #</mat-label>
+          <input matInput matTooltip="Enter the work phone #" (keypress)="allowOnlyNumbers($event)"
+            formControlName="phoneNumber" maxlength="10">
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            
+            @if(!isSubmitted || !contactForm.get('mobileCode')?.hasError('required')){
+              Country Code
+              }
+              @if(isSubmitted && contactForm.get('mobileCode')?.hasError('required')){
+                <span class="error-msg">Country code is required.</span>
+                }
+                </mat-label>
+          <mat-select formControlName="mobileCode" required
+            (selectionChange)="onCountryMobilePhoneChange($event.value, contactForm)" matTooltip="Select Country Code"
+            (selectionChange)="enablePrimaryContactButton()">
+            <mat-option value="">-- Please Select --</mat-option>
+            <mat-option *ngFor="let country of supplierPhoneCode" [value]="country.mobileCode">
+              {{ country.countryCode | uppercase}} +{{ country.mobileCode }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error *ngIf="contactForm.get('mobileCode')?.hasError('required')">
+            Country code is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-form-field class="col">
+          <mat-label>
+            @if(!isSubmitted || !contactForm.get('mobileNumber')?.hasError('required')){
+              Mobile Phone #
+              }
+              @if(isSubmitted && contactForm.get('mobileNumber')?.hasError('required')){
+                <span class="error-msg">Mobile number is required.</span>
+                }
+              </mat-label>
+          <input matInput matTooltip="Enter the mobile phone #" (keypress)="allowOnlyNumbers($event)"
+            formControlName="mobileNumber" required maxlength="10" (change)="enablePrimaryContactButton()">
+          <!-- <mat-error *ngIf="contactForm.get('mobileNumber')?.hasError('required')">
+            Mobile number is required.
+          </mat-error> -->
+        </mat-form-field>
+        <mat-checkbox  class="mt-3" (click)="checkprimaryContact()" formControlName="isPrimaryContact">Primary Contact</mat-checkbox>
+      </div>
+    </div>
+  </form>
+  </div>
+
+<div class="widget-box me-2" >
+  <div class="table-responsive table-col-control" >
+    <table class="content-table">
+      <thead>
+          <tr class="thead-light">
+              <th scope="col">Serial #</th>
+              <th scope="col" >Primary Contact</th>
+              <th scope="col" >Name</th>
+              <th scope="col">Job Title </th>
+              <th scope="col">Role Name</th>
+              <th scope="col">Contact Details</th>
+              <th scope="col" width="10%">Action</th>
+          </tr>
+      </thead>
+      <tbody class="list" *ngFor="let contact of SecondarycontactDetails; let i = index">
+          <tr *ngIf="!contact?.firstContactFlag">
+            <td>Contact {{i + 1}}</td>
+            <td>
+              <!-- <span *ngIf="contact.isPrimaryContact"
+              class="badge text-bg-secondary">Primary Contact
+            
+            </span> -->
+            
+              <mat-checkbox *ngIf="contact.isPrimaryContact" [checked]="contact.isPrimaryContact" [disabled]="contact.isPrimaryContact">
+              </mat-checkbox>
+          
+             </td>
+           <td>{{ contact.salutationName +' '+ contact.firstName +' '+contact.lastName}}</td>
+           <td>{{ contact.jobTitle  }}</td>
+           <td>{{ contact.roleName }}</td>
+           <td>{{ contact.mobileNumber }}</td>
+           <td>
+                <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small"
+              (click)="EditContact(target,contact , i)" matTooltip="Edit"><i class="fa fa-edit"></i>
+            </button>
+            <button [disabled]="editFlag == true" (click)="deletePopUp(i)" *ngIf="!contact.isPrimaryContact" mat-button
+              Xclass="btn btn-danger btn-sm smBtn" class="btn-small" matTooltip="Delete">
+             <i class="fa fa-trash text-danger"></i>
+            </button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+</div>
