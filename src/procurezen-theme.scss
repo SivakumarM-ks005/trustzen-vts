@@ -3998,8 +3998,8 @@ a {
 @media only screen and (min-width : 1024px) and (max-width : 1440px) {
      
     html, body {
-        overflow-y: scroll !important;
-        background-color: #fff;
+        // overflow-y: scroll !important;
+        // background-color: #fff;
     } 
     .mat-toolbar-single-row {
          padding: 0px 34px !important;
@@ -4007,15 +4007,15 @@ a {
     .main-content {
          padding: 10px 35px !important;
         .body-content {
-            // grid-template-columns: 67% 32% !important;
+            grid-template-columns: 67% 32% !important;
         }
         .welecome-title  {
-            font-size: 28px !important; 
-            line-height: 20px !important; 
-            padding-top: 15px;
+            // font-size: 28px !important; 
+            // line-height: 20px !important; 
+            // padding-top: 15px;
         }
         .caption {
-            font-size: 24px !important; 
+            font-size: 20px !important; 
             line-height: 22px !important; 
         }        
         
