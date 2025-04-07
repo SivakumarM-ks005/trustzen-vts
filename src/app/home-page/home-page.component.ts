@@ -33,7 +33,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 })
 export class HomePageComponent {
   SupplierlogInForm!: FormGroup;
-  selectedLanguage = "en";
+
   isRtl: boolean = false;
   logInDetails: any;
   agreeDownloadCenter: boolean = false;
@@ -77,17 +77,11 @@ export class HomePageComponent {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
-  switchLanguage(language: string) {
-    this.isRtl = language === "ar";
-    this.languageService.setLanguage(language);
-  }
-
   login_custom() {
     this.route.navigate(["/krya/dashboard-menu"]);
   }
 
   registrationPopUp() {
-    if (this.agreeDownloadCenter) {
       this.dialog.open(SupplierRegistrationComponent, {
         disableClose: true,
         hasBackdrop: true,
@@ -97,9 +91,7 @@ export class HomePageComponent {
         position: { top: "calc(1vw + 20px)" },
         panelClass: "popUpMiddle"
       });
-    }
   }
-
   ForgotPasswordPopUp() {
     this.dialog.open(ForgotPasswordComponent, {
       disableClose: true,
@@ -111,7 +103,6 @@ export class HomePageComponent {
       panelClass: "forgot-popup"
     });
   }
-
   onForgotPswdSubmit() {
     this.ForgotPasswordPopUp();
   }
