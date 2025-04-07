@@ -1,437 +1,455 @@
 <div [ngClass]="{ rtl: isRtl, ltr: !isRtl }">
-  <mat-toolbar class="mat-header">
-     <img src="assets/Trustzen-Logo.png" alt="ProcureZEN" style="height: 35px;">
-     <span class="example-spacer"></span>
-     <div class="cust-field-height">
-        <mat-form-field class="languageSelect">
-           <span class="mat-spanTooltip">
-              <mat-label matTooltip="Select language">
-                 <span class="material-icons-outlined">translate</span>
-                 <!-- <i class="fa fa-language" aria-hidden="true"></i> -->
-              </mat-label>
-           </span>
-           <!-- Test <span class="material-icons-outlined">translate</span> -->
-           <mat-select (selectionChange)="switchLanguage($event.value)" class="pull-right" class="text-right"
-           [(value)]="selectedLanguage" matTooltip="Select language">
-           <mat-option value="">-- Please Select --</mat-option>
-           <mat-option value="en">English</mat-option>
-           <mat-option value="ar">العربية</mat-option>
-           <!-- <mat-option value="ta">தமிழ்</mat-option> -->
-           </mat-select>
-        </mat-form-field>
-     </div>
-  </mat-toolbar>
-  <div class="col-lg-12 main-content">
-     <h1 class="welecome-title">trustzen</h1>
-     <h2 class="caption">Helping Organizations Across The Globe In Making 'SMART' AND 'SAFE' Hiring Decisions...</h2>
-     <div class="body-content">
-        <div class="content">
-           <p class="paragraph">
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-              standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-              make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-              typesetting, remaining essentially unchanged Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
-              printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
-              centuries, but also the leap into electronic typesetting, remaining essentially unchanged Lorem Ipsum is
-              simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-              text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-              specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-              remaining essentially unchanged Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-              galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but
-              also the leap into electronic typesetting, remaining essentially unchanged
-           </p>
-           <div class="grid-2cols  content-box">
-              <div class="widget-box1">
-                 <div class="widget-title d-flex align-items-center border-bottom-dashed">
-                    <span class="material-icons-outlined icon-notation">contacts</span>Contact Details
-                 </div>
-                 <div class="widget-content pt-2">
-                    <p>For any support or assistance, Please reach us to the below contacts</p>
-                    <div class="contact-list widget-title p-0">
-                       <ul>
-                          <li><span class="material-icons-outlined icon-notation d-inline">call</span>+91 44-6669 2727</li>
-                          <li><span class="material-icons-outlined icon-notation d-inline">mail</span>contactkryacheck.com</li>
-                       </ul>
-                    </div>
-                 </div>
-              </div>
-              <div class="widget-box1">
-                 <div class="widget-title d-flex align-items-center border-bottom-dashed"> <span
-                    class="material-icons-outlined icon-notation">file_download</span> Download Centre</div>
-                 <div class="widget-content pt-2">
-                    <p> Download and review our Terms and Conditions. Ensure you understand our policies before proceeding to
-                       registration.
-                    </p>
-                    <a class="btn-blue1 mt-2" >
-                    <i class="fa fa-download"></i>
-                    <span class="ps-2"> Access Files</span>
-                    </a>
-                    <mat-checkbox class="msn-10 checkbox-custom mt-2" [(ngModel)]="agreeDownloadCenter">
-                    I have read and agree to the Supplier Registration Guidelines and Code of Conduct
-                    </mat-checkbox>
-                 </div>
-              </div>
-           </div>
-        </div>
-        <div>
-           <div class="login-wrap">
-              <h2 class="d-flex justify-content-between">Sign In
-                 <span class="ft-size13">
-                 New Supplier <a class="signup" (click)="registrationPopUp()">
-                 <span>Signup</span></a>
-                 </span>
-              </h2>
-              <div class="tab-menus ">
-                 <!-- Tab Links -->
-                 <ul class="nav nav-pills">
-                    <li class="nav-item">
-                       <a class="nav-link active" id="krya-tab" data-bs-toggle="pill" href="#krya-tab-content">
-                          <div class="tab-box">
-                             <div class="pt-1 pb-1"><i class="ri-user-2-line"></i></div>
-                             <div class="log-tit pb-1">KRYA <span>Login</span></div>
-                          </div>
-                       </a>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" id="client-tab" data-bs-toggle="pill" href="#client-tab-content">
-                          <div class="tab-box">
-                             <div class="pt-1 pb-1"><i class="ri-user-star-line"></i></div>
-                             <div class="log-tit pb-1">Client <span>Login</span></div>
-                          </div>
-                       </a>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" id="candidate-tab" data-bs-toggle="pill" href="#candidate-tab-content">
-                          <div class="tab-box">
-                             <div class="candiate-log"><i class="fa-solid fa-user-tie"></i></div>
-                             <div class="log-tit pb-1">Candidate <span>Login</span></div>
-                          </div>
-                       </a>
-                    </li>
-                    <li class="nav-item">
-                       <a class="nav-link" id="vendor-tab" data-bs-toggle="pill" href="#vendor-tab-content">
-                          <div class="tab-box">
-                             <div class="candiate-log"><i class="ri-shield-user-line"></i></div>
-                             <div class="log-tit pb-1">Vendor <span>Login</span></div>
-                          </div>
-                       </a>
-                    </li>
-                 </ul>
-                 <!-- Tab Content -->
-                 <div class="tab-content mt-3">
-                    <div class="tab-pane fade show active" id="krya-tab-content">
-                       <!-- KRYA Tab Content -->
-                       <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                             <mat-form-field class="d-flex col">
-                                <input matInput required placeholder="User Name" autocomplete="off" formControlName="userName" />
-                                <div class="login-validation">
-                                 
-                                   <span class="ft-size11 text-danger">Username Required</span>
-                                   
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                             <mat-form-field class="d-flex col pwd-input">
-                                <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
-                                   formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                <!-- Toggle icon to show/hide password -->
-                                <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                   <span class="material-icons-outlined icons-color-000-55">
-                                   {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                </mat-icon>
-                                <div class="login-validation">
-                                
-                                   <span class="ft-size11 text-danger">Password required</span>
-                             
-                             
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="capche-sec">
-                             <div class="captcha-ref">
-                                <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                <div class="refresh-btn mx-3"><span class="ft-size13">
-                                   <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
-                                   </span>
-                                </div>
-                             </div>
-                             <div class="capcha-input">
-                                <mat-form-field class="">
-                                   <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
-                                      formControlName="userName" />
-                                </mat-form-field>
-                             </div>
-                          </div>
-                          <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                             <a class="signup" (click)="onForgotPswdSubmit()">
-                             Forgot Password?
-                             </a>
-                             <div *ngIf="showMFA === false">
-                                <button type="submit" class="btn-blue1" (click)="login_custom()">
-                                <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                </button>
-                             </div>
-                          </div>
-                       </form>
-                    </div>
-                    <div class="tab-pane fade" id="client-tab-content">
-                       <!-- Client Tab Content -->
-                       <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                             <mat-form-field class="d-flex col">
-                                <input matInput required placeholder="User Name"
-                                   autocomplete="off" formControlName="userName" />
-                                <div class="login-validation">
-                                 
-                                   <span class="ft-size11 text-danger">Username Required</span>
-                                   
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                             <mat-form-field class="d-flex col pwd-input">
-                                <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
-                                   formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                <!-- Toggle icon to show/hide password -->
-                                <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                   <span class="material-icons-outlined icons-color-000-55">
-                                   {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                </mat-icon>
-                                <div class="login-validation">
-                                 
-                                   <span class="ft-size11 text-danger">Password required</span>
-                                   
-                           
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="capche-sec">
-                             <div class="captcha-ref">
-                                <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                <div class="refresh-btn mx-3"><span class="ft-size13">
-                                   <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
-                                   </span>
-                                </div>
-                             </div>
-                             <div class="capcha-input">
-                                <mat-form-field class="">
-                                   <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
-                                      formControlName="userName" />
-                                </mat-form-field>
-                             </div>
-                          </div>
-                          <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                             <a class="signup" (click)="onForgotPswdSubmit()">
-                             Forgot Password?
-                             </a>
-                             <div *ngIf="showMFA === false">
-                                <button type="submit" class="btn-blue1" (click)="login()">
-                                <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                </button>
-                             </div>
-                          </div>
-                       </form>
-                    </div>
-                    <div class="tab-pane fade" id="candidate-tab-content">
-                       <!-- Candidate Tab Content -->
-                       <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                             <mat-form-field class="d-flex col">
-                                <input matInput required placeholder="User Name"
-                                   autocomplete="off" formControlName="userName" />
-                                <div class="login-validation">
-                                  
-                                   <span class="ft-size11 text-danger">Username Required</span>
-                                   
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                             <mat-form-field class="d-flex col pwd-input">
-                                <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
-                                   formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                <!-- Toggle icon to show/hide password -->
-                                <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                   <span class="material-icons-outlined icons-color-000-55">
-                                   {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                </mat-icon>
-                                <div class="login-validation">
-                                 
-                                   <span class="ft-size11 text-danger">Password required</span>
-                                   
-                          
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="capche-sec">
-                             <div class="captcha-ref">
-                                <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                <div class="refresh-btn mx-3"><span class="ft-size13">
-                                   <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
-                                   </span>
-                                </div>
-                             </div>
-                             <div class="capcha-input">
-                                <mat-form-field class="">
-                                   <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
-                                      formControlName="userName" />
-                                </mat-form-field>
-                             </div>
-                          </div>
-                          <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                             <a class="signup" (click)="onForgotPswdSubmit()">
-                             Forgot Password?
-                             </a>
-                             <div *ngIf="showMFA === false">
-                                <button type="submit" class="btn-blue1" (click)="login()">
-                                <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                </button>
-                             </div>
-                          </div>
-                       </form>
-                    </div>
-                    <div class="tab-pane fade" id="vendor-tab-content">
-                       <!-- Candidate Tab Content -->
-                       <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                             <mat-form-field class="d-flex col">
-                                <input matInput required placeholder="User Name"
-                                   autocomplete="off" formControlName="userName" />
-                                <div class="login-validation">
-                                  
-                                   <span class="ft-size11 text-danger">Username Required</span>
-                                   
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="form-group position-relative">
-                             <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                             <mat-form-field class="d-flex col pwd-input">
-                                <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
-                                   formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                <!-- Toggle icon to show/hide password -->
-                                <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                   <span class="material-icons-outlined icons-color-000-55">
-                                   {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                </mat-icon>
-                                <div class="login-validation">
-                                
-                                   <span class="ft-size11 text-danger">Password required</span>
-                                   
-                             
-                                </div>
-                             </mat-form-field>
-                          </div>
-                          <div class="capche-sec">
-                             <div class="captcha-ref">
-                                <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                <div class="refresh-btn mx-3"><span class="ft-size13">
-                                   <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
-                                   </span>
-                                </div>
-                             </div>
-                             <div class="capcha-input">
-                                <mat-form-field class="">
-                                   <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
-                                      formControlName="userName" />
-                                </mat-form-field>
-                             </div>
-                          </div>
-                          <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                             <a class="signup" (click)="onForgotPswdSubmit()">
-                             Forgot Password?
-                             </a>
-                             <div *ngIf="showMFA === false">
-                                <button type="submit" class="btn-blue1" (click)="login()">
-                                <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                </button>
-                             </div>
-                          </div>
-                       </form>
-                    </div>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </div>
-  </div>
-  <footer class="footer" *ngIf="copyrightFooter">
-     <p class="copy-right">&copy; Copyright Krya Solutions Pvt. Ltd.</p>
-  </footer>
+   <mat-toolbar class="mat-header mat-toolbar-single-row">
+      <img src="assets/Trustzen-Logo.png" alt="ProcureZEN" style="height: 35px;">
+      <span class="example-spacer"></span>
+      <div class="cust-field-height">
+         <mat-form-field class="languageSelect">
+            <span class="mat-spanTooltip">
+               <mat-label matTooltip="Select language">
+                  <span class="material-icons-outlined">translate</span>
+                  <!-- <i class="fa fa-language" aria-hidden="true"></i> -->
+               </mat-label>
+            </span>
+            <!-- Test <span class="material-icons-outlined">translate</span> -->
+            <mat-select (selectionChange)="switchLanguage($event.value)" class="pull-right" class="text-right"
+               [(value)]="selectedLanguage" matTooltip="Select language">
+               <mat-option value="">-- Please Select --</mat-option>
+               <mat-option value="en">English</mat-option>
+               <mat-option value="ar">العربية</mat-option>
+               <!-- <mat-option value="ta">தமிழ்</mat-option> -->
+            </mat-select>
+         </mat-form-field>
+      </div>
+   </mat-toolbar>
+   <div class="col-lg-12 main-content">
+      <h1 class="welecome-title">trustzen</h1>
+      <h2 class="caption">Helping Organizations Across The Globe In Making 'SMART' AND 'SAFE' Hiring Decisions...</h2>
+      <div class="body-content">
+         <div class="content">
+            <p class="paragraph">
+               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+               industry's
+               standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
+               to
+               make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+               typesetting, remaining essentially unchanged Lorem Ipsum is simply dummy text of the printing and
+               typesetting
+               industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown
+               printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
+               five
+               centuries, but also the leap into electronic typesetting, remaining essentially unchanged Lorem Ipsum is
+               simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard
+               dummy
+               text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
+               specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+               remaining essentially unchanged Lorem Ipsum is simply dummy text of the printing and typesetting
+               industry.
+               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+               took a
+               galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
+               but
+               also the leap into electronic typesetting, remaining essentially unchanged
+            </p>
+            <div class="grid-2cols  content-box">
+               <div class="widget-box1">
+                  <div class="widget-title d-flex align-items-center border-bottom-dashed">
+                     <span class="material-icons-outlined icon-notation">contacts</span>Contact Details
+                  </div>
+                  <div class="widget-content pt-2">
+                     <p>For any support or assistance, Please reach us to the below contacts</p>
+                     <div class="contact-list widget-title p-0">
+                        <ul>
+                           <li><span class="material-icons-outlined icon-notation d-inline">call</span>+91 44-6669 2727
+                           </li>
+                           <li><span
+                                 class="material-icons-outlined icon-notation d-inline">mail</span>contactkryacheck.com
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+               <div class="widget-box1">
+                  <div class="widget-title d-flex align-items-center border-bottom-dashed"> <span
+                        class="material-icons-outlined icon-notation">file_download</span> Download Centre</div>
+                  <div class="widget-content pt-2">
+                     <p> Download and review our Terms and Conditions. Ensure you understand our policies before
+                        proceeding to
+                        registration.
+                     </p>
+                     <a class="btn-blue1 mt-2">
+                        <i class="fa fa-download"></i>
+                        <span class="ps-2"> Access Files</span>
+                     </a>
+                     <mat-checkbox class="msn-10 checkbox-custom mt-2" [(ngModel)]="agreeDownloadCenter">
+                        I have read and agree to the Supplier Registration Guidelines and Code of Conduct
+                     </mat-checkbox>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div>
+            <div class="login-wrap">
+               <h2 class="d-flex justify-content-between">Sign In
+                  <span class="ft-size13">
+                     New Supplier <a class="signup" (click)="registrationPopUp()">
+                        <span>Signup</span></a>
+                  </span>
+               </h2>
+               <div class="tab-menus ">
+                  <!-- Tab Links -->
+                  <ul class="nav nav-pills">
+                     <li class="nav-item">
+                        <a class="nav-link active" id="krya-tab" data-bs-toggle="pill" href="#krya-tab-content">
+                           <div class="tab-box">
+                              <div class="pt-1 pb-1"><i class="ri-user-2-line"></i></div>
+                              <div class="log-tit pb-1">KRYA <span>Login</span></div>
+                           </div>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" id="client-tab" data-bs-toggle="pill" href="#client-tab-content">
+                           <div class="tab-box">
+                              <div class="pt-1 pb-1"><i class="ri-user-star-line"></i></div>
+                              <div class="log-tit pb-1">Client <span>Login</span></div>
+                           </div>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" id="candidate-tab" data-bs-toggle="pill" href="#candidate-tab-content">
+                           <div class="tab-box">
+                              <div class="candiate-log"><i class="fa-solid fa-user-tie"></i></div>
+                              <div class="log-tit pb-1">Candidate <span>Login</span></div>
+                           </div>
+                        </a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" id="vendor-tab" data-bs-toggle="pill" href="#vendor-tab-content">
+                           <div class="tab-box">
+                              <div class="candiate-log"><i class="ri-shield-user-line"></i></div>
+                              <div class="log-tit pb-1">Vendor <span>Login</span></div>
+                           </div>
+                        </a>
+                     </li>
+                  </ul>
+                  <!-- Tab Content -->
+                  <div class="tab-content mt-3">
+                     <div class="tab-pane fade show active" id="krya-tab-content">
+                        <!-- KRYA Tab Content -->
+                        <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                              <mat-form-field class="d-flex col">
+                                 <input matInput required placeholder="User Name" autocomplete="off"
+                                    formControlName="userName" />
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Username Required</span>
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                              <mat-form-field class="d-flex col pwd-input">
+                                 <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                    formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                 <!-- Toggle icon to show/hide password -->
+                                 <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                    <span class="material-icons-outlined icons-color-000-55">
+                                       {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                    </span>
+                                 </mat-icon>
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Password required</span>
+
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="capche-sec">
+                              <div class="captcha-ref">
+                                 <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                 <div class="refresh-btn mx-3"><span class="ft-size13">
+                                       <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
+                                             Refresh</span></a>
+                                    </span>
+                                 </div>
+                              </div>
+                              <div class="capcha-input">
+                                 <mat-form-field class="">
+                                    <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                       formControlName="userName" />
+                                 </mat-form-field>
+                              </div>
+                           </div>
+                           <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                              <a class="signup" (click)="onForgotPswdSubmit()">
+                                 Forgot Password?
+                              </a>
+                              <div>
+                                 <button type="submit" class="btn-blue1" (click)="login_custom()">
+                                    <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                 </button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                     <div class="tab-pane fade" id="client-tab-content">
+                        <!-- Client Tab Content -->
+                        <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                              <mat-form-field class="d-flex col">
+                                 <input matInput required placeholder="User Name" autocomplete="off"
+                                    formControlName="userName" />
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Username Required</span>
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                              <mat-form-field class="d-flex col pwd-input">
+                                 <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                    formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                 <!-- Toggle icon to show/hide password -->
+                                 <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                    <span class="material-icons-outlined icons-color-000-55">
+                                       {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                    </span>
+                                 </mat-icon>
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Password required</span>
+
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="capche-sec">
+                              <div class="captcha-ref">
+                                 <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                 <div class="refresh-btn mx-3"><span class="ft-size13">
+                                       <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
+                                             Refresh</span></a>
+                                    </span>
+                                 </div>
+                              </div>
+                              <div class="capcha-input">
+                                 <mat-form-field class="">
+                                    <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                       formControlName="userName" />
+                                 </mat-form-field>
+                              </div>
+                           </div>
+                           <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                              <a class="signup" (click)="onForgotPswdSubmit()">
+                                 Forgot Password?
+                              </a>
+                              <div>
+                                 <button type="submit" class="btn-blue1" (click)="login_custom()">
+                                    <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                 </button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                     <div class="tab-pane fade" id="candidate-tab-content">
+                        <!-- Candidate Tab Content -->
+                        <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                              <mat-form-field class="d-flex col">
+                                 <input matInput required placeholder="User Name" autocomplete="off"
+                                    formControlName="userName" />
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Username Required</span>
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                              <mat-form-field class="d-flex col pwd-input">
+                                 <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                    formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                 <!-- Toggle icon to show/hide password -->
+                                 <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                    <span class="material-icons-outlined icons-color-000-55">
+                                       {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                    </span>
+                                 </mat-icon>
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Password required</span>
+
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="capche-sec">
+                              <div class="captcha-ref">
+                                 <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                 <div class="refresh-btn mx-3"><span class="ft-size13">
+                                       <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
+                                             Refresh</span></a>
+                                    </span>
+                                 </div>
+                              </div>
+                              <div class="capcha-input">
+                                 <mat-form-field class="">
+                                    <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                       formControlName="userName" />
+                                 </mat-form-field>
+                              </div>
+                           </div>
+                           <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                              <a class="signup" (click)="onForgotPswdSubmit()">
+                                 Forgot Password?
+                              </a>
+                              <div>
+                                 <button type="submit" class="btn-blue1" (click)="login_custom()">
+                                    <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                 </button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                     <div class="tab-pane fade" id="vendor-tab-content">
+                        <!-- Candidate Tab Content -->
+                        <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                              <mat-form-field class="d-flex col">
+                                 <input matInput required placeholder="User Name" autocomplete="off"
+                                    formControlName="userName" />
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Username Required</span>
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="form-group position-relative">
+                              <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                              <mat-form-field class="d-flex col pwd-input">
+                                 <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                    formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                 <!-- Toggle icon to show/hide password -->
+                                 <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                    <span class="material-icons-outlined icons-color-000-55">
+                                       {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                    </span>
+                                 </mat-icon>
+                                 <div class="login-validation">
+
+                                    <span class="ft-size11 text-danger">Password required</span>
+
+
+                                 </div>
+                              </mat-form-field>
+                           </div>
+                           <div class="capche-sec">
+                              <div class="captcha-ref">
+                                 <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                 <div class="refresh-btn mx-3"><span class="ft-size13">
+                                       <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
+                                             Refresh</span></a>
+                                    </span>
+                                 </div>
+                              </div>
+                              <div class="capcha-input">
+                                 <mat-form-field class="">
+                                    <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                       formControlName="userName" />
+                                 </mat-form-field>
+                              </div>
+                           </div>
+                           <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                              <a class="signup" (click)="onForgotPswdSubmit()">
+                                 Forgot Password?
+                              </a>
+                              <div>
+                                 <button type="submit" class="btn-blue1" (click)="login_custom()">
+                                    <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                 </button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <footer class="footer" *ngIf="copyrightFooter">
+      <p class="copy-right">&copy; Copyright Krya Solutions Pvt. Ltd.</p>
+   </footer>
 </div>
 <ng-template #downloadDoc>
-  <div class="dialog-container">
-     <div mat-dialog-title>
-        <div class="col-lg-11">
-           <h3>Download Centre</h3>
-        </div>
-        <div class="col-lg-1 text-end">
-           <button mat-icon-button mat-dialog-close>
-           <i class="material-icons" matTooltip="close">close</i>
-           </button>
-        </div>
-     </div>
-     <mat-dialog-content>
-        <div class="widget-box">
-           <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-              Download List
-           </h5>
-           <div class="widget-content">
-              <div class="table-container">
-                 <div class="tableFull">
-                    <table class="content-table">
-                       <thead>
-                          <tr>
-                             <th scope="col" style="padding: 4px 0px; text-align: left;">
-                                <div class="col-lg-12">
-                                   <mat-checkbox color="primary" class="checkbox-custom fontNormal" [checked]="selectAllChecked">
-                                      Select All
-                                   </mat-checkbox>
-                                </div>
-                             </th>
-                          </tr>
-                       </thead>
-                       <tbody class="list">
-                          <tr>
-                             <td style="padding: 0px; text-align: left;">
-                                <mat-checkbox color="primary" class="checkbox-custom fontNormal">
-                                   Registration Guideliness (OWASP_SCP_Quick_Reference_Guide.pdf)
-                                </mat-checkbox>
-                             </td>
-                          </tr>
-                       </tbody>
-                    </table>
-                 </div>
-              </div>
-           </div>
-        </div>
-     </mat-dialog-content>
-     <mat-dialog-actions>
-        <div class="footer-cta-btn">
-           <div class="cta-leftside-btn">
-              <button class="btn-gray" mat-dialog-close cdkFocusInitial>
-              <i class="fa fa-ban pe-2"></i>Close</button>
-           </div>
-           <div class="cta-rightside-btn">
-              <button class="btn-blue"><i class="fa fa-download pe-2"></i>Download
-              </button>
-           </div>
-        </div>
-     </mat-dialog-actions>
-  </div>
+   <div class="dialog-container">
+      <div mat-dialog-title>
+         <div class="col-lg-11">
+            <h3>Download Centre</h3>
+         </div>
+         <div class="col-lg-1 text-end">
+            <button mat-icon-button mat-dialog-close>
+               <i class="material-icons" matTooltip="close">close</i>
+            </button>
+         </div>
+      </div>
+      <mat-dialog-content>
+         <div class="widget-box">
+            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+               Download List
+            </h5>
+            <div class="widget-content">
+               <div class="table-container">
+                  <div class="tableFull">
+                     <table class="content-table">
+                        <thead>
+                           <tr>
+                              <th scope="col" style="padding: 4px 0px; text-align: left;">
+                                 <div class="col-lg-12">
+                                    <mat-checkbox color="primary" class="checkbox-custom fontNormal"
+                                       [checked]="selectAllChecked">
+                                       Select All
+                                    </mat-checkbox>
+                                 </div>
+                              </th>
+                           </tr>
+                        </thead>
+                        <tbody class="list">
+                           <tr>
+                              <td style="padding: 0px; text-align: left;">
+                                 <mat-checkbox color="primary" class="checkbox-custom fontNormal">
+                                    Registration Guideliness (OWASP_SCP_Quick_Reference_Guide.pdf)
+                                 </mat-checkbox>
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+         <div class="footer-cta-btn">
+            <div class="cta-leftside-btn">
+               <button class="btn-gray" mat-dialog-close cdkFocusInitial>
+                  <i class="fa fa-ban pe-2"></i>Close</button>
+            </div>
+            <div class="cta-rightside-btn">
+               <button class="btn-blue"><i class="fa fa-download pe-2"></i>Download
+               </button>
+            </div>
+         </div>
+      </mat-dialog-actions>
+   </div>
 </ng-template>
