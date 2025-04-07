@@ -431,6 +431,10 @@ mat-label {
   border-bottom: 1px dashed #ccc;
 }
 
+.mat-mdc-form-field {
+  background-color: transparent !important;
+}
+
 
 /******* Responsive **************/
 @media (min-width: 320px) and (max-width: 374px) {
