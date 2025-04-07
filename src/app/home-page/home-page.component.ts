@@ -1,11 +1,11 @@
-import {Component,ElementRef,HostListener,inject,Renderer2,ViewChild,} from "@angular/core";
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS,MatFormField,MatLabel,MatError,MatSuffix,} from "@angular/material/form-field";
-import {MatDialog,MatDialogTitle,MatDialogClose,MatDialogContent,MatDialogActions,} from "@angular/material/dialog";
+import { Component, ElementRef, HostListener, inject, Renderer2, ViewChild, } from "@angular/core";
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormField, MatLabel, MatError, MatSuffix, } from "@angular/material/form-field";
+import { MatDialog, MatDialogTitle, MatDialogClose, MatDialogContent, MatDialogActions, } from "@angular/material/dialog";
 import { SupplierRegistrationComponent } from "../supplier-registration/supplier-registration.component";
-import {FormBuilder,FormGroup,Validators,FormsModule,ReactiveFormsModule,} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, } from "@angular/forms";
 import { LanguageService } from "../core/services/language/language.service";
 import { CommonService } from "../core/services/common.service";
-import {MatSnackBar,MatSnackBarHorizontalPosition,MatSnackBarVerticalPosition,} from "@angular/material/snack-bar";
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, } from "@angular/material/snack-bar";
 import { AdminService } from "../core/services/admin/admin.service";
 import { Router } from "@angular/router";
 import { ForgotPasswordComponent } from "../auth-module/forgot-password/forgot-password.component";
@@ -23,17 +23,10 @@ import { MatButton, MatIconButton } from "@angular/material/button";
 import { CdkScrollable } from "@angular/cdk/scrolling";
 import { MatTabGroup, MatTab } from "@angular/material/tabs";
 import { LoginService } from "../core/services/login/login.service";
-import { SupplierUserFormService } from "../core/services/supplier-management/supplier.user.form.service";
+// import { SupplierUserFormService } from "../core/services/supplier-management/supplier.user.form.service";
 import { MatToolbarModule } from "@angular/material/toolbar";
 
-interface PublishedEventData {
-  eventRef: string;
-  publishedDate: string;
-  eventName: string;
-  description: string;
-  submissionDate: string;
-  categoryScope: string;
-}
+
 @Component({
   selector: "app-home-page",
   providers: [
@@ -50,57 +43,15 @@ interface PublishedEventData {
   styleUrl: "./home-page.component.scss",
   standalone: true,
   imports: [
-    NgClass,
-    MatFormField,
-    MatLabel,
-    MatToolbarModule,
-    MatTooltip,
-    MatSelect,
-    MatOption,
-    ScrollPanelModule,
-    MatCheckbox,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInput,
-    MatError,
-    MatIcon,
-    MatSuffix,
-    NgIf,
-    MatButton,
-    MatDialogTitle,
-    MatIconButton,
-    MatDialogClose,
-    CdkScrollable,
-    MatDialogContent,
-    NgFor,
-    MatDialogActions,
-    MatTabGroup,
-    MatTab,
+    NgClass,MatFormField,MatLabel,MatToolbarModule,MatTooltip,MatSelect,MatOption,ScrollPanelModule,MatCheckbox,FormsModule,ReactiveFormsModule,MatInput,MatError,MatIcon,MatSuffix,NgIf,MatButton,MatDialogTitle,MatIconButton,MatDialogClose,CdkScrollable,MatDialogContent,NgFor,MatDialogActions,MatTabGroup,MatTab,
   ],
 })
 export class HomePageComponent {
-  horizontalPosition: MatSnackBarHorizontalPosition = "center";
-  verticalPosition: MatSnackBarVerticalPosition = "top";
   SupplierlogInForm!: FormGroup;
   selectedLanguage = "en";
   isRtl: boolean = false;
-  submitLoginData = new SupplierSubmitLoginData();
-  loginData = new SupplierLoginData();
   logInDetails: any;
-
-  @ViewChild("downloadDoc") downloadDoc: any;
-  @ViewChild("publishedSE") publishedSE: any;
-  dialogRef: any;
-  documents: { name: string; path: string; selected: boolean }[] = [];
-
-  mfaCode: string = "";
-  userId!: number;
-  isResendDisabled: boolean = false;
-  resendCountdown: number = 90; // Countdown in seconds
-  countdownInterval: any;
-
   // Ensure currentTab is typed as one of the keys
-  currentTab: "tab1" | "tab2" | "tab3" | "tab4" = "tab1";
   agreeDownloadCenter: boolean = false;
   showMFA: boolean = false;
   sessionTimeOut: any;
@@ -130,44 +81,11 @@ export class HomePageComponent {
     private elementRef: ElementRef,
     public adminService: AdminService,
     public route: Router,
-    public supplierUser: SupplierUserFormService,
+    // public supplierUser: SupplierUserFormService,
     private sessionTimeoutService: SessionTimeoutService
   ) {
     this.sessionTimeoutService.stopSessionTimeout();
-    this.initSupplierForm();
-
-    this.GetSystemParamTimeExpried();
-    this.GetImplementationConfigData();
   }
-
-  GetImplementationConfigData() {
-    this.supplierUser.GetImplementationConfigData().subscribe((res) => {
-      if (res) {
-        this.getImplementationConfigDataRes = res;
-        this.companylogo = res.companyLogo;
-        this.companydescription = res.companyDescription;
-        this.copyrightFooter = res.copyrightFooter;
-        this.landingPagetitle = res.landingPageTitle;
-        this.document = [
-          {
-            name: "Code of Conducts",
-            ...res.codeOfConduct,
-            filePath: res.codeOfConduct?.filePath || "",
-            //...res.filePath
-          },
-          {
-            name: "Registration Guideliness",
-            ...res.registrationGuidelines,
-            filePath: res.registrationGuidelines?.filePath || "",
-          },
-        ];
-        if (this.companylogo.fileContent) {
-          this.logoSrc = this.companylogo.fileContent;
-        }
-      }
-    });
-  }
-
   // Toggle Select All
   toggleSelectAll(event: any) {
     this.selectAllChecked = event.checked;
@@ -187,93 +105,9 @@ export class HomePageComponent {
     }
     this.selectAllChecked = this.selectedIndexes.size === this.document.length;
   }
-
-  downloadSelectedFiles() {
-    const selectedFiles = Array.from(this.selectedIndexes).map((index) => ({
-      fileName: this.document[index].fileName,
-      filePath: this.document[index].filePath,
-    }));
-
-    if (selectedFiles.length > 0) {
-      const filePaths = selectedFiles.map((file) => file.filePath);
-
-      // Send the file paths to the backend in the correct JSON format
-      this.supplierUser.downloadMultipleFiles(filePaths).subscribe({
-        next: (fileResponses: any[]) => {
-          fileResponses.forEach((response) => {
-            if (response.fileContent) {
-              // Decode the Base64 content
-              const byteCharacters = atob(response.fileContent);
-              const byteNumbers = new Array(byteCharacters.length).map((_, i) =>
-                byteCharacters.charCodeAt(i)
-              );
-              const byteArray = new Uint8Array(byteNumbers);
-
-              // Create a Blob from the byte array
-              const blob = new Blob([byteArray], {
-                type: "application/octet-stream",
-              });
-
-              // Create a URL for the Blob object
-              const downloadUrl = window.URL.createObjectURL(blob);
-
-              // Create a temporary anchor element to trigger the download
-              const link = document.createElement("a");
-              link.href = downloadUrl;
-              link.download = response.fileName; // Use the file name from the response
-              link.click(); // Trigger the download
-              window.URL.revokeObjectURL(downloadUrl); // Clean up the object URL
-            } else {
-              console.error("Error: ", response.error || "Unknown error");
-            }
-          });
-        },
-        error: (err) => {
-          console.error("Download failed", err);
-        },
-      });
-    } else {
-      alert("Please select at least one file.");
-    }
-  }
-
-  GetSystemParamTimeExpried() {
-    this.supplierUser.GetSysParameterGeneral().subscribe((res) => {
-      if (res != null) {
-        if (
-          res.sessionTimeOut &&
-          res.sessionMinsSeconds !== null &&
-          res.sessionTextField !== null
-        ) {
-          this.sessionTimeOut = res.sessionTimeOut;
-          this.sessionTextField = res.sessionTextField;
-          this.sessionMinsSeconds = res.sessionMinsSeconds;
-        }
-      }
-    });
-  }
-
-  initSupplierForm() {
-    this.SupplierlogInForm = this.fb.group({
-      userName: ["", [Validators.required]],
-      mfaCode: ["", []],
-      passWord: [
-        "",
-        [
-          Validators.required,
-          Validators.minLength(8),
-          Validators.pattern(
-            "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#_-])[A-Za-z\\d@$!%*?&#_-]{8,}$"
-          ),
-        ],
-      ],
-    });
-  }
-
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible; // Toggle visibility
   }
-
   switchLanguage(language: string) {
     // this.translate.use(language);
     //document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'; // Change text direction
@@ -285,7 +119,6 @@ export class HomePageComponent {
   login_custom() {
     this.route.navigate(["/krya/dashboard-menu"]);
   }
-
   login() {
     const login = {
       emailOrUsername: this.SupplierlogInForm.value.userName,
@@ -341,21 +174,9 @@ export class HomePageComponent {
                     } else if (res?.userType === 3) {
                       this.route.navigate(["/ProcureZen"]);
                     }
-                  } else {
-                    this.otpgenerate();
-                  }
+                  } 
                 });
-                if (
-                  this.sessionTimeOut &&
-                  this.sessionTextField !== null &&
-                  this.sessionMinsSeconds !== null
-                ) {
-                  this.sessionTimeoutService.startSessionTimeout(
-                    this.sessionTimeOut,
-                    this.sessionTextField,
-                    this.sessionMinsSeconds
-                  );
-                }
+       
               } else {
                 this.adminService.showMessage(res.message);
               }
@@ -365,97 +186,8 @@ export class HomePageComponent {
           }
         }
       },
-      error: (error) => {
-        this.SupplierlogInForm.get("mfaCode")?.clearValidators();
-        this.SupplierlogInForm.get("mfaCode")?.updateValueAndValidity();
-        if (this.SupplierlogInForm.valid) {
-          this.logInDetails = [];
-          this.commonService.userName = this.SupplierlogInForm.value.userName;
-          const logInInfo = this.SupplierlogInForm.value;
-          this.loginService.logIn(logInInfo).subscribe((res: any) => {
-            if (res.success == true) {
-              localStorage.setItem("loginDetails", JSON.stringify(res));
-              this.logInDetails = res;
-              this.commonService.SupplierId = res.supplierId;
-              this.commonService.UserId = res.userId;
-              this.loginService.getScurity().subscribe((resData: any) => {
-                if (!resData?.enableOTPFlag) {
-                  if (res?.userType === 1) {
-                    this.route.navigate(["/krya/dashboard-menu"], {
-                      queryParams: {
-                        ImplementConfig: JSON.stringify(
-                          this.getImplementationConfigDataRes
-                        ),
-                      },
-                      skipLocationChange: true,
-                      replaceUrl: true,
-                    });
-                  } else if (res.supplierCompletedFlag === true) {
-                    this.route.navigate(["/krya/dashboard"], {
-                      queryParams: {
-                        ImplementConfig: JSON.stringify(
-                          this.getImplementationConfigDataRes
-                        ),
-                      },
-                      skipLocationChange: true,
-                      replaceUrl: true,
-                    });
-                  } else if (res?.userType === 2) {
-                    this.route.navigate(["/SupplierUserForm"], {
-                      skipLocationChange: true,
-                      replaceUrl: true,
-                    });
-                  } else if (res?.userType === 3) {
-                    this.route.navigate(["/ProcureZen"]);
-                  }
-                } else {
-                  this.otpgenerate();
-                }
-              });
-              if (
-                this.sessionTimeOut &&
-                this.sessionTextField !== null &&
-                this.sessionMinsSeconds !== null
-              ) {
-                this.sessionTimeoutService.startSessionTimeout(
-                  this.sessionTimeOut,
-                  this.sessionTextField,
-                  this.sessionMinsSeconds
-                );
-              }
-            } else {
-              this.adminService.showMessage(res.message);
-            }
-          });
-        } else {
-          this.adminService.showMessage("Please enter username and password");
-        }
-      },
     });
   }
-
-  otpgenerate() {
-    this.SupplierlogInForm.get("mfaCode")?.setValidators(Validators.required);
-    this.SupplierlogInForm.get("mfaCode")?.updateValueAndValidity();
-    this.loginData = new SupplierLoginData();
-    this.loginData.userId = this.logInDetails.userId;
-    this.loginData.toMailAddress = this.logInDetails.emailId;
-    this.loginService.getOTPforMFA(this.loginData).subscribe((res: number) => {
-      if (res) {
-        this.showMFA = true;
-        this.adminService.showMessage(
-          "OTP has been send to your registred Email ID"
-        );
-        // this.openMFAPopUp();
-        this.startCountdown();
-      } else {
-        this.adminService.showMessage(
-          "OTP has been not generated. Please contact Admin"
-        );
-      }
-    });
-  }
-
   registrationPopUp() {
     if (this.agreeDownloadCenter == true) {
       // load the docment before open pop up
@@ -480,76 +212,6 @@ export class HomePageComponent {
       );
     }
   }
-
-  // download center
-  downloadPopUp() {
-    // load the docment before open pop up
-    this.dialog.open(this.downloadDoc, {
-      disableClose: false,
-      hasBackdrop: true,
-      backdropClass: "",
-      autoFocus: true,
-      width: "65%",
-      height: "60%",
-      position: {
-        top: "calc(3vw + 20px)",
-        bottom: "",
-        left: "",
-        right: "",
-      },
-      panelClass: "popUpMiddle",
-    });
-    if (this.dialogRef) {
-      this.dialogRef.afterClosed().subscribe((result: any) => {
-        if (result) {
-        }
-      });
-    }
-  }
-
-  download() {
-    this.documents
-      .filter((doc) => doc.selected)
-      .forEach((doc) => {
-        const a = document.createElement("a");
-        a.href = doc.path;
-        a.download = doc.name; // Use 'name' for the downloaded file
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-      });
-  }
-
-  dialogClose() {
-    this.documents.forEach((doc) => (doc.selected = false));
-    this.dialogRef.close();
-  }
-
-  // View source event
-  // View Source Event
-  publishPopUp() {
-    // load the docment before open pop up
-    this.dialogRef = this.dialog.open(this.publishedSE, {
-      disableClose: false,
-      hasBackdrop: true,
-      backdropClass: "",
-      autoFocus: true,
-      width: "80%",
-      height: "80%",
-      position: {
-        top: "calc(3vw + 20px)",
-        bottom: "",
-        left: "",
-        right: "",
-      },
-      panelClass: "popUpMiddle",
-    });
-  }
-
-  dialogCancel() {
-    this.dialogRef.close();
-  }
-
   ForgotPasswordPopUp() {
     this.dialog.open(ForgotPasswordComponent, {
       disableClose: true,
@@ -568,121 +230,12 @@ export class HomePageComponent {
       panelClass: "forgot-popup",
     });
   }
-
   onForgotPswdSubmit() {
     this.ForgotPasswordPopUp();
-  }
-
-  getContentHeight() {
-    let a =
-      this.elementRef.nativeElement.ownerDocument.getElementsByTagName(
-        "body"
-      )[0].clientHeight;
-    let b = Math.round(a);
-    if (
-      b &&
-      this.elementRef.nativeElement.getElementsByClassName("conainerHeight")[0]
-    ) {
-      if (b >= 450) {
-        this.elementRef.nativeElement.getElementsByClassName(
-          "conainerHeight"
-        )[0].style.minHeight = b - 200 + "px";
-      } else {
-        this.elementRef.nativeElement.getElementsByClassName(
-          "conainerHeight"
-        )[0].style.minHeight = "400px";
-      }
-    }
-  }
-
-  @HostListener("window:resize", ["$event"]) onResize() {
-    this.getContentHeight();
-  }
-  ngAfterViewChecked() {
-    this.getContentHeight();
-  }
-
-  startCountdown() {
-    this.isResendDisabled = true;
-    this.resendCountdown = 90;
-    this.countdownInterval = setInterval(() => {
-      this.resendCountdown--;
-      if (this.resendCountdown <= 0) {
-        this.stopCountdown();
-      }
-    }, 1000);
-  }
-
-  stopCountdown() {
-    this.isResendDisabled = false;
-    clearInterval(this.countdownInterval);
-  }
-
-  submitMfa() {
-    this.SupplierlogInForm.markAllAsTouched();
-    this.submitLoginData.otpCode = this.SupplierlogInForm.value.mfaCode;
-    this.submitLoginData.userId = this.logInDetails.userId;
-    this.loginService
-      .submitOTPforMFA(this.submitLoginData)
-      .subscribe((res: any) => {
-        if (res) {
-          if (res.userTypeId == this.commonService.supplierUserType) {
-            if (res.supplierCompletedFlag === true) {
-              this.route.navigate(["/krya/dashboard"], {
-                queryParams: {
-                  ImplementConfig: JSON.stringify(
-                    this.getImplementationConfigDataRes
-                  ),
-                },
-                skipLocationChange: true,
-                replaceUrl: true,
-              });
-            } else {
-              this.route.navigate(["/SupplierUserForm"], {
-                queryParams: {
-                  ImplementConfig: JSON.stringify(
-                    this.getImplementationConfigDataRes
-                  ),
-                },
-                skipLocationChange: true,
-                replaceUrl: true,
-              });
-            }
-            // this.dialogRef.close();
-          } else if (res.userTypeId == this.commonService.adminUserType) {
-            this.route.navigate(["/krya/dashboard"], {
-              queryParams: {
-                ImplementConfig: JSON.stringify(
-                  this.getImplementationConfigDataRes
-                ),
-              },
-              skipLocationChange: true,
-              replaceUrl: true,
-            });
-          }
-        } else {
-          this.adminService.showMessage("Invalid OTP");
-        }
-      });
   }
   // end
 }
 
-export class SupplierLoginData {
-  userId!: number;
-  toMailAddress!: string;
-}
 
-export class SupplierSubmitLoginData {
-  otpCode!: string;
-  userId!: number;
-}
-interface SupplierUser {
-  userName: string;
-  userId: number;
-  password: string;
-  userType: string;
-  confirmPassword: string;
-  emailId: string;
-  activeFlag: boolean;
-}
+
+
