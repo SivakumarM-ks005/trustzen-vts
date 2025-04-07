@@ -14,109 +14,94 @@
                             </div>
 
                             <div class="menu-open" *ngIf="isShowIcon">
-                                <mat-icon class="menu-close">arrow_right</mat-icon> 
+                                <mat-icon class="menu-close">arrow_right</mat-icon>
                             </div>
                         </button>
                     </div>
                 </div>
             </div>
-          
+
             <div class="col">
                 <div class="d-flex flex-row justify-content-start align-items-center col">
                     <div class="mview">
-                        <a class="toolbarLink pointer user-name" [matMenuTriggerFor]="menurespo">
-                            <span class="material-icons-outlined">menu</span>
-                        </a>
                         <mat-menu #menurespo="matMenu" class="userMenu comm-menu mv-matmenu">
-                        <div class="col"> 
-                            <div class="navmenu mv-block">
-                                <ul class="main-menu">
-                                    <li class="active">
-                                        <a (click)="dasboardmenus()">
-                                            <span class="material-icons-outlined">dashboard</span>Dashboard
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <!-- [routerLink]="['/krya/dashboard']" -->
-                                        <a class="toolbarLink pointer user-name" [matMenuTriggerFor]="menuDashboard">
-                                            <span class="material-icons-outlined">menu</span>Menu
-                                        </a>
-                                        <mat-menu #menuDashboard="matMenu" class="userMenu comm-menu">
-                                            <button mat-menu-item>
-                                                Supplier Management
-                                            </button>
-                                            <button mat-menu-item>
-                                                Sourcing Management
-                                            </button>
-                                            <button mat-menu-item>
-                                                Contract Management
-                                            </button>
-                                            <button mat-menu-item>
-                                                Order Management
-                                            </button>
-                                            <button mat-menu-item>
-                                                Milestone Completion
-                                            </button>
-                                            <button mat-menu-item>
-                                                Invoice & Payments
-                                            </button>
-                                            <button mat-menu-item>
-                                                Inventory Management
-                                            </button>
-                                            <button mat-menu-item>
-                                                Insights
-                                            </button>
-                                            <button mat-menu-item>
-                                                Performance Evaluation
-                                            </button>
-                                        </mat-menu>
-                                    </li>
-                                   
-                                    <li (click)="workflowList()">
-                                        <!-- <a [routerLink]="['/krya/dashboard']" class="toolbarLink pointer user-name">
-                                            <span class="material-icons-outlined">trending_up</span>Workflow
-                                        </a> -->
-                                        <a class="toolbarLink pointer user-name" (click)="workflowList()">
-                                            <span class="material-icons-outlined">trending_up</span>Workflow
-                                        </a>
-                                        <!-- <mat-menu #menuWorkFlow="matMenu" class="userMenu comm-menu aa">
-                                            <button mat-menu-item [routerLink]="['/krya/dashboard']">
-                                                Supplier Management
-                                            </button>
-                                            <button mat-menu-item [routerLink]="['/krya/workFlowList']">
-                                                Template WorkFlow
-                                            </button>
-                                        </mat-menu> -->
-                                    </li>
-                                    <li class="active" *ngIf="loginData?.userType === 2">
-                                        <a (click)="easyView()" class="toolbarLink pointer user-name">
-                                            <span class="material-icons-outlined">device_hub</span>Easy View
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a (click)="dashboard()" [matMenuTriggerFor]="help"
-                                            class="toolbarLink pointer user-name">
-                                            <span class="material-icons-outlined">help_outline</span>Help
-                                        </a>
-                                        <mat-menu #help="matMenu" class="userMenu comm-menu aa">
-                                            <button mat-menu-item>
-                                                User Manuals
-                                            </button>
-                                            <button mat-menu-item>
-                                                About Procurezen
-                                            </button>
-                                            <button mat-menu-item>
-                                                Contact
-                                            </button>
-                                        </mat-menu>
-                                    </li>
-                                </ul>
-                            </div> 
-                        </div>
+                            <div class="col">
+                                <div class="navmenu mv-block">
+                                    <ul class="main-menu">
+                                        <li class="active">
+                                            <a (click)="dasboardmenus()">
+                                                <span class="material-icons-outlined">dashboard</span>Dashboard
+                                            </a>
+                                        </li>
+                                        <li>
+
+                                            <a class="toolbarLink pointer user-name"
+                                                [matMenuTriggerFor]="menuDashboard">
+                                                <span class="material-icons-outlined">menu</span>Menu
+                                            </a>
+                                            <mat-menu #menuDashboard="matMenu" class="userMenu comm-menu">
+                                                <button mat-menu-item>
+                                                    Supplier Management
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Sourcing Management
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Contract Management
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Order Management
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Milestone Completion
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Invoice & Payments
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Inventory Management
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Insights
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Performance Evaluation
+                                                </button>
+                                            </mat-menu>
+                                        </li>
+
+                                        <li>
+
+                                            <a class="toolbarLink pointer user-name">
+                                                <span class="material-icons-outlined">trending_up</span>Workflow
+                                            </a>
+
+                                        </li>
+
+                                        <li>
+                                            <a (click)="dashboard()" [matMenuTriggerFor]="help"
+                                                class="toolbarLink pointer user-name">
+                                                <span class="material-icons-outlined">help_outline</span>Help
+                                            </a>
+                                            <mat-menu #help="matMenu" class="userMenu comm-menu aa">
+                                                <button mat-menu-item>
+                                                    User Manuals
+                                                </button>
+                                                <button mat-menu-item>
+                                                    About Procurezen
+                                                </button>
+                                                <button mat-menu-item>
+                                                    Contact
+                                                </button>
+                                            </mat-menu>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </mat-menu>
                     </div>
 
-                    <div class="col"> 
+                    <div class="col">
                         <div class="navmenu mv-none">
                             <ul class="main-menu">
                                 <li class="active">
@@ -125,7 +110,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <!-- [routerLink]="['/krya/dashboard']" -->
+
                                     <a class="toolbarLink pointer user-name" [matMenuTriggerFor]="menuDashboard">
                                         <span class="material-icons-outlined">menu</span>Menu
                                     </a>
@@ -159,25 +144,14 @@
                                         </button>
                                     </mat-menu>
                                 </li>
-                               
-                                <li (click)="workflowList()" *ngIf="loginData?.userType !== 2">
-                                    <!-- <a [routerLink]="['/krya/dashboard']" class="toolbarLink pointer user-name">
-                                        <span class="material-icons-outlined">trending_up</span>Workflow
-                                    </a> -->
+
+                                <li (click)="workflowList()">
                                     <a class="toolbarLink pointer user-name" (click)="workflowList()">
                                         <span class="material-icons-outlined">trending_up</span>Workflow
                                     </a>
-                                    <!-- <mat-menu #menuWorkFlow="matMenu" class="userMenu comm-menu aa">
-                                        <button mat-menu-item [routerLink]="['/krya/dashboard']">
-                                            Supplier Management
-                                        </button>
-                                        <button mat-menu-item [routerLink]="['/krya/workFlowList']">
-                                            Template WorkFlow
-                                        </button>
-                                    </mat-menu> -->
                                 </li>
-                                <li class="active" *ngIf="loginData?.userType === 2">
-                                    <a (click)="easyView()"  class="toolbarLink pointer user-name">
+                                <li class="active">
+                                    <a class="toolbarLink pointer user-name">
                                         <span class="material-icons-outlined">device_hub</span>Easy View
                                     </a>
                                 </li>
@@ -200,95 +174,17 @@
                                 </li>
                             </ul>
                         </div>
-
-                        <!-- <div class="subHeading ms-2" >Dashboard</div> -->
-
-
-                        <div class="d-flex flex-row justify-content-end align-items-center">
-                            <div class="col-md-3">
-                                <div class="subHeading ms-2" (click)="dashboard()"></div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="subHeading ms-2" (click)="dashboard()"></div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="subHeading ms-2" (click)="dashboard()"></div>
-                            </div>
-                        </div>
-                        <!-- start -->
-
-                        <!-- <mat-menu #menu="matMenu" class="userMenu">test
-                            <button mat-button [matMenuTriggerFor]="menu">Menu</button>
-                            <button mat-menu-item [routerLink]="['']">
-                                <span class="material-icons-outlined">person</span> Menu 1
-                            </button>
-                            <button mat-menu-item [routerLink]="['/HomePage']">
-                                <span class="material-icons-outlined">person</span> Menu2
-                            </button>
-                            <button mat-menu-item [routerLink]="['/HomePage']">
-                                <span class="material-icons-outlined">person</span> Menu3
-                            </button>
-                        </mat-menu> -->
-
-                        <!-- end -->
                     </div>
-                    <!-- <div class="col text-center d-none d-md-block">
-                          <mat-form-field class="masterSearch">
-                            <mat-icon matTextPrefix>search</mat-icon>
-                            <input matInput placeholder="Master Search" #searchVal="ngModel" [(ngModel)]="masterSearch"
-                                required>
-                            @if (searchVal.touched ) {
-                            <mat-error>Enter the value</mat-error>
-                            }
-                        </mat-form-field>  
-                    </div>  -->
                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
                         <div class="d-flex flex-row user-profile" matTooltip="User Profile">
                             <div class="avatar-sm" [matMenuTriggerFor]="menu">
                                 <img src="assets/images/avatar.png" alt="User Profile" class="user-img">
                             </div>
-                            <a [matMenuTriggerFor]="menu" class="toolbarLink pointer ft-size13 user-name">
-                                {{loginData?.firstName | translate}} {{ loginData?.middleName ? (loginData?.middleName |
-                                    translate) : ""}}
-                                    {{loginData?.lastName | translate}}
-                            </a>
-
-                            <!-- <a [matMenuTriggerFor]="menu" class="toolbarLink pointer user-name">
-                                {{loginData?.firstName | translate}} {{ loginData?.middleName ? (loginData?.middleName |
-                                translate) : ""}}
-                                {{loginData?.lastName | translate}}
-                            </a> -->
-
-                            
-
-                            <!-- <a [matMenuTriggerFor]="menu" class="toolbarLink pointer user-name"
-                                *ngIf="loginData.userType === 2">
-                                {{supplier?.firstName | translate}} {{supplier?.middleName | translate}}
-                                {{supplier?.lastName | translate}}
-                            </a> -->
-                            <!-- <a [matMenuTriggerFor]="menu" class="toolbarLink pointer user-name"
-                                *ngIf="loginData.userType === 2 || loginData.userType === 1" -->
-                                
-                           
                             <mat-menu #menu="matMenu" class="XuserMenu comm-menu comm-menu-userprofile">
-
-                                <button mat-menu-item (click)="manageProfile('manageprofile')"
-                                *ngIf="SupDetails?.status === 'Requested information'">
-                                    <!-- <i class="fa fa-id-card-o" aria-hidden="true"></i> -->
-                                    <img src="../../assets/images/icons/userprofile.png" alt="User Profile">Manage Profile
-                                </button>
-                                <button mat-menu-item (click)="logOut()" >
+                                <button mat-menu-item (click)="logOut()">
                                     <img src="../../assets/images/icons/logout.png" alt="Logout Profile">Logout
                                 </button>
 
-                                <!-- 
-                               Sample designs for other Icons  Dont Delete the below html code By Jawahar UI
-                                <button mat-menu-item [routerLink]="['/HomePage']">
-                                    <span class="material-icons-outlined"> logout </span>Material Icon
-                                </button>
-                                <button mat-menu-item [routerLink]="['/HomePage']">
-                                    <mat-icon aria-hidden="false" aria-label="home icon" fontIcon="home"></mat-icon>Mat Icon
-                                </button>-->
 
                             </mat-menu>
                         </div>
@@ -296,204 +192,48 @@
 
 
 
-                </div> 
-            </div> 
+                </div>
+            </div>
         </div>
     </mat-toolbar>
 
     <mat-sidenav-container class="sidenav-container">
         <mat-sidenav #sidenav class="sidenav-width" [mode]="isMobile ? 'over' : 'side'"
             [opened]="isMobile ? 'false' : 'true'" *ngIf="loginData?.userType !== 2">
-            <button mat-button class="btn-width" *ngIf="loginData?.userType === 2"
-                (click)="manageProfile('manageprofile')" routerLinkActive="active-link active">
-                <div class="nav-icons"><mat-icon>person_add</mat-icon>Supplier Registration</div>
-            </button>
 
-            @if(loginData?.businessRole === 'PQ Rep' && getImplementationConfigDataRes?.supplierManagement ||
-            loginData?.businessRole === 'PQ Rep Approver' && getImplementationConfigDataRes?.supplierManagement){
-                <button mat-button [matMenuTriggerFor]="supplier" #supplierTrigger="matMenuTrigger"  (click)="supplierTrigger.openMenu();">
-                    <div class="nav-icons"><mat-icon>group</mat-icon>Supplier Management</div>
-                </button>
-                <mat-menu #supplier="matMenu" xPosition="after" class="level1Menu">
-                    <span (mouseleave)="supplierTrigger.closeMenu()">
-                    <button mat-menu-item *ngIf="!isSublistVisible" (click)="dashboard()">Supplier
+
+
+            <button mat-button [matMenuTriggerFor]="supplier" #supplierTrigger="matMenuTrigger"
+                (click)="supplierTrigger.openMenu();">
+                <div class="nav-icons">
+                    <mat-icon>group</mat-icon>Supplier Management
+                </div>
+            </button>
+            <mat-menu #supplier="matMenu" xPosition="after" class="level1Menu">
+                <span (mouseleave)="supplierTrigger.closeMenu()">
+                    <button mat-menu-item>Supplier
                         Pre-Qualification</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible" (click)="pqAssesmentList()">Supplier
+                    <button mat-menu-item>Supplier
                         Directory</button>
-                        </span>
-                </mat-menu>
-            }
-            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.sourcingManagement || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
-                <button mat-button [matMenuTriggerFor]="sourcing" #sourcingTrigger="matMenuTrigger" (click)="sourcingTrigger.openMenu()"
-                >
-                <!-- <button mat-button class="btn-width" [matMenuTriggerFor]="sourcingManagement"
-                    > -->
-                    <div class="nav-icons"><i class="fa fa-sitemap" aria-hidden="true"></i>Sourcing Management</div>
-                </button>
-                <mat-menu #sourcing="matMenu" xPosition="after" class="level1Menu">
-                    <span (mouseleave)="sourcingTrigger.closeMenu()">
-                    <button mat-menu-item *ngIf="!isSublistVisible"  (click)="materialrequisition()">Material Requisition</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible"  (click)="purchaserequisition()">Purchase Requisition</button>               
-                    <button mat-menu-item *ngIf="!isSublistVisible"  (click)="requestforquation()">Request for Quotation</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible">Request for Proposal</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible">Request for Tender</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible">Auctions & Reverse Auctions</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible">E-Commerce</button>
-                    <!-- <button mat-menu-item *ngIf="!isSublistVisible" [routerLink]="['/krya/cqa']">CQA</button> -->
-                    </span>
-                </mat-menu>
-            }
-            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.contractsManagement || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
-                <button mat-button [matMenuTriggerFor]="contracts" #contractsTrigger="matMenuTrigger" (click)="contractsTrigger.openMenu()"
-                >
-                    <div class="nav-icons"><i class="fa fa-handshake-o" aria-hidden="true"></i>Contract Management</div>
-                </button>
-                <mat-menu #contracts="matMenu" xPosition="after" class="level1Menu">
-                    <span (mouseleave)="contractsTrigger.closeMenu()">
-                    <button mat-menu-item *ngIf="!isSublistVisible" (click)="clauseLib()">Clause
-                        Library</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible" (click)="contractTem()">Template
-                        Management</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible" (click)="contarctRep()">Contracts
-                        Transactions</button>
-                        </span>
-                </mat-menu>
-            }
-            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.orderManagement || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
-                <button mat-button [matMenuTriggerFor]="order" #orderTrigger="matMenuTrigger" (click)="orderTrigger.openMenu()"
-                >
-                    <div class="nav-icons">
-                        <!-- <i class="fa fa-sitemap" aria-hidden="true"></i> -->
-                        <i class="fa fa-folder-open-o ft-size18" aria-hidden="true" ></i>
-                        Order Management</div>
-                </button>
-                <mat-menu #order="matMenu" xPosition="after" class="level1Menu" style="display: block !important;">
-                    <span (mouseleave)="orderTrigger.closeMenu()">
-                        <button mat-menu-item *ngIf="!isSublistVisible" [routerLink]="['/krya/purchaseorderlist']"> 
-                            <img src="../../assets/images/icons/icon-po.png" alt="" width="22" style="padding-right: 05px;">
-                            Purchase Orders
-                        </button>
-                        <button mat-menu-item *ngIf="!isSublistVisible" [routerLink]="['/krya/addsupplierpurchaseorder']">
-                            <img src="../../assets/images/icons/Supplier.png" alt="" width="22"  style="padding-right: 05px;">
-                            Supplier Purchase Orders Form</button>
-                    </span>
-                </mat-menu>
-            }
-            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.workCompletionCertificate || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
-                <button mat-button [matMenuTriggerFor]="requests" #requestsTrigger="matMenuTrigger" (click)="requestsTrigger.openMenu()"
-                >
-                    <div class="nav-icons"><i class="fa fa-line-chart" aria-hidden="true"></i>Milestone Completion</div>
-                </button>
-                <mat-menu #requests="matMenu" xPosition="after" class="level1Menu">
-                    <span (mouseleave)="requestsTrigger.closeMenu()">
-                    <button mat-menu-item *ngIf="!isSublistVisible">Requests</button>
-                    </span>
-                </mat-menu>
-            }
-            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.paymentsAndInvoices || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
-                <button mat-button [matMenuTriggerFor]="invoice" #invoiceTrigger="matMenuTrigger" (click)="invoiceTrigger.openMenu()"
-                >
-                    <div class="nav-icons"><i class="fa fa-wpforms" aria-hidden="true"></i>Invoice & Payments</div>
-                </button>
-                <mat-menu #invoice="matMenu" xPosition="after" class="level1Menu">
-                    <span (mouseleave)="invoiceTrigger.closeMenu()">
-                    <button mat-menu-item *ngIf="!isSublistVisible" >Invoice
-                    </button>
-                    </span>
-                </mat-menu>
-            }
-            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.paymentsAndInvoices || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
-                <button mat-button [matMenuTriggerFor]="invoice" #invoiceTrigger="matMenuTrigger" (click)="invoiceTrigger.openMenu()"
-                >
-                    <div class="nav-icons"><i class="fa fa-wpforms" aria-hidden="true"></i>Master Services</div>
-                </button>
-                <mat-menu #invoice="matMenu" xPosition="after" class="level1Menu">
-                    <span (mouseleave)="invoiceTrigger.closeMenu()">
-                    <button mat-menu-item *ngIf="!isSublistVisible" [routerLink]="['/krya/transit-agency']">Service Requests</button>
-                    <button mat-menu-item *ngIf="!isSublistVisible"  [routerLink]="['/krya/form60']">Form60</button>
-                    </span>
-                </mat-menu>
-            }
-
-            @if(loginData?.businessRole === 'Buyer' && getImplementationConfigDataRes?.paymentsAndInvoices || loginData?.businessRoleId !== 2 || loginData?.businessRoleId !== 5 || loginData?.businessRoleId !== 4){
-            <button mat-button [matMenuTriggerFor]="invoice" #invoiceTrigger="matMenuTrigger" (click)="invoiceTrigger.openMenu()"
-            >
-                <div class="nav-icons"><i class="fa fa-wpforms" aria-hidden="true"></i>Inventory Management</div>
-            </button>
-            <mat-menu #invoice="matMenu" xPosition="after" class="level1Menu">
-                <span (mouseleave)="invoiceTrigger.closeMenu()">
-                <button mat-menu-item *ngIf="!isSublistVisible" (click)="itemMaster()">Inventory</button>
                 </span>
             </mat-menu>
-        }
-            <!-- <mat-nav-list class="mainMenu">
-                <mat-list-item *ngIf="loginData.roleId !== 5" [routerLink]="['/krya/dashboard']"
-                    routerLinkActive="active-link active">
-                    <div class="menuLink">Dashboard</div>
-                </mat-list-item>
-                <mat-list-item *ngIf="loginData.userType !== 4" [routerLink]="['/krya/dashboardSupReg']"
-                    routerLinkActive="active-link active">
-                    <div class="menuLink">Supplier Registration</div>
-                </mat-list-item>
-                <mat-list-item (click)="toggleSublist()" *ngIf="loginData.userType === 4">
-                    <div class="menuLink">Supplier Management</div>
-                </mat-list-item>
-                <mat-nav-list *ngIf="isSublistVisible">
-                    <mat-list-item [routerLink]="['/krya/dashboard']" routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Supplier Pre-Qualification</div>
-                    </mat-list-item>
-                    <mat-list-item [routerLink]="['/krya/PQAssesmentList']" routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Supplier Directory</div>
-                    </mat-list-item>
-                </mat-nav-list>
-                <mat-list-item (click)="toggleSource()" *ngIf="loginData.userType === 4">
-                    <div class="menuLink">Sourcing Management </div>
-                </mat-list-item>
-                <mat-nav-list *ngIf="isSourceVisible">
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Purchase Requisition</div>
-                    </mat-list-item>
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Request for Quotation</div>
-                    </mat-list-item>
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Request for Proposal</div>
-                    </mat-list-item>
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Request for Tender</div>
-                    </mat-list-item>
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Auctions & Reverse Auctions</div>
-                    </mat-list-item>
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">E-Commerce</div>
-                    </mat-list-item>
-                </mat-nav-list>
-                <mat-list-item (click)="toggleContract()" *ngIf="loginData.userType === 4">
-                    <div class="menuLink">Contract Management</div>
-                </mat-list-item>
-                <mat-nav-list *ngIf="isContractVisible">
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Template Management</div>
-                    </mat-list-item>
-                    <mat-list-item routerLinkActive="active-link active">
-                        <div class="menuLink sublist">Contracts Transactions</div>
-                    </mat-list-item>
-                </mat-nav-list>
-
-                <mat-list-item *ngIf="loginData.userType === 4">
-                    <div class="menuLink">Order Management </div>
-                </mat-list-item>
-                <mat-list-item *ngIf="loginData.userType === 4">
-                    <div class="menuLink">Milestone Completion </div>
-                </mat-list-item>
-                <mat-list-item *ngIf="loginData.userType === 4">
-                    <div class="menuLink">Invoice & Payments</div>
-                </mat-list-item>
 
 
+            <button mat-button [matMenuTriggerFor]="contracts" #contractsTrigger="matMenuTrigger"
+                (click)="contractsTrigger.openMenu()">
+                <div class="nav-icons"><i class="fa fa-handshake-o" aria-hidden="true"></i>Contract Management</div>
+            </button>
+            <mat-menu #contracts="matMenu" xPosition="after" class="level1Menu">
+                <span (mouseleave)="contractsTrigger.closeMenu()">
+                    <button mat-menu-item>Clause
+                        Library</button>
+                    <button mat-menu-item>Template
+                        Management</button>
+                    <button mat-menu-item>Contracts
+                        Transactions</button>
+                </span>
+            </mat-menu>
 
-            </mat-nav-list> -->
         </mat-sidenav>
 
         <mat-sidenav-content>
