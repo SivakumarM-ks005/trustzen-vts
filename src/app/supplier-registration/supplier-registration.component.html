@@ -4,8 +4,8 @@
          <h3>Supplier User Creation</h3>
       </div>
       <div class="col-lg-1 text-end">
-         <button mat-icon-button  mat-dialog-close>
-         <i class="material-icons" matTooltip="close">close</i>
+         <button mat-icon-button mat-dialog-close>
+            <i class="material-icons" matTooltip="close">close</i>
          </button>
       </div>
    </div>
@@ -19,32 +19,33 @@
                <div class="grid-4cols">
                   <mat-form-field class="col">
                      <mat-label>
-                        <span class="error-msg">  Supplier Classification</span>
+                        <span class="error-msg"> Supplier Classification</span>
                      </mat-label>
-                     <mat-select formControlName="supplierClassificationId"
-                        matTooltip="Supplier Classification">
+                     <mat-select formControlName="supplierClassificationId" matTooltip="Supplier Classification">
                         <mat-option value="">-- Please Select --</mat-option>
                         <mat-option>Local Company</mat-option>
                      </mat-select>
-                     <!-- Place mat-error directly inside mat-form-field -->
+
                      <mat-error>
                         Supplier Classification
-                        </mat-error>
+                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="col">
                      <mat-label>
                         <span class="error-msg"> Company Name </span>
                      </mat-label>
-                     <input uppercaseOnly appOnlyAllowedInput matInput formControlName="supplierName" matTooltip="Company Name" required />
+                     <input uppercaseOnly appOnlyAllowedInput matInput formControlName="supplierName"
+                        matTooltip="Company Name" required />
                      <mat-error *ngIf="supplierForm.get('supplierName')?.hasError('required')">
                         Company Name
-                        </mat-error>
+                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="col">
                      <mat-label>
                         Company Name in Native Language
                      </mat-label>
-                     <input matInput formControlName="supplierNameNativeLang" matTooltip="Company Name in Native Language" />
+                     <input matInput formControlName="supplierNameNativeLang"
+                        matTooltip="Company Name in Native Language" />
                   </mat-form-field>
                   <mat-form-field class="col">
                      <mat-label>
@@ -53,7 +54,7 @@
                      <input matInput formControlName="tradeLicense" [matTooltip]="" required />
                      <mat-error>
                         Licence
-                        </mat-error>
+                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="col">
                      <mat-label>
@@ -62,17 +63,16 @@
                      <input matInput formControlName="taxRegistration" matTooltip="Tax Registration" required />
                      <mat-error *ngIf="supplierForm.get('taxRegistration')?.hasError('required')">
                         Tax Registration
-                        </mat-error>
+                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="col">
                      <mat-label>
                         <span class="error-msg">Site Code</span>
                      </mat-label>
-                     <input matInput formControlName="siteCode"
-                        matTooltip="Site Code" />
+                     <input matInput formControlName="siteCode" matTooltip="Site Code" />
                      <mat-error *ngIf="supplierForm?.get('siteCode')?.hasError('required')">
                         Site Code
-                        </mat-error>
+                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="col">
                      <mat-label>
@@ -81,20 +81,17 @@
                      <input matInput matTooltip="Site Name" formControlName="siteName" />
                      <mat-error>
                         Site Name
-                        </mat-error>
+                     </mat-error>
                   </mat-form-field>
                   <mat-form-field class="col">
                      <mat-label>
                         <span class="error-msg">Company Email</span>
                      </mat-label>
-                     <input matInput formControlName="companyEmail"
-                        matTooltip="Company Email" />
+                     <input matInput formControlName="companyEmail" matTooltip="Company Email" />
                      <mat-error>
                         Company Email
-                        </mat-error>
-                     <!-- <mat-error *ngIf="supplierForm.get('companyEmail')?.hasError('pattern')">
-                        Please enter a valid email address.
-                        </mat-error> -->
+                     </mat-error>
+
                   </mat-form-field>
                </div>
             </div>
@@ -113,39 +110,38 @@
                         <mat-select formControlName="salutation" required>
                            <mat-option value="">-- Please Select --</mat-option>
                            <mat-option>
-                           Mr
+                              Mr
                            </mat-option>
                         </mat-select>
                         <mat-error>
                            Salutation
-                           </mat-error>
+                        </mat-error>
                      </mat-form-field>
                      <mat-form-field class="col">
                         <mat-label>
                            <span class="error-msg">salutationName</span>
                         </mat-label>
-                        <input matInput appOnlyAllowedSymbol formControlName="firstName"
-                           matTooltip="salutationName" required />
+                        <input matInput appOnlyAllowedSymbol formControlName="firstName" matTooltip="salutationName"
+                           required />
                         <mat-error>
                            salutationName
-                           </mat-error>
+                        </mat-error>
                      </mat-form-field>
                      <mat-form-field class="col">
                         <mat-label>
                            Middle Name
                         </mat-label>
-                        <input matInput appOnlyAllowedSymbol formControlName="middleName"
-                           matTooltip="Middle Name" />
+                        <input matInput appOnlyAllowedSymbol formControlName="middleName" matTooltip="Middle Name" />
                      </mat-form-field>
                      <mat-form-field class="col">
                         <mat-label>
                            <span class="error-msg">Last Name </span>
                         </mat-label>
-                        <input matInput appOnlyAllowedSymbol formControlName="lastName"
-                           matTooltip="Last Name" required />
+                        <input matInput appOnlyAllowedSymbol formControlName="lastName" matTooltip="Last Name"
+                           required />
                         <mat-error>
                            Last Name
-                           </mat-error>
+                        </mat-error>
                      </mat-form-field>
                   </div>
                   <div class="grid-user-2nd-row">
@@ -153,39 +149,34 @@
                         <mat-label>
                            <span class="error-msg"> Designation </span>
                         </mat-label>
-                        <input matInput formControlName="designation"
-                           matTooltip="Designation " required />
+                        <input matInput formControlName="designation" matTooltip="Designation " required />
                         <mat-error>
                            Designation
-                           </mat-error>
+                        </mat-error>
                      </mat-form-field>
                      <mat-form-field class="col">
                         <mat-label>
                            <span class="error-msg"> Role </span>
                         </mat-label>
-                        <mat-select formControlName="contactRoleId"
-                           matTooltip="Role">
+                        <mat-select formControlName="contactRoleId" matTooltip="Role">
                            <mat-option value="">-- Please Select --</mat-option>
                            <mat-option>
-                           Account Manager
+                              Account Manager
                            </mat-option>
                         </mat-select>
                         <mat-error *ngIf="supplierForm.get('contactRoleId')?.hasError('required')">
                            Role
-                           </mat-error>
+                        </mat-error>
                      </mat-form-field>
                      <mat-form-field class="col">
                         <mat-label>
                            <span class="error-msg"> Email ID </span>
                         </mat-label>
-                        <input matInput formControlName="emailId"
-                           matTooltip="Email ID" />
+                        <input matInput formControlName="emailId" matTooltip="Email ID" />
                         <mat-error>
                            Email ID
-                           </mat-error>
-                        <!-- <mat-error *ngIf="supplierForm.get('emailId')?.hasError('pattern')">
-                           Please enter a valid email address.
-                           </mat-error> -->
+                        </mat-error>
+
                      </mat-form-field>
                   </div>
                   <div class="grid-3cols cust-field-height mt-2">
@@ -193,51 +184,45 @@
                         <span class="ft-size11">Country Code - Mobile Number<sup class="text-danger">*</sup></span>
                         <div class="d-flex align-items-center">
                            <mat-form-field class="col">
-                              <mat-select formControlName="mobileCode"
-                                 
-                                 required>
+                              <mat-select formControlName="mobileCode" required>
                                  <mat-option value="">-- Please Select --</mat-option>
                                  <mat-option>
-                                 IND +91
+                                    IND +91
                                  </mat-option>
                               </mat-select>
                            </mat-form-field>
                            <mat-error *ngIf="supplierForm.get('mobileCode')?.hasError('required')">
                               Country Code
-                              </mat-error>
-                           <mat-form-field  class="col">
-                              <input matInput formControlName="mobileNumber"
-                                
-                                 matTooltip="Mobile Number" required
+                           </mat-error>
+                           <mat-form-field class="col">
+                              <input matInput formControlName="mobileNumber" matTooltip="Mobile Number" required
                                  maxlength="10" />
                               <mat-error>
                                  Mobile Number
-                                 </mat-error>
+                              </mat-error>
                            </mat-form-field>
                         </div>
                      </div>
                      <div class="w-100">
                         <span class="ft-size11">Country Code - Landline Number</span>
                         <div class="d-flex align-items-center">
-                           <mat-form-field  class="col">
-                              <mat-select formControlName="landlineCode"
-                                 >
+                           <mat-form-field class="col">
+                              <mat-select formControlName="landlineCode">
                                  <mat-option value="">-- Please Select --</mat-option>
                                  <mat-option>
-                                 IND +11
+                                    IND +11
                                  </mat-option>
                               </mat-select>
                            </mat-form-field>
                            <mat-error>
                               Country Code
-                              </mat-error>
-                           <mat-form-field  class="col">
-                              <input matInput formControlName="landlineNumber"
-                                 
-                                 matTooltip="Landline Number" maxlength="10" />
+                           </mat-error>
+                           <mat-form-field class="col">
+                              <input matInput formControlName="landlineNumber" matTooltip="Landline Number"
+                                 maxlength="10" />
                               <mat-error>
                                  Landline Number
-                                 </mat-error>
+                              </mat-error>
                            </mat-form-field>
                         </div>
                      </div>
@@ -254,59 +239,37 @@
                         <mat-label>
                            <span class="error-msg">User Name</span>
                         </mat-label>
-                        <input matInput formControlName="userName" autocomplete="new-password"
-                        matTooltip="User Name" required
-                         />
+                        <input matInput formControlName="userName" autocomplete="new-password" matTooltip="User Name"
+                           required />
                         <mat-error>
                            User Name
-                           </mat-error>
-                           <!-- <mat-error *ngIf="supplierForm?.get('userName')?.hasError('usernameExists')">
-                           {{ 'Username already exists, please enter a new username' | translate }}
-                           </mat-error> -->
+                        </mat-error>
+
                      </mat-form-field>
                      <mat-form-field class="col pwd-input">
                         <mat-label>
                            Password
                         </mat-label>
-                        <input matInput matTooltip="Password"
-                        [type]="isPasswordVisible ? 'password' : 'text'" autocomplete="one-time-code"
-                        formControlName="password" required  class="input-pr" />
-                        <!-- Eye icon inside the input field using matSuffix -->
-                        <mat-icon matSuffix (click)="togglePasswordVisibility()"
-                           class="password-toggle eye-icon ieye">
+                        <input matInput matTooltip="Password" [type]="isPasswordVisible ? 'password' : 'text'"
+                           autocomplete="one-time-code" formControlName="password" required class="input-pr" />
+
+                        <mat-icon matSuffix (click)="togglePasswordVisibility()" class="password-toggle eye-icon ieye">
                            {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
                         </mat-icon>
-                        <!-- @if (supplierForm.get('password')?.hasError('required') &&
-                           supplierForm.get('password')?.touched) {
-                           <mat-error> {{ 'Password is required' | translate }}</mat-error>
-                           }
-                           @if (supplierForm.get('password')?.hasError('pattern') &&
-                           supplierForm.get('password')?.touched) {
-                           <mat-error> {{ 'Password must contain at least 8 characters, includes special
-                               character
-                               (like @, # etc.), N, n, 1' | translate }} </mat-error>
-                           }
-                           <mat-error *ngIf="supplierForm?.get('password')?.hasError('confrmpasswordMismatch')">
-                               Passwords do not match
-                           </mat-error> -->
+
                      </mat-form-field>
                      <mat-form-field class="col pwd-input">
                         <mat-label>
                            Confirm / Retype Password
                         </mat-label>
-                        <input matInput type="password" formControlName="confirmPassword" matTooltip="Confirm / Retype Password" [type]="isConformPasswordVisible ? 'password' : 'text'"
-                        required type="password" autocomplete="new-password"
-                         class="input-pr" />
+                        <input matInput type="password" formControlName="confirmPassword"
+                           matTooltip="Confirm / Retype Password"
+                           [type]="isConformPasswordVisible ? 'password' : 'text'" required type="password"
+                           autocomplete="new-password" class="input-pr" />
                         <mat-icon matSuffix (click)="toggleConformPasswordVisibility()"
                            class="password-toggle eye-icon ieye">
                            {{ isConformPasswordVisible ? 'visibility_off' : 'visibility' }}
                         </mat-icon>
-                        <!-- <mat-error *ngIf="supplierForm.get('confirmPassword')?.hasError('required')">
-                           {{ 'Confirm Password is required' | translate }}
-                           </mat-error>
-                           <mat-error *ngIf="supplierForm?.get('confirmPassword')?.hasError('passwordMismatch')">
-                           Passwords do not match
-                           </mat-error> -->
                      </mat-form-field>
                   </div>
                </div>
@@ -316,14 +279,13 @@
    </mat-dialog-content>
    <mat-dialog-actions>
       <div class="footer-action-btn">
-         <button   class="btn-gray"  cdkFocusInitial>
-         <i class="fa fa-ban pe-2"></i> Cancel
+         <button class="btn-gray" cdkFocusInitial>
+            <i class="fa fa-ban pe-2"></i> Cancel
          </button>
          <div class="middle-spacer"></div>
          <button class="btn-blue">
-         <i class="fa fa-hand-pointer-o pe-2"></i>Signin
+            <i class="fa fa-hand-pointer-o pe-2"></i>Signin
          </button>
       </div>
    </mat-dialog-actions>
 </div>
-
