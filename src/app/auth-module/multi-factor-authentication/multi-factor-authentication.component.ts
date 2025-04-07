@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogClose, MatDialo
 import { CommonService } from '../../core/services/common.service';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from "@angular/material/snack-bar";
-import { SupplierLoginData } from '../../home-page/home-page.component';
+// import { SupplierLoginData } from '../../home-page/home-page.component';
 import { AdminService } from '../../core/services/admin/admin.service';
 import { MatIconButton, MatButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -33,7 +33,7 @@ export class MultiFactorAuthenticationComponent {
   isResendDisabled: boolean = false;
   resendCountdown: number = 90; // Countdown in seconds
   countdownInterval: any;
-  loginData = new SupplierLoginData();
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { logInDetails: any },
@@ -69,21 +69,7 @@ export class MultiFactorAuthenticationComponent {
   }
 
   resendOtp() {
-    this.otpgenerate();
     this.startCountdown();
-  }
-
-  otpgenerate() {
-    this.loginData = new SupplierLoginData();
-    this.loginData.userId = this.data.logInDetails.userId;
-    this.loginData.toMailAddress = this.data.logInDetails.emailId;
-    this.loginService.getOTPforMFA(this.loginData).subscribe((res: number) => {
-      if (res) {
-        this.adminService.showMessage('OTP has been re-send to your registred Email ID');
-      } else {
-        this.adminService.showMessage('OTP has been not generated. Please contact Admin');
-      }
-    })
   }
 
   onSubmitMfa() { }
