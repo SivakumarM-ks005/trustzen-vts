@@ -222,11 +222,11 @@ sup {
     }
 
     .content-box {
-        padding: 0 45px 30px 45px;
-        margin-bottom: 30px;
+        // padding: 0 45px 30px 45px;
+        // margin-bottom: 30px;
         // height: 85vh;
-        overflow: hidden;
-        position: relative;
+        // overflow: hidden;
+        // position: relative;
         .content-body-box {
             height: 85vh;
             overflow-x: auto;
@@ -4069,4 +4069,17 @@ a {
 .cdk-overlay-pane {
     width: 230px;
 }
- 
+.under-construct-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%); /* IE 9 */
+        -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */
+    }
+}
+

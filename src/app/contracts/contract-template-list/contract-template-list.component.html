@@ -2,29 +2,13 @@
     <div class="bread-crumbs">
         <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Contract Management</h2>
     </div>
-    @if(!showAddPage){
+
     <div class="content-box p-2">
         <div class="widget-box">
-            <h5 class="widget-title d-flex justify-content-between pt-4 pb-4">Template List
-                <button class="header-level-btn-blue" matTooltip="Create Template" (click)="addTemplate()"><i
-                        class="fa fa-plus pe-2"></i>New</button>
+            <h5 class="widget-title">
+                Template List
             </h5>
-            <div class="widget-content">
-                <ag-grid-angular     [theme]="theme" [rowData]="templateData" [columnDefs]="colDefs"
-                    [defaultColDef]="defaultColDef" [pagination]="pagination" [paginationPageSize]="paginationPageSize"
-                    [paginationPageSizeSelector]="paginationPageSizeSelector" rowSelection="single"
-                    [rowHeight]="rowHeight" (gridReady)="onGridReady($event)" />
-            </div>
+                <div class="under-construct-box"><img src="/assets/images/under-construction.png" alt="under-constrction" width="250" height="250" ></div>
         </div>
     </div>
-    }
-    @if(showAddPage){
-    <div>
-        <div class="content-box p-2 vh-100">
-            <app-contract-template [dataValue]="templateValue" [isEditMode]="editMode" [templateData]="templateData"
-                [isApproverViewMode]="approverViewMode" [isViewModeOnly]="viewOnly"
-                (backEvent)="backClick()"></app-contract-template>
-        </div>
-    </div>
-    }
 </div>

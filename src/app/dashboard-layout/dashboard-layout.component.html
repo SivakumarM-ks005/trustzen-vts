@@ -5,7 +5,8 @@
             <div class="w-200 mv-width">
                 <div class="d-flex flex-row justify-content-start align-items-center">
                     <div class="h2 text-white d-inline-block mb-0 col">
-                        <a routerLink="/ProcureZen" ><img src="assets/Trustzen-Logo.png" alt="trustzen_logo" style="height: 25px;"></a>
+                        <a routerLink="/ProcureZen"><img src="assets/Trustzen-Logo.png" alt="trustzen_logo"
+                                style="height: 25px;"></a>
                     </div>
                     <div class="toggle-icon">
                         <button mat-icon-button (click)="sidenav.toggle()" (click)="isShowIcon = !isShowIcon">
@@ -79,8 +80,7 @@
                                         </li>
 
                                         <li>
-                                            <a [matMenuTriggerFor]="help"
-                                                class="toolbarLink pointer user-name">
+                                            <a [matMenuTriggerFor]="help" class="toolbarLink pointer user-name">
                                                 <span class="material-icons-outlined">help_outline</span>Help
                                             </a>
                                             <mat-menu #help="matMenu" class="userMenu comm-menu aa">
@@ -156,8 +156,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a [matMenuTriggerFor]="help"
-                                        class="toolbarLink pointer user-name">
+                                    <a [matMenuTriggerFor]="help" class="toolbarLink pointer user-name">
                                         <span class="material-icons-outlined">help_outline</span>Help
                                     </a>
                                     <mat-menu #help="matMenu" class="userMenu comm-menu aa">
@@ -211,9 +210,9 @@
             </button>
             <mat-menu #supplier="matMenu" xPosition="after" class="level1Menu">
                 <span (mouseleave)="supplierTrigger.closeMenu()">
-                    <button mat-menu-item>Supplier
+                    <button mat-menu-item (click)="pqAssesmentList()">Supplier
                         Pre-Qualification</button>
-                    <button mat-menu-item>Supplier
+                    <button mat-menu-item (click)="pqAssesmentList()">Supplier
                         Directory</button>
                 </span>
             </mat-menu>
@@ -225,11 +224,11 @@
             </button>
             <mat-menu #contracts="matMenu" xPosition="after" class="level1Menu">
                 <span (mouseleave)="contractsTrigger.closeMenu()">
-                    <button mat-menu-item>Clause
+                    <button mat-menu-item (click)="clauseLib()">Clause
                         Library</button>
-                    <button mat-menu-item>Template
+                    <button mat-menu-item (click)="contractTem()">Template
                         Management</button>
-                    <button mat-menu-item>Contracts
+                    <button mat-menu-item (click)="contarctRep()">Contracts
                         Transactions</button>
                 </span>
             </mat-menu>
