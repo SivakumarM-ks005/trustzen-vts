@@ -1,5 +1,21 @@
 .menu-close {
-    border: 1px solid #ccc !important;    
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    justify-content: center;
+    font-size: 28px;
+    align-items: center;
+    display: flex;
+    background: #005cbb;
+    padding: 5px;
+    border-radius: 25px;
+    color: #ffffff;
+    margin-right: 5px;
+    position: relative;
+    top: -1px;
+    cursor: default;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: #fff;
 }
 
 .sidenav-width {

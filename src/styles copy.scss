@@ -1875,7 +1875,7 @@ table.table-border tbody tr:hover {
     }
 
     .mat-mdc-icon-button .mat-mdc-button-touch-target {
-        border: 1px solid rgb(243, 246, 250) !important;
+        // border: 1px solid rgb(243, 246, 250) !important;
         // changed the 1px to 0px by Jawahar 
     }
 }
@@ -1883,7 +1883,7 @@ table.table-border tbody tr:hover {
 .mat-mdc-icon-button .mat-mdc-button-touch-target {
     height: 24px !important;
     width: 26px !important;
-    border: 1px solid #f7f1bb !important // changed the 1px to 0px by Jawahar 
+    // border: 1px solid #f7f1bb !important // changed the 1px to 0px by Jawahar 
 }
 
 .mat-mdc-form-field-icon-suffix,

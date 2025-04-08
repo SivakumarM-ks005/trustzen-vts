@@ -160,6 +160,7 @@ sup {
     .material-icons-outlined,
     .material-icons {
         font-size: 18px;
+        top: 0 !important;
     }
 }
 
@@ -716,7 +717,7 @@ sup {
     }
 
     .mat-mdc-icon-button .mat-mdc-button-touch-target {
-        border: 1px solid rgb(243, 246, 250) !important;
+        // border: 1px solid rgb(243, 246, 250) !important;
     }
 }
 
@@ -1909,7 +1910,7 @@ input[type='file'] {
     }
 
     .mat-mdc-icon-button .mat-mdc-button-touch-target {
-        border: 1px solid rgb(243, 246, 250) !important;
+        // border: 1px solid rgb(243, 246, 250) !important;
         color: $white !important;
     }
 }
@@ -2393,7 +2394,7 @@ input[type='file'] {
 }
 
 .mat-mdc-icon-button {
-    margin-top: 14px;
+    // margin-top: 14px;
 }
 
 .status-label {
@@ -2521,11 +2522,11 @@ input[type='file'] {
                         width: 22px !important;
                         border-radius: 25px;
                         background: #0253a7;
-                        border: 1px solid #02386e !important;
+                        // border: 1px solid #02386e !important;
                         color: #fff;
                         z-index: 1;
                         &:hover{
-                           border: 1px solid $paraText;
+                        //    border: 1px solid $paraText;
                         }
                     }
                 }
@@ -2877,6 +2878,7 @@ input[type='file'] {
                 font-size: 16px !important;
                 margin-right: 4px !important;
                 color: #6e6e6e;
+                margin-top: 0px !important;
             }
 
         }
@@ -3472,7 +3474,7 @@ a {
                 .mat-mdc-button-touch-target {
                     height: 24px !important;
                     width: 26px !important;
-                    border: 1px solid #d3d3d3 !important;
+                    // border: 1px solid #d3d3d3 !important;
                     border-radius: 3px;
                     background: #e9e9e952;
                 }
@@ -4082,4 +4084,5 @@ a {
         -webkit-transform: translate(-50%, -50%); /* Chrome, Safari, Opera */
     }
 }
+
 
