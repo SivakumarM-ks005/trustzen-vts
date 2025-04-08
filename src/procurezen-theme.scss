@@ -4063,9 +4063,10 @@ a {
         min-width: var(--mat-dialog-container-min-width, 0);
     }
 }
-
-
 .cursor-pointer {
     cursor: pointer;
+}
+.cdk-overlay-pane {
+    width: 230px;
 }
  

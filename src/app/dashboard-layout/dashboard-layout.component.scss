@@ -26,11 +26,15 @@ button {
 }
 
 // for top menu
+
 .navmenu ul.main-menu li a {
     color: rgb(68 68 68);
     font-weight: 400 !important;
     font-size: 13px !important;
     text-decoration: none;
+}
+.navmenu ul.main-menu li .active {
+    color: rgb(235, 93, 13) !important;
 }
 .navmenu ul.main-menu li a:hover {
     color: rgb(235, 93, 13) !important;
