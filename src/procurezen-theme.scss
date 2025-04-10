@@ -247,10 +247,10 @@ input:focus-visible {
 
         .widget-box {
             // display: flex;
-            // background: $white;
-            // border: 1px solid $LightGray;
-            background: #f6935e;
-            border: 1px solid #f6935e;
+            background: $white;
+            border: 1px solid $LightGray;
+            // background: #f6935e;
+            // border: 1px solid #f6935e;
             margin-bottom: 5px;
             border-radius: 5px;
 
@@ -260,18 +260,18 @@ input:focus-visible {
 
             .widget-title {
                 font: 400 14px / 10px 'Roboto', sans-serif;
-                // color: $BravesNavy;
-                // background: $AliceBlue;
-                color: #fff;
+                color: $BravesNavy;
+                background: $AliceBlue;
+                // color: #fff;
                 height: 30px;
                 line-height: 30px;
                 padding: 0px 10px 0px 10px !important;
-                // border-bottom: 1px solid $LightGray;
+                border-bottom: 1px solid $LightGray;
                 display: flex;
                 align-items: center;
                 width: 100%;
                 margin-bottom: 0;
-                font-weight: 300;
+                border-radius: 5px;
 
                 // .number-notation {
                 //     background: $pzenOrange;
@@ -2200,7 +2200,8 @@ input[type='file'] {
 
 .content-table thead tr,
 .ag-header-cell{
-    background-color: $tableRowBg;}
+    // background-color: $tableRowBg;
+}
 
 
 .content-table th { 
