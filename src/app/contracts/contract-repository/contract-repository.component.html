@@ -3,11 +3,172 @@
         <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Contract Management</h2>
     </div>
     <div class="content-box p-2">
-        <div class="widget-box">
-            <h5 class="widget-title">
-                Contract List
-            </h5>
-                <div class="under-construct-box"><img src="/assets/images/under-construction.png" alt="under-constrction" width="250" height="250" ></div>
+    <div class="widget-box">
+        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+            Contract List
+            <button   class="header-level-btn-blue" matTooltip="Create Template"
+                (click)="contractform()"><mat-icon>add</mat-icon>New</button>
+        </h5>
+        <div class="widget-content">
+            <div class="d-block cust-mat-table">
+
+                <table mat-table [dataSource]="dataSource">
+                    <ng-container matColumnDef="contractId">
+                        <th mat-header-cell *matHeaderCellDef>Contract #</th>
+                        <td mat-cell *matCellDef="let element"> {{element.contractId}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-contractId">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field class="f-width100">
+                                <input type="text" matInput placeholder="Search by Id">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="contractName">
+                        <th mat-header-cell *matHeaderCellDef> Contract Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.contractName}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-contractName">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Search by Name">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="createdDate">
+                        <th mat-header-cell *matHeaderCellDef> Created Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-createdDate">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field class="f-width100">
+                                <input type="text" matInput placeholder="Search by Date">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="startDate">
+                        <th mat-header-cell *matHeaderCellDef> Start Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-startDate">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field class="f-width100">
+                                <input type="text" matInput placeholder="Search by Date">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="endDate">
+                        <th mat-header-cell *matHeaderCellDef> End Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-endDate">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field class="f-width100">
+                                <input type="text" matInput placeholder="Search by Date">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+
+
+
+                    <ng-container matColumnDef="sourceDocRef">
+                        <th mat-header-cell *matHeaderCellDef> Source Doc Ref #</th>
+                        <td mat-cell *matCellDef="let element"> {{element.sourceDocRef}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-sourceDocRef">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="by Doc Ref">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="sourceDocDate">
+                        <th mat-header-cell *matHeaderCellDef> Source Doc Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.sourceDocDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-sourceDocDate">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="By Source Date">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+                    <ng-container matColumnDef="contractAdmin">
+                        <th mat-header-cell *matHeaderCellDef> Contract Admin </th>
+                        <td mat-cell *matCellDef="let element"> {{element.contractAdmin}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-contractAdmin">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Search by Admin">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef>Status </th>
+                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-status">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field>
+                                <input type="text" matInput placeholder="Search by Status">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+                    <ng-container matColumnDef="approvedDate">
+                        <th mat-header-cell *matHeaderCellDef> Approved Date </th>
+                        <td mat-cell *matCellDef="let element"> {{element.approvedDate}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="f-approvedDate">
+                        <th mat-header-cell *matHeaderCellDef>
+                            <mat-form-field class="f-width100">
+                                <input type="text" matInput placeholder="Search by Date">
+                            </mat-form-field>
+                        </th>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                        <th mat-header-cell *matHeaderCellDef>Action </th>
+                        <td mat-cell *matCellDef="let element"><a class="d-flex align-items-center"
+                                [matMenuTriggerFor]="menu"><span>Action</span> <mat-icon aria-hidden="true"
+                                    aria-label="arrow_drop_down" fontIcon="arrow_drop_down"></mat-icon>
+                            </a>
+                            <mat-menu #menu="matMenu">
+                                <button mat-menu-item class="menu-hight" (click)="tractTrace()">Track and Trace</button>
+                                <button mat-menu-item class="menu-hight" (click)="contractform()">View /
+                                    Edit</button>
+                                <button mat-menu-item class="menu-hight" (click)="contractview()">
+                                    Review</button>
+                                <button mat-menu-item class="menu-hight" [disabled]="true">Amendement</button>
+                                <button mat-menu-item class="menu-hight" (click)="renewalGuidelines()">Renewal</button>
+                                <button mat-menu-item class="menu-hight"
+                                    (click)="cancelContract()">Cancellation</button>
+                                <button mat-menu-item class="menu-hight">Work Order</button>
+                                <button mat-menu-item class="menu-hight"
+                                   (click)="contractInsights()">Insights</button>
+                                <button mat-menu-item class="menu-hight" (click)="contractview()">view
+                                    Workflow</button>
+                            </mat-menu>
+                    </ng-container>
+                    <ng-container matColumnDef="f-action">
+                        <th mat-header-cell *matHeaderCellDef>
+                        </th>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsFilter"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <div class="d-flex w-100 align-items-center">
+                    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 </div>
