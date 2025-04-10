@@ -1,51 +1,29 @@
 <div class="widget-box">
     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-        @if(isViewModeOnly){
-        <span>View Template</span>
-        } @else {
-        <span>{{ isEditMode ? 'Edit Template Details' : 'Create Template'}}</span>
-        }
-        @if(isEditMode || isViewModeOnly || isApproverViewMode){
-        <div class="d-flex align-items-center">
-            @if(dataValue.status === 'Active'){
-            <mat-checkbox [disabled]="isDisabled" checked>Freeze Template</mat-checkbox>
-            }
-            <div class="d-flex ft-size13 ps-2">Status: <span class="ft-bold ps-1">{{dataValue.status}}</span></div>
-        </div>
-        }
+        <span>Create Template</span>
     </h5>
     <form #contractTemplateForm="ngForm" id="contractTemplateFormId">
         <div class="widget-content">
             <div class="grid-5cols">
                 <mat-form-field class="col">
                     <mat-label>Template ID</mat-label>
-                    <input matInput matTooltip="" placeholder="" [(ngModel)]="saveTemplateVm.templateId"
-                        #templateIdControl="ngModel" [required]="true" name="refNo" [disabled]="true">
+                    <input matInput matTooltip="Enter Template ID" placeholder=""
+                       [required]="true" name="refNo" >
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Short Name</mat-label>
                     <input matInput matTooltip="Enter the Short Name" placeholder=""
-                        [(ngModel)]="saveTemplateVm.shortName" #shortNameControl="ngModel" [required]="true"
+                       [required]="true"
                         name="shortName" [disabled]="isViewModeOnly">
-                    @if (shortNameControl.errors?.required) {
-                    <mat-error matTooltip="Enter the Short Name">
-                        Short Name is required</mat-error>
-                    }
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Description</mat-label>
-                    <textarea matInput matTooltip="Enter the description" [(ngModel)]="saveTemplateVm.description"
-                        #optDesc="ngModel" #noteHint name="clauseDesc" cdkTextareaAutosize cdkTextareaAutosize
+                    <textarea matInput matTooltip="Enter the description"
+                        #noteHint name="clauseDesc" cdkTextareaAutosize cdkTextareaAutosize
                         #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="1" [required]="true"
                         [disabled]="isViewModeOnly"></textarea>
-                    <mat-hint align="end">{{noteHint.value.length > 0 ? noteHint.value.length : 0}} of
-                        1500</mat-hint>
-                    @if (optDesc.errors?.required) {
-                    <mat-error matTooltip="Enter the Description">
-                        Description is required</mat-error>
-                    }
                 </mat-form-field>
 
                 <mat-form-field class="col ">
@@ -53,59 +31,44 @@
                     <input matInput matTooltip="Enter the Create Date" [matDatepicker]="createDateTab"
                         [(ngModel)]="saveTemplateVm.createDate" #createDateControl="ngModel" name="createDate"
                         [disabled]="isViewModeOnly">
-                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                    <!-- <mat-hint>{{commonService.hindDateFormat}}</mat-hint> -->
                     <mat-datepicker-toggle matIconSuffix [for]="createDateTab"></mat-datepicker-toggle>
                     <mat-datepicker #createDateTab></mat-datepicker>
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Version</mat-label>
-                    <input matInput matTooltip="Enter the Version" placeholder="" [(ngModel)]="saveTemplateVm.version"
-                        #versionControl="ngModel" [required]="true" name="versionVal" [disabled]="isViewModeOnly">
-                    @if (versionControl.errors?.required) {
-                    <mat-error matTooltip="Enter the Version">
-                        Version is required</mat-error>
-                    }
+                    <input matInput matTooltip="Enter the Version" placeholder="" 
+                       [required]="true" name="versionVal" >
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Contract Type</mat-label>
-                    <mat-select [(ngModel)]="saveTemplateVm.contractTypeId" name="contractTypeVal"
-                        #contractTypeControl="ngModel" matTooltip="Select contract type" [required]="true"
+                    <mat-select name="contractTypeVal"
+                       matTooltip="Select contract type" [required]="true"
                         [disabled]="isViewModeOnly">
                         <mat-option value="">-- Please Select --</mat-option>
-                        @for (ix of contractTypeData; track ix) {
-                        <mat-option [value]="ix.contractTypeId">{{ix.contractName}}</mat-option>
-                        }
+                        
                     </mat-select>
-                    @if (contractTypeControl.errors?.required) {
-                    <mat-error matTooltip="Select a Contract Type">
-                        Contract Type is required</mat-error>
-                    }
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Contract Classification</mat-label>
-                    <mat-select [(ngModel)]="saveTemplateVm.contractClassificationId" name="contractClassificationVal"
-                        #contractClassificationControl="ngModel" matTooltip="Select Contract Classification"
+                    <mat-select name="contractClassificationVal"
+                       matTooltip="Select Contract Classification"
                         [required]="true" [disabled]="isViewModeOnly">
                         <mat-option value="">-- Please Select --</mat-option>
-                        @for (ix of classificationData; track ix) {
-                        <mat-option [value]="ix.classificationId">{{ix.classificationName}}</mat-option>
-                        }
+                
                     </mat-select>
-                    @if (contractClassificationControl.errors?.required) {
-                    <mat-error matTooltip="Select a Contract Classification">
-                        Contract Classification is required</mat-error>
-                    }
+
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Amend Date</mat-label>
                     <input matInput matTooltip="Enter the Amend Date" [matDatepicker]="amendDateTab"
-                        [(ngModel)]="saveTemplateVm.amendDate" #createDateControl="ngModel" name="amendDate"
+                       name="amendDate"
                         [disabled]="isViewModeOnly">
-                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                 
                     <mat-datepicker-toggle matIconSuffix [for]="amendDateTab"></mat-datepicker-toggle>
                     <mat-datepicker #amendDateTab></mat-datepicker>
                 </mat-form-field>
@@ -127,7 +90,7 @@
     </mat-expansion-panel>
 </mat-accordion>
 
-@if(isEditMode){
+<!-- @if(isEditMode){
 <div class="mt-2 mb-2">
     <mat-accordion class="custom-accordion">
         <mat-expansion-panel class="cust-panel">
@@ -136,7 +99,6 @@
             </mat-expansion-panel-header>
             <div class="pq-score-card">
                 <div class="table-responsive">
-                    <!-- <app-workflow-history></app-workflow-history> -->
                     <div class="table-responsive p-2" >
                         <table class="content-table">
                         <thead>
@@ -169,8 +131,8 @@
         </mat-expansion-panel>
     </mat-accordion>
 </div>
-}
-@if(!isApproverViewMode && !isViewModeOnly){
+} -->
+
 <div class="footer-action-btn">
    
         <button   class="btn-gray" (click)="goToBack()"><i
@@ -198,25 +160,26 @@
             Draft</button>
    
 </div>
-}
-@if(isViewModeOnly){
-<div class="footer-cta-btn">
+
+
+
+<!-- <div class="footer-cta-btn">
     <div class="cta-leftside-btn">
         <button   class="btn-gray" (click)="goToBack()"><i
                 class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
-        @if(dataValue.status === 'Workflow Approved'){
+       
         <button   class="btn-blue" (click)="freezeTemplate()">Freeze Template</button>
-        }
-        @if(dataValue.status === 'Active'){
+        
+       
         <button   class="btn-blue" (click)="deactivateTemplate()"><i
                 class="fa fa-times pe-2" aria-hidden="true"></i>Deactivate
             Template</button>
-        }
+        
     </div>
-</div>
-}
-@if(isApproverViewMode){
-<div class="footer-action-btn">
+</div> -->
+
+
+<!-- <div class="footer-action-btn">
   
         <button   class="btn-gray" (click)="goToBack()"><i
                 class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
@@ -224,5 +187,4 @@
         <button   class="btn-blue" (click)="approvalOpen()">
             <i class="fa fa-check pe-2" aria-hidden="true"></i>Approval Workflow</button>
            
-</div>
-}
+</div> -->
