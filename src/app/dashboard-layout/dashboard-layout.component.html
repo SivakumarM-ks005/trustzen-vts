@@ -204,20 +204,20 @@
 
 
 
-            <button mat-button [matMenuTriggerFor]="supplier" #supplierTrigger="matMenuTrigger"
+            <!-- <button mat-button [matMenuTriggerFor]="supplier" #supplierTrigger="matMenuTrigger"
                 (click)="supplierTrigger.openMenu();">
                 <div class="nav-icons">
                     <mat-icon>group</mat-icon>Supplier Management
                 </div>
-            </button>
-            <mat-menu #supplier="matMenu" xPosition="after" class="level1Menu">
+            </button> -->
+            <!-- <mat-menu #supplier="matMenu" xPosition="after" class="level1Menu">
                 <span (mouseleave)="supplierTrigger.closeMenu()">
                     <button mat-menu-item (click)="pqAssesmentList()">Supplier
                         Pre-Qualification</button>
                     <button mat-menu-item (click)="pqAssesmentList()">Supplier
                         Directory</button>
                 </span>
-            </mat-menu>
+            </mat-menu> -->
 
 
             <button mat-button [matMenuTriggerFor]="contracts" #contractsTrigger="matMenuTrigger"
@@ -226,8 +226,6 @@
             </button>
             <mat-menu #contracts="matMenu" xPosition="after" class="level1Menu">
                 <span (mouseleave)="contractsTrigger.closeMenu()">
-                    <button mat-menu-item (click)="clauseLib()">Clause
-                        Library</button>
                     <button mat-menu-item (click)="contractTem()">Template
                         Management</button>
                     <button mat-menu-item (click)="contarctRep()">Contracts
