@@ -25,11 +25,11 @@ export const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/ProcureZen',
+    redirectTo: '/trustzen',
     pathMatch: 'full'
   },
   {
-    path: 'ProcureZen',
+    path: 'trustzen',
     loadComponent: () => import('./home-page/home-page.component').then(n => n.HomePageComponent)
   },
   {
