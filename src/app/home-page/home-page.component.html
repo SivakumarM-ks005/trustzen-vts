@@ -54,9 +54,16 @@
                                <i class="fa fa-download"></i>
                                <span class="ps-2"> Access Files</span>
                            </a>
-                           <mat-checkbox class="msn-10 checkbox-custom mt-2" [(ngModel)]="agreeDownloadCenter">
+                           <div class="form-check custom-check-form mt-3">
+                            <input class="form-check-input custom-checkbox " type="checkbox" value="" id="flexCheckDefault" checked>
+                            <label class="form-check-label ft-size13" for="flexCheckDefault">
+                                I have read and agree to the Supplier Registration Guidelines and Code of Conduct
+                            </label>
+                          </div>
+
+                           <!-- <mat-checkbox class="msn-10 checkbox-custom mt-2" [(ngModel)]="agreeDownloadCenter">
                                I have read and agree to the Supplier Registration Guidelines and Code of Conduct
-                           </mat-checkbox>
+                           </mat-checkbox> -->
                        </div>
                    </div>
                </div>

@@ -460,6 +460,14 @@ mat-label {
   border-left: none !important;
 }
 
+.custom-check-form {
+  margin: 0px 15px;
+}
+.custom-checkbox {
+  font-size: 22px;
+  border: 1px solid #ccc;
+}
+
 /******* Responsive **************/
 @media (min-width: 320px) and (max-width: 374px) {
   .tab-box {
