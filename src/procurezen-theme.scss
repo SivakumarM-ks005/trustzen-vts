@@ -111,6 +111,11 @@ sup {
     color: red;
 }
 
+input:focus-visible {
+    border: 1px solid #f1dfd0 !important;
+    outline: none;
+  }
+
 // ------------ side menu styles ----------------------
 .side-nav {
     .mat-expansion-panel-header {
