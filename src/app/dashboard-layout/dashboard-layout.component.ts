@@ -41,7 +41,7 @@ export class DashboardLayoutComponent implements OnInit {
   }
   ngOnInit() {
     this.getImplementationConfigDataRes = JSON.parse(this.activateRouter.snapshot.queryParamMap.get('ImplementConfig')!);
-    window.history.replaceState({}, '', '/ProcureZen');
+    window.history.replaceState({}, '', '/trustzen');
 
     this.loginData = JSON.parse(localStorage.getItem('loginDetails')!);
     this.userName = this.loginData?.userName;
@@ -66,7 +66,7 @@ export class DashboardLayoutComponent implements OnInit {
     }
     localStorage.clear();  
 
-    this.router.navigate(['/ProcureZen'], { skipLocationChange: true, replaceUrl: true })
+    this.router.navigate(['/trustzen'], { skipLocationChange: true, replaceUrl: true })
   }
   
   dashboardSupReg() {
