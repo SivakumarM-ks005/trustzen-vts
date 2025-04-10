@@ -202,7 +202,8 @@ sup {
     // height: 100vh;;
 
     .bread-crumbs {
-        background: $pzenBlue;
+        // background: $pzenBlue;
+        background-image: linear-gradient(to bottom, #005cbb 0%, #13274f 100%);
         // padding: 0 30px;
         margin-bottom: 5px;
 
@@ -241,9 +242,12 @@ sup {
 
         .widget-box {
             // display: flex;
-            background: $white;
-            border: 1px solid $LightGray;
+            // background: $white;
+            // border: 1px solid $LightGray;
+            background: #f6935e;
+            border: 1px solid #f6935e;
             margin-bottom: 5px;
+            border-radius: 5px;
 
             .widget-title1 {
                 font: 400 18px / 10px 'Roboto', sans-serif;
@@ -251,16 +255,18 @@ sup {
 
             .widget-title {
                 font: 400 14px / 10px 'Roboto', sans-serif;
-                color: $BravesNavy;
-                background: $AliceBlue;
+                // color: $BravesNavy;
+                // background: $AliceBlue;
+                color: #fff;
                 height: 30px;
                 line-height: 30px;
                 padding: 0px 10px 0px 10px !important;
-                border-bottom: 1px solid $LightGray;
+                // border-bottom: 1px solid $LightGray;
                 display: flex;
                 align-items: center;
                 width: 100%;
                 margin-bottom: 0;
+                font-weight: 300;
 
                 // .number-notation {
                 //     background: $pzenOrange;
@@ -3390,14 +3396,16 @@ a {
         margin: 0px;
         border-bottom: 1px solid #ededed;
         &:hover {
-            background: #005cbb !important;
+            // background: #005cbb !important;
+            background-image: linear-gradient(to bottom, #005cbb 0%, #13274f 100%) !important;
             border-radius: none !important;
             color: #fff !important;
             font-weight: 400;
             transition-duration: 0.5s;
         }
         &:active, &:focus {
-            background: #03509f !important;
+            // background: #03509f !important;
+            background-image: linear-gradient(to bottom, #005cbb 0%, #13274f 100%) !important;
         }
     }
     .mdc-button:last-child {
