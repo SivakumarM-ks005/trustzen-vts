@@ -1,7 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
-import { CommonService } from '../core/services/common.service';
 import { ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatIconButton, MatButton } from '@angular/material/button';
@@ -37,10 +36,8 @@ export class DashboardLayoutComponent implements OnInit {
   getImplementationConfigDataRes: any;
 
   constructor(private observer: BreakpointObserver,
-    public commonService: CommonService,
     private activateRouter: ActivatedRoute,
     private router: Router) {
-    this.userName = this.commonService.userName;
   }
   ngOnInit() {
     this.getImplementationConfigDataRes = JSON.parse(this.activateRouter.snapshot.queryParamMap.get('ImplementConfig')!);
@@ -120,15 +117,5 @@ export class DashboardLayoutComponent implements OnInit {
 
   easyView(){
     this.router.navigate(['/krya/easyview'], { skipLocationChange: true, replaceUrl: true })
-  }
-
-  materialrequisition(){
-    this.router.navigate(['/krya/materialRequestList'], { skipLocationChange: true, replaceUrl: true })
-  }
-  purchaserequisition(){
-    this.router.navigate(['/krya/purchaseRequestList'], { skipLocationChange: true, replaceUrl: true })
-  }
-  requestforquation(){
-    this.router.navigate(['/krya/rfq-list'], { skipLocationChange: true, replaceUrl: true })
   }
 }
