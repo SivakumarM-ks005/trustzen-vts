@@ -7,23 +7,20 @@
             <div class="grid-5cols">
                 <mat-form-field class="col">
                     <mat-label>Template ID</mat-label>
-                    <input matInput matTooltip="Enter Template ID" placeholder=""
-                       [required]="true" name="refNo" >
+                    <input matInput matTooltip="Enter Template ID" placeholder="" [required]="true" name="refNo">
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Short Name</mat-label>
-                    <input matInput matTooltip="Enter the Short Name" placeholder=""
-                       [required]="true"
-                        name="shortName" [disabled]="isViewModeOnly">
+                    <input matInput matTooltip="Enter the Short Name" placeholder="" [required]="true" name="shortName"
+                        [disabled]="isViewModeOnly">
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Description</mat-label>
-                    <textarea matInput matTooltip="Enter the description"
-                        #noteHint name="clauseDesc" cdkTextareaAutosize cdkTextareaAutosize
-                        #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="1" [required]="true"
-                        [disabled]="isViewModeOnly"></textarea>
+                    <textarea matInput matTooltip="Enter the description" #noteHint name="clauseDesc"
+                        cdkTextareaAutosize cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="1" [required]="true" [disabled]="isViewModeOnly"></textarea>
                 </mat-form-field>
 
                 <mat-form-field class="col ">
@@ -38,37 +35,33 @@
 
                 <mat-form-field class="col">
                     <mat-label>Version</mat-label>
-                    <input matInput matTooltip="Enter the Version" placeholder="" 
-                       [required]="true" name="versionVal" >
+                    <input matInput matTooltip="Enter the Version" placeholder="" [required]="true" name="versionVal">
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Contract Type</mat-label>
-                    <mat-select name="contractTypeVal"
-                       matTooltip="Select contract type" [required]="true"
+                    <mat-select name="contractTypeVal" matTooltip="Select contract type" [required]="true"
                         [disabled]="isViewModeOnly">
                         <mat-option value="">-- Please Select --</mat-option>
-                        
+
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Contract Classification</mat-label>
-                    <mat-select name="contractClassificationVal"
-                       matTooltip="Select Contract Classification"
+                    <mat-select name="contractClassificationVal" matTooltip="Select Contract Classification"
                         [required]="true" [disabled]="isViewModeOnly">
                         <mat-option value="">-- Please Select --</mat-option>
-                
+
                     </mat-select>
 
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>Amend Date</mat-label>
-                    <input matInput matTooltip="Enter the Amend Date" [matDatepicker]="amendDateTab"
-                       name="amendDate"
+                    <input matInput matTooltip="Enter the Amend Date" [matDatepicker]="amendDateTab" name="amendDate"
                         [disabled]="isViewModeOnly">
-                 
+
                     <mat-datepicker-toggle matIconSuffix [for]="amendDateTab"></mat-datepicker-toggle>
                     <mat-datepicker #amendDateTab></mat-datepicker>
                 </mat-form-field>
@@ -84,107 +77,30 @@
             </mat-panel-title>
         </mat-expansion-panel-header>
         <div class="p-2">
-        <angular-editor [(ngModel)]="saveTemplateVm.htmlContent" [config]="config" #htmlContentControl="ngModel"
-            name="htmlText"></angular-editor>
+            <angular-editor [(ngModel)]="saveTemplateVm.htmlContent" [config]="config" #htmlContentControl="ngModel"
+                name="htmlText"></angular-editor>
         </div>
     </mat-expansion-panel>
 </mat-accordion>
 
-<!-- @if(isEditMode){
-<div class="mt-2 mb-2">
-    <mat-accordion class="custom-accordion">
-        <mat-expansion-panel class="cust-panel">
-            <mat-expansion-panel-header class="accordion-cust-header">
-                <mat-panel-title class="custom-panel-header">Approval Workflow</mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="pq-score-card">
-                <div class="table-responsive">
-                    <div class="table-responsive p-2" >
-                        <table class="content-table">
-                        <thead>
-                                <tr>
-                                    <th scope="col">WF Level #</th>
-                                    <th scope="col">Assigned User</th>
-                                    <th scope="col">Assigned To</th>
-                                    <th scope="col">Action Date</th>
-                                    <th scope="col">Comments</th>
-                                    <th scope="col">Estimated Date of Completion</th>
-                                    <th scope="col" class="cxw-200">Action Taken</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let wfHistory of workFlowHistory; let i = index" class="border-bottom">
-                                    <td Xclass="text-center">{{ i+1 }}</td>
-                                    <td>{{wfHistory?.assignedUser}}</td>
-                                    <td>{{wfHistory?.assignedTo}}</td>
-                                    <td>{{wfHistory?.actionDate | date: (commonService.showFormat)}}</td>
-                                    <td>{{wfHistory?.comments}}</td>
-                                    <td>{{wfHistory?.estimatedDateOfCompletion | date:
-                                        (commonService.showFormat) }}</td>
-                                    <td class="cxw-200">{{wfHistory?.actionTaken}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </mat-expansion-panel>
-    </mat-accordion>
-</div>
-} -->
-
 <div class="footer-action-btn">
-   
-        <button   class="btn-gray" (click)="goToBack()"><i
-                class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
-        <button   class="btn-blue" [disabled]="(this.saveTemplateVm.status !== 'Active')"
-            (click)="deactivateTemplate()"><i class="fa fa-times pe-2" aria-hidden="true"></i>Deactivate
-            Template</button>
 
-        <button   class="btn-blue"
-            [disabled]="(!this.saveTemplateVm.isAssignCategory || !this.saveTemplateVm.isEntity)"
-            (click)="initiateWorkFlow()"><i class="fa fa-check pe-2" aria-hidden="true"></i>
-            {{saveTemplateVm.status === 'Request for Information' ? 'Update Workflow' :
-            'Intiate Workflow'}}</button>
+    <button class="btn-gray" (click)="goToBack()"><i class="fa fa-arrow-circle-o-left pe-2"
+            aria-hidden="true"></i>Cancel</button>
+
+    <button class="btn-blue" [disabled]=""><i class="fa fa-times pe-2" aria-hidden="true"></i>Deactivate
+        Template</button>
+
+    <button class="btn-blue" [disabled]=""><i class="fa fa-check pe-2" aria-hidden="true"></i>
+        Intiate Workflow </button>
 
     <div class="middle-spacer"> </div>
-        <button   class="btn-blue"
-            [disabled]="this.saveTemplateVm.contractTemplateId === 0" (click)="assignCategory()"><i
-                class="fa fa-check pe-2" aria-hidden="true"></i>Assign Category</button>
+    <button class="btn-blue" [disabled]="this.saveTemplateVm.contractTemplateId === 0"><i class="fa fa-check pe-2"
+            aria-hidden="true"></i>Assign Category</button>
 
-        <button   class="btn-blue"
-            [disabled]="this.saveTemplateVm.contractTemplateId === 0" (click)="assignEntity()"><i
-                class="fa fa-check pe-2" aria-hidden="true"></i>Assign Entity</button>
-        <button   class="btn-blue" [disabled]="disableSave"
-            (click)="saveContratTemplate()"><i class="fa fa-floppy-o pe-2"></i>Save as
-            Draft</button>
-   
+    <button class="btn-blue" [disabled]="this.saveTemplateVm.contractTemplateId === 0"><i class="fa fa-check pe-2"
+            aria-hidden="true"></i>Assign Entity</button>
+    <button class="btn-blue" [disabled]="disableSave"><i class="fa fa-floppy-o pe-2"></i>Save as
+        Draft</button>
+
 </div>
-
-
-
-<!-- <div class="footer-cta-btn">
-    <div class="cta-leftside-btn">
-        <button   class="btn-gray" (click)="goToBack()"><i
-                class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
-       
-        <button   class="btn-blue" (click)="freezeTemplate()">Freeze Template</button>
-        
-       
-        <button   class="btn-blue" (click)="deactivateTemplate()"><i
-                class="fa fa-times pe-2" aria-hidden="true"></i>Deactivate
-            Template</button>
-        
-    </div>
-</div> -->
-
-
-<!-- <div class="footer-action-btn">
-  
-        <button   class="btn-gray" (click)="goToBack()"><i
-                class="fa fa-arrow-circle-o-left pe-2" aria-hidden="true"></i>Cancel</button>
-                <div class="middle-spacer"> </div>
-        <button   class="btn-blue" (click)="approvalOpen()">
-            <i class="fa fa-check pe-2" aria-hidden="true"></i>Approval Workflow</button>
-           
-</div> -->

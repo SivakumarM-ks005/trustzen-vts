@@ -78,7 +78,7 @@ export class HomePageComponent {
   }
 
   login_custom() {
-    this.route.navigate(["/krya/dashboard-menu"]);
+    this.route.navigate(["/krya/contractTemplateList"]);
   }
 
   registrationPopUp() {

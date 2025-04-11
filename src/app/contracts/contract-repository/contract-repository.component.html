@@ -15,7 +15,7 @@
                 <table mat-table [dataSource]="dataSource">
                     <ng-container matColumnDef="contractId">
                         <th mat-header-cell *matHeaderCellDef>Contract #</th>
-                        <td mat-cell *matCellDef="let element"> {{element.contractId}} </td>
+                        <td mat-cell *matCellDef="let element"> FY2024-2060 </td>
                     </ng-container>
                     <ng-container matColumnDef="f-contractId">
                         <th mat-header-cell *matHeaderCellDef>
@@ -27,7 +27,7 @@
 
                     <ng-container matColumnDef="contractName">
                         <th mat-header-cell *matHeaderCellDef> Contract Name </th>
-                        <td mat-cell *matCellDef="let element"> {{element.contractName}} </td>
+                        <td mat-cell *matCellDef="let element"> template1	 </td>
                     </ng-container>
                     <ng-container matColumnDef="f-contractName">
                         <th mat-header-cell *matHeaderCellDef>
@@ -39,7 +39,7 @@
 
                     <ng-container matColumnDef="createdDate">
                         <th mat-header-cell *matHeaderCellDef> Created Date </th>
-                        <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+                        <td mat-cell *matCellDef="let element"> 18-Sep-2024 </td>
                     </ng-container>
                     <ng-container matColumnDef="f-createdDate">
                         <th mat-header-cell *matHeaderCellDef>
@@ -51,7 +51,7 @@
 
                     <ng-container matColumnDef="startDate">
                         <th mat-header-cell *matHeaderCellDef> Start Date </th>
-                        <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
+                        <td mat-cell *matCellDef="let element"> 18-Sep-2024 </td>
                     </ng-container>
                     <ng-container matColumnDef="f-startDate">
                         <th mat-header-cell *matHeaderCellDef>
@@ -63,7 +63,7 @@
 
                     <ng-container matColumnDef="endDate">
                         <th mat-header-cell *matHeaderCellDef> End Date </th>
-                        <td mat-cell *matCellDef="let element"> {{element.endDate}} </td>
+                        <td mat-cell *matCellDef="let element"> 01-10-2024 </td>
                     </ng-container>
                     <ng-container matColumnDef="f-endDate">
                         <th mat-header-cell *matHeaderCellDef>
@@ -77,7 +77,7 @@
 
                     <ng-container matColumnDef="sourceDocRef">
                         <th mat-header-cell *matHeaderCellDef> Source Doc Ref #</th>
-                        <td mat-cell *matCellDef="let element"> {{element.sourceDocRef}} </td>
+                        <td mat-cell *matCellDef="let element"> temp001 </td>
                     </ng-container>
                     <ng-container matColumnDef="f-sourceDocRef">
                         <th mat-header-cell *matHeaderCellDef>
@@ -89,7 +89,7 @@
 
                     <ng-container matColumnDef="sourceDocDate">
                         <th mat-header-cell *matHeaderCellDef> Source Doc Date </th>
-                        <td mat-cell *matCellDef="let element"> {{element.sourceDocDate}} </td>
+                        <td mat-cell *matCellDef="let element"> 29-09-2024 </td>
                     </ng-container>
                     <ng-container matColumnDef="f-sourceDocDate">
                         <th mat-header-cell *matHeaderCellDef>
@@ -100,7 +100,7 @@
                     </ng-container>
                     <ng-container matColumnDef="contractAdmin">
                         <th mat-header-cell *matHeaderCellDef> Contract Admin </th>
-                        <td mat-cell *matCellDef="let element"> {{element.contractAdmin}} </td>
+                        <td mat-cell *matCellDef="let element">Sam Williams </td>
                     </ng-container>
                     <ng-container matColumnDef="f-contractAdmin">
                         <th mat-header-cell *matHeaderCellDef>
@@ -112,7 +112,7 @@
 
                     <ng-container matColumnDef="status">
                         <th mat-header-cell *matHeaderCellDef>Status </th>
-                        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+                        <td mat-cell *matCellDef="let element"> Workflow Approved </td>
                     </ng-container>
                     <ng-container matColumnDef="f-status">
                         <th mat-header-cell *matHeaderCellDef>
@@ -123,7 +123,7 @@
                     </ng-container>
                     <ng-container matColumnDef="approvedDate">
                         <th mat-header-cell *matHeaderCellDef> Approved Date </th>
-                        <td mat-cell *matCellDef="let element"> {{element.approvedDate}} </td>
+                        <td mat-cell *matCellDef="let element"> 01-10-2024</td>
                     </ng-container>
                     <ng-container matColumnDef="f-approvedDate">
                         <th mat-header-cell *matHeaderCellDef>
@@ -139,19 +139,19 @@
                                     aria-label="arrow_drop_down" fontIcon="arrow_drop_down"></mat-icon>
                             </a>
                             <mat-menu #menu="matMenu">
-                                <button mat-menu-item class="menu-hight" (click)="tractTrace()">Track and Trace</button>
-                                <button mat-menu-item class="menu-hight" (click)="contractform()">View /
+                                <button mat-menu-item class="menu-hight" >Track and Trace</button>
+                                <button mat-menu-item class="menu-hight" >View /
                                     Edit</button>
-                                <button mat-menu-item class="menu-hight" (click)="contractview()">
+                                <button mat-menu-item class="menu-hight" >
                                     Review</button>
                                 <button mat-menu-item class="menu-hight" [disabled]="true">Amendement</button>
-                                <button mat-menu-item class="menu-hight" (click)="renewalGuidelines()">Renewal</button>
+                                <button mat-menu-item class="menu-hight" >Renewal</button>
                                 <button mat-menu-item class="menu-hight"
-                                    (click)="cancelContract()">Cancellation</button>
+                                    >Cancellation</button>
                                 <button mat-menu-item class="menu-hight">Work Order</button>
                                 <button mat-menu-item class="menu-hight"
-                                   (click)="contractInsights()">Insights</button>
-                                <button mat-menu-item class="menu-hight" (click)="contractview()">view
+                                   >Insights</button>
+                                <button mat-menu-item class="menu-hight" >view
                                     Workflow</button>
                             </mat-menu>
                     </ng-container>

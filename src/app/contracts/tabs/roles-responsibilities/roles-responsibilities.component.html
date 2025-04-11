@@ -8,7 +8,7 @@
       <td mat-cell *matCellDef="let element" style="width: 200px;">
         <mat-form-field >
         <mat-select matTooltip="Select the Roles">
-        <mat-option value="{{element.roles}}">{{element.roles}}</mat-option>
+        <mat-option value="{{element.roles}}">Co-ordinator</mat-option>
     </mat-select>
 </mat-form-field>         
 </td>
@@ -17,7 +17,8 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+      <td mat-cell *matCellDef="let element">
+        Christopher</td>
     </ng-container>
   
     <!-- Weight Column -->

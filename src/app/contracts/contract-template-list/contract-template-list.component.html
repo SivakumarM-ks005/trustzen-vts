@@ -2,11 +2,11 @@
     <div class="bread-crumbs">
         <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Contract Management</h2>
     </div>
-    @if(!showAddPage){
+
     <div class="content-box p-2">
         <div class="widget-box">
             <h5 class="widget-title d-flex justify-content-between pt-4 pb-4">Template List
-                <button class="header-level-btn-blue" matTooltip="Create Template" (click)="addTemplate()"><i
+                <button class="header-level-btn-blue" matTooltip="Create Template" ><i
                         class="fa fa-plus pe-2"></i>New</button>
             </h5>
             <div class="widget-content">
@@ -17,8 +17,8 @@
             </div>
         </div>
     </div>
-    }
-    @if(showAddPage){
+    
+
     <div>
         <div class="content-box p-2 vh-100">
             <app-contract-template [dataValue]="templateValue" [isEditMode]="editMode" [templateData]="templateData"
@@ -26,5 +26,5 @@
                 (backEvent)="backClick()"></app-contract-template>
         </div>
     </div>
-    }
+    
 </div>

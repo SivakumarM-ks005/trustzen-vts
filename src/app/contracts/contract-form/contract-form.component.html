@@ -6,8 +6,8 @@
         <div class="widget-box">
             <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
                 Contract Creation
-                <div>
-                <button   class="header-level-btn-blue">History of Review
+                <div class="d-flex">
+                <button class="header-level-btn-blue">History of Review
                     Tracking</button>
                 <button   class="header-level-btn-blue ms-2">Track & Trace</button>
             </div>
@@ -193,6 +193,7 @@
                     <mat-expansion-panel-header class="accordion-cust-header">
                         <mat-panel-title class="custom-panel-header">Details</mat-panel-title>
                     </mat-expansion-panel-header>
+                    
                     <mat-tab-group class="horizontalTab mt-2">
                         <mat-tab label="Parties in Transaction">
                             <app-party-information></app-party-information>
@@ -239,14 +240,8 @@
 
 
 <div class="footer-action-btn">
-    <button   class="btn-gray" (click)="contarctRep()"><i
+    <button class="btn-gray"><i
             class="fa fa-arrow-left-o pe-2"></i>Cancel</button>
     <div class="middle-spacer"></div>
-    <button mat-stroked-button  class="btn-blue"><i class="f fa-floppy-o pe-2"></i>Save as Draft</button>
-    <!-- <span class="me-2"></span>
-    <button  >Initiate Internal Review</button>
-    <span class="me-2"></span>
-    <button  >Initiate Review with Supplier</button>
-    <span class="me-2"></span>
-    <button   (click)="freezeTemplate()">Freeze Contract</button> -->
+    <button class="btn-blue"><i class="f fa-floppy-o pe-2"></i>Save as Draft</button>
 </div>
