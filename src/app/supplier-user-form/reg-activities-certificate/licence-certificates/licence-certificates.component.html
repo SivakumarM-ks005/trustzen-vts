@@ -1,386 +1,274 @@
 <div class="widget-box">
-    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">Add Business Licenses and Certificates <span *ngIf="NextButtonValidation()"></span>
-        <div class="d-flex">
-            <button mat-stroked-button  [disabled]="disableStatusBased == false" *ngIf="ClearValues()"
-                            (click)="clearLicenseCertificate()" matTooltip="Clear License Certificate" class="header-level-btn-gray me-2"><i class="fa fa-refresh pe-2"></i>
-                            Clear</button>
-                        <!-- <button  class="header-level-btn-blue"
-                            matTooltip="Add more License Certificate" (click)="addLicenseCertificate()"
-                            [disabled]="disableSave || disableStatusBased == false"><i class="fa fa-floppy-o pe-2"></i>
-                            {{editLicenseFlag ? 'Update':'Save'}}
-                        </button> -->
-        </div>
+    <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+       Add Business Licenses and
+       Certificates <span *ngIf="NextButtonValidation()"></span>
+       <div class="d-flex">
+          <button mat-stroked-button [disabled]="disableStatusBased == false" *ngIf="ClearValues()"
+          (click)="clearLicenseCertificate()" matTooltip="Clear License Certificate"
+          class="header-level-btn-gray me-2"><i class="fa fa-refresh pe-2"></i>
+          Clear</button>
+       </div>
     </h5>
     <div class="widget-content">
-        <form #licenceCertificatesForm="ngForm" id="licenceCertificatesFormId">
-            <div class="grid-4cols">
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !categoryIdControl.errors?.required){
-                            Category
-                        }
-                        @if(isSubmitted && categoryIdControl.errors?.required){
-                            <span class="error-msg"> Category is required </span>
-                        }
-                    </mat-label>
-                    <mat-select [(ngModel)]="saveLicenseVm.categoryId" name="categoryName" #categoryIdControl="ngModel"
-                        matTooltip="Select the category" [required]="true">
-                        <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let cat of licenseCategoryList" [value]="cat.licenseCategoryId">
-                            {{ cat.categoryType }}
-                        </mat-option>
-                    </mat-select>
-                    <!-- @if (categoryIdControl.errors?.required) {
-                    <mat-error matTooltip="Category is required">
-                        Category is required</mat-error>
-                    } -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !licenseTypeControl.errors?.required){
-                            License Type
-                        }
-                        @if(isSubmitted && licenseTypeControl.errors?.required){
-                            <span class="error-msg"> License Type is required </span>
-                        }
-                    </mat-label>
-                    <mat-select [(ngModel)]="saveLicenseVm.licenseTypeId" name="licenseTypeName"
-                        #licenseTypeControl="ngModel" matTooltip="Select the license type" [required]="true">
-                        <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let lt of licenseTypeList" [value]="lt.licenseTypeId">
-                            {{ lt.licenseType }}
-                        </mat-option>
-                    </mat-select>
-                    <!-- @if (licenseTypeControl.errors?.required) {
-                    <mat-error matTooltip="License type is required">
-                        License Type is required</mat-error>
-                    } -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !licenseCertificateControl.errors?.required){
-                            License / Certificate Name
-                        }
-                        @if(isSubmitted && licenseCertificateControl.errors?.required){
-                            <span class="error-msg"> License / Certificate Name is required </span>
-                        }
-                        </mat-label>
-                    <input matInput matTooltip="Enter the license / certificate Name"
-                        [(ngModel)]="saveLicenseVm.licenseOrCertificateName" name="licenseOrCertificatesName"
-                        #licenseCertificateControl="ngModel" [required]="true">
-                    <!-- @if (licenseCertificateControl.errors?.required) {
-                    <mat-error matTooltip="License / certificate name is required">
-                        License / Certificate Name is required</mat-error>
-                    } -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !LicenseCertificateAccreditationNumberControl.errors?.required){
-                            License / Certificate Accreditation Number
-                        }
-                        @if(isSubmitted && LicenseCertificateAccreditationNumberControl.errors?.required){
-                            <span class="error-msg"> License / Certificate Accreditation is required </span>
-                        }
-                        </mat-label>
-                    <input matInput matTooltip="Enter the license / certificate accreditation number"
-                        [(ngModel)]="saveLicenseVm.licenseOrCertificateAccreditationNumber"
-                        name="licenseCertificateNumberName" #LicenseCertificateAccreditationNumberControl="ngModel"
-                        [required]="true">
-                    <!-- @if (LicenseCertificateAccreditationNumberControl.errors?.required) {
-                    <mat-error matTooltip="License / certificate accreditation number is required">
-                        License / Certificate Accreditation is required</mat-error>
-                    } -->
-                </mat-form-field>
-          
-                <mat-form-field class="col date-icon-place">
-                    <mat-label>
-                        @if(!isSubmitted || !issueDateControl.errors?.required){
-                            Issue Date
-                        }
-                        @if(isSubmitted && issueDateControl.errors?.required){
-                            <span class="error-msg"> start Date is required </span>
-                        }
-                    </mat-label>
-                    <input matInput matTooltip="Enter the issue date" [matDatepicker]="issueDate"
-                        [(ngModel)]="saveLicenseVm.issueDate" name="issueDateName" #issueDateControl="ngModel"
-                        [required]="true">
-                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="issueDate"></mat-datepicker-toggle>
-                    <mat-datepicker #issueDate></mat-datepicker>
-                    <!-- @if (issueDateControl.errors?.required) {
-                    <mat-error matTooltip="start date is required">
-                        start Date is required</mat-error>
-                    } -->
-                </mat-form-field>
-           
-                <mat-form-field class="col date-icon-place">
-                    <mat-label>
-                        @if(!isSubmitted || !expiryDateControl.errors?.required){
-                            Expiry Date
-                        }
-                        @if(isSubmitted && expiryDateControl.errors?.required){
-                            <span class="error-msg"> Expiry Date is required </span>
-                        }
-                        </mat-label>
-                    <input matInput matTooltip="Enter the expiry date" [matDatepicker]="expiryDateTab"
-                        [(ngModel)]="saveLicenseVm.expiryDate" name="expiryDateName" #expiryDateControl="ngModel"
-                        [required]="true">
-                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="expiryDateTab"></mat-datepicker-toggle>
-                    <mat-datepicker #expiryDateTab></mat-datepicker>
-                    <!-- @if (expiryDateControl.errors?.required) {
-                    <mat-error matTooltip="Expiry date is required">
-                        Expiry Date is required</mat-error>
-                    } -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !issuingAuthorityControl.errors?.required){
-                            Issuing Authority
-                        }
-                        @if(isSubmitted && issuingAuthorityControl.errors?.required){
-                            <span class="error-msg">Issuing Authority is required </span>
-                        }
-                        </mat-label>
-                    <input matInput matTooltip="Enter the issuing authority"
-                        [(ngModel)]="saveLicenseVm.issuingAuthority" name="issuingAuthorityName"
-                        #issuingAuthorityControl="ngModel" [required]="true">
-                    <!-- @if (issuingAuthorityControl.errors?.required) {
-                    <mat-error matTooltip="Issuing authority is required">
-                        Issuing Authority is required</mat-error>
-                    } -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>Issuing Country</mat-label>
-                    <mat-select [(ngModel)]="saveLicenseVm.issuingCountryId" matTooltip="Select a issuing country"
-                        (selectionChange)="getStates(saveLicenseVm.issuingCountryId)" name="issuingCountryName"
-                        #issuingCountryIdControl="ngModel">
-                        <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let country of issuingCountryList" [value]="country.countryId">
-                            {{ country.countryName }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>Issuing State</mat-label>
-                    <mat-select [(ngModel)]="saveLicenseVm.issuingStateId" name="issuingStateName"
-                        #issuingStateIdControl="ngModel" matTooltip="Select a issuing state">
-                        <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let state of issuingStateList" [value]="state.stateId">
-                            {{ state.stateName }}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !statusIdControl.errors?.required){
-                            Status
-                        }
-                        @if(isSubmitted && statusIdControl.errors?.required){
-                            <span class="error-msg">Status is required </span>
-                        }
-                        </mat-label>
-                    <mat-select matInput matTooltip="Select a status" [(ngModel)]="saveLicenseVm.statusId"
-                        name="statusIdName" #statusIdControl="ngModel" [required]="true">
-                        <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let st of licenseStatusList" [value]="st.licenseStatusId">
-                            {{ st.status }}
-                        </mat-option>
-                    </mat-select>
-                    <!-- @if (statusIdControl.errors?.required) {
-                    <mat-error matTooltip="Status is required">
-                        Status is required</mat-error>
-                    } -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>Related Activity</mat-label>
-                    <input matInput matTooltip="Enter the related activity" [(ngModel)]="saveLicenseVm.relatedActivity"
-                        name="relatedActivityName" #relatedActivityControl="ngModel">
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>Remarks</mat-label>
-                    <input matInput matTooltip="Enter the remarks" [(ngModel)]="saveLicenseVm.remarks"
-                        name="remarksName" #remarksNameControl="ngModel">
-                </mat-form-field>
-            <div class="mt-3">
+       <form id="licenceCertificatesFormId">
+          <div class="grid-4cols">
+             <mat-form-field class="col">
+                <mat-label>
+                   Category
+                </mat-label>
+                <mat-select [(ngModel)]="saveLicenseVm.categoryId" name="categoryName" #categoryIdControl="ngModel"
+                matTooltip="Select the category" [required]="true">
+                <mat-option value="">-- Please Select --</mat-option>
+                <mat-option *ngFor="let cat of licenseCategoryList" [value]="cat.licenseCategoryId">
+                License
+                </mat-option>
+                </mat-select>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>
+                   License Type
+                </mat-label>
+                <mat-select [(ngModel)]="saveLicenseVm.licenseTypeId" name="licenseTypeName"
+                #licenseTypeControl="ngModel" matTooltip="Select the license type" [required]="true">
+                <mat-option value="">-- Please Select --</mat-option>
+                <mat-option *ngFor="let lt of licenseTypeList" [value]="lt.licenseTypeId">
+                Import License
+                </mat-option>
+                </mat-select>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>
+                   License / Certificate Name
+                </mat-label>
+                <input matInput matTooltip="Enter the license / certificate Name"
+                [(ngModel)]="saveLicenseVm.licenseOrCertificateName" name="licenseOrCertificatesName"
+                #licenseCertificateControl="ngModel" [required]="true">
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>
+                   License / Certificate Accreditation Number
+                </mat-label>
+                <input matInput matTooltip="Enter the license / certificate accreditation number"
+                [(ngModel)]="saveLicenseVm.licenseOrCertificateAccreditationNumber"
+                name="licenseCertificateNumberName" #LicenseCertificateAccreditationNumberControl="ngModel"
+                [required]="true">
+             </mat-form-field>
+             <mat-form-field class="col date-icon-place">
+                <mat-label>
+                   Issue Date
+                </mat-label>
+                <input matInput matTooltip="Enter the issue date" [matDatepicker]="issueDate"
+                [(ngModel)]="saveLicenseVm.issueDate" name="issueDateName" #issueDateControl="ngModel"
+                [required]="true">
+                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="issueDate"></mat-datepicker-toggle>
+                <mat-datepicker #issueDate></mat-datepicker>
+             </mat-form-field>
+             <mat-form-field class="col date-icon-place">
+                <mat-label>
+                   Expiry Date
+                </mat-label>
+                <input matInput matTooltip="Enter the expiry date" [matDatepicker]="expiryDateTab"
+                [(ngModel)]="saveLicenseVm.expiryDate" name="expiryDateName" #expiryDateControl="ngModel"
+                [required]="true">
+                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="expiryDateTab"></mat-datepicker-toggle>
+                <mat-datepicker #expiryDateTab></mat-datepicker>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>
+                   Issuing Authority
+                </mat-label>
+                <input matInput matTooltip="Enter the issuing authority"
+                [(ngModel)]="saveLicenseVm.issuingAuthority" name="issuingAuthorityName"
+                #issuingAuthorityControl="ngModel" [required]="true">
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>Issuing Country</mat-label>
+                <mat-select [(ngModel)]="saveLicenseVm.issuingCountryId" matTooltip="Select a issuing country"
+                (selectionChange)="getStates(saveLicenseVm.issuingCountryId)" name="issuingCountryName"
+                #issuingCountryIdControl="ngModel">
+                <mat-option value="">-- Please Select --</mat-option>
+                <mat-option *ngFor="let country of issuingCountryList" [value]="country.countryId">
+                India
+                </mat-option>
+                </mat-select>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>Issuing State</mat-label>
+                <mat-select [(ngModel)]="saveLicenseVm.issuingStateId" name="issuingStateName"
+                #issuingStateIdControl="ngModel" matTooltip="Select a issuing state">
+                <mat-option value="">-- Please Select --</mat-option>
+                <mat-option *ngFor="let state of issuingStateList" [value]="state.stateId">
+                Tamil Nadu
+                </mat-option>
+                </mat-select>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>
+                   Status
+                </mat-label>
+                <mat-select matInput matTooltip="Select a status" [(ngModel)]="saveLicenseVm.statusId"
+                name="statusIdName" #statusIdControl="ngModel" [required]="true">
+                <mat-option value="">-- Please Select --</mat-option>
+                <mat-option *ngFor="let st of licenseStatusList" [value]="st.licenseStatusId">
+                Active
+                </mat-option>
+                </mat-select>
+                <!-- @if (statusIdControl.errors?.required) {
+                   <mat-error matTooltip="Status is required">
+                       Status is required</mat-error>
+                   } -->
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>Related Activity</mat-label>
+                <input matInput matTooltip="Enter the related activity" [(ngModel)]="saveLicenseVm.relatedActivity"
+                name="relatedActivityName" #relatedActivityControl="ngModel">
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>Remarks</mat-label>
+                <input matInput matTooltip="Enter the remarks" [(ngModel)]="saveLicenseVm.remarks"
+                name="remarksName" #remarksNameControl="ngModel">
+             </mat-form-field>
+             <div class="mt-3">
                 <div class="d-flex w-100 justify-content-between align-items-center mt-2">
-                    <div class="custom-file-upload">
-                        <button class="file-upload-button">
-                            <input class="custom-file-input" id="customFileLang" type="file"
-                            accept=".txt, application/pdf,.xls,.xlsx,.doc, .docs"
-                            (change)="onFileChange($event)" multiple #fileInput>
-                            <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
-                                class="ps-2">Upload</span>
-                            <!-- <label class="custom-file-label" for="customFileLang">Select the file to upload</label> -->
-                        </button>
-                    </div>
-
-                    <div class="attach-section col position-relative" style="width: 50px; margin-left: 20px;">
-                        <mat-icon matBadge={{listOfFiles.length}} id="sidebarToggle"
-                            (click)="toggleAttach()">
-                            <span class="material-icons-outlined">ballot</span>
-                        </mat-icon>
-                        <div class="sidebar navbar-nav" style="display: none;" [class.toggled]="attachToggle">
-                            <div class="close-icon">
-                                <div class="subHeading">Attachments</div>
-                                <mat-icon class="icon-close" (click)="closeAttach()">
-                                    <span class="material-icons-outlined">close</span>
-                                </mat-icon>
+                   <div class="custom-file-upload">
+                      <button class="file-upload-button">
+                         <input class="custom-file-input" id="customFileLang" type="file"
+                         accept=".txt, application/pdf,.xls,.xlsx,.doc, .docs"
+                         (change)="onFileChange($event)" multiple #fileInput>
+                         <i class="fa fa-cloud-upload" aria-hidden="true"></i><span class="ps-2">Upload</span>
+                         <!-- <label class="custom-file-label" for="customFileLang">Select the file to upload</label> -->
+                      </button>
+                   </div>
+                   <div class="attach-section col position-relative" style="width: 50px; margin-left: 20px;">
+                      <mat-icon matBadge={{listOfFiles.length}} id="sidebarToggle" (click)="toggleAttach()">
+                         <span class="material-icons-outlined">ballot</span>
+                      </mat-icon>
+                      <div class="sidebar navbar-nav" style="display: none;" [class.toggled]="attachToggle">
+                         <div class="close-icon">
+                            <div class="subHeading">Attachments</div>
+                            <mat-icon class="icon-close" (click)="closeAttach()">
+                               <span class="material-icons-outlined">close</span>
+                            </mat-icon>
+                         </div>
+                         <div>
+                            <div class="upload-file-row">
+                               <div class="d-flex flex-row align-items-top">
+                                  <div style="width: fit-content;" class="subHeading2 pe-1">1</div>
+                                  <div class="subHeading2 col">
+                                     <div
+                                        style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        <span class="me-1"
+                                           style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;"
+                                           matTooltip="PDF">
+                                        PDF
+                                        </span>
+                                        <small>250kb</small>
+                                     </div>
+                                     <div
+                                        style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                        <span class="me-1"
+                                           style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;"
+                                           matTooltip="PDF">
+                                        PDF
+                                        </span>
+                                        <small>250kb</small>
+                                     </div>
+                                  </div>
+                                  <div class="col-auto">
+                                     <button class="btn btn-sm smBtn btn-download"
+                                        matTooltip="Download File">
+                                     <span class="material-icons-outlined">file_download</span>
+                                     </button>
+                                     <button [disabled]="disableStatusBased == false"
+                                        class="btn btn-danger btn-sm smBtn" matTooltip="Delete"
+                                        type="button">
+                                     <span class="material-icons-outlined">delete</span>
+                                     </button>
+                                  </div>
+                               </div>
                             </div>
-                            @if(listOfFiles.length === 0){
-                            <div class="smText noData">Files not available.</div>
-                            }
-                            @if(listOfFiles.length > 0){
-                            <div >
-                            @for (file of listOfFiles; track file; let idx = $index) {
-                                <div class="upload-file-row">
-                                    <div class="d-flex flex-row align-items-top">
-                                        <div style="width: fit-content;" class="subHeading2 pe-1">{{idx+1}}.</div>
-                                   
-                                        <div class="subHeading2 col"> 
-                                           
-                                            @if (file.docId > 0) {
-
-                                                     
-                                                    
-                                                     <div style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                        <span class="me-1" style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;" matTooltip="{{file.fileInfo.name}}">
-                                                            {{file.fileInfo.name}}
-                                                        </span>
-                                                        <small>{{commonService.transformFileSize(file.fileInfo.size)}}</small>
-                                                        <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadDoc(doc.value)">download</span> -->
-                                                    </div>
-                                                                                            
-                                                } @else{
-                                                    <div style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                        <span class="me-1" style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;" matTooltip="{{file.fileInfo.name}}">
-                                                            {{file.fileInfo.name}}
-                                                        </span>
-                                                        <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
-                                                        <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadDoc(doc.value)">download</span> -->
-                                                    </div>                                                
-                                                                                            
-                                            }
-                                        </div>
-                                    
-                                    <div class="col-auto">
-                                        <button class="btn btn-sm smBtn btn-download" matTooltip="Download File" (click)="downloadFile(file.fileInfo.filePath)">
-                                            <span class="material-icons-outlined">file_download</span>
-                                        </button>
-                                        <button [disabled]="disableStatusBased == false" class="btn btn-danger btn-sm smBtn" matTooltip="Delete"
-                                            type="button" (click)="deleteFile(file)">
-                                            <span class="material-icons-outlined">delete</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            }
-                            </div>
-                            }
-                        </div>
-                    </div>
+                         </div>
+                      </div>
+                   </div>
                 </div>
-                <div class="text-danger ft-size11" style="line-height: 15px;">Supported Formates: docs, doc, xlsx, xls, pdf, txt</div>
-                    
+                <div class="text-danger ft-size11" style="line-height: 15px;">Supported Formates: docs, doc, xlsx,
+                   xls, pdf, txt
                 </div>
-            </div>
-        </form>
+             </div>
+          </div>
+       </form>
     </div>
-</div>
-<div>
-    
-<div class="widget-box">
-    <h5 class="widget-title">
-        License / Certificate Details
-    </h5>
-    <div class="widget-content">
-       
-    @if(saveAllLicenseVm.length > 0) {
-        @for(license of saveAllLicenseVm; track license; let idx = $index) {
-    <div class="table-responsive table-col-control" >
-        <table class="content-table">
-            <thead>
-                <tr>
-                <th>Serial #</th>
-                <th>Category</th>
-                <th>License Type</th>
-                <th>Name</th>
-                <th>Number</th>
-                <th>Issue Date</th>
-                <th>Expiry Date</th>
-                <th>Issuing Authority</th>
-                <th>Issuing Country</th>
-                <th>Issuing State</th>
-                <th>Status</th>
-                <th>Related Activity</th>
-                <th>Attachment</th>
-                <th>Remarks</th>
-                <th>Action</th>
-            </tr>
-
-            </thead>
-            <tbody>
-                <tr>
-                <td>{{idx + 1}}</td>
-                <td>{{license.categoryName}}</td>
-                <td>{{license.licenseTypeName}}</td>
-                <td>{{license.licenseOrCertificateAccreditationNumber}}</td>
-                <td>{{license.licenseOrCertificateAccreditationNumber}}</td>
-                <td>{{license.issueDate |date:(commonService.showFormat)}}</td>
-                <td>{{license.expiryDate |date:(commonService.showFormat)}}</td>
-                <td>{{license.issuingAuthority}}</td>
-                <td>{{license.issuingCountry}}</td>
-                <td>{{license.issuingState}}</td>
-                <td>{{license.status}}</td>
-                <td>{{license.relatedActivity}}</td>
-                <td>@for (file of license.fileInfo; track file; let idx = $index) {
-                    <div class="d-flex flex-row align-items-top">
-                        <div class="col-auto subHeading2">{{idx+1}}.</div>
-                        <div class="col">
-                            @if (file.docId > 0) {
-                            <a class="helper-underline pointer">
-                                {{file.fileInfo.name}}
-                            </a>
-                            <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
-                            <span class="material-icons-outlined" style="cursor: pointer;" matTooltip="Download File" (click)="downloadFile(file.fieInfo.filePath)">file_download</span>  
-                            } @else{
-                            <div>
-                                <span >{{file.fileInfo.name}}</span>
-                                <small>({{commonService.transformFileSize(file.fileInfo.size)}})</small>
-                                <span class="material-icons-outlined" style="cursor: pointer;" matTooltip="Download File" (click)="downloadFile(file.fileInfo.filePath)">file_download</span>  
+ </div>
+ <div>
+    <div class="widget-box">
+       <h5 class="widget-title">
+          License / Certificate Details
+       </h5>
+       <div class="widget-content">
+          <div class="table-responsive table-col-control">
+             <table class="content-table">
+                <thead>
+                   <tr>
+                      <th>Serial #</th>
+                      <th>Category</th>
+                      <th>License Type</th>
+                      <th>Name</th>
+                      <th>Number</th>
+                      <th>Issue Date</th>
+                      <th>Expiry Date</th>
+                      <th>Issuing Authority</th>
+                      <th>Issuing Country</th>
+                      <th>Issuing State</th>
+                      <th>Status</th>
+                      <th>Related Activity</th>
+                      <th>Attachment</th>
+                      <th>Remarks</th>
+                      <th>Action</th>
+                   </tr>
+                </thead>
+                <tbody>
+                   <tr>
+                      <td>1</td>
+                      <td>License</td>
+                      <td>Import License</td>
+                      <td>3424324322</td>
+                      <td>3424324322</td>
+                      <td>11-Apr-2025</td>
+                      <td>30-Apr-2025</td>
+                      <td>234243</td>
+                      <td>USA</td>
+                      <td>NewYork</td>
+                      <td>Active</td>
+                      <td>license</td>
+                      <td>
+                         <div class="d-flex flex-row align-items-top">
+                            <div class="col-auto subHeading2">1</div>
+                            <div class="col">
+                               <a class="helper-underline pointer">
+                               PDF
+                               </a>
+                               <small>250kb</small>
+                               <span class="material-icons-outlined" style="cursor: pointer;"
+                                  matTooltip="Download File">file_download</span>
                             </div>
-                            }
-                        </div>
-                    </div>
-                    }</td>
-                    <td>{{license.remarks}}</td>
-
-                    <td>
-                        <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small" matTooltip="Edit"
-                        (click)="editLicenseActivity(idx)"><i class="fa fa-edit"></i>
-                        </button>
-                        <button Xclass="btn btn-danger btn-sm smBtn" [disabled]="disableStatusBased == false"
-                            class="btn-small" mat-button matTooltip="Delete"
-                            (click)="deletelicenseCertification(idx,license.fileNameId,license.licenseCertificationId)">
-                            <i class="fa fa-trash text-danger"></i>
-                        </button>
-                    </td>
-
-            </tr>
-            </tbody>
-            </table>
-            </div>
-        }
-    }
-</div>
-</div>
-</div>
+                         </div>
+                      </td>
+                      <td>100</td>
+                      <td>
+                         <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small"
+                            matTooltip="Edit"><i class="fa fa-edit"></i>
+                         </button>
+                         <button Xclass="btn btn-danger btn-sm smBtn" [disabled]="disableStatusBased == false"
+                            class="btn-small" mat-button matTooltip="Delete">
+                         <i class="fa fa-trash text-danger"></i>
+                         </button>
+                      </td>
+                   </tr>
+                </tbody>
+             </table>
+          </div>
+       </div>
+    </div>
+ </div>

@@ -117,238 +117,278 @@
                            <div class="tab-pane fade show active" id="krya-tab-content">
                                <!-- KRYA Tab Content -->
                                <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                                       <mat-form-field class="d-flex col">
-                                           <input matInput required placeholder="User Name" autocomplete="off" formControlName="userName" />
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Username Required</span>
-
-                                           </div>
-                                       </mat-form-field>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                                   <mat-form-field class="d-flex col">
+                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                         autocomplete="off" formControlName="userName" />
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
+                                         SupplierlogInForm.get('userName')?.touched) {
+                                         <span class="ft-size11 text-danger">Username Required</span>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                                   <mat-form-field class="d-flex col pwd-input">
+                                      <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                         formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                      <!-- Toggle icon to show/hide password -->
+                                      <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                         <span class="material-icons-outlined icons-color-000-55">
+                                         {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                         </span>
+                                      </mat-icon>
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <span class="ft-size11 text-danger">Password required</span>
+                                         }
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <p class="ft-size11 text-danger">
+                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
+                                            etc.), N, n, 1' | translate }}
+                                         </p>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="capche-sec">
+                                   <div class="captcha-ref">
+                                      <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                      <div class="refresh-btn mx-3"><span class="ft-size13">
+                                         <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
+                                         </span>
+                                      </div>
                                    </div>
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                                       <mat-form-field class="d-flex col pwd-input">
-                                           <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off" formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                           <!-- Toggle icon to show/hide password -->
-                                           <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                               <span class="material-icons-outlined icons-color-000-55">
-                                      {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                           </mat-icon>
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Password required</span>
-
-
-                                           </div>
-                                       </mat-form-field>
+                                   <div class="capcha-input">
+                                      <mat-form-field class="">
+                                         <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                            formControlName="userName" />
+                                      </mat-form-field>
                                    </div>
-                                   <div class="capche-sec">
-                                       <div class="captcha-ref">
-                                           <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                           <div class="refresh-btn mx-3"><span class="ft-size13">
-                                      <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
-                                            Refresh</span></a>
-                                               </span>
-                                           </div>
-                                       </div>
-                                       <div class="capcha-input">
-                                           <mat-form-field class="">
-                                               <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off" formControlName="userName" />
-                                           </mat-form-field>
-                                       </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                                   <a class="signup" (click)="onForgotPswdSubmit()">
+                                   Forgot Password?
+                                   </a>
+                                   <div *ngIf="showMFA === false">
+                                      <button type="submit" class="btn-blue1" (click)="login()">
+                                      <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                      </button>
                                    </div>
-                                   <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                                       <a class="signup" (click)="onForgotPswdSubmit()">
-                                Forgot Password?
-                             </a>
-                                       <div>
-                                           <button type="submit" class="btn-blue1" (click)="login_custom()">
-                                               <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                           </button>
-                                       </div>
-                                   </div>
-                               </form>
+                                </div>
+                             </form>
                            </div>
                            <div class="tab-pane fade" id="client-tab-content">
                                <!-- Client Tab Content -->
                                <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                                       <mat-form-field class="d-flex col">
-                                           <input matInput required placeholder="User Name" autocomplete="off" formControlName="userName" />
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Username Required</span>
-
-                                           </div>
-                                       </mat-form-field>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                                   <mat-form-field class="d-flex col">
+                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                         autocomplete="off" formControlName="userName" />
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
+                                         SupplierlogInForm.get('userName')?.touched) {
+                                         <span class="ft-size11 text-danger">Username Required</span>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                                   <mat-form-field class="d-flex col pwd-input">
+                                      <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                         formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                      <!-- Toggle icon to show/hide password -->
+                                      <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                         <span class="material-icons-outlined icons-color-000-55">
+                                         {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                         </span>
+                                      </mat-icon>
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <span class="ft-size11 text-danger">Password required</span>
+                                         }
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <p class="ft-size11 text-danger">
+                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
+                                            etc.), N, n, 1' | translate }}
+                                         </p>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="capche-sec">
+                                   <div class="captcha-ref">
+                                      <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                      <div class="refresh-btn mx-3"><span class="ft-size13">
+                                         <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
+                                         </span>
+                                      </div>
                                    </div>
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                                       <mat-form-field class="d-flex col pwd-input">
-                                           <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off" formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                           <!-- Toggle icon to show/hide password -->
-                                           <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                               <span class="material-icons-outlined icons-color-000-55">
-                                      {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                           </mat-icon>
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Password required</span>
-
-
-                                           </div>
-                                       </mat-form-field>
+                                   <div class="capcha-input">
+                                      <mat-form-field class="">
+                                         <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                            formControlName="userName" />
+                                      </mat-form-field>
                                    </div>
-                                   <div class="capche-sec">
-                                       <div class="captcha-ref">
-                                           <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                           <div class="refresh-btn mx-3"><span class="ft-size13">
-                                      <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
-                                            Refresh</span></a>
-                                               </span>
-                                           </div>
-                                       </div>
-                                       <div class="capcha-input">
-                                           <mat-form-field class="">
-                                               <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off" formControlName="userName" />
-                                           </mat-form-field>
-                                       </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                                   <a class="signup" (click)="onForgotPswdSubmit()">
+                                   Forgot Password?
+                                   </a>
+                                   <div *ngIf="showMFA === false">
+                                      <button type="submit" class="btn-blue1" (click)="login()">
+                                      <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                      </button>
                                    </div>
-                                   <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                                       <a class="signup" (click)="onForgotPswdSubmit()">
-                                Forgot Password?
-                             </a>
-                                       <div>
-                                           <button type="submit" class="btn-blue1" (click)="login_custom()">
-                                               <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                           </button>
-                                       </div>
-                                   </div>
-                               </form>
+                                </div>
+                             </form>
                            </div>
                            <div class="tab-pane fade" id="candidate-tab-content">
                                <!-- Candidate Tab Content -->
                                <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                                       <mat-form-field class="d-flex col">
-                                           <input matInput required placeholder="User Name" autocomplete="off" formControlName="userName" />
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Username Required</span>
-
-                                           </div>
-                                       </mat-form-field>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                                   <mat-form-field class="d-flex col">
+                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                         autocomplete="off" formControlName="userName" />
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
+                                         SupplierlogInForm.get('userName')?.touched) {
+                                         <span class="ft-size11 text-danger">Username Required</span>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                                   <mat-form-field class="d-flex col pwd-input">
+                                      <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                         formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                      <!-- Toggle icon to show/hide password -->
+                                      <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                         <span class="material-icons-outlined icons-color-000-55">
+                                         {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                         </span>
+                                      </mat-icon>
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <span class="ft-size11 text-danger">Password required</span>
+                                         }
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <p class="ft-size11 text-danger">
+                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
+                                            etc.), N, n, 1' | translate }}
+                                         </p>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="capche-sec">
+                                   <div class="captcha-ref">
+                                      <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                      <div class="refresh-btn mx-3"><span class="ft-size13">
+                                         <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
+                                         </span>
+                                      </div>
                                    </div>
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                                       <mat-form-field class="d-flex col pwd-input">
-                                           <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off" formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                           <!-- Toggle icon to show/hide password -->
-                                           <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                               <span class="material-icons-outlined icons-color-000-55">
-                                      {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                           </mat-icon>
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Password required</span>
-
-
-                                           </div>
-                                       </mat-form-field>
+                                   <div class="capcha-input">
+                                      <mat-form-field class="">
+                                         <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                            formControlName="userName" />
+                                      </mat-form-field>
                                    </div>
-                                   <div class="capche-sec">
-                                       <div class="captcha-ref">
-                                           <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                           <div class="refresh-btn mx-3"><span class="ft-size13">
-                                      <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
-                                            Refresh</span></a>
-                                               </span>
-                                           </div>
-                                       </div>
-                                       <div class="capcha-input">
-                                           <mat-form-field class="">
-                                               <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off" formControlName="userName" />
-                                           </mat-form-field>
-                                       </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                                   <a class="signup" (click)="onForgotPswdSubmit()">
+                                   Forgot Password?
+                                   </a>
+                                   <div *ngIf="showMFA === false">
+                                      <button type="submit" class="btn-blue1" (click)="login()">
+                                      <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                      </button>
                                    </div>
-                                   <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                                       <a class="signup" (click)="onForgotPswdSubmit()">
-                                Forgot Password?
-                             </a>
-                                       <div>
-                                           <button type="submit" class="btn-blue1" (click)="login_custom()">
-                                               <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                           </button>
-                                       </div>
-                                   </div>
-                               </form>
+                                </div>
+                             </form>
                            </div>
                            <div class="tab-pane fade" id="vendor-tab-content">
                                <!-- Candidate Tab Content -->
                                <form role="form" class="registration-form" [formGroup]="SupplierlogInForm">
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
-                                       <mat-form-field class="d-flex col">
-                                           <input matInput required placeholder="User Name" autocomplete="off" formControlName="userName" />
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Username Required</span>
-
-                                           </div>
-                                       </mat-form-field>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
+                                   <mat-form-field class="d-flex col">
+                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                         autocomplete="off" formControlName="userName" />
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
+                                         SupplierlogInForm.get('userName')?.touched) {
+                                         <span class="ft-size11 text-danger">Username Required</span>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="form-group position-relative">
+                                   <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
+                                   <mat-form-field class="d-flex col pwd-input">
+                                      <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off"
+                                         formControlName="passWord" required placeholder="Password" class="input-pr" />
+                                      <!-- Toggle icon to show/hide password -->
+                                      <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
+                                         <span class="material-icons-outlined icons-color-000-55">
+                                         {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
+                                         </span>
+                                      </mat-icon>
+                                      <div class="login-validation">
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <span class="ft-size11 text-danger">Password required</span>
+                                         }
+                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
+                                         SupplierlogInForm.get('passWord')?.touched) {
+                                         <p class="ft-size11 text-danger">
+                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
+                                            etc.), N, n, 1' | translate }}
+                                         </p>
+                                         }
+                                      </div>
+                                   </mat-form-field>
+                                </div>
+                                <div class="capche-sec">
+                                   <div class="captcha-ref">
+                                      <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
+                                      <div class="refresh-btn mx-3"><span class="ft-size13">
+                                         <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i> Refresh</span></a>
+                                         </span>
+                                      </div>
                                    </div>
-                                   <div class="form-group position-relative">
-                                       <span class="material-icons-outlined icons-place icons-color-000-55">lock_open</span>
-                                       <mat-form-field class="d-flex col pwd-input">
-                                           <input matInput [type]="isPasswordVisible ? 'text' : 'password'" autocomplete="off" formControlName="passWord" required placeholder="Password" class="input-pr" />
-                                           <!-- Toggle icon to show/hide password -->
-                                           <mat-icon matSuffix (click)="togglePasswordVisibility()" class="eye-icon ieye">
-                                               <span class="material-icons-outlined icons-color-000-55">
-                                      {{ isPasswordVisible ? 'visibility_off' : 'visibility' }}
-                                   </span>
-                                           </mat-icon>
-                                           <div class="login-validation">
-
-                                               <span class="ft-size11 text-danger">Password required</span>
-
-
-                                           </div>
-                                       </mat-form-field>
+                                   <div class="capcha-input">
+                                      <mat-form-field class="">
+                                         <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off"
+                                            formControlName="userName" />
+                                      </mat-form-field>
                                    </div>
-                                   <div class="capche-sec">
-                                       <div class="captcha-ref">
-                                           <div><span><img src="assets/images/capchaa.png" width="120" height="35"></span></div>
-                                           <div class="refresh-btn mx-3"><span class="ft-size13">
-                                      <a class="signup"><span><i class="fa-solid fa-arrows-rotate"></i>
-                                            Refresh</span></a>
-                                               </span>
-                                           </div>
-                                       </div>
-                                       <div class="capcha-input">
-                                           <mat-form-field class="">
-                                               <input class="p-2" matInput required placeholder="Enter Capcha" autocomplete="off" formControlName="userName" />
-                                           </mat-form-field>
-                                       </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center w-100 mt-3">
+                                   <a class="signup" (click)="onForgotPswdSubmit()">
+                                   Forgot Password?
+                                   </a>
+                                   <div *ngIf="showMFA === false">
+                                      <button type="submit" class="btn-blue1" (click)="login()">
+                                      <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
+                                      </button>
                                    </div>
-                                   <div class="d-flex justify-content-between align-items-center w-100 mt-3">
-                                       <a class="signup" (click)="onForgotPswdSubmit()">
-                                Forgot Password?
-                             </a>
-                                       <div>
-                                           <button type="submit" class="btn-blue1" (click)="login_custom()">
-                                               <i class="fa fa-sign-in"></i> <span class="ps-2">Signin</span>
-                                           </button>
-                                       </div>
-                                   </div>
-                               </form>
+                                </div>
+                             </form>
                            </div>
                        </div>
                    </div>

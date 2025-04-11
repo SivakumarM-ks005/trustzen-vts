@@ -4,67 +4,39 @@
     </h5>
 
     <div class="widget-content">
-        <!-- @for (attach of saveAllManData; track saveManAttachment; let idx = $index) { --> 
 
         <form [formGroup]="mandatoryFormList">
             <div formArrayName="mandatoryFormInfos">
                 <div class="projectBox" *ngFor="let group of mandatoryFormInfos.controls; let i = index"
                     [formGroupName]="i">
                     <div class="grid-attach align-items-center">
-                        <div class="serial-number"> {{ i + 1 }} </div>
+                        <div class="serial-number"> 1 </div>
 
                         <mat-form-field class="col">
                             <mat-label>
-                                @if(!isSubmitted || !group.get('attachmentTypeId')?.hasError('required')){
-                                    Attachment Type
-                                }
-                                @if(isSubmitted && group.get('attachmentTypeId')?.hasError('required')){
-                                    <span class="error-msg"> Attachment Type is required</span>
-                                }
+                                Attachment Type 
                             </mat-label>
                             <mat-select formControlName="attachmentTypeId" name="attachment"
                                 matTooltip="Select a Attachment Type" [required]="true">
                                 <mat-option value="">-- Please Select --</mat-option>
                                 <mat-option *ngFor="let lt of filterManAttachmentType" [value]="lt.attachmentTypeId" [disabled]="isOptionDisabled(lt.attachmentTypeId, i)">
-                                    {{ lt.attachmentType }}
+                                    Owner-Visa
                                 </mat-option>
                             </mat-select>
-                            <!-- <mat-error *ngIf="group.get('attachmentTypeId')?.hasError('required')">
-                                Attachment Type is required
-                            </mat-error> -->
+
                         </mat-form-field>
 
                         <mat-form-field class="col">
                             <mat-label>
-                                @if(!isSubmitted || !group.get('description')?.hasError('required')){
-                                    Description
-                                }
-                                @if(isSubmitted && group.get('description')?.hasError('required')){
-                                    <span class="error-msg"> Description is required</span>
-                                }
-                                @if(isSubmitted && group.get('description')?.hasError('maxLength')){
-                                    <span class="error-msg">  Description cannot exceed 1500 characters</span>
-                                }
+                                Description 
                                 </mat-label>
-                            <!-- <textarea matInput matTooltip="Enter the description" required formControlName="description"
-                                #noteHint name="textArea" cdkTextareaAutosize cdkTextareaAutosize
-                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                                cdkAutosizeMaxRows="2"></textarea> -->
 
                                 <textarea matInput matTooltip="Enter the description" formControlName="description"
                                 #noteHint name="textArea" rows="1"></textarea>
 
 
                             <mat-hint align="end">{{noteHint.value.length > 0 ? noteHint.value.length : 0}} of 1500</mat-hint>
-                            <!-- <mat-error *ngIf="group.get('description')?.hasError('required')">
-                                Description is required
-                            </mat-error>
-                            <mat-error *ngIf="group.get('description')?.hasError('maxLength')">
-                                Description cannot exceed 1500 characters
-                            </mat-error> -->
-                            <!-- @if (desc.errors?.required) {
-                                    <mat-error matTooltip="Enter a description">Error: Enter a description </mat-error>
-                                    } -->
+
                         </mat-form-field>
 
                         <mat-form-field class="col">
@@ -101,10 +73,8 @@
                                                 <span class="material-icons-outlined">close</span>
                                             </mat-icon>
                                         </div>
-                                        @if(getFilesArray(i).controls.length === 0){
-                                        <div class="smText noData">Files not available.</div>
-                                        }
-                                        @if(getFilesArray(i).controls.length > 0){
+                     
+
                                       
                                             <div *ngIf="getFilesArray(i).controls.length > 0">
 <div *ngFor="let file of getFilesArray(i).controls; let idx = index" class="upload-file-row" >
@@ -113,20 +83,19 @@
                                                         <div style="width: fit-content;" class="subHeading2 pe-1">{{ idx + 1 }}.</div>                                                        
                                                         <div class="subHeading2 col">
                                                             <div style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                                @if (file.value.docId > 0) {
+                                                             
                                                                     <span class="me-1" style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;" matTooltip="{{file.value.fileInfo.name}}">
-                                                                        {{file.value.fileInfo.name}}
+                                                                        PDF
                                                                     </span>
                                                                     <small>({{commonService.transformFileSize(file.value.fileInfo.size)}})</small>
-                                                                    <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadFile(file.value.fileInfo.filePath)">download</span>-->
-                                                                }
-                                                                @else { 
+
+                                                                
                                                                     <span class="me-1" style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;" matTooltip="{{file.value.fileInfo.name}}">
-                                                                        {{file.value.fileInfo.name}}
+                                                                       PDF
                                                                     </span>
-                                                                    <small>({{commonService.transformFileSize(file.value.fileInfo.size)}})</small>
-                                                                    <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadFile(file.value.fileInfo.filePath)">download</span>-->
-                                                                }
+                                                                    <small>250KB</small>
+                                                                  
+                                                                
                                                             </div>
 
                                                         </div>
@@ -146,7 +115,7 @@
                                                 </div>
                                             </div>
                                          
-                                        }
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -165,22 +134,16 @@
     <h5 class="widget-title d-flex flex-row justify-content-start align-items-center">
         <div class="col">Optional Attachment</div>
         <div class="col-auto">
-            @if (showOptionalAttachFlag) {
+         
             <button [disabled]="disableStatusBased == false" class="header-level-btn-blue me-3"
                 (click)="saveAttachments(false,true)" matTooltip="Add Optional Attachment">
                 <i class="fa fa-floppy-o pe-2"></i>
-                {{editedOptionalFlag ? 'Update':'Save'}}</button>
-            }
+                Save</button>
+            
         </div>
-        <div>
-            <a class="pointer"
-                (click)="showOptionalAttachFlag?showOptionalAttachFlag=false:showOptionalAttachFlag=true;clearOptionalValue()">
-                <span class="material-icons-outlined">{{showOptionalAttachFlag ? 'expand_more':
-                    'expand_less'}}</span>
-            </a>
-        </div>
+
     </h5>
-    <!-- @if (showOptionalAttachFlag) { -->
+
 
     <form #optionalForm="ngForm" id="optionalAttach">
         <div class="widget-content">
@@ -188,48 +151,23 @@
                 <mat-form-field class="col">
                     <mat-label>
                         
-                        @if(!isSubmitted || !optionalttachmentTypeControl.errors?.required){
-                            Attachment Type
-                        }
-                        @if(isSubmitted && optionalttachmentTypeControl.errors?.required){
-                            <span class="error-msg"> Attachment Type is required</span>
-                        }
-                        @if(isSubmitted && optionalttachmentTypeControl.errors?.invalid){
-                            <span class="error-msg">valid Attachment Type is required</span>
-                        }
+                        Attachment Type
                         </mat-label>
                     <mat-select name="optAttachment" #optionalttachmentTypeControl="ngModel"
                         matTooltip="Select a Attachment Type" [(ngModel)]="saveOptAttachment.attachmentTypeId"
                         name="optionalAttachType">
                         <mat-option value="">-- Please Select --</mat-option>
                         <mat-option *ngFor="let lt of filterAttachmentType" [value]="lt.attachmentTypeId">
-                            {{ lt.attachmentType }}
+                            Owner-Visa
                         </mat-option>
                     </mat-select>
-                    <!-- @if (optionalttachmentTypeControl.errors?.required) {
-                    <mat-error matTooltip="Select a Attachment Type">
-                        Attachment Type is required</mat-error>
-                    }
-                    @if (optionalttachmentTypeControl.errors?.invalid) {
-                    <mat-error matTooltip="Select a Attachment Type">
-                        valid Attachment Type is required</mat-error>
-                    } -->
+
                 </mat-form-field>
 
                 <mat-form-field class="col">
                     <mat-label>
-                        @if(!isSubmitted || !optDesc.errors?.required){
-                            Description
-                        }
-                        @if(isSubmitted && optDesc.errors?.required){
-                            <span class="error-msg"> Error: Enter a description</span>
-                        }
+                        Description
                         </mat-label>
-                    <!-- <textarea matInput matTooltip="Enter the description" 
-                        [(ngModel)]="saveOptAttachment.description" #optDesc="ngModel" #noteHint name="optTextArea"
-                        cdkTextareaAutosize cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
-                        cdkAutosizeMaxRows="1"></textarea> -->
-
 
                         <textarea matInput matTooltip="Enter the description" 
                         [(ngModel)]="saveOptAttachment.description" #optDesc="ngModel" #noteHint name="optTextArea"
@@ -239,9 +177,6 @@
 
                     <mat-hint align="end">{{noteHint.value.length > 0 ? noteHint.value.length : 0}} of
                         1500</mat-hint>
-                    <!-- @if (optDesc.errors?.required) {
-                    <mat-error matTooltip="Enter a description">Error: Enter a description </mat-error>
-                    } -->
                 </mat-form-field>
                 <mat-form-field class="col">
                     <mat-label>Uploaded By</mat-label>
@@ -271,8 +206,7 @@
                                 (click)="toggleAttachOptional()">
                                 <span class="material-icons-outlined">ballot</span>
                             </mat-icon>
-                            <!-- <div class="sidebar navbar-nav" style="display: none; top:64% !important; right:15px !important"
-                                [class.toggled]="attachOptionalToggle"> -->
+
                                 <div class="sidebar navbar-nav" style="display: none;" [class.toggled]="attachOptionalToggle">
                                  
                                 <div class="close-icon">
@@ -289,7 +223,6 @@
                                     @for (file of optListOfFiles; track file; let idx = $index) {
                                     <div  class="upload-file-row" >
                                         <div class="d-flex flex-row align-items-top">
-                                            <!-- <div class="col-auto subHeading2 me-1"></div> -->
                                             <div style="width: fit-content;" class="subHeading2 pe-1">{{ idx + 1 }}.
                                             </div> 
                                             <div class="subHeading2 col">
@@ -300,14 +233,14 @@
                                                         </span>
                                                         <small>{{commonService.transformFileSize(file.fileInfo.size)}}</small>
                                                         
-                                                        <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadDoc(doc.value)">download</span> -->
+                                                        
 
                                                     }   @else {
                                                         <span class="me-1" style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;" matTooltip="{{file.fileInfo.name}}">
                                                             {{file.fileInfo.name}}
                                                         </span>
                                                        <small> {{commonService.transformFileSize(file.fileInfo.size)}}</small>
-                                                        <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadDoc(doc.value)">download</span> -->
+                                                      
 
                                                     }
                                                     
@@ -339,8 +272,7 @@
 
     </form>
     <div class="m-2">
-    @if (this.saveAllOptAttachment.length > 0) {
-    @for (optAttach of saveAllOptAttachment; track optAttach; let idx = $index) {
+
         
         <div class="table-responsive table-col-control" >
             <table class="content-table">
@@ -361,32 +293,32 @@
 
                 <tr class="border-bottom">
                     <td>
-                        {{idx + 1}}
+                       1
                     </td>
                     <td>
-                        {{optAttach.attachmentType}}
+                        Owner-Visa
                     </td>
                     <td>
-                        {{optAttach.uploadedUserName}}
+                       Owner-Visa
                     </td>
                     <td>
-                        {{optAttach.description}}
+                        dsdsdsdsddd
                     </td>
                     <td>
-                        {{optAttach.uploadedDate}}
+                        08-Apr-2025
                     </td>
                     <td>
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === false" mat-button class="btn-small" matTooltip="Edit"
-                            (click)="editOptionalAttach(idx)">
+                            >
                            <i class="fa fa-eye"></i>
                         </button>
                             <button class="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === true" mat-button class="btn-small" matTooltip="Edit"
-                                (click)="editOptionalAttach(idx)">
+                                >
                                <i class="fa fa-edit"></i>
                             </button>
                             <button Xclass="btn btn-danger btn-sm smBtn" [disabled]="disableStatusBased == false" class="btn-small" mat-button
-                                matTooltip="Delete" (click)="deleteOptionaAttach(optAttach.optAttachmentId, idx)">
+                                matTooltip="Delete" >
                               <i class="fa fa-trash text-danger"></i>
                             </button>
                         </div>
@@ -396,8 +328,6 @@
         </table>
     </div>
 
-    }
-    }
+  
 </div>
-    <!-- } -->
 </div>

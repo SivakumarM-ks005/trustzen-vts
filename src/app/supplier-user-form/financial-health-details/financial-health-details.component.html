@@ -1,532 +1,378 @@
 <form [formGroup]="financialForm" class="financial-health me-2">
-
     <div class="widget-box">
-        <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-            Business Capability <span *ngIf="ClearValues() && NextButtonValidation()"></span>
-        </h5>
-        <div class="widget-content" formGroupName="businessCreditInfos">
-            <div class="grid-4cols">
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !financialForm.get('businessCreditInfos.experienceId')?.hasError('invalidValue')){
-                            Experience History   
-                        }
-                        @if(isSubmitted && financialForm.get('businessCreditInfos.experienceId')?.hasError('invalidValue')){
-                            <span class="error-msg">  Experience is required.  </span>
-                        }
-                    </mat-label>
-                    <mat-select required formControlName="experienceId" matTooltip="Select Experience History">
-                        <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option [value]="1">1-3 Years</mat-option>
-                        <mat-option [value]="2">4-6 Years</mat-option>
-                        <mat-option [value]="3">7-10 Years</mat-option>
-                        <mat-option [value]="4">10+ Years</mat-option>
-                    </mat-select>
-                    <!-- <mat-error *ngIf="financialForm.get('businessCreditInfos.experienceId')?.hasError('invalidValue')">
-                        Experience is required.
-                    </mat-error> -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>
-                        @if(!isSubmitted || !financialForm.get('businessCreditInfos.currencyId')?.hasError('invalidValue')){
-                            Currency   
-                        }
-                        @if(isSubmitted && financialForm.get('businessCreditInfos.currencyId')?.hasError('invalidValue')){
-                            <span class="error-msg"> Currency is required.  </span>
-                        }
-                    </mat-label>
-                    <mat-select required formControlName="currencyId" matTooltip="Select Currency">
-                        <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let currency of FinCurrencyList" [value]="currency.currencyId">
-                            {{ currency.currencyName }}
-                        </mat-option>
-                    </mat-select>
-                    <!-- <mat-error *ngIf="financialForm.get('businessCreditInfos.currencyId')?.hasError('invalidValue')">
-                        Currency is required.
-                    </mat-error> -->
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>Aggregate Value of Projects at Hand</mat-label>
-                    <input matInput formControlName="aggregateValueProjects" style="text-align: right;"
-                        matTooltip="Enter the Aggregate Value of Projects at Hand" [systemParameter]="systemParameter"
-                        formatCurrency>
-                </mat-form-field>
-
-                <mat-form-field class="col">
-                    <mat-label>Max Value of Projects that you can
-                        Undertake</mat-label>
-                    <input matInput formControlName="maxValueOfProjectUndertake" style="text-align: right;"
-                        maxlength="20" [systemParameter]="systemParameter" formatCurrency
-                        matTooltip="Enter the Max Value of Projects that you can Undertake">
-                </mat-form-field>
-            </div>
-        </div>
+       <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+          Business Capability <span *ngIf="ClearValues() && NextButtonValidation()"></span>
+       </h5>
+       <div class="widget-content" formGroupName="businessCreditInfos">
+          <div class="grid-4cols">
+             <mat-form-field class="col">
+                <mat-label>
+                   Experience History
+                </mat-label>
+                <mat-select required formControlName="experienceId" matTooltip="Select Experience History">
+                   <mat-option value="">-- Please Select --</mat-option>
+                   <mat-option [value]="1">1-3 Years</mat-option>
+                   <mat-option [value]="2">4-6 Years</mat-option>
+                   <mat-option [value]="3">7-10 Years</mat-option>
+                   <mat-option [value]="4">10+ Years</mat-option>
+                </mat-select>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>
+                   Currency
+                </mat-label>
+                <mat-select required formControlName="currencyId" matTooltip="Select Currency">
+                   <mat-option value="">-- Please Select --</mat-option>
+                   <mat-option *ngFor="let currency of FinCurrencyList" [value]="currency.currencyId">
+                   Inr
+                   </mat-option>
+                </mat-select>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>Aggregate Value of Projects at Hand</mat-label>
+                <input matInput formControlName="aggregateValueProjects" style="text-align: right;"
+                   matTooltip="Enter the Aggregate Value of Projects at Hand" [systemParameter]="systemParameter"
+                   formatCurrency>
+             </mat-form-field>
+             <mat-form-field class="col">
+                <mat-label>Max Value of Projects that you can
+                   Undertake
+                </mat-label>
+                <input matInput formControlName="maxValueOfProjectUndertake" style="text-align: right;"
+                   maxlength="20" [systemParameter]="systemParameter" formatCurrency
+                   matTooltip="Enter the Max Value of Projects that you can Undertake">
+             </mat-form-field>
+          </div>
+       </div>
     </div>
     <div>
-        <div class="widget-box">
-            <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-                Project Details
-                <button [disabled]="disableStatusBased == false" style="min-width: 20px !important;height: 26px;"
-                    class="header-level-btn-blue" matTooltip="Add more Project Details"
-                    (click)="addProjectDetailsRow();">
-                    <i class="fa fa-plus"></i>
-                </button>
-            </h5>
-            <div class="widget-content" formGroupName="projectDetailsInfos">
-                <mat-accordion class="project-panel" *ngFor="let project of projectDetailsInfos.controls; let i = index"
-                    [formGroupName]="i">
-                    <mat-expansion-panel [expanded]="true">
-                        <mat-expansion-panel-header>
-                            <div class="my-panel" (click)="$event.stopPropagation();">
-                                <span>Project # {{ i + 1 }}</span>
-                                <div class="remove-proj  del-icon-position" *ngIf="i > 0">
-                                    <!-- <button mat-icon-button matTooltip="Remove this Project Details" (click)="removeProjectDetailsRow(i)"
-                                        [disabled]="projectDetailsInfos.length <= 1">
-                                        <i class="fa fa-times-circle" aria-hidden="true"></i>
-                                    </button> -->
-
-                                    <a mattooltip="Remove Tax" class="delete-hover"  matTooltip="Remove this Project Details" (click)="removeProjectDetailsRow(i)"  
-                                    [class.disabled]="projectDetailsInfos.length <= 1">
-                                        <span class="material-icons-outlined cursor-pointer">delete_forever</span>
-                                    </a>
-
-
-                                </div>
+       <div class="widget-box">
+          <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
+             Project Details
+             <button [disabled]="disableStatusBased == false" style="min-width: 20px !important;height: 26px;"
+             class="header-level-btn-blue" matTooltip="Add more Project Details"
+             (click)="addProjectDetailsRow();">
+             <i class="fa fa-plus"></i>
+             </button>
+          </h5>
+          <div class="widget-content" formGroupName="projectDetailsInfos">
+             <mat-accordion class="project-panel" *ngFor="let project of projectDetailsInfos.controls; let i = index"
+             [formGroupName]="i">
+             <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                   <div class="my-panel" (click)="$event.stopPropagation();">
+                      <span>Project # {{ i + 1 }}</span>
+                      <div class="remove-proj  del-icon-position" *ngIf="i > 0">
+                         <a mattooltip="Remove Tax" class="delete-hover"
+                         matTooltip="Remove this Project Details" (click)="removeProjectDetailsRow(i)"
+                         [class.disabled]="projectDetailsInfos.length <= 1">
+                         <span class="material-icons-outlined cursor-pointer">delete_forever</span>
+                         </a>
+                      </div>
+                   </div>
+                </mat-expansion-panel-header>
+                <div class="grid-4cols">
+                   <mat-form-field class="col">
+                      <mat-label>
+                         Project Status
+                      </mat-label>
+                      <mat-select required formControlName="projectStatusId"
+                         matTooltip="Select Project Status" (selectionChange)="endDateValidate(i)">
+                         <mat-option value="">-- Please Select --</mat-option>
+                         <mat-option [value]="1">Ongoing Project</mat-option>
+                         <mat-option [value]="2">Completed Project</mat-option>
+                      </mat-select>
+                   </mat-form-field>
+                   <mat-form-field class="col">
+                      <mat-label>
+                         Customer Name
+                      </mat-label>
+                      <input matInput matTooltip="Enter the customer name" formControlName="customerName"
+                         required>
+                   </mat-form-field>
+                   <mat-form-field class="col">
+                      <mat-label>
+                         Start Date
+                      </mat-label>
+                      <input matInput matTooltip="Enter the start Date" [matDatepicker]="startDateTab"
+                         formControlName="startDate" required name="startDate">
+                      <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                      <mat-datepicker-toggle matIconSuffix [for]="startDateTab"></mat-datepicker-toggle>
+                      <mat-datepicker #startDateTab></mat-datepicker>
+                   </mat-form-field>
+                   <mat-form-field class="col">
+                      <mat-label>
+                         End Date
+                      </mat-label>
+                      <input matInput [matDatepicker]="endDateTab" formControlName="endDate"
+                      [min]="project.get('startDate')?.value" matTooltip="Select the End Date" />
+                      <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                      <mat-datepicker-toggle matIconSuffix [for]="endDateTab"></mat-datepicker-toggle>
+                      <mat-datepicker #endDateTab></mat-datepicker>
+                   </mat-form-field>
+                   <mat-form-field class="col">
+                      <mat-label>
+                         Country
+                      </mat-label>
+                      <mat-select formControlName="countryId" matTooltip="Select Country">
+                         <mat-option value="">-- Please Select --</mat-option>
+                         <mat-option *ngFor="let country of BankCountryList" [value]="country.countryId">
+                         India
+                         </mat-option>
+                      </mat-select>
+                   </mat-form-field>
+                   <mat-form-field class="col">
+                      <mat-label>Currency</mat-label>
+                      <mat-select formControlName="currencyId" matTooltip="Select Currency">
+                         <mat-option value="">-- Please Select --</mat-option>
+                         <mat-option *ngFor="let currency of FinCurrencyList" [value]="currency.currencyId">
+                         Inr
+                         </mat-option>
+                      </mat-select>
+                   </mat-form-field>
+                   <mat-form-field class="col">
+                      <mat-label>Value</mat-label>
+                      <input [systemParameter]="systemParameter" formatCurrency matInput
+                         formControlName="value" matTooltip="Enter the value" style="text-align: right;"
+                         maxlength="14" allowNumberOnly>
+                   </mat-form-field>
+                   <mat-form-field class="col">
+                      <mat-label>
+                         Project Description
+                      </mat-label>
+                      <textarea matInput formControlName="projectDescription" rows="1" required></textarea>
+                   </mat-form-field>
+                </div>
+             </mat-expansion-panel>
+             </mat-accordion>
+          </div>
+       </div>
+       <div class="widget-box">
+          <h5 class="widget-title">Financial Health</h5>
+          <div class="widget-content" formGroupName="financialHealthInfo">
+             <div class="grid-3cols align-items-center">
+                <mat-checkbox formControlName="netProfitLast3Year">
+                   Did you make Net Profit in the last 3 years?
+                </mat-checkbox>
+                <span class="subHeading2 ms-1">
+                Financial Audited statements for last 3 years
+                <span *ngIf="Mandatefinancestatement" class="color-red">*</span>
+                </span>
+                <div>
+                   <div class="d-flex w-100 justify-content-between align-items-center mt-2"
+                      formGroupName="financialHealthDocsInfo">
+                      <div class="custom-file-upload">
+                         <button class="file-upload-button">
+                         <input class="custom-file-input" [disabled]="disableStatusBased === false"
+                         id="customFileLang" (change)="onFileSelect($event)" type="file">
+                         <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
+                            class="ps-2">Upload</span>
+                         </button>
+                      </div>
+                      <div class="attach-section col position-relative" style="width: 50px; margin-left: 20px;">
+                         <mat-icon matBadge={{financialHealthDocsArray.length}} id="sidebarToggle"
+                            (click)="toggleAttach()">
+                            <span class="material-icons-outlined">ballot</span>
+                         </mat-icon>
+                         <div class="sidebar navbar-nav" style="display: none;" [class.toggled]="attachToggle">
+                            <div class="close-icon">
+                               <div class="subHeading">Financial Documents</div>
+                               <mat-icon class="icon-close" (click)="closeAttach()">
+                                  <span class="material-icons-outlined">close</span>
+                               </mat-icon>
                             </div>
-                        </mat-expansion-panel-header>
-                        <div class="grid-4cols">
-                            <mat-form-field class="col">
-                                <mat-label>
-                                    @if(!isSubmitted || !project.get('projectStatusId')?.hasError('invalidValue')){
-                                        Project Status   
-                                    }
-                                    @if(isSubmitted && project.get('projectStatusId')?.hasError('invalidValue')){
-                                        <span class="error-msg">  Project Status is required.  </span>
-                                    }
-                                     </mat-label>
-                                <mat-select required formControlName="projectStatusId"
-                                    matTooltip="Select Project Status" (selectionChange)="endDateValidate(i)">
-                                    <mat-option value="">-- Please Select --</mat-option>
-                                    <mat-option [value]="1">Ongoing Project</mat-option>
-                                    <mat-option [value]="2">Completed Project</mat-option>
-                                </mat-select>
-                                <!-- <mat-error *ngIf="project.get('projectStatusId')?.hasError('invalidValue')">
-                                    Project Status is required.
-                                </mat-error> -->
-                            </mat-form-field>
-
-                            <mat-form-field class="col">
-                                <mat-label>
-                                    @if(!isSubmitted || !project.get('customerName')?.hasError('required')){
-                                        Customer Name   
-                                    }
-                                    @if(isSubmitted && project.get('customerName')?.hasError('required')){
-                                        <span class="error-msg">  Customer Name is required.  </span>
-                                    }
-                                    </mat-label>
-                                <input matInput matTooltip="Enter the customer name" formControlName="customerName"
-                                    required>
-                                <!-- <mat-error *ngIf="project.get('customerName')?.hasError('required')">
-                                    Customer Name is required.
-                                </mat-error> -->
-                            </mat-form-field>
-
-                            <mat-form-field class="col">
-                                <mat-label>
-                                    @if(!isSubmitted || !project.get('startDate')?.hasError('required')){
-                                        Start Date   
-                                    }
-                                    @if(isSubmitted && project.get('startDate')?.hasError('required')){
-                                        <span class="error-msg"> Start Date is required.  </span>
-                                    }
-                                    </mat-label>
-                                <input matInput matTooltip="Enter the start Date" [matDatepicker]="startDateTab"
-                                    formControlName="startDate" required name="startDate">
-                                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="startDateTab"></mat-datepicker-toggle>
-                                <mat-datepicker #startDateTab></mat-datepicker>
-                                <!-- <mat-error *ngIf="project.get('startDate')?.hasError('required')">
-                                    Start Date is required.
-                                </mat-error> -->
-                            </mat-form-field>
-
-                            <mat-form-field class="col">
-                                <mat-label>
-                                    @if(!isSubmitted || !projectDetailsInfos.at(i).get('endDate')?.hasError('required')){
-                                        End Date   
-                                    }
-                                    @if(isSubmitted && projectDetailsInfos.at(i).get('endDate')?.hasError('required')){
-                                        <span class="error-msg"> End Date is required.  </span>
-                                    }
-                                </mat-label>
-                                <input matInput [matDatepicker]="endDateTab" formControlName="endDate"
-                                    [min]="project.get('startDate')?.value" matTooltip="Select the End Date" />
-                                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="endDateTab"></mat-datepicker-toggle>
-                                <mat-datepicker #endDateTab></mat-datepicker>
-                                <!-- <mat-error *ngIf="projectDetailsInfos.at(i).get('endDate')?.hasError('required')">
-                                    End Date is required</mat-error> -->
-                                <!-- <mat-error *ngIf="project.get('endDate')?.hasError('required')">
-                                            End Date is required.
-                                        </mat-error> -->
-                                <!-- <mat-error *ngIf="project.get('endDate')?.hasError('invalidEndDate')">
-                                            End Date cannot be earlier than Start Date.
-                                        </mat-error> -->
-                            </mat-form-field>
-
-                            <mat-form-field class="col">
-                                <mat-label>
-                                    @if(!isSubmitted || !project.get('countryId')?.hasError('required')){
-                                        Country   
-                                    }
-                                    @if(isSubmitted && project.get('countryId')?.hasError('required')){
-                                        <span class="error-msg"> Country Name is required.  </span>
-                                    }
-                                    </mat-label>
-                                <mat-select formControlName="countryId" matTooltip="Select Country">
-                                    <mat-option value="">-- Please Select --</mat-option>
-                                    <mat-option *ngFor="let country of BankCountryList" [value]="country.countryId">
-                                        {{ country.countryName }}
-                                    </mat-option>
-                                </mat-select>
-                                <!-- <mat-error *ngIf="project.get('countryId')?.hasError('required')">
-                                    CountryName is required.
-                                </mat-error> -->
-                            </mat-form-field>
-
-                            <mat-form-field class="col">
-                                <mat-label>Currency</mat-label>
-                                <mat-select formControlName="currencyId" matTooltip="Select Currency">
-                                    <mat-option value="">-- Please Select --</mat-option>
-                                    <mat-option *ngFor="let currency of FinCurrencyList" [value]="currency.currencyId">
-                                        {{ currency.currencyName }}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-
-                            <mat-form-field class="col">
-                                <mat-label>Value</mat-label>
-                                <input  [systemParameter]="systemParameter" formatCurrency matInput formControlName="value" matTooltip="Enter the value"
-                                   style="text-align: right;" maxlength="14"
-                                     allowNumberOnly>
-                            </mat-form-field>
-
-                            <mat-form-field class="col">
-                                <mat-label>
-                                    @if(!isSubmitted || !project.get('projectDescription')?.hasError('required')){
-                                        Project Description   
-                                    }
-                                    @if(isSubmitted && project.get('projectDescription')?.hasError('required')){
-                                        <span class="error-msg">Project Description is required.  </span>
-                                    }
-                                    </mat-label>
-                                <textarea matInput 
-                                formControlName="projectDescription" rows="1"
-                                required></textarea>
-                                <!-- <textarea matInput 
-                                    formControlName="projectDescription" cdkTextareaAutosize cdkTextareaAutosize
-                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="3"
-                                    required></textarea> -->
-                                <!-- <mat-error *ngIf="project.get('projectDescription')?.hasError('required')">
-                                    Project Description is required.
-                                </mat-error> -->
-                            </mat-form-field>
-                        </div>
-                    </mat-expansion-panel>
-                </mat-accordion>
-
-            </div>
-        </div>
-        <div class="widget-box">
-            <h5 class="widget-title">Financial Health</h5>
-            <div class="widget-content" formGroupName="financialHealthInfo">
-                <div class="grid-3cols align-items-center">
-                    <mat-checkbox  formControlName="netProfitLast3Year">
-                        Did you make Net Profit in the last 3 years?
-                    </mat-checkbox>
-                    <span class="subHeading2 ms-1">
-                        Financial Audited statements for last 3 years
-                        <span *ngIf="Mandatefinancestatement" class="color-red">*</span>
-                    </span>
-                    <div>
-                    <div class="d-flex w-100 justify-content-between align-items-center mt-2" formGroupName="financialHealthDocsInfo">
-
-                        <div class="custom-file-upload">
-                            <button class="file-upload-button">
-                                <input class="custom-file-input" [disabled]="disableStatusBased === false" id="customFileLang" (change)="onFileSelect($event)"
-                                    type="file">
-                                <i class="fa fa-cloud-upload" aria-hidden="true"></i><span class="ps-2">Upload</span>
-                                <!-- <label class="custom-file-label" for="customFileLang">Select the file to upload</label> -->
-                            </button>
-                            
-                        </div>
-
-
-                        <div class="attach-section col position-relative" style="width: 50px; margin-left: 20px;">
-                            <mat-icon matBadge={{financialHealthDocsArray.length}} id="sidebarToggle"
-                                (click)="toggleAttach()">
-                                <span class="material-icons-outlined">ballot</span>
-                            </mat-icon>
-                            <div class="sidebar navbar-nav" style="display: none;" [class.toggled]="attachToggle">
-                                <div class="close-icon">
-                                    <div class="subHeading">Financial Documents</div>
-                                    <mat-icon class="icon-close" (click)="closeAttach()">
-                                        <span class="material-icons-outlined">close</span>
-                                    </mat-icon>
-                                </div>
-                                @if(financialHealthDocsArray.length === 0){
-                                <div class="smText noData">Files not available.</div>
-                                }
-                                @if(financialHealthDocsArray.length > 0){
-                                <div class="upload-file-row" *ngFor="let doc of financialHealthDocsArray.controls; let i = index">
-                                    <div *ngIf="doc.get('fileName')?.value">
-                                        <div class="d-flex flex-row align-items-top">
-                                            <div style="width: fit-content;" class="subHeading2 pe-1">{{ i + 1 }}.
-                                            </div>
-                                            <div class="subHeading2 col">
-                                                <div style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                                    <span class="me-1" style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;" matTooltip="{{doc.get('fileName')?.value}}">
-                                                        {{ doc.get('fileName')?.value }}
-                                                    </span>
-                                                    <small>(86.5 KB)</small>
-                                                    <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadDoc(doc.value)">download</span> -->
-                                                </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <!-- Jawahar download icons -->
-                                                <button class="btn btn-sm smBtn btn-download" matTooltip="Download File" (click)="downloadDoc(doc.value)">
-                                                    <span class="material-icons-outlined">file_download</span>
-                                                </button>
-                                                <button class="btn btn-danger btn-sm smBtn" [disabled]="disableStatusBased === false" type="button"
-                                                    matTooltip="Delete File" (click)="removeDocument(financialHealthDocsArray,i)">
-                                                    <span class="material-icons-outlined">delete</span>
-                                                </button>
-                                            </div>
-                                            <!-- <div style="width: fit-content;">
-                                                                            <span class="material-icons-outlined del-icon" matTooltip="Delete"
-                                                                                (click)="removeDocument(financialHealthDocsArray,i)">delete_forever</span>
-                                                                        </div> -->
+                            <div class="upload-file-row"
+                               *ngFor="let doc of financialHealthDocsArray.controls; let i = index">
+                               <div *ngIf="doc.get('fileName')?.value">
+                                  <div class="d-flex flex-row align-items-top">
+                                     <div style="width: fit-content;" class="subHeading2 pe-1">{{ i + 1 }}.
+                                     </div>
+                                     <div class="subHeading2 col">
+                                        <div
+                                           style="display: flex; align-items: center; max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                           <span class="me-1"
+                                              style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;"
+                                              matTooltip="{{doc.get('fileName')?.value}}">
+                                           {{ doc.get('fileName')?.value }}
+                                           </span>
+                                           <small>(86.5 KB)</small>
+                                           <!-- <span class="material-icons-outlined ms-2" style="cursor: pointer;" matTooltip="Download File" (click)="downloadDoc(doc.value)">download</span> -->
                                         </div>
-                                    </div>
-                                </div>
-                                }
+                                     </div>
+                                     <div class="col-auto">
+                                        <!-- Jawahar download icons -->
+                                        <button class="btn btn-sm smBtn btn-download"
+                                           matTooltip="Download File" (click)="downloadDoc(doc.value)">
+                                        <span class="material-icons-outlined">file_download</span>
+                                        </button>
+                                        <button class="btn btn-danger btn-sm smBtn"
+                                        [disabled]="disableStatusBased === false" type="button"
+                                        matTooltip="Delete File"
+                                        (click)="removeDocument(financialHealthDocsArray,i)">
+                                        <span class="material-icons-outlined">delete</span>
+                                        </button>
+                                     </div>
+                                     <!-- <div style="width: fit-content;">
+                                        <span class="material-icons-outlined del-icon" matTooltip="Delete"
+                                            (click)="removeDocument(financialHealthDocsArray,i)">delete_forever</span>
+                                        </div> -->
+                                  </div>
+                               </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="text-danger ft-size11">Supported Formates: jpg, jpeg, gif, png, pdf</div>
-                    </div>
+                         </div>
+                      </div>
+                   </div>
+                   <div class="text-danger ft-size11">Supported Formates: jpg, jpeg, gif, png, pdf</div>
                 </div>
-            </div>
-        </div>
-        <div class="widget-box">
-            <h5 class="widget-title">Assets and Liabilities</h5>
-            <div class="widget-content" formArrayName="assetLiabilitieInfos">
-                <div class="d-flex flex-row flex-wrap justify-content-start align-items-start">
-                    <div *ngFor="let group of assetLiabilitieInfos.controls; let i = index" [formGroupName]="i"
-                        class="col-md-6 p-1">
-                        
-                        <div class="display-label">
-                            {{ group.get('description')?.value }}  
-                        </div>
-
-                        <!-- Year-1 -->
-                        <div class="widget-box">
-                            <h5 class="widget-title">
-                                Year - 1
-                            </h5>
-                            <div class="widget-content">
-                                <div class="grid-3cols">
-                                    <mat-form-field>
-                                        <mat-label>
-                                            @if(!isSubmitted || !group.get('fromDateYear1')?.hasError('required')){
-                                                From  
-                                            }
-                                            @if(isSubmitted && group.get('fromDateYear1')?.hasError('required')){
-                                                <span class="error-msg">Enter the from date  </span>
-                                            }
-                                            </mat-label>
-                                        <input matInput matTooltip=" Enter the From Date" [matDatepicker]="FromTab"
-                                            formControlName="fromDateYear1" required name="Fromdate" (click)="click()">
-                                        <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                        <mat-datepicker-toggle matIconSuffix [for]="FromTab"></mat-datepicker-toggle>
-                                        <mat-datepicker #FromTab></mat-datepicker>
-                                        <!-- <mat-error *ngIf="group.get('fromDateYear1')?.hasError('required')">
-                                            Enter the from date
-                                        </mat-error> -->
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-label>
-                                            @if(!isSubmitted || !group.get('toDateYear1')?.hasError('required')){
-                                                To  
-                                            }
-                                            @if(isSubmitted && group.get('toDateYear1')?.hasError('required')){
-                                                <span class="error-msg">Enter the To date  </span>
-                                            }
-                                        </mat-label>
-                                        <input matInput matTooltip=" Enter the To Date" [matDatepicker]="toTab"
-                                            [min]="group.get('fromDateYear1')?.value" formControlName="toDateYear1"
-                                            required name="Todate" (click)="click()">
-                                        <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                        <mat-datepicker-toggle matIconSuffix [for]="toTab"></mat-datepicker-toggle>
-                                        <mat-datepicker #toTab></mat-datepicker>
-                                        <!-- <mat-error *ngIf="group.get('toDateYear1')?.hasError('required')">
-                                            Enter the To date,
-                                        </mat-error> -->
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-label> 
-                                            @if(!isSubmitted || !group.get('valueYear1')?.hasError('required')){
-                                            Amount  
-                                        }
-                                        @if(isSubmitted && group.get('valueYear1')?.hasError('required')){
-                                            <span class="error-msg">Enter the Amount  </span>
-                                        }
-                                    </mat-label>
-                                        <input matInput [systemParameter]="systemParameter" formatCurrency
-                                        formControlName="valueYear1" matTooltip="Value from year 1"
-                                        style="text-align: right;" maxlength="14" allowNumberOnly (click)="click()">
-                                        <!-- <mat-error *ngIf="group.get('valueYear1')?.hasError('required')">
-                                            Enter the Amount
-                                        </mat-error> -->
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Year-2 -->
-                        <div class="widget-box">
-                            <h5 class="widget-title">
-                                Year-2
-                            </h5>
-                            <div class="widget-content">
-                                <div class="grid-3cols">
-                                    <mat-form-field>
-                                        <mat-label>From</mat-label>
-                                        <input matInput matTooltip=" Enter the From Date" [matDatepicker]="FromTab2"
-                                            formControlName="fromDateYear2" name="Fromdate2">
-                                        <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                        <mat-datepicker-toggle matIconSuffix [for]="FromTab2"></mat-datepicker-toggle>
-                                        <mat-datepicker #FromTab2></mat-datepicker>
-
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-label>To</mat-label>
-                                        <input matInput matTooltip=" Enter the To Date" [matDatepicker]="toTab2"
-                                            formControlName="toDateYear2" name="toTab2"
-                                            [min]="group.get('fromDateYear2')?.value">
-                                        <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                        <mat-datepicker-toggle matIconSuffix [for]="toTab2"></mat-datepicker-toggle>
-                                        <mat-datepicker #toTab2></mat-datepicker>
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-label>Amount</mat-label>
-                                        <input matInput formControlName="valueYear2" matTooltip="Value from Year 2"
-                                            style="text-align: right;" maxlength="14"
-                                            [systemParameter]="systemParameter" formatCurrency allowNumberOnly>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Year-3 -->
-                        <div class="widget-box">
-                            <h5 class="widget-title">
-                                Year-3
-                            </h5>
-                            <div class="widget-content">
-                                <div class="grid-3cols">
-                                    <mat-form-field>
-                                        <mat-label>From</mat-label>
-                                        <input matInput matTooltip=" Enter the From Date" [matDatepicker]="FromTab3"
-                                            formControlName="fromDateYear3" name="Fromdate3">
-                                        <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                        <mat-datepicker-toggle matIconSuffix [for]="FromTab3"></mat-datepicker-toggle>
-                                        <mat-datepicker #FromTab3></mat-datepicker>
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-label>To</mat-label>
-                                        <input matInput matTooltip=" Enter the To Date" [matDatepicker]="toTab3"
-                                            formControlName="toDateYear3" name="Todate3"
-                                            [min]="group.get('fromDateYear3')?.value">
-                                        <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-                                        <mat-datepicker-toggle matIconSuffix [for]="toTab3"></mat-datepicker-toggle>
-                                        <mat-datepicker #toTab3></mat-datepicker>
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-label>Amount</mat-label>
-                                        <input matInput formControlName="valueYear3" matTooltip="Value from year 3"
-                                            style="text-align: right;" maxlength="14"
-                                            [systemParameter]="systemParameter" formatCurrency allowNumberOnly>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+             </div>
+          </div>
+       </div>
+       <div class="widget-box">
+          <h5 class="widget-title">Assets and Liabilities</h5>
+          <div class="widget-content" formArrayName="assetLiabilitieInfos">
+             <div class="d-flex flex-row flex-wrap justify-content-start align-items-start">
+                <div *ngFor="let group of assetLiabilitieInfos.controls; let i = index" [formGroupName]="i"
+                class="col-md-6 p-1">
+                <div class="display-label">
+                   Assets
                 </div>
-            </div>
-        </div>
-
-        <div class="widget-box">
-            <h5 class="widget-title">Credit Limit</h5>
-            <div class="widget-content" formGroupName="businessCreditInfos">
-                <div class="grid-3cols">
-                    <mat-form-field>
-                        <mat-label>Credit Limit</mat-label>
-                        <input matInput matTooltip="Enter the credit limit" formControlName="creditLimit"
-                               style="text-align: right;" (focusout)="validateLimitForm()" (keypress)="allowOnlyNumbers($event)">
-                        <!-- <mat-error *ngIf="financialForm.get('businessCreditInfos.creditLimit')?.hasError('exceedsExposure')">
-                          Credit Limit must be greater than Exposure Limit.
-                        </mat-error>
-                        <mat-error *ngIf="financialForm.get('businessCreditInfos.creditLimit')?.hasError('exceedsProject')">
-                          Credit Limit must be greater than Project Limit.
-                        </mat-error> -->
-                      </mat-form-field>
-                      
-                      <mat-form-field>
-                        <mat-label>
-                            @if(!financialForm.get('businessCreditInfos.creditExposureLimit')?.hasError('exceedsCredit')){
-                                <span>Credit Exposure Limit</span>
-                            }@else if(financialForm.get('businessCreditInfos.creditExposureLimit')?.hasError('exceedsCredit')){
-                                <span class="error-msg">
-                                    Must be equal to or less than Credit Limit.
-                                </span>
-                            }
-                        </mat-label>
-                        <input matInput matTooltip="Enter the credit exposure limit" formControlName="creditExposureLimit"
-                               style="text-align: right;" (focusout)="validateLimitForm()" (keypress)="allowOnlyNumbers($event)">
-                        <!-- <mat-error *ngIf="financialForm.get('businessCreditInfos.creditExposureLimit')?.hasError('exceedsProject')">
-                          Exposure Limit must be greater than Project Limit.
-                        </mat-error> -->
-                        <!-- <mat-error *ngIf="financialForm.get('businessCreditInfos.creditExposureLimit')?.hasError('exceedsCredit')">
-                            Must be equal to or less than Credit Limit.
-                        </mat-error> -->
-                      </mat-form-field>
-                      
-                      <mat-form-field>
-                        <mat-label>
-                            @if(!financialForm.get('businessCreditInfos.projectLimit')?.hasError('exceedsExposure')){
-                                <span>Project Limit</span>
-                            }@else if(financialForm.get('businessCreditInfos.projectLimit')?.hasError('exceedsExposure')){
-                                <span class="error-msg">
-                                    Must be equal to or less than Credit Exposure Limit.
-                                </span>
-                            }
-                        </mat-label>
-                        <input matInput matTooltip="Enter the project limit" formControlName="projectLimit"
-                               style="text-align: right;" (focusout)="validateLimitForm()" (keypress)="allowOnlyNumbers($event)">
-                        <!-- <mat-error *ngIf="financialForm.get('businessCreditInfos.projectLimit')?.hasError('exceedsExposure')">
-                            Must be equal to or less than Credit Exposure Limit.
-                        </mat-error> -->
-                        <!-- <mat-error *ngIf="financialForm.get('businessCreditInfos.projectLimit')?.hasError('exceedsCredit')">
-                          Project Limit must be less than Credit Limit.
-                        </mat-error> -->
-                      </mat-form-field>
-                      
+                <!-- Year-1 -->
+                <div class="widget-box">
+                   <h5 class="widget-title">
+                      Year - 1
+                   </h5>
+                   <div class="widget-content">
+                      <div class="grid-3cols">
+                         <mat-form-field>
+                            <mat-label>
+                               From
+                            </mat-label>
+                            <input matInput matTooltip=" Enter the From Date" [matDatepicker]="FromTab"
+                            formControlName="fromDateYear1" required name="Fromdate" (click)="click()">
+                            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="FromTab"></mat-datepicker-toggle>
+                            <mat-datepicker #FromTab></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field>
+                            <mat-label>
+                               To
+                            </mat-label>
+                            <input matInput matTooltip=" Enter the To Date" [matDatepicker]="toTab"
+                            [min]="group.get('fromDateYear1')?.value" formControlName="toDateYear1"
+                            required name="Todate" (click)="click()">
+                            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="toTab"></mat-datepicker-toggle>
+                            <mat-datepicker #toTab></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field>
+                            <mat-label>
+                               Amount
+                            </mat-label>
+                            <input matInput [systemParameter]="systemParameter" formatCurrency
+                            formControlName="valueYear1" matTooltip="Value from year 1"
+                            style="text-align: right;" maxlength="14" allowNumberOnly (click)="click()">
+                         </mat-form-field>
+                      </div>
+                   </div>
                 </div>
-            </div>
-        </div>
+                <!-- Year-2 -->
+                <div class="widget-box">
+                   <h5 class="widget-title">
+                      Year-2
+                   </h5>
+                   <div class="widget-content">
+                      <div class="grid-3cols">
+                         <mat-form-field>
+                            <mat-label>From</mat-label>
+                            <input matInput matTooltip=" Enter the From Date" [matDatepicker]="FromTab2"
+                               formControlName="fromDateYear2" name="Fromdate2">
+                            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="FromTab2"></mat-datepicker-toggle>
+                            <mat-datepicker #FromTab2></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field>
+                            <mat-label>To</mat-label>
+                            <input matInput matTooltip=" Enter the To Date" [matDatepicker]="toTab2"
+                            formControlName="toDateYear2" name="toTab2"
+                            [min]="group.get('fromDateYear2')?.value">
+                            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="toTab2"></mat-datepicker-toggle>
+                            <mat-datepicker #toTab2></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field>
+                            <mat-label>Amount</mat-label>
+                            <input matInput formControlName="valueYear2" matTooltip="Value from Year 2"
+                               style="text-align: right;" maxlength="14"
+                               [systemParameter]="systemParameter" formatCurrency allowNumberOnly>
+                         </mat-form-field>
+                      </div>
+                   </div>
+                </div>
+                <!-- Year-3 -->
+                <div class="widget-box">
+                   <h5 class="widget-title">
+                      Year-3
+                   </h5>
+                   <div class="widget-content">
+                      <div class="grid-3cols">
+                         <mat-form-field>
+                            <mat-label>From</mat-label>
+                            <input matInput matTooltip=" Enter the From Date" [matDatepicker]="FromTab3"
+                               formControlName="fromDateYear3" name="Fromdate3">
+                            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="FromTab3"></mat-datepicker-toggle>
+                            <mat-datepicker #FromTab3></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field>
+                            <mat-label>To</mat-label>
+                            <input matInput matTooltip=" Enter the To Date" [matDatepicker]="toTab3"
+                            formControlName="toDateYear3" name="Todate3"
+                            [min]="group.get('fromDateYear3')?.value">
+                            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="toTab3"></mat-datepicker-toggle>
+                            <mat-datepicker #toTab3></mat-datepicker>
+                         </mat-form-field>
+                         <mat-form-field>
+                            <mat-label>Amount</mat-label>
+                            <input matInput formControlName="valueYear3" matTooltip="Value from year 3"
+                               style="text-align: right;" maxlength="14"
+                               [systemParameter]="systemParameter" formatCurrency allowNumberOnly>
+                         </mat-form-field>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
     </div>
-</form>
+    <div class="widget-box">
+       <h5 class="widget-title">Credit Limit</h5>
+       <div class="widget-content" formGroupName="businessCreditInfos">
+          <div class="grid-3cols">
+             <mat-form-field>
+                <mat-label>Credit Limit</mat-label>
+                <input matInput matTooltip="Enter the credit limit" formControlName="creditLimit"
+                style="text-align: right;" (focusout)="validateLimitForm()"
+                (keypress)="allowOnlyNumbers($event)">
+             </mat-form-field>
+             <mat-form-field>
+                <mat-label>
+                   Credit Exposure Limit
+                </mat-label>
+                <input matInput matTooltip="Enter the credit exposure limit"
+                formControlName="creditExposureLimit" style="text-align: right;"
+                (focusout)="validateLimitForm()" (keypress)="allowOnlyNumbers($event)">
+             </mat-form-field>
+             <mat-form-field>
+                <mat-label>
+                   Project Limit
+                </mat-label>
+                <input matInput matTooltip="Enter the project limit" formControlName="projectLimit"
+                style="text-align: right;" (focusout)="validateLimitForm()"
+                (keypress)="allowOnlyNumbers($event)">
+             </mat-form-field>
+          </div>
+       </div>
+    </div>
+    </div>
+ </form>

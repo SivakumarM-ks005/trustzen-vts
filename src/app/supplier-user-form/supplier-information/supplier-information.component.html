@@ -1,285 +1,163 @@
-<form [formGroup]="supplierForm" class="me-2">
-<div class="widget-box">
-    <h5 class="widget-title">Company Details <span *ngIf="ClearValues() && NextButtonValidation()"></span></h5>
-    <div class="widget-content">
-      <div class="grid-4cols">
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('companyName')?.hasError('required')){
-                    Company Name
-                }
-                @if(isSubmitted && supplierForm.get('companyName')?.hasError('required')){
-                    <span class="error-msg"> Company Name is required.</span>
-                }
-            </mat-label>
-            <input matInput matTooltip="Enter the company name" formControlName="companyName"
-                readonly="true" required>
-            <!-- <mat-error *ngIf="supplierForm.get('companyName')?.hasError('required')">
-                Company Name is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>Company Name in Native</mat-label>
-            <input matInput matTooltip="Enter the company name in native"
-                formControlName="companyNameNative">
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>Parent Company Name</mat-label>
-            <input matInput matTooltip="Enter the parent company name"
-                formControlName="parentCompanyName">
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('supplierClassification')?.hasError('required')){
-                    Supplier Classification
-                }
-                @if(isSubmitted && supplierForm.get('supplierClassification')?.hasError('required')){
-                    <span class="error-msg"> Supplier Classification is required.</span>
-                }
-                </mat-label>
-            <input type="text" placeholder="Search supplier classification" readonly="true"
-                formControlName="supplierClassification" matTooltip="Search supplier classification"
-                aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto"
-                required>
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                @for (option of filteredOptions | async; track option) {
-                <mat-option [value]="option">{{option}}</mat-option>
-                }
-            </mat-autocomplete>
-            <!-- <mat-error *ngIf="supplierForm.get('supplierClassification')?.hasError('required')">
+<form class="me-2">
+    <div class="widget-box">
+        <h5 class="widget-title">Company Details </h5>
+        <div class="widget-content">
+            <div class="grid-4cols">
+                <mat-form-field class="col">
+                    <mat-label>
+                        Company Name
+                    </mat-label>
+                    <input matInput matTooltip="Enter the company name" formControlName="companyName">
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>Company Name in Native</mat-label>
+                    <input matInput matTooltip="Enter the company name in native" formControlName="companyNameNative">
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>Parent Company Name</mat-label>
+                    <input matInput matTooltip="Enter the parent company name" formControlName="parentCompanyName">
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Supplier Classification
+                    </mat-label>
+                    <input type="text" placeholder="Search supplier classification" readonly="true"
+                        formControlName="supplierClassification" matTooltip="Search supplier classification"
+                        aria-label="Number" matInput [formControl]="myControl">
+                    <!-- <mat-error *ngIf="supplierForm.get('supplierClassification')?.hasError('required')">
                 Supplier Classification is required.
             </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('supplierTypeId')?.hasError('required')){
-                    Supplier Type
-                }
-                @if(isSubmitted && supplierForm.get('supplierTypeId')?.hasError('required')){
-                    <span class="error-msg"> Supplier Type is required.</span>
-                }
-               </mat-label>
-            <mat-select [(value)]="selectedSupplierTypeId" formControlName="supplierTypeId"
-                matTooltip="Select Supplier Type">
-                <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let type of supplierTypes"
-                    [value]="type.supplierTypeId">{{type.supplierName}}</mat-option>
-            </mat-select>
-            <!-- <mat-error *ngIf="supplierForm.get('supplierTypeId')?.hasError('required')">
-                Supplier Type is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>Organization Website</mat-label>
-            <input matInput matTooltip="Enter the organization website"
-                formControlName="organizationWebsite" >
-            <!-- <mat-error *ngIf="supplierForm.get('organizationWebsite')?.hasError('required')">
-                Organization Website is required.
-            </mat-error> -->
-        </mat-form-field>
-      </div>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Supplier Type
+                    </mat-label>
+                    <mat-select [(value)]="selectedSupplierTypeId" formControlName="supplierTypeId"
+                        matTooltip="Select Supplier Type">
+                        <mat-option value="">-- Please Select --</mat-option>
+                        <mat-option *ngFor="let type of supplierTypes"
+                            [value]="type.supplierTypeId">Contractor</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>Organization Website</mat-label>
+                    <input matInput matTooltip="Enter the organization website" formControlName="organizationWebsite">
+                </mat-form-field>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="widget-box">
-    <h5 class="widget-title">{{(this.SupplierManagement?.complianceRenewalBank?.captureBusinessLicenses && this.SupplierManagement?.licenseCertificate?.length > 0) ? this.SupplierManagement?.licenseCertificate[0]?.displayLabel : "Commercial License"}} Details </h5>
-    <div class="widget-content">
-      <div class="grid-4cols">
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('commercialLicenseNo')?.hasError('required')){
-                    {{(this.SupplierManagement?.complianceRenewalBank?.captureBusinessLicenses && this.SupplierManagement?.licenseCertificate?.length > 0) ? this.SupplierManagement?.licenseCertificate[0]?.displayLabel : "Commercial License Number"}}
-                }
-                @if(isSubmitted && supplierForm.get('commercialLicenseNo')?.hasError('required')){
-                    <span class="error-msg">{{(this.SupplierManagement?.complianceRenewalBank?.captureBusinessLicenses && this.SupplierManagement?.licenseCertificate?.length > 0) ? this.SupplierManagement?.licenseCertificate[0]?.displayLabel : "Commercial License Number"}} is required.</span>
-                }
-                </mat-label>
-            <input matInput [matTooltip]="tooltipValueForLicense" readonly="true"
-                formControlName="commercialLicenseNo" required>
-            <!-- <mat-error *ngIf="supplierForm.get('commercialLicenseNo')?.hasError('required')">
-                Organization Website is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('establishmentDate')?.hasError('required')){
-                    Establishment Date
-                }
-                @if(isSubmitted && supplierForm.get('establishmentDate')?.hasError('required')){
-                    <span class="error-msg"> Establishment Date is required.</span>
-                }
-                </mat-label>
-            <input matInput [matDatepicker]="establishmentDt" formControlName="establishmentDate"
-                [required]="checkEstablishDateAdmin" matTooltip="Enter the Establishment Date" [max]="maxDate">
-                <!-- [max]="maxDate" -->
-            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="establishmentDt"></mat-datepicker-toggle>
-            <mat-datepicker #establishmentDt></mat-datepicker>
-            <!-- <mat-error *ngIf="supplierForm.get('establishmentDate')?.hasError('required')">
-                Establishment Date is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('issuedDate')?.hasError('required')){
-                    Issued Date
-                }
-                @if(isSubmitted && supplierForm.get('issuedDate')?.hasError('required')){
-                    <span class="error-msg"> Issued Date is required.</span>
-                }
-              </mat-label>
-            <input matInput [matDatepicker]="issuedDate" [min]="supplierForm.get('establishmentDate')?.value" formControlName="issuedDate" 
-                [required]="checkIssueDateAdmin"
-                matTooltip="Enter the Issued Date" [max]="maxDate">
-
-                <!-- [max]="maxDate" -->
-            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="issuedDate"></mat-datepicker-toggle>
-            <mat-datepicker #issuedDate></mat-datepicker>
-            <!-- <mat-error *ngIf="supplierForm.get('issuedDate')?.hasError('required')">
-                Issued Date is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('issuedBy')?.hasError('required')){
-                    Issued By
-                }
-                @if(isSubmitted && supplierForm.get('issuedBy')?.hasError('required')){
-                    <span class="error-msg"> Issued By is required.</span>
-                }
-            </mat-label>
-            <input matInput matTooltip="Enter the Issued By" formControlName="issuedBy" required>
-            <!-- <mat-error *ngIf="supplierForm.get('issuedBy')?.hasError('required')">
-                Issued By is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('typeOfOwnershipId')?.hasError('required')){
-                    Type Of Ownership
-                }
-                @if(isSubmitted && supplierForm.get('typeOfOwnershipId')?.hasError('required')){
-                    <span class="error-msg"> Type Of Ownership is required.</span>
-                }
-               </mat-label>
-            <mat-select [(value)]="selectedOwnershipTypeId" formControlName="typeOfOwnershipId"
-                matTooltip="Select Type Of Ownership">
-                <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let type of ownershipTypes" [value]="type.typeOwnershipId">
-                    {{ type.typeOwnershipName }}
-                </mat-option>
-            </mat-select>
-            <!-- <mat-error *ngIf="supplierForm.get('typeOfOwnershipId')?.hasError('required')">
-                Type of Ownership is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('location')?.hasError('required')){
-                    Location
-                }
-                @if(isSubmitted && supplierForm.get('location')?.hasError('required')){
-                    <span class="error-msg"> Location is required.</span>
-                }
-                </mat-label>
-            <input matInput matTooltip="Enter the location" formControlName="location" [required]="checkIssueLocationAdmin">
-            <!-- <mat-error *ngIf="supplierForm.get('location')?.hasError('required')">
-                Location is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('expiryDate')?.hasError('required')){
-                    Expiry Date
-                }
-                @if(isSubmitted && supplierForm.get('expiryDate')?.hasError('required')){
-                    <span class="error-msg"> Expiry Date is required.</span>
-                }
-            </mat-label>
-            <input matInput [matDatepicker]="expiryDate" [min]="minDate"  formControlName="expiryDate" [required]="checkExpiryDateAdmin"
-                matTooltip="Enter the Expiry Date">
-            <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="expiryDate"></mat-datepicker-toggle>
-            <mat-datepicker #expiryDate></mat-datepicker>
-            <!-- <mat-error *ngIf="supplierForm.get('expiryDate')?.hasError('required')">
-                Expiry Date is required.
-            </mat-error> -->
-        </mat-form-field>
-      </div>
+    <div class="widget-box">
+        <h5 class="widget-title">Licence # Details </h5>
+        <div class="widget-content">
+            <div class="grid-4cols">
+                <mat-form-field class="col">
+                    <mat-label>
+                        Licence #
+                    </mat-label>
+                    <input matInput [matTooltip]="tooltipValueForLicense" readonly="true"
+                        formControlName="commercialLicenseNo" required>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Establishment Date
+                    </mat-label>
+                    <input matInput [matDatepicker]="establishmentDt" formControlName="establishmentDate"
+                        [required]="checkEstablishDateAdmin" matTooltip="Enter the Establishment Date" [max]="maxDate">
+                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="establishmentDt"></mat-datepicker-toggle>
+                    <mat-datepicker #establishmentDt></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Issued Date
+                    </mat-label>
+                    <input matInput [matDatepicker]="issuedDate" [min]="supplierForm.get('establishmentDate')?.value"
+                        formControlName="issuedDate" [required]="checkIssueDateAdmin" matTooltip="Enter the Issued Date"
+                        [max]="maxDate">
+                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="issuedDate"></mat-datepicker-toggle>
+                    <mat-datepicker #issuedDate></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Issued By
+                    </mat-label>
+                    <input matInput matTooltip="Enter the Issued By" formControlName="issuedBy" required>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Type Of Ownership
+                    </mat-label>
+                    <mat-select [(value)]="selectedOwnershipTypeId" formControlName="typeOfOwnershipId"
+                        matTooltip="Select Type Of Ownership">
+                        <mat-option value="">-- Please Select --</mat-option>
+                        <mat-option *ngFor="let type of ownershipTypes" [value]="type.typeOwnershipId">
+                            {{ type.typeOwnershipName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Location
+                    </mat-label>
+                    <input matInput matTooltip="Enter the location" formControlName="location"
+                        [required]="checkIssueLocationAdmin">
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Expiry Date
+                    </mat-label>
+                    <input matInput [matDatepicker]="expiryDate" [min]="minDate" formControlName="expiryDate"
+                        [required]="checkExpiryDateAdmin" matTooltip="Enter the Expiry Date">
+                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="expiryDate"></mat-datepicker-toggle>
+                    <mat-datepicker #expiryDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="widget-box">
-    <h5 class="widget-title">Manager in Commercial License</h5>
-    <div class="widget-content">
-      <div class="grid-4cols">
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('managerFirstName')?.hasError('required')){
-                    First Name
-                }
-                @if(isSubmitted && supplierForm.get('managerFirstName')?.hasError('required')){
-                    <span class="error-msg"> First Name is required.</span>
-                }
-                </mat-label>
-            <input matInput appOnlyAllowedSymbol matTooltip="Enter the first name" formControlName="managerFirstName"
-                required>
-            <!-- <mat-error *ngIf="supplierForm.get('managerFirstName')?.hasError('required')">
-                FirstName is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>Middle Name</mat-label>
-            <input matInput appOnlyAllowedSymbol matTooltip="Enter the middle name" formControlName="managerMiddleName">
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('managerLastName')?.hasError('required')){
-                    Last Name
-                }
-                @if(isSubmitted && supplierForm.get('managerLastName')?.hasError('required')){
-                    <span class="error-msg"> Last Name is required.</span>
-                }
-                 </mat-label>
-            <input matInput appOnlyAllowedSymbol matTooltip="Enter the lst name" formControlName="managerLastName" required>
-            <!-- <mat-error *ngIf="supplierForm.get('managerLastName')?.hasError('required')">
-                LastName is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('managerRole')?.hasError('required')){
-                    Role
-                }
-                @if(isSubmitted && supplierForm.get('managerRole')?.hasError('required')){
-                    <span class="error-msg"> Role is required.</span>
-                }
-            </mat-label>
-            <mat-select [(value)]="selectedSupplierRoleId" formControlName="managerRole" required
-                matTooltip="Select Role">
-                <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let role of supplierRole"
-                    [value]="role.roleId">{{role.roleName}}</mat-option>
-            </mat-select>
-            <!-- <mat-error *ngIf="supplierForm.get('managerRole')?.hasError('required')">
-                Role is required.
-            </mat-error> -->
-        </mat-form-field>
-        <mat-form-field class="col">
-            <mat-label>
-                @if(!isSubmitted || !supplierForm.get('managerJobTitle')?.hasError('required')){
-                    Job Title
-                }
-                @if(isSubmitted && supplierForm.get('managerJobTitle')?.hasError('required')){
-                    <span class="error-msg"> Job Title is required.</span>
-                }
-            </mat-label>
-            <input matInput matTooltip="Enter the job title" formControlName="managerJobTitle" required>
-            <!-- <mat-error *ngIf="supplierForm.get('managerJobTitle')?.hasError('required')">
-                Job Title is required.
-            </mat-error> -->
-        </mat-form-field>
-      </div>
+    <div class="widget-box">
+        <h5 class="widget-title">Manager in Commercial License</h5>
+        <div class="widget-content">
+            <div class="grid-4cols">
+                <mat-form-field class="col">
+                    <mat-label>
+                        First Name
+                    </mat-label>
+                    <input matInput appOnlyAllowedSymbol matTooltip="Enter the first name"
+                        formControlName="managerFirstName" required>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>Middle Name</mat-label>
+                    <input matInput appOnlyAllowedSymbol matTooltip="Enter the middle name"
+                        formControlName="managerMiddleName">
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Last Name
+                    </mat-label>
+                    <input matInput appOnlyAllowedSymbol matTooltip="Enter the lst name"
+                        formControlName="managerLastName" required>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Role
+                    </mat-label>
+                    <mat-select [(value)]="selectedSupplierRoleId" formControlName="managerRole" required
+                        matTooltip="Select Role">
+                        <mat-option value="">-- Please Select --</mat-option>
+                        <mat-option *ngFor="let role of supplierRole"
+                            [value]="role.roleId">{{role.roleName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col">
+                    <mat-label>
+                        Job Title
+                    </mat-label>
+                    <input matInput matTooltip="Enter the job title" formControlName="managerJobTitle" required>
+                </mat-form-field>
+            </div>
+        </div>
     </div>
-  </div>
 </form>

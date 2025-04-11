@@ -1,139 +1,102 @@
 <div class="widget-box">
     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-        Add Licensed Activities and
-        Sub-Activities <span *ngIf="NextButtonValidation()"></span>
-        <div class="d-flex">
-            <button [disabled]="disableStatusBased == false" *ngIf="ClearValues()" class="header-level-btn-gray me-2"
-                (click)="clearActivities()" matTooltip="Clear Activity"><i class="fa fa-refresh pe-2"></i>
-                Clear</button>
-            <!-- <button mat-flat-button color="primary" class="normalBtn me-2" matTooltip="Save Activity"
-                            (click)="saveActivities()" [disabled]="disableSave">Save</button> -->
-            <!-- <button class="header-level-btn-blue" matTooltip="Add more Activities" (click)="addActivities()"
-                [disabled]="disableSave || disableStatusBased == false || !licenceActivityForm.valid"> <i class="fa fa-floppy-o pe-2"></i>{{editActivityFlag ? 'Update':'Save'}}
-            </button> -->
-        </div>
+       Add Licensed Activities and
+       Sub-Activities <span *ngIf="NextButtonValidation()"></span>
+       <div class="d-flex">
+          <button [disabled]="disableStatusBased == false" *ngIf="ClearValues()" class="header-level-btn-gray me-2"
+          (click)="clearActivities()" matTooltip="Clear Activity"><i class="fa fa-refresh pe-2"></i>
+          Clear</button>
+       </div>
     </h5>
     <div class="widget-content">
-        <div>
-            <form #licenceActivityForm="ngForm" id="licenceActivityForm">
-                <div class="grid-4cols">
-                    <mat-form-field class="col">
-                        <mat-label>
-                            @if (!isSubmitted || !activityControl.errors?.required) {
-                                Activity
-                            }
-                            @if (isSubmitted && activityControl.errors?.required) {
-                                <span class="error-msg"> Activity is required</span>
-                            }
-                        </mat-label>
-                        <input matInput [matAutocomplete]="activityAuto" id="activityId" #activityControl="ngModel" required
-                            matTooltip="Select a activity" [(ngModel)]="saveLicenseActivity.activityId" [required]="true"
-                            name="activityName" [dataList]="activityList" [autoCompleteDirective]="'activity'"
-                            (sendVal)="filterActivity =$event"  (dataValue)="saveLicenseActivity.activityId = $event?.activityId" class="input-pr">
-                            <mat-icon matSuffix class="icon-search">
-                                <span class="material-icons-outlined">manage_search</span>
-                            </mat-icon>
-                        <mat-autocomplete #activityAuto="matAutocomplete" [displayWith]="displayFnActivity.bind(this)" (optionSelected)="onSelectionLicenceChange($event)">
-                            @for (opt of filterActivity; track opt) {
-                            <mat-option [value]="opt.activityId">
-                                {{opt.activity}}
-                            </mat-option>
-                            }
-                        </mat-autocomplete>
-                        <!-- @if (activityControl.errors?.required) {
-                        <mat-error matTooltip="Activity is required">
-                            Activity is required</mat-error>
-                        } -->
-                    </mat-form-field>
-
-                    <mat-form-field class="col">
-                        <mat-label>
-                            @if (!isSubmitted || !subActivityControl.errors?.required) {
-                                Sub Activity
-                            }
-                            @if (isSubmitted && subActivityControl.errors?.required) {
-                               <span class="error-msg"> Sub Activity is required </span>
-                            }
-                        </mat-label>
-                        <input matInput [matAutocomplete]="subActivityAuto" id="subActivityId" #subActivityControl="ngModel"
-                            matTooltip="Select a sub activity" [(ngModel)]="saveLicenseActivity.subActivityId"
-                            [required]="true" name="subActivityName" [dataList]="subActivityList"
-                            [autoCompleteDirective]="'subActivity'" (sendVal)="filterSubActivity =$event"
-                            (dataValue)="saveLicenseActivity.subActivityId = $event?.subActivityId" class="input-pr">
-                            <mat-icon matSuffix class="icon-search">
-                                <span class="material-icons-outlined icons-color-000-55">manage_search</span>
-                            </mat-icon>
-                        <mat-autocomplete #subActivityAuto="matAutocomplete"
-                            [displayWith]="displayFnSubActivity.bind(this)">
-                            @for (value of filterSubActivity; track value) {
-                            <mat-option [value]="value.subActivityId">
-                                {{value.subActivity}}
-                            </mat-option>
-                            }
-                        </mat-autocomplete>
-                        <!-- @if (subActivityControl.errors?.required) {
-                        <mat-error matTooltip="Sub activity is required">
-                            Sub Activity is required</mat-error>
-                        } -->
-                    </mat-form-field>
-                </div>
-            </form>
-        </div>
-        <div class="mt-2"> 
-            @if (saveAllLicenseActivity.length > 0) {
-                <div class="table-responsive table-col-control" >
-                    <table class="content-table">
-                        <thead>
-                            <tr class="thead-light">
-                                <th scope="col" >Serial #</th>
-                                <th scope="col" >Activity</th>
-                                <th scope="col" >Sub Activity</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody class="list">
-        
-                    @for (activity of saveAllLicenseActivity; track activity; let idx = $index) {
-                    
-                        
-                                        <tr class="border-bottom">
-                                        <td> {{idx + 1}}</td>
-                                        <td>{{activity.activityName}}</td>
-                                        <td>{{activity.subActivityName}}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-between">
-                                                <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === false" mat-button class="btn-small"
-                                            matTooltip="Edit" (click)="editActivities(idx)">
-                                            <i class="fa fa-eye"></i>
-                                        </button>
-                                            <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === true" mat-button class="btn-small"
-                                            matTooltip="Edit" (click)="editActivities(idx)">
-                                            <i class="fa fa-edit"></i>
-                                        </button>
-                                        <button Xclass="btn btn-danger btn-sm smBtn" [disabled]="disableStatusBased == false"
-                                            class="btn-small" mat-button matTooltip="Delete"
-                                            (click)="deleteActivities(idx,activity.licensedActivityId)">
-                                        <i class="fa fa-trash text-danger"></i>
-                                        </button>
-                                        </div>
-                                    </td>
-                                        </tr>
-                                    
-                                }
-                            </tbody>
-                                </table>
-                </div>   
-            
-            }
-        </div>
+       <div>
+          <form id="licenceActivityForm">
+             <div class="grid-4cols">
+                <mat-form-field class="col">
+                   <mat-label>
+                      Activity
+                   </mat-label>
+                   <input matInput [matAutocomplete]="activityAuto" id="activityId" #activityControl="ngModel"
+                   required matTooltip="Select a activity" [(ngModel)]="saveLicenseActivity.activityId"
+                   [required]="true" name="activityName" [dataList]="activityList"
+                   [autoCompleteDirective]="'activity'" (sendVal)="filterActivity =$event"
+                   (dataValue)="saveLicenseActivity.activityId = $event?.activityId" class="input-pr">
+                   <mat-icon matSuffix class="icon-search">
+                      <span class="material-icons-outlined">manage_search</span>
+                   </mat-icon>
+                   <mat-autocomplete #activityAuto="matAutocomplete" [displayWith]="displayFnActivity.bind(this)"
+                   (optionSelected)="onSelectionLicenceChange($event)">
+                   @for (opt of filterActivity; track opt) {
+                   <mat-option [value]="opt.activityId">
+                      {{opt.activity}}
+                   </mat-option>
+                   }
+                   </mat-autocomplete>
+                </mat-form-field>
+                <mat-form-field class="col">
+                   <mat-label>
+                      Sub Activity
+                   </mat-label>
+                   <input matInput [matAutocomplete]="subActivityAuto" id="subActivityId"
+                   #subActivityControl="ngModel" matTooltip="Select a sub activity"
+                   [(ngModel)]="saveLicenseActivity.subActivityId" [required]="true" name="subActivityName"
+                   [dataList]="subActivityList" [autoCompleteDirective]="'subActivity'"
+                   (sendVal)="filterSubActivity =$event"
+                   (dataValue)="saveLicenseActivity.subActivityId = $event?.subActivityId" class="input-pr">
+                   <mat-icon matSuffix class="icon-search">
+                      <span class="material-icons-outlined icons-color-000-55">manage_search</span>
+                   </mat-icon>
+                   <mat-autocomplete #subActivityAuto="matAutocomplete"
+                   [displayWith]="displayFnSubActivity.bind(this)">
+                   @for (value of filterSubActivity; track value) {
+                   <mat-option [value]="value.subActivityId">
+                      {{value.subActivity}}
+                   </mat-option>
+                   }
+                   </mat-autocomplete>
+                </mat-form-field>
+             </div>
+          </form>
+       </div>
+       <div class="mt-2">
+          <div class="table-responsive table-col-control">
+             <table class="content-table">
+                <thead>
+                   <tr class="thead-light">
+                      <th scope="col">Serial #</th>
+                      <th scope="col">Activity</th>
+                      <th scope="col">Sub Activity</th>
+                      <th scope="col">Action</th>
+                   </tr>
+                </thead>
+                <tbody class="list">
+                   <tr class="border-bottom">
+                      <td> 1</td>
+                      <td>Robotics</td>
+                      <td>AI</td>
+                      <td>
+                         <div class="d-flex justify-content-between">
+                            <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === false"
+                               mat-button class="btn-small" matTooltip="Edit">
+                            <i class="fa fa-eye"></i>
+                            </button>
+                            <button Xclass="btn btn-primary btn-sm smBtn" *ngIf="disableStatusBased === true"
+                               mat-button class="btn-small" matTooltip="Edit">
+                            <i class="fa fa-edit"></i>
+                            </button>
+                            <button Xclass="btn btn-danger btn-sm smBtn"
+                               [disabled]="disableStatusBased == false" class="btn-small" mat-button
+                               matTooltip="Delete">
+                            <i class="fa fa-trash text-danger"></i>
+                            </button>
+                         </div>
+                      </td>
+                   </tr>
+                </tbody>
+             </table>
+          </div>
+       </div>
     </div>
-</div>
-
-<div>
-
-    <!-- <div class="widget-box"> -->
-   
-   
-        <!-- </div> -->
-</div>
+ </div>
+ <div>
+ </div>

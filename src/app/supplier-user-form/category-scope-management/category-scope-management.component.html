@@ -1,6 +1,6 @@
 <div #target class="me-2">
 
-    <form #categoryAndScopeForm="ngForm" id="categoryAndScope">
+    <form  id="categoryAndScope">
         <div class="widget-box">
             <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
                 Category Information <span *ngIf="NextButtonValidation()"></span>
@@ -8,10 +8,6 @@
                     <button [disabled]="disableStatusBased == false" *ngIf="clearValues()"
                         class="header-level-btn-gray me-2" (click)="clearCategories()" matTooltip="Clear Category"><i
                             class="fa fa-refresh pe-2" aria-hidden="true"></i>Clear</button>
-
-                    <!-- <button class="header-level-btn-blue" (click)="addCategories()" matTooltip="Add Category"
-                [disabled]="disableSave || disableStatusBased == false || !categoryAndScopeForm.valid"><i class="fa fa-floppy-o pe-2" aria-hidden="true"></i> 
-                {{editedCategoryFlag ? 'Update':'Save'}}</button> -->
                 </div>
             </h5>
 
@@ -20,12 +16,7 @@
                 <div class="grid-3cols">
                     <mat-form-field class="col">
                         <mat-label>
-                            @if (!isSubmitted || !parentCategoryControl.errors?.required) {
-                            Parent Category
-                            }
-                            @if (isSubmitted && parentCategoryControl.errors?.required) {
-                            <span class="error-msg">Parent Category is required</span>
-                            }
+                            Category Information
                         </mat-label>
                         <input matInput placeholder="" [matAutocomplete]="parentCategoryAuto" id="parentCategory"
                             #parentCategoryControl="ngModel" required matTooltip="Select a Parent Category"
@@ -47,21 +38,11 @@
                             </mat-option>
                             }
                         </mat-autocomplete>
-                        <!-- @if (parentCategoryControl.errors?.required) {
-                                    <mat-error matTooltip="Select a Parent Category">
-                                        Parent Category is required</mat-error>
-                                    } -->
-
                     </mat-form-field>
 
                     <mat-form-field class="col">
                         <mat-label>
-                            @if (!isSubmitted || !subCategoryControl.errors?.required) {
-                            Sub Category
-                            }
-                            @if (isSubmitted && subCategoryControl.errors?.required) {
-                            <span class="error-msg">Sub Category is required</span>
-                            }
+                            Sub Category 
                         </mat-label>
                         <input matInput placeholder="" [matAutocomplete]="subCategoryAuto" id="subCategory"
                             #subCategoryControl="ngModel" required matTooltip="Select a Sub Category"
@@ -82,20 +63,11 @@
                             </mat-option>
                             }
                         </mat-autocomplete>
-                        <!-- @if (subCategoryControl.errors?.required) {
-                                    <mat-error matTooltip="Select a Sub Category">
-                                        Sub Category is required</mat-error>
-                                    } -->
                     </mat-form-field>
 
                     <mat-form-field class="col">
                         <mat-label>
-                            @if (!isSubmitted || !childCategoryControl.errors?.required) {
-                            Child Category
-                            }
-                            @if (isSubmitted && childCategoryControl.errors?.required) {
-                            <span class="error-msg">Child Category is required</span>
-                            }</mat-label>
+                            Child Category</mat-label>
                         <input matInput placeholder="" [matAutocomplete]="childCategoryAuto" id="childCatId"
                             #childCategoryControl="ngModel" required matTooltip="Select a Child Category"
                             [(ngModel)]="saveCategoryAndScopeVm.childCategoryId" [required]="true" name="childCategory"
@@ -114,10 +86,6 @@
                             </mat-option>
                             }
                         </mat-autocomplete>
-                        <!-- @if (childCategoryControl.errors?.required) {
-                                    <mat-error matTooltip="Select a Child Category">
-                                        Child Category is required</mat-error>
-                                    } -->
                     </mat-form-field>
                 </div>
 
@@ -139,20 +107,11 @@
                                 <mat-option [value]="doc.documentTypeId">{{doc.documentType}}</mat-option>
                                 }
                             </mat-select>
-                            <!-- @if (typeControl.errors?.required) {
-                                            <mat-error matTooltip="Select a Type">
-                                                Type is required</mat-error>
-                                            } -->
                         </mat-form-field>
 
                         <mat-form-field class="col">
                             <mat-label>
-                                @if (!isSubmitted || !optDesc.errors?.required) {
                                 Description
-                                }
-                                @if (isSubmitted && optDesc.errors?.required) {
-                                <span class="error-msg">Description is required</span>
-                                }
                             </mat-label>
                             <textarea matInput matTooltip="Enter the description" [required]="discriptionValidtion"
                                 [(ngModel)]="saveCategoryAndScopeVm.description" #optDesc="ngModel" #noteHint
@@ -250,7 +209,7 @@
         </div>
     </form>
     <div class="widget-box">
-        @if (this.savaAllCategoryAndScopeVm.length > 0) {
+
         <div class="table-responsive table-col-control">
             <table class="content-table">
                 <thead>
@@ -265,36 +224,36 @@
                 </thead>
 
                 <tbody>
-                    @for (category of savaAllCategoryAndScopeVm; track category; let idx = $index) {
+    
 
 
                     <tr>
-                        <td> Category {{idx + 1}}</td>
-                        <td>{{category.parentCategory}}</td>
-                        <td>{{category.subCategory}}</td>
-                        <td>{{category.childCategory}}</td>
-                        <td>{{category.typeName}}</td>
+                        <td>Category 1</td>
+                        <td>Finance</td>
+                        <td>Services</td>
+                        <td>Consulting & Design Development</td>
+                        <td>----</td>
                         <td>
                             <div>
                                 <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small"
-                                    matTooltip="Edit" (click)="editCategoryScope(idx, target)"
+                                    matTooltip="Edit" 
                                     [disabled]="existingNotEditable === false">
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <button Xclass="btn btn-danger btn-sm smBtn"
                                     [disabled]="disableStatusBased == false || existingNotEditable === false"
                                     class="btn-small" mat-button matTooltip="Delete"
-                                    (click)="deleteCategoryScope(idx,category.fileNameId,category.categoryScopeId)">
+                                   >
                                     <i class="fa fa-trash text-danger"></i>
                                 </button>
                             </div>
                         </td>
                     </tr>
 
-                    }
+                    
                 </tbody>
             </table>
         </div>
-        }
+        
     </div>
 </div>
