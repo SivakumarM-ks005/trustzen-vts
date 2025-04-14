@@ -32,11 +32,11 @@
                     <mat-label>
                         Supplier Type
                     </mat-label>
-                    <mat-select [(value)]="selectedSupplierTypeId" formControlName="supplierTypeId"
+                    <mat-select formControlName="supplierTypeId"
                         matTooltip="Select Supplier Type">
                         <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let type of supplierTypes"
-                            [value]="type.supplierTypeId">Contractor</mat-option>
+                        <mat-option 
+                           >Contractor</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="col">
@@ -64,7 +64,7 @@
                     </mat-label>
                     <input matInput [matDatepicker]="establishmentDt" formControlName="establishmentDate"
                         [required]="checkEstablishDateAdmin" matTooltip="Enter the Establishment Date" [max]="maxDate">
-                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                 
                     <mat-datepicker-toggle matIconSuffix [for]="establishmentDt"></mat-datepicker-toggle>
                     <mat-datepicker #establishmentDt></mat-datepicker>
                 </mat-form-field>
@@ -75,7 +75,6 @@
                     <input matInput [matDatepicker]="issuedDate" [min]="supplierForm.get('establishmentDate')?.value"
                         formControlName="issuedDate" [required]="checkIssueDateAdmin" matTooltip="Enter the Issued Date"
                         [max]="maxDate">
-                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="issuedDate"></mat-datepicker-toggle>
                     <mat-datepicker #issuedDate></mat-datepicker>
                 </mat-form-field>
@@ -89,11 +88,11 @@
                     <mat-label>
                         Type Of Ownership
                     </mat-label>
-                    <mat-select [(value)]="selectedOwnershipTypeId" formControlName="typeOfOwnershipId"
+                    <mat-select formControlName="typeOfOwnershipId"
                         matTooltip="Select Type Of Ownership">
                         <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let type of ownershipTypes" [value]="type.typeOwnershipId">
-                            {{ type.typeOwnershipName }}
+                        <mat-option >
+                            Individual
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -110,7 +109,6 @@
                     </mat-label>
                     <input matInput [matDatepicker]="expiryDate" [min]="minDate" formControlName="expiryDate"
                         [required]="checkExpiryDateAdmin" matTooltip="Enter the Expiry Date">
-                    <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
                     <mat-datepicker-toggle matIconSuffix [for]="expiryDate"></mat-datepicker-toggle>
                     <mat-datepicker #expiryDate></mat-datepicker>
                 </mat-form-field>
@@ -144,11 +142,11 @@
                     <mat-label>
                         Role
                     </mat-label>
-                    <mat-select [(value)]="selectedSupplierRoleId" formControlName="managerRole" required
+                    <mat-select formControlName="managerRole" required
                         matTooltip="Select Role">
                         <mat-option value="">-- Please Select --</mat-option>
-                        <mat-option *ngFor="let role of supplierRole"
-                            [value]="role.roleId">{{role.roleName}}</mat-option>
+                        <mat-option
+                            >Business Development</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="col">
