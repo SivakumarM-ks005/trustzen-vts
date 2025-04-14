@@ -1,16 +1,13 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import moment from 'moment';
-
 import { MatTooltip } from '@angular/material/tooltip';
 import { ContractTemplate } from '../../core/models/contract-template.model';
 import { ContractService } from '../../core/services/contract-service';
 import { ContractTemplateComponent } from "../contract-template/contract-template.component";
-import { DialogViewWorkflowComponent } from '../dialog/dialog-view-workflow/dialog-view-workflow.component';
 import { AgGridAngular } from 'ag-grid-angular';
 import { AllCommunityModule, ColDef, GridReadyEvent, ModuleRegistry } from 'ag-grid-community';
 import { ContractTemplateActionMenuComponent } from './contract-template-action-menu/contract-template-action-menu.component';
 import { TemplateIdRenderer } from './contract-template-action-menu/template-id-render.component';
-import { TransactionTypeConstants } from '../../core/models/constants/transaction-type.constant';
 import { themeBalham } from 'ag-grid-community';
 ModuleRegistry.registerModules([AllCommunityModule]);
 @Component({
@@ -26,7 +23,6 @@ export class ContractTemplateListComponent implements OnInit, AfterViewInit, OnD
   editMode: boolean = false;
   approverViewMode: boolean = false;
   viewOnly: boolean = false;
-  allDataCount: number = 0;
   templateData: ContractTemplate[] = new Array<ContractTemplate>();
   loginData: any;
   public theme = themeBalham;
@@ -82,7 +78,6 @@ export class ContractTemplateListComponent implements OnInit, AfterViewInit, OnD
             }
            
           });
-          this.allDataCount = res.length;
           this.templateData = res;
         },
       });
