@@ -356,7 +356,7 @@ export class PQBuyerUserComponent implements OnInit {
   }
 
   saveFinancialandBusiness(isNextClick: boolean = false) {
-    this.financialHealth.saveFinancialandBusiness(isNextClick);
+    // this.financialHealth.saveFinancialandBusiness(isNextClick);
   }
 
   saveBankDetails(isNextClick: boolean = false) {
@@ -400,7 +400,7 @@ export class PQBuyerUserComponent implements OnInit {
           // this.Contact.confirmatioPopUp();
           return;
         case 'financialHealth':
-          this.financialHealth.confirmatioPopUp();
+          // this.financialHealth.confirmatioPopUp();
           return;
         case 'bankDetails':
           this.Bank.confirmatioPopUp();

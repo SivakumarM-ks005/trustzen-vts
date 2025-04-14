@@ -429,7 +429,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   saveFinancialandBusiness(isNextClick: boolean = false) {
-    this.financialHealth.saveFinancialandBusiness(isNextClick);
+    // this.financialHealth.saveFinancialandBusiness(isNextClick);
   }
 
   saveBankDetails(isNextClick: boolean = false) {
@@ -483,7 +483,7 @@ export class SupplierUserFormComponent implements OnInit {
           // this.Contact.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'financialHealth':
-          this.financialHealth.confirmatioPopUp(undefined, checkClickPrevious);
+          // this.financialHealth.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'bankDetails':
           this.Bank.confirmatioPopUp(undefined, checkClickPrevious);
