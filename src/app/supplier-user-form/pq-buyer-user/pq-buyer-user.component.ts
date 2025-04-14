@@ -384,7 +384,7 @@ export class PQBuyerUserComponent implements OnInit {
     this.pqquestionaries.PQquestionnaries(isNextClick);
   }
   saveFinalSubmission() {
-    this.FinalSubmission.SaveFinalSubmission();
+    // this.FinalSubmission.SaveFinalSubmission();
   }
 
   goto(buttonControlFlag: boolean, comp: string) {

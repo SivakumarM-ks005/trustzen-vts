@@ -461,7 +461,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   saveFinalSubmission() {
-    this.FinalSubmission.SaveFinalSubmission();
+    // this.FinalSubmission.SaveFinalSubmission();
   }
 
   getCommonPageName(data: string) {
