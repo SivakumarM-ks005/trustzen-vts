@@ -3,7 +3,7 @@
      Supplier Contact Information <span *ngIf="NextButtonValidation()"></span>
      <div class="w-25 justify-content-end text-right d-flex">
         <button class="header-level-btn-gray me-2" [disabled]="disableStatusBased == false"
-        *ngIf="SecondarycontactDetails[0]?.firstContactFlag !== true && ClearValues()" (click)="resetForm()">
+        >
         <i class="fa fa-refresh pe-2" aria-hidden="true"></i>Clear</button>
      </div>
   </h5>
@@ -15,9 +15,9 @@
                  Salutation
               </mat-label>
               <mat-select formControlName="salutationId" required matTooltip="Select Salutation"
-                 (selectionChange)="enablePrimaryContactButton()">
+                >
                  <mat-option value="">-- Please Select --</mat-option>
-                 <mat-option *ngFor="let salutation of suppliersalutation" [value]="salutation.salutationId">
+                 <mat-option>
                  Mr.
                  </mat-option>
               </mat-select>
@@ -27,7 +27,7 @@
                  First Name
               </mat-label>
               <input matInput appOnlyAllowedSymbol matTooltip="Enter the first name" formControlName="firstName" required
-                 (change)="enablePrimaryContactButton()">
+                 >
            </mat-form-field>
            <mat-form-field class="col">
               <mat-label>Middle Name</mat-label>
@@ -38,23 +38,23 @@
                  Last Name
               </mat-label>
               <input matInput appOnlyAllowedSymbol matTooltip="Enter the last name" formControlName="lastName" required
-                 (change)="enablePrimaryContactButton()">
+                 >
            </mat-form-field>
            <mat-form-field class="col">
               <mat-label>
                  Job Title
               </mat-label>
               <input matInput matTooltip="Enter the job title" formControlName="jobTitle" required
-                 (change)="enablePrimaryContactButton()">
+                 >
            </mat-form-field>
            <mat-form-field class="col">
               <mat-label>
                  Role
               </mat-label>
               <mat-select formControlName="roleId" required matTooltip="Select Role"
-                 (selectionChange)="enablePrimaryContactButton()">
+                 >
                  <mat-option value="">-- Please Select --</mat-option>
-                 <mat-option *ngFor="let role of supplierRole" [value]="role.roleId">
+                 <mat-option>
                  Co-ordinator
                  </mat-option>
               </mat-select>
@@ -63,21 +63,21 @@
               <mat-label>
                  Email
               </mat-label>
-              <input matInput matTooltip="Enter the email" formControlName="email" (change)="enablePrimaryContactButton()">
+              <input matInput matTooltip="Enter the email" formControlName="email" >
            </mat-form-field>
            <mat-form-field class="col">
               <mat-label>Country Code</mat-label>
-              <mat-select formControlName="phoneCode" (selectionChange)="onCountryCodeChange($event.value, contactForm)"
+              <mat-select formControlName="phoneCode" 
                  matTooltip="Select Country Code">
                  <mat-option value="">-- Please Select --</mat-option>
-                 <mat-option *ngFor="let country of supplierPhoneCode" [value]="country.landNumberCode">
+                 <mat-option >
                  India
                  </mat-option>
               </mat-select>
            </mat-form-field>
            <mat-form-field class="col">
               <mat-label>Work Phone #</mat-label>
-              <input matInput matTooltip="Enter the work phone #" (keypress)="allowOnlyNumbers($event)"
+              <input matInput matTooltip="Enter the work phone #" 
                  formControlName="phoneNumber" maxlength="10">
            </mat-form-field>
            <mat-form-field class="col">
@@ -85,11 +85,11 @@
                  Country Code
               </mat-label>
               <mat-select formControlName="mobileCode" required
-              (selectionChange)="onCountryMobilePhoneChange($event.value, contactForm)" matTooltip="Select Country Code"
-              (selectionChange)="enablePrimaryContactButton()">
+             matTooltip="Select Country Code"
+              >
               <mat-option value="">-- Please Select --</mat-option>
-              <mat-option *ngFor="let country of supplierPhoneCode" [value]="country.mobileCode">
-              {{ country.countryCode | uppercase}} +{{ country.mobileCode }}
+              <mat-option>
+              +91 00
               </mat-option>
               </mat-select>
            </mat-form-field>
@@ -97,8 +97,8 @@
               <mat-label>
                  Mobile Phone #
               </mat-label>
-              <input matInput matTooltip="Enter the mobile phone #" (keypress)="allowOnlyNumbers($event)"
-              formControlName="mobileNumber" required maxlength="10" (change)="enablePrimaryContactButton()">
+              <input matInput matTooltip="Enter the mobile phone #" 
+              formControlName="mobileNumber" required maxlength="10" >
            </mat-form-field>
            <mat-checkbox class="mt-3" formControlName="isPrimaryContact">Primary Contact</mat-checkbox>
         </div>
@@ -121,7 +121,7 @@
      </thead>
      <tbody class="list" *ngFor="let contact of SecondarycontactDetails; let i = index">
         <tr *ngIf="!contact?.firstContactFlag">
-           <td>Contact {{i + 1}}</td>
+           <td>Contact 1</td>
            <td>
               <mat-checkbox *ngIf="contact.isPrimaryContact" [checked]="contact.isPrimaryContact"
               [disabled]="contact.isPrimaryContact">
@@ -133,9 +133,9 @@
            <td>9941702339</td>
            <td>
               <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small"
-                 (click)="EditContact(target,contact , i)" matTooltip="Edit"><i class="fa fa-edit"></i>
+                 matTooltip="Edit"><i class="fa fa-edit"></i>
               </button>
-              <button [disabled]="editFlag == true" (click)="deletePopUp(i)" *ngIf="!contact.isPrimaryContact" mat-button
+              <button [disabled]="editFlag == true" mat-button
               Xclass="btn btn-danger btn-sm smBtn" class="btn-small" matTooltip="Delete">
               <i class="fa fa-trash text-danger"></i>
               </button>

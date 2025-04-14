@@ -425,7 +425,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   saveContactDetails(isNextClick: boolean = false) {
-    this.Contact.saveUpdateContact(isNextClick);
+    // this.Contact.saveUpdateContact(isNextClick);
   }
 
   saveFinancialandBusiness(isNextClick: boolean = false) {
@@ -480,7 +480,7 @@ export class SupplierUserFormComponent implements OnInit {
           this.addressDetails.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'contactDetails':
-          this.Contact.confirmatioPopUp(undefined, checkClickPrevious);
+          // this.Contact.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'financialHealth':
           this.financialHealth.confirmatioPopUp(undefined, checkClickPrevious);
