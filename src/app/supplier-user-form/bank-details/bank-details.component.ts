@@ -1,7 +1,6 @@
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonService } from '../../core/services/common.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AdminService } from '../../core/services/admin/admin.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
@@ -28,13 +27,8 @@ import { PreQualificationProcessComponent } from '@app/pre-qualification-process
 export class BankDetailsComponent implements OnInit {
   @Input() supplierId: number;
   BankForm: FormGroup;
-  bankDetails: SupplierBank[] = [];
   finalSaveBankData: any[] = [];
   editFlag: boolean = false;
-  BankCountryList: BankCountrylist[] = [];
-  BankStateList: BankState[] = [];
-  BankCityList: BankCity[] = [];
-  BankCurrencyList: BankCurrency[] = [];
   isOtherCitySelected: boolean = false;
   userData: any | null;
   previousTabClick: boolean = false;
@@ -59,10 +53,6 @@ export class BankDetailsComponent implements OnInit {
   SwiftManantory: any;
   BsbManantory: any;
   RouteManantory: any;
-  BankCityListForCorrespondanceBank: BankCity[] = [];
-  BankStateListForCorrespondanceBank: BankState[] = [];
-  BankCountryListForCorrespondanceBank: BankCountrylist[] = [];
-  BankCurrencyListForCorrespondanceBank: BankCurrency[] = [];
   isSubmitted = false;
   @Output() NextFlag = new EventEmitter<boolean>();
   profileStatus: any;
@@ -187,52 +177,13 @@ export class BankDetailsComponent implements OnInit {
     this.checkCorresBank(bank?.correspondentBankObject);
   }
 
-  // checkInvalidFields() {
-  //   const controls = this.BankForm.controls;
-
-  //   // Loop through each form control to check for missing or invalid fields
-  //   for (const controlName in controls) {
-  //     const control = controls[controlName];
-
-  //     // If control is invalid and dirty (i.e., touched by the user)
-  //     if (control.invalid && (control.value === null || control.value === undefined || control.value === '')) {
-  //       const controlLabel = this.getControlLabel(controlName); // Optionally get the control's label for better messaging
-  //       this.adminService.showMessage(`Field ${controlLabel} is required.`);
-  //     }
-  //   }
-  // }
-
-  // getControlLabel(controlName: string): string {
-  //   // Explicitly define the type of the object
-  //   const controlLabels: { [key: string]: string } = {
-  //     bankName: 'Bank Name',
-  //     branch: 'Branch',
-  //     currencyId: 'Currency',
-  //     countryId: 'Country',
-  //     stateId: 'State',
-  //     cityId: 'City',
-  //     accountNumber: 'Account Number',
-  //     swiftCodeBIC: 'Swift Code / BIC',
-  //     iban: 'IBAN',
-  //     bsb : 'BSB',
-  //     routing: 'Routing',
-
-  //     // Add more field names as necessary
-  //   };
-
-  //   return controlLabels[controlName] || controlName; // Default to the control name if it's not found
-  // }
-
   updateDefaultBankStatus() {
     const defaultBankControl = this.BankForm.get('defaultBank');
-    if (this.bankDetails.length === 0) {
-      defaultBankControl?.setValue(true);
-    }
+
   }
   GetSupplierBank() {
     this.loginservice.GetSupplierBank(this.supplierId).subscribe(response => {
       if (response.length !== 0) {
-        this.bankDetails = response;
       }
       this.tabValidCheckEmit.emit();
       // this.updateDefaultBankStatus();
@@ -241,7 +192,6 @@ export class BankDetailsComponent implements OnInit {
   getCountry(): void {
     this.loginservice.getCountry().subscribe(data => {
       if (data) {
-        this.BankCountryList = data;
       }
     });
   }
@@ -249,23 +199,18 @@ export class BankDetailsComponent implements OnInit {
   getCurrency(): void {
     this.loginservice.GetCurrencyDetails().subscribe(data => {
       if (data) {
-        this.BankCurrencyList = data;
       }
     });
   }
   getStates(countryId: number): void {
-    this.BankStateList = [];
     this.loginservice.GetCountryBaseaState(countryId).subscribe((data) => {
-      this.BankStateList = data;
 
 
     });
   }
 
   getCities(stateId: number): void {
-    this.BankCityList = [];
     this.loginservice.GetStatebaseCity(stateId).subscribe((data) => {
-      this.BankCityList = data;
 
     });
   }
@@ -286,398 +231,7 @@ export class BankDetailsComponent implements OnInit {
         moduleName: 'Supplier Bank'
       },
     });
-    cancelDialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        
-        const combinedData = {
-          ...this.BankForm.value
-        };
-        this.finalSaveBankData = [combinedData];
-        if (this.editFlag) {
-          const index = this.bankDetails.findIndex(b => b.bankId === this.BankForm.value.bankId);
-          if (index !== -1) {
-            this.bankDetails[index] = { ...this.BankForm.value };
-            // debugger
-            this.BankCountryList.forEach(ele => {
-              if (this.bankDetails[index].countryId == ele.countryId) {
-                this.bankDetails[index].country = ele.countryName;
-              }
-            });
-            this.BankCityList.forEach(ele => {
-              if (this.bankDetails[index].cityId == ele.cityId) {
-                this.bankDetails[index].city = ele.cityName;
-              }
-            });
-            this.BankStateList.forEach(ele => {
-              if (this.bankDetails[index].stateId == ele.stateId) {
-                this.bankDetails[index].state = ele.stateName;
-              }
-            });
-            this.BankCurrencyList.forEach(ele => {
-              if (this.bankDetails[index].currencyId == ele.currencyId) {
-                this.bankDetails[index].currency = ele.currencyName;
-              }
-            });
 
-            //Correspondance details functionality
-            if (this.bankDetails[index]?.correspondentBank) {
-              //get state details
-              this.BankStateListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.stateId == ele.stateId) {
-                  this.bankDetails[index].correspondentBankObject.state = ele.stateName;
-                }
-              })
-
-              //get city details 
-              this.BankCityListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.cityId == ele.cityId) {
-                  this.bankDetails[index].correspondentBankObject.city = ele.cityName;
-                }
-              });
-
-              this.BankCountryListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.countryId == ele.countryId) {
-                  this.bankDetails[index].correspondentBankObject.country = ele.countryName;
-                }
-              });
-              this.BankCurrencyListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.currencyId == ele.currencyId) {
-                  this.bankDetails[index].correspondentBankObject.currency = ele.currencyName;
-                }
-              });
-            }
-
-            if (this.finalSaveBankData.length > 0) {
-              this.saveBankDetails(this.finalSaveBankData, false);
-            }
-          }
-        } else {
-          this.BankStateList.forEach(ele => {
-            if (combinedData.stateId == ele.stateId) {
-              combinedData.state = ele.stateName;
-            }
-          })
-          this.BankCityList.forEach(ele => {
-            if (combinedData.cityId == ele.cityId) {
-              combinedData.city = ele.cityName;
-            }
-          });
-          this.BankCountryList.forEach(ele => {
-            if (combinedData.countryId == ele.countryId) {
-              combinedData.country = ele.countryName;
-            }
-          });
-          this.BankCurrencyList.forEach(ele => {
-            if (combinedData.currencyId == ele.currencyId) {
-              combinedData.currency = ele.currencyName;
-            }
-          });
-
-          //Correspondance details functionality
-          if (combinedData?.correspondentBank) {
-            //get state details
-            this.BankStateListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.stateId == ele.stateId) {
-                combinedData.correspondentBankObject.state = ele.stateName;
-              }
-            })
-
-            //get city details 
-            this.BankCityListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.cityId == ele.cityId) {
-                combinedData.correspondentBankObject.city = ele.cityName;
-              }
-            });
-
-            this.BankCountryListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.countryId == ele.countryId) {
-                combinedData.correspondentBankObject.country = ele.countryName;
-              }
-            });
-            this.BankCurrencyListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.currencyId == ele.currencyId) {
-                combinedData.correspondentBankObject.currency = ele.currencyName;
-              }
-            });
-          }
-
-          this.bankDetails.push(combinedData);
-          if (this.finalSaveBankData.length > 0) {
-            this.saveBankDetails(this.finalSaveBankData, false);
-          }
-        }
-        this.nextTabEmit.emit(6);
-      } else {
-        const combinedData = {
-          ...this.BankForm.value
-        };
-        this.finalSaveBankData = [combinedData];
-        if (this.editFlag) {
-          const index = this.bankDetails.findIndex(b => b.bankId === this.BankForm.value.bankId);
-          if (index !== -1) {
-            this.bankDetails[index] = { ...this.BankForm.value };
-            // debugger
-            this.BankCountryList.forEach(ele => {
-              if (this.bankDetails[index].countryId == ele.countryId) {
-                this.bankDetails[index].country = ele.countryName;
-              }
-            });
-            this.BankCityList.forEach(ele => {
-              if (this.bankDetails[index].cityId == ele.cityId) {
-                this.bankDetails[index].city = ele.cityName;
-              }
-            });
-            this.BankStateList.forEach(ele => {
-              if (this.bankDetails[index].stateId == ele.stateId) {
-                this.bankDetails[index].state = ele.stateName;
-              }
-            });
-            this.BankCurrencyList.forEach(ele => {
-              if (this.bankDetails[index].currencyId == ele.currencyId) {
-                this.bankDetails[index].currency = ele.currencyName;
-              }
-            });
-
-            //Correspondance details functionality
-            if (this.bankDetails[index]?.correspondentBank) {
-              //get state details
-              this.BankStateListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.stateId == ele.stateId) {
-                  this.bankDetails[index].correspondentBankObject.state = ele.stateName;
-                }
-              })
-
-              //get city details 
-              this.BankCityListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.cityId == ele.cityId) {
-                  this.bankDetails[index].correspondentBankObject.city = ele.cityName;
-                }
-              });
-
-              this.BankCountryListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.countryId == ele.countryId) {
-                  this.bankDetails[index].correspondentBankObject.country = ele.countryName;
-                }
-              });
-              this.BankCurrencyListForCorrespondanceBank.forEach(ele => {
-                if (this.bankDetails[index]?.correspondentBankObject?.currencyId == ele.currencyId) {
-                  this.bankDetails[index].correspondentBankObject.currency = ele.currencyName;
-                }
-              });
-            }
-
-            if (this.finalSaveBankData.length > 0) {
-              this.saveBankDetails(this.finalSaveBankData, false);
-            }
-          }
-        } else {
-          this.BankStateList.forEach(ele => {
-            if (combinedData.stateId == ele.stateId) {
-              combinedData.state = ele.stateName;
-            }
-          })
-          this.BankCityList.forEach(ele => {
-            if (combinedData.cityId == ele.cityId) {
-              combinedData.city = ele.cityName;
-            }
-          });
-          this.BankCountryList.forEach(ele => {
-            if (combinedData.countryId == ele.countryId) {
-              combinedData.country = ele.countryName;
-            }
-          });
-          this.BankCurrencyList.forEach(ele => {
-            if (combinedData.currencyId == ele.currencyId) {
-              combinedData.currency = ele.currencyName;
-            }
-          });
-
-          //Correspondance details functionality
-          if (combinedData?.correspondentBank) {
-            //get state details
-            this.BankStateListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.stateId == ele.stateId) {
-                combinedData.correspondentBankObject.state = ele.stateName;
-              }
-            })
-
-            //get city details 
-            this.BankCityListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.cityId == ele.cityId) {
-                combinedData.correspondentBankObject.city = ele.cityName;
-              }
-            });
-
-            this.BankCountryListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.countryId == ele.countryId) {
-                combinedData.correspondentBankObject.country = ele.countryName;
-              }
-            });
-            this.BankCurrencyListForCorrespondanceBank.forEach(ele => {
-              if (combinedData?.correspondentBankObject?.currencyId == ele.currencyId) {
-                combinedData.correspondentBankObject.currency = ele.currencyName;
-              }
-            });
-          }
-
-          this.bankDetails.push(combinedData);
-          if (this.finalSaveBankData.length > 0) {
-            this.saveBankDetails(this.finalSaveBankData, false);
-          }
-        }
-      }
-    });
-
-  }
-
-  AddUpdateBank(isNextClick: boolean = false) {
-    this.isSubmitted = true;
-    if (this.bankDetails.length > 0) {
-      this.defaultBank = this.bankDetails.some((item: any) => item.defaultBank === true);
-    }
-
-    if (!isNextClick && this.profileStatus === 'manageprofile') {
-      this.preQualification();
-    }else{
-
-    if (isNextClick && this.bankDetails?.length !== 0 && this.editFlag && this.BankForm.dirty && this.BankForm.valid) {
-      this.confirmatioPopUp(isNextClick);
-    } else if (!isNextClick && this.BankForm.valid) {
-      const combinedData = {
-        ...this.BankForm.value
-      };
-      this.finalSaveBankData = [combinedData];
-      if (this.editFlag) {
-        const index = this.bankDetails.findIndex(b => b.bankId === this.BankForm.value.bankId);
-        if (index !== -1) {
-          this.bankDetails[index] = { ...this.BankForm.value };
-          // debugger
-          this.BankCountryList.forEach(ele => {
-            if (this.bankDetails[index].countryId == ele.countryId) {
-              this.bankDetails[index].country = ele.countryName;
-            }
-          });
-          this.BankCityList.forEach(ele => {
-            if (this.bankDetails[index].cityId == ele.cityId) {
-              this.bankDetails[index].city = ele.cityName;
-            }
-          });
-          this.BankStateList.forEach(ele => {
-            if (this.bankDetails[index].stateId == ele.stateId) {
-              this.bankDetails[index].state = ele.stateName;
-            }
-          });
-          this.BankCurrencyList.forEach(ele => {
-            if (this.bankDetails[index].currencyId == ele.currencyId) {
-              this.bankDetails[index].currency = ele.currencyName;
-            }
-          });
-
-          //Correspondance details functionality
-          if (this.bankDetails[index]?.correspondentBank) {
-            //get state details
-            this.BankStateListForCorrespondanceBank.forEach(ele => {
-              if (this.bankDetails[index]?.correspondentBankObject?.stateId == ele.stateId) {
-                this.bankDetails[index].correspondentBankObject.state = ele.stateName;
-              }
-            })
-
-            //get city details 
-            this.BankCityListForCorrespondanceBank.forEach(ele => {
-              if (this.bankDetails[index]?.correspondentBankObject?.cityId == ele.cityId) {
-                this.bankDetails[index].correspondentBankObject.city = ele.cityName;
-              }
-            });
-
-            this.BankCountryListForCorrespondanceBank.forEach(ele => {
-              if (this.bankDetails[index]?.correspondentBankObject?.countryId == ele.countryId) {
-                this.bankDetails[index].correspondentBankObject.country = ele.countryName;
-              }
-            });
-            this.BankCurrencyListForCorrespondanceBank.forEach(ele => {
-              if (this.bankDetails[index]?.correspondentBankObject?.currencyId == ele.currencyId) {
-                this.bankDetails[index].correspondentBankObject.currency = ele.currencyName;
-              }
-            });
-          }
-
-          if (this.finalSaveBankData.length > 0) {
-            this.saveBankDetails(this.finalSaveBankData, isNextClick);
-          }
-        }
-      } else {
-        this.BankStateList.forEach(ele => {
-          if (combinedData.stateId == ele.stateId) {
-            combinedData.state = ele.stateName;
-          }
-        })
-        this.BankCityList.forEach(ele => {
-          if (combinedData.cityId == ele.cityId) {
-            combinedData.city = ele.cityName;
-          }
-        });
-        this.BankCountryList.forEach(ele => {
-          if (combinedData.countryId == ele.countryId) {
-            combinedData.country = ele.countryName;
-          }
-        });
-        this.BankCurrencyList.forEach(ele => {
-          if (combinedData.currencyId == ele.currencyId) {
-            combinedData.currency = ele.currencyName;
-          }
-        });
-
-        //Correspondance details functionality
-        if (combinedData?.correspondentBank) {
-          //get state details
-          this.BankStateListForCorrespondanceBank.forEach(ele => {
-            if (combinedData?.correspondentBankObject?.stateId == ele.stateId) {
-              combinedData.correspondentBankObject.state = ele.stateName;
-            }
-          })
-
-          //get city details 
-          this.BankCityListForCorrespondanceBank.forEach(ele => {
-            if (combinedData?.correspondentBankObject?.cityId == ele.cityId) {
-              combinedData.correspondentBankObject.city = ele.cityName;
-            }
-          });
-
-          this.BankCountryListForCorrespondanceBank.forEach(ele => {
-            if (combinedData?.correspondentBankObject?.countryId == ele.countryId) {
-              combinedData.correspondentBankObject.country = ele.countryName;
-            }
-          });
-          this.BankCurrencyListForCorrespondanceBank.forEach(ele => {
-            if (combinedData?.correspondentBankObject?.currencyId == ele.currencyId) {
-              combinedData.correspondentBankObject.currency = ele.currencyName;
-            }
-          });
-        }
-
-        this.bankDetails.push(combinedData);
-        if (this.finalSaveBankData.length > 0) {
-          this.saveBankDetails(this.finalSaveBankData, isNextClick);
-        }
-      }
-    } else if (isNextClick && !this.BankForm.valid) {
-      if (this.bankDetails?.length !== 0) {
-        this.nextTabEmit.emit();
-      } else {
-        this.isSubmitted = true;
-        this.BankForm.markAllAsTouched();
-      }
-      return;
-    } else {
-      if (this.BankForm.valid) {
-        if (isNextClick) {
-          this.adminService.showMessage(`Complete all mandatory fields and click 'Save as Draft' to proceed.`);
-        } else {
-          this.adminService.showMessage('Please fill in all mandatory fields before save');
-        }
-      }
-    }
-  }
   }
 
   ClearValues(): boolean {
@@ -691,33 +245,8 @@ export class BankDetailsComponent implements OnInit {
   }
 
 
-  removeBank(i: number) {
-    const bank = this.bankDetails[i]
-    const bankId = bank.bankId;
-    if (bankId !== 0 && bankId !== null && bankId !== undefined) {
-      this.supplierUserFormService.deleteBankDetails(bankId, this.userData.supplierId, this.userData.userId).subscribe((res: any) => {
-        if (res.success) {
-          this.bankDetails.splice(i, 1);
-          this.adminService.showMessage(res.message);
-          this.GetSupplierBank();
-        } else {
-          this.adminService.showMessage(res.message);
-        }
-      })
-    }
-    else {
-      this.bankDetails.splice(i, 1);
-    }
 
-  }
 
-  NextButtonValidation() {
-    if (this.bankDetails?.length !== 0) {
-      this.NextFlag.emit(true);
-    } else {
-      this.NextFlag.emit(false);
-    }
-  }
 
   EditBank(data: any, i: number, el: HTMLElement) {
     el.scrollIntoView();
@@ -734,150 +263,10 @@ export class BankDetailsComponent implements OnInit {
 
     });
   }
-  saveBankDetails(bankDetails: any, isNextClick: boolean = false) {
-    if (this.bankDetails.length > 0) {
-      this.defaultBank = this.bankDetails.some((item: any) => item.defaultBank === true);
-    }
-    this.BankForm.markAllAsTouched();
-    if (bankDetails.length > 0) {
-      bankDetails[0].supplierId = this.supplierId;
-      if (bankDetails[0]?.correspondentBank) {
-        bankDetails[0].correspondentBankObject.supplierId = this.supplierId;
-      }
-      bankDetails[0].loggedIn = this.userData.userId;
-      this.loginservice.SaveBankDetails(bankDetails).subscribe((response) => {
-        if (response.success) {
-          this.BankForm.clearValidators();
-          if (this.editFlag) {
-            this.adminService.showMessage('Data on the form has been updated successfully');
-          } else {
-            this.adminService.showMessage('Data on the form has been saved successfully');
-          }
-          this.BankForm.reset();
-          this.editFlag = false;
-          this.GetSupplierBank();
-          if (isNextClick) {
-            if (this.bankDetails.length > 0 && this.defaultBank == false) {
-              this.adminService.showMessage('Please select at least one bank as the default bank to proceed.');
-              return;
-            } else {
-              setTimeout(() => {
-                this.nextTabEmit.emit();
-              }, 1000);
-            }
-          }
-          if (this.previousTabClick) {
-            if (this.bankDetails.length > 0 && this.defaultBank == false) {
-              this.adminService.showMessage('Please select at least one bank as the default bank to proceed.');
-              return;
-            } else {
-              setTimeout(() => {
-                this.dialogResult.emit(true);
-              }, 1000);
-            }
-          }
-          this.finalSaveBankData = [];
-        }
-        else {
-          this.adminService.showMessage(response.message);
-        }
-      });
-    } else {
-      this.adminService.showMessage('Please fill in all mandatory fields before save!.');
-    }
-  }
 
-  confirmatioPopUp(isNextClick: boolean = false, isPreviousClick: boolean = false): void {
-    if (this.bankDetails.length > 0) {
-      this.defaultBank = this.bankDetails.some((item: any) => item.defaultBank === true);
-    }
-    const financialFields = Object.values(this.BankForm.controls).some(control => control.dirty || control.value);
-    if (financialFields) {
-      const cancelDialogRef = this.dialog.open(ConfirmationDialogComponent,
-        {
-          disableClose: false,
-          hasBackdrop: true,
-          autoFocus: true,
-          width: '35%',
-          height: '40%',
-          position: {
-            top: 'calc(10vw + 20px)',
-          },
-          panelClass: 'confirmdialog',
-          data: {
-            parentDialogRef: this.commonService.dataLostModalConfig,  // Passing the parent dialog reference
-            checkBtnValue: isNextClick ? "next" : isPreviousClick ? "previous" : ""
-          },
-        })
-      // this.commonService.dataLostModalConfig);
-      cancelDialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          if (isNextClick) {
-            // this.BankForm.markAllAsTouched();
-            // this.AddUpdateBank();
-            this.nextTabEmit.emit();
-            return;
-          } else {
-            this.previousTabClick = true;
-            this.dialogResult.emit(true);
-            // this.AddUpdateBank();
-          }
-        } else {
-          //New condition for previous No Btn
-          if (isPreviousClick) {
-            return;
-          }
-          if (isNextClick) {
-            return;
-            // if (this.bankDetails.length > 0 && this.defaultBank == false) {
-            //   this.adminService.showMessage('Please select at least one bank as the default bank to proceed.');
-            //   return;
-            // } else {
-            //   this.nextTabEmit.emit();
-            // }
-          }
-          else {
-            // if (this.bankDetails.length > 0 && this.defaultBank == false) {
-            //   this.adminService.showMessage('Please select at least one bank as the default bank to proceed.');
-            //   return;
-            // } else {
-            this.dialogResult.emit(true);
-            // }
-          }
-        }
-      });
-    } else {
-      if (isNextClick) {
-        if (this.bankDetails.length > 0 && this.defaultBank == false) {
-          this.adminService.showMessage('Please select at least one bank as the default bank to proceed.');
-          return;
-        } else if (this.bankDetails.length > 0) {
-          this.nextTabEmit.emit();
-        } else {
-          this.adminService.showMessage(`Complete all mandatory fields and click 'Save as Draft' to proceed.`);
-        }
-      }
-      else {
-        // if (this.bankDetails.length > 0 && this.defaultBank == false) {
-        //   this.adminService.showMessage('Please select at least one bank as the default bank to proceed.');
-        //   return;
-        // } else if (this.bankDetails.length == 0) {
-        //   this.adminService.showMessage(`Complete all mandatory fields and click 'Save as Draft' to proceed.`);
-        // } else {
-        this.BankForm.reset();
-        this.dialogResult.emit(true);
-        // }
-      }
-    }
-  }
 
-  checkbank() {
-    this.bankDetails?.forEach(data => {
-      if (this.editFlag && !this.BankForm.get('defaultBank')?.value && data?.defaultBank && this.BankForm.get('accountNumber')?.value === data?.accountNumber) {
-        this.adminService.showMessage('Please select at least one address as Default Bank to proceed.');
-      }
-    })
-  }
+
+
 
   resetForm() {
     this.BankForm.removeControl('correspondentBankObject');
@@ -896,7 +285,7 @@ export class BankDetailsComponent implements OnInit {
     const cancelDialogRef = this.dialog.open(ConfirmationDialogComponent, this.commonService.deletetModalConfig);
     cancelDialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.removeBank(ind);
+
       } else {
         this.dialog.closeAll();
       }
@@ -911,13 +300,9 @@ export class BankDetailsComponent implements OnInit {
       const defaultBankControl = this.BankForm.get('defaultBank');
 
       if (bankFields) {
-        if (this.bankDetails.length === 0) {
-          defaultBankControl?.setValue(true);
-        }
+
       } else {
-        if (this.bankDetails.length === 0) {
-          defaultBankControl?.setValue(false);
-        }
+
       }
     }
   }
@@ -997,7 +382,6 @@ export class BankDetailsComponent implements OnInit {
   getCountryForCorrespondanceBank(): void {
     this.loginservice.getCountry().subscribe(data => {
       if (data) {
-        this.BankCountryListForCorrespondanceBank = data;
       }
     });
   }
@@ -1005,93 +389,19 @@ export class BankDetailsComponent implements OnInit {
   getCurrencyForCorrespondanceBank(): void {
     this.loginservice.GetCurrencyDetails().subscribe(data => {
       if (data) {
-        this.BankCurrencyListForCorrespondanceBank = data;
       }
     });
   }
 
   getStatesForCorrespondanceBank(countryId: number): void {
-    this.BankStateListForCorrespondanceBank = [];
     this.loginservice.GetCountryBaseaState(countryId).subscribe((data) => {
-      this.BankStateListForCorrespondanceBank = data;
     });
   }
 
   getCitiesForCorrespondanceBank(stateId: number): void {
-    this.BankCityListForCorrespondanceBank = [];
     this.loginservice.GetStatebaseCity(stateId).subscribe((data) => {
-      this.BankCityListForCorrespondanceBank = data;
     });
   }
 }
 
-interface BankCountry {
-  countryId: number;
-  countryName: string;
 
-}
-interface BankCountrylist {
-  countryId: number;
-  countryName: string;
-
-}
-
-interface BankState {
-  stateId: number;
-  stateName: string;
-}
-
-interface BankCity {
-  cityId: number;
-  cityName: string;
-}
-
-interface BankCurrency {
-  currencyId: number;
-  currencyName: string;
-  countryId: number;
-}
-export class SupplierBank {
-  bankId: number = 0;
-  supplierId: number = 0;
-  loggedIn: number = 0;
-  bankName: string = '';
-  branch: string = '';
-  currencyId: number = 0;
-  currency: string = '';
-  countryId: number = 0;
-  country: string = '';
-  stateId: number = 0;
-  state: string = '';
-  cityId: number = 0;
-  city: string = '';
-  accountNumber: string = '';
-  swiftCodeBIC: string = '';
-  iban: string = '';
-  bsb: string = '';
-  routing: string = '';
-  ifscCode: string = '';
-  correspondentBank: boolean = false;
-  defaultBank: boolean = false;
-  correspondentBankObject = {
-    bankId: 0,
-    supplierId: 0,
-    loggedIn: 0,
-    bankName: '',
-    branch: '',
-    currencyId: 0,
-    currency: '',
-    countryId: 0,
-    country: '',
-    stateId: 0,
-    state: '',
-    cityId: 0,
-    city: '',
-    accountNumber: '',
-    swiftCodeBIC: '',
-    iban: '',
-    bsb: '',
-    routing: '',
-    ifscCode: '',
-  }
-}

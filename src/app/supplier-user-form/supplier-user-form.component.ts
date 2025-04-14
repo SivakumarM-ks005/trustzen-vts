@@ -433,7 +433,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   saveBankDetails(isNextClick: boolean = false) {
-    this.Bank.AddUpdateBank(isNextClick);
+    // this.Bank.AddUpdateBank(isNextClick);
   }
 
   saveCategoryAndScope(isNextClick: boolean = false) {
@@ -486,7 +486,7 @@ export class SupplierUserFormComponent implements OnInit {
           // this.financialHealth.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'bankDetails':
-          this.Bank.confirmatioPopUp(undefined, checkClickPrevious);
+          // this.Bank.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'pqquestionaries':
           this.pqquestionaries.confirmatioPopUp(undefined, checkClickPrevious);

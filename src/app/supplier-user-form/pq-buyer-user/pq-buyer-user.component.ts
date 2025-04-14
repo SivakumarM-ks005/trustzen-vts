@@ -360,7 +360,7 @@ export class PQBuyerUserComponent implements OnInit {
   }
 
   saveBankDetails(isNextClick: boolean = false) {
-    this.Bank.AddUpdateBank(isNextClick);
+    // this.Bank.AddUpdateBank(isNextClick);
   }
 
   saveCategoryAndScope(isNextClick: boolean = false) {
@@ -403,7 +403,7 @@ export class PQBuyerUserComponent implements OnInit {
           // this.financialHealth.confirmatioPopUp();
           return;
         case 'bankDetails':
-          this.Bank.confirmatioPopUp();
+          // this.Bank.confirmatioPopUp();
           return;
         case 'categoryAndScope':
           this.childCategoryScope.confirmatioPopUp();
