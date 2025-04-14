@@ -1,242 +1,202 @@
 <div class="main-container">
-
     <mat-toolbar color="primary top-header" class="menuBar">
-        <div class="d-flex flex-row justify-content-between align-items-center flex-fill">
-            <div class="w-200 mv-width">
-                <div class="d-flex flex-row justify-content-start align-items-center">
-                    <div class="h2 text-white d-inline-block col">
-                        <a routerLink="/trustzen"><img src="assets/images/Trustzen-Logo.png" alt="trustzen_logo"
-                                style="height: 25px;"></a>
-                    </div>
-                    <div class="toggle-icon">
-
-
-                        <button mat-icon-button (click)="sidenav.toggle()" (click)="isShowIcon = !isShowIcon">
-                            <div class="menu-box" *ngIf="!isShowIcon">
-                                <mat-icon class="menu-close">arrow_left</mat-icon>
-                            </div>
-
-                            <div class="menu-open" *ngIf="isShowIcon">
-                                <mat-icon class="menu-close">arrow_right</mat-icon>
-                            </div>
-                        </button>
-                    </div>
+       <div class="d-flex flex-row justify-content-between align-items-center flex-fill">
+          <div class="w-200 mv-width">
+             <div class="d-flex flex-row justify-content-start align-items-center">
+                <div class="h2 text-white d-inline-block col">
+                   <a routerLink="/trustzen"><img src="assets/images/Trustzen-Logo.png" alt="trustzen_logo"
+                      style="height: 25px;"></a>
                 </div>
-            </div>
-
-            <div class="col">
-                <div class="d-flex flex-row justify-content-start align-items-center col">
-                    <div class="mview">
-                        <mat-menu #menurespo="matMenu" class="userMenu comm-menu mv-matmenu">
-                            <div class="col">
-                                <div class="navmenu mv-block">
-                                    <ul class="main-menu">
-                                        <li class="active">
-                                            <a>
-                                                <span class="material-icons-outlined">dashboard</span>Dashboard
-                                            </a>
-                                        </li>
-                                        <li>
-
-                                            <a class="toolbarLink pointer user-name"
-                                                [matMenuTriggerFor]="menuDashboard">
-                                                <span class="material-icons-outlined">menu</span>Menu
-                                            </a>
-                                            <mat-menu #menuDashboard="matMenu" class="userMenu comm-menu">
-                                                <button mat-menu-item>
-                                                    Supplier Management
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Sourcing Management
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Contract Management
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Order Management
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Milestone Completion
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Invoice & Payments
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Inventory Management
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Insights
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Performance Evaluation
-                                                </button>
-                                            </mat-menu>
-                                        </li>
-
-                                        <li>
-
-                                            <a class="toolbarLink pointer user-name">
-                                                <span class="material-icons-outlined">trending_up</span>Workflow
-                                            </a>
-
-                                        </li>
-
-                                        <li>
-                                            <a [matMenuTriggerFor]="help" class="toolbarLink pointer user-name">
-                                                <span class="material-icons-outlined">help_outline</span>Help
-                                            </a>
-                                            <mat-menu #help="matMenu" class="userMenu comm-menu aa">
-                                                <button mat-menu-item>
-                                                    User Manuals
-                                                </button>
-                                                <button mat-menu-item>
-                                                    About Procurezen
-                                                </button>
-                                                <button mat-menu-item>
-                                                    Contact
-                                                </button>
-                                            </mat-menu>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </mat-menu>
-                    </div>
-
-                    <div class="col">
-                        <div class="navmenu mv-none">
+                <div class="toggle-icon">
+                   <button mat-icon-button (click)="sidenav.toggle()" (click)="isShowIcon = !isShowIcon">
+                   <div class="menu-box" *ngIf="!isShowIcon">
+                      <mat-icon class="menu-close">arrow_left</mat-icon>
+                   </div>
+                   <div class="menu-open" *ngIf="isShowIcon">
+                      <mat-icon class="menu-close">arrow_right</mat-icon>
+                   </div>
+                   </button>
+                </div>
+             </div>
+          </div>
+          <div class="col">
+             <div class="d-flex flex-row justify-content-start align-items-center col">
+                <div class="mview">
+                   <mat-menu #menurespo="matMenu" class="userMenu comm-menu mv-matmenu">
+                      <div class="col">
+                         <div class="navmenu mv-block">
                             <ul class="main-menu">
-                                <li>
-                                    <a (click)="dasboardmenus()">
-                                        <span class="material-icons-outlined">dashboard</span>Dashboard
-                                    </a>
-                                </li>
-                                <li>
-
-                                    <a class="toolbarLink pointer user-name" [matMenuTriggerFor]="menuDashboard">
-                                        <span class="material-icons-outlined">menu</span>Menu
-                                    </a>
-                                    <mat-menu #menuDashboard="matMenu" class="userMenu comm-menu">
-                                        <button mat-menu-item>
-                                            Supplier Management
-                                        </button>
-                                        <button mat-menu-item>
-                                            Sourcing Management
-                                        </button>
-                                        <button mat-menu-item>
-                                            Contract Management
-                                        </button>
-                                        <button mat-menu-item>
-                                            Order Management
-                                        </button>
-                                        <button mat-menu-item>
-                                            Milestone Completion
-                                        </button>
-                                        <button mat-menu-item>
-                                            Invoice & Payments
-                                        </button>
-                                        <button mat-menu-item>
-                                            Inventory Management
-                                        </button>
-                                        <button mat-menu-item>
-                                            Insights
-                                        </button>
-                                        <button mat-menu-item>
-                                            Performance Evaluation
-                                        </button>
-                                    </mat-menu>
-                                </li>
-
-                                <li (click)="workflowList()">
-                                    <a class="toolbarLink pointer user-name" (click)="workflowList()">
-                                        <span class="material-icons-outlined">trending_up</span>Workflow
-                                    </a>
-                                </li>
-                                <li class="active" (click)="easyView()">
-                                    <a class="toolbarLink pointer user-name">
-                                        <span class="material-icons-outlined">device_hub</span>Easy View
-                                    </a>
-                                </li>
-                                <li>
-                                    <a [matMenuTriggerFor]="help" class="toolbarLink pointer user-name">
-                                        <span class="material-icons-outlined">help_outline</span>Help
-                                    </a>
-                                    <mat-menu #help="matMenu" class="userMenu comm-menu aa">
-                                        <button mat-menu-item>
-                                            User Manuals
-                                        </button>
-                                        <button mat-menu-item>
-                                            About Procurezen
-                                        </button>
-                                        <button mat-menu-item>
-                                            Contact
-                                        </button>
-                                    </mat-menu>
-                                </li>
+                               <li class="active">
+                                  <a>
+                                  <span class="material-icons-outlined">dashboard</span>Dashboard
+                                  </a>
+                               </li>
+                               <li>
+                                  <a class="toolbarLink pointer user-name"
+                                     [matMenuTriggerFor]="menuDashboard">
+                                  <span class="material-icons-outlined">menu</span>Menu
+                                  </a>
+                                  <mat-menu #menuDashboard="matMenu" class="userMenu comm-menu">
+                                     <button mat-menu-item>
+                                     Supplier Management
+                                     </button>
+                                     <button mat-menu-item>
+                                     Sourcing Management
+                                     </button>
+                                     <button mat-menu-item>
+                                     Contract Management
+                                     </button>
+                                     <button mat-menu-item>
+                                     Order Management
+                                     </button>
+                                     <button mat-menu-item>
+                                     Milestone Completion
+                                     </button>
+                                     <button mat-menu-item>
+                                     Invoice & Payments
+                                     </button>
+                                     <button mat-menu-item>
+                                     Inventory Management
+                                     </button>
+                                     <button mat-menu-item>
+                                     Insights
+                                     </button>
+                                     <button mat-menu-item>
+                                     Performance Evaluation
+                                     </button>
+                                  </mat-menu>
+                               </li>
+                               <li>
+                                  <a class="toolbarLink pointer user-name">
+                                  <span class="material-icons-outlined">trending_up</span>Workflow
+                                  </a>
+                               </li>
+                               <li>
+                                  <a [matMenuTriggerFor]="help" class="toolbarLink pointer user-name">
+                                  <span class="material-icons-outlined">help_outline</span>Help
+                                  </a>
+                                  <mat-menu #help="matMenu" class="userMenu comm-menu aa">
+                                     <button mat-menu-item>
+                                     User Manuals
+                                     </button>
+                                     <button mat-menu-item>
+                                     About Procurezen
+                                     </button>
+                                     <button mat-menu-item>
+                                     Contact
+                                     </button>
+                                  </mat-menu>
+                               </li>
                             </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
-                        <div class="d-flex flex-row user-profile" matTooltip="User Profile">
-                            <div class="avatar-sm" [matMenuTriggerFor]="menu">
-                                <img src="assets/images/user/04.jpg" alt="User Profile" class="user-img">
-                            </div>
-                            <mat-menu #menu="matMenu" class="XuserMenu comm-menu comm-menu-userprofile">
-                                <button mat-menu-item (click)="logOut()">
-                                    <img src="../../assets/images/icons/logout.png" alt="Logout Profile">Logout
-                                </button>
-
-
+                         </div>
+                      </div>
+                   </mat-menu>
+                </div>
+                <div class="col">
+                   <div class="navmenu mv-none">
+                      <ul class="main-menu">
+                         <li>
+                            <a (click)="dasboardmenus()">
+                            <span class="material-icons-outlined">dashboard</span>Dashboard
+                            </a>
+                         </li>
+                         <li>
+                            <a class="toolbarLink pointer user-name" [matMenuTriggerFor]="menuDashboard">
+                            <span class="material-icons-outlined">menu</span>Menu
+                            </a>
+                            <mat-menu #menuDashboard="matMenu" class="userMenu comm-menu">
+                               <button mat-menu-item>
+                               Supplier Management
+                               </button>
+                               <button mat-menu-item>
+                               Sourcing Management
+                               </button>
+                               <button mat-menu-item>
+                               Contract Management
+                               </button>
+                               <button mat-menu-item>
+                               Order Management
+                               </button>
+                               <button mat-menu-item>
+                               Milestone Completion
+                               </button>
+                               <button mat-menu-item>
+                               Invoice & Payments
+                               </button>
+                               <button mat-menu-item>
+                               Inventory Management
+                               </button>
+                               <button mat-menu-item>
+                               Insights
+                               </button>
+                               <button mat-menu-item>
+                               Performance Evaluation
+                               </button>
                             </mat-menu>
-                        </div>
-                    </div>
-
-
-
+                         </li>
+                         <li (click)="workflowList()">
+                            <a class="toolbarLink pointer user-name" (click)="workflowList()">
+                            <span class="material-icons-outlined">trending_up</span>Workflow
+                            </a>
+                         </li>
+                         <li class="active" (click)="easyView()">
+                            <a class="toolbarLink pointer user-name">
+                            <span class="material-icons-outlined">device_hub</span>Easy View
+                            </a>
+                         </li>
+                         <li>
+                            <a [matMenuTriggerFor]="help" class="toolbarLink pointer user-name">
+                            <span class="material-icons-outlined">help_outline</span>Help
+                            </a>
+                            <mat-menu #help="matMenu" class="userMenu comm-menu aa">
+                               <button mat-menu-item>
+                               User Manuals
+                               </button>
+                               <button mat-menu-item>
+                               About Procurezen
+                               </button>
+                               <button mat-menu-item>
+                               Contact
+                               </button>
+                            </mat-menu>
+                         </li>
+                      </ul>
+                   </div>
                 </div>
-            </div>
-        </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-6">
+                   <div class="d-flex flex-row user-profile" matTooltip="User Profile">
+                      <div class="avatar-sm" [matMenuTriggerFor]="menu">
+                         <img src="assets/images/user/04.jpg" alt="User Profile" class="user-img">
+                      </div>
+                      <mat-menu #menu="matMenu" class="XuserMenu comm-menu comm-menu-userprofile">
+                         <button mat-menu-item (click)="logOut()">
+                         <img src="../../assets/images/icons/logout.png" alt="Logout Profile">Logout
+                         </button>
+                      </mat-menu>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
     </mat-toolbar>
-
     <mat-sidenav-container class="sidenav-container">
-        <mat-sidenav #sidenav class="sidenav-width" [mode]="isMobile ? 'over' : 'side'"
-            [opened]="isMobile ? 'false' : 'true'" *ngIf="loginData?.userType !== 2">
-
-
-
-            <!-- <button mat-button [matMenuTriggerFor]="supplier" #supplierTrigger="matMenuTrigger"
-                (click)="supplierTrigger.openMenu();">
-                <div class="nav-icons">
-                    <mat-icon>group</mat-icon>Supplier Management
-                </div>
-            </button> -->
-            <!-- <mat-menu #supplier="matMenu" xPosition="after" class="level1Menu">
-                <span (mouseleave)="supplierTrigger.closeMenu()">
-                    <button mat-menu-item (click)="pqAssesmentList()">Supplier
-                        Pre-Qualification</button>
-                    <button mat-menu-item (click)="pqAssesmentList()">Supplier
-                        Directory</button>
-                </span>
-            </mat-menu> -->
-
-
-            <button mat-button [matMenuTriggerFor]="contracts" #contractsTrigger="matMenuTrigger"
-                (click)="contractsTrigger.openMenu()">
-                <div class="nav-icons"><i class="fa fa-handshake-o" aria-hidden="true"></i>Contract Management</div>
-            </button>
-            <mat-menu #contracts="matMenu" xPosition="after" class="level1Menu">
-                <span (mouseleave)="contractsTrigger.closeMenu()">
-                    <button mat-menu-item (click)="contractTem()">Template
-                        Management</button>
-                    <button mat-menu-item (click)="contarctRep()">Contracts
-                        Transactions</button>
-                </span>
-            </mat-menu>
-
-        </mat-sidenav>
-
-        <mat-sidenav-content>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
+       <mat-sidenav #sidenav class="sidenav-width" [mode]="isMobile ? 'over' : 'side'"
+       [opened]="isMobile ? 'false' : 'true'" *ngIf="loginData?.userType !== 2">
+       <button mat-button [matMenuTriggerFor]="contracts" #contractsTrigger="matMenuTrigger"
+       (click)="contractsTrigger.openMenu()">
+       <div class="nav-icons"><i class="fa fa-handshake-o" aria-hidden="true"></i>Contract Management</div>
+       </button>
+       <mat-menu #contracts="matMenu" xPosition="after" class="level1Menu">
+          <span (mouseleave)="contractsTrigger.closeMenu()">
+          <button mat-menu-item (click)="contractTem()">Template
+          Management</button>
+          <button mat-menu-item (click)="contarctRep()">Contracts
+          Transactions</button>
+          </span>
+       </mat-menu>
+       </mat-sidenav>
+       <mat-sidenav-content>
+          <router-outlet></router-outlet>
+       </mat-sidenav-content>
     </mat-sidenav-container>
-</div>
+ </div>

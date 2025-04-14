@@ -56,14 +56,10 @@
                            </a>
                            <div class="form-check custom-check-form mt-3">
                             <input class="form-check-input custom-checkbox " type="checkbox" value="" id="flexCheckDefault" checked>
-                            <label class="form-check-label ft-size13" for="flexCheckDefault">
+                            <label class="form-check-label ft-size13 checkbox-custom" for="flexCheckDefault" >
                                 I have read and agree to the Supplier Registration Guidelines and Code of Conduct
                             </label>
                           </div>
-
-                           <!-- <mat-checkbox class="msn-10 checkbox-custom mt-2" [(ngModel)]="agreeDownloadCenter">
-                               I have read and agree to the Supplier Registration Guidelines and Code of Conduct
-                           </mat-checkbox> -->
                        </div>
                    </div>
                </div>
@@ -120,13 +116,11 @@
                                 <div class="form-group position-relative">
                                    <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
                                    <mat-form-field class="d-flex col">
-                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                      <input matInput required placeholder="User Name"
                                          autocomplete="off" formControlName="userName" />
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
-                                         SupplierlogInForm.get('userName')?.touched) {
                                          <span class="ft-size11 text-danger">Username Required</span>
-                                         }
+                                         
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -142,17 +136,9 @@
                                          </span>
                                       </mat-icon>
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
+                                   
                                          <span class="ft-size11 text-danger">Password required</span>
-                                         }
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
-                                         <p class="ft-size11 text-danger">
-                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
-                                            etc.), N, n, 1' | translate }}
-                                         </p>
-                                         }
+                                         
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -189,13 +175,11 @@
                                 <div class="form-group position-relative">
                                    <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
                                    <mat-form-field class="d-flex col">
-                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                      <input matInput required placeholder="User Name"
                                          autocomplete="off" formControlName="userName" />
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
-                                         SupplierlogInForm.get('userName')?.touched) {
                                          <span class="ft-size11 text-danger">Username Required</span>
-                                         }
+                                         
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -211,17 +195,8 @@
                                          </span>
                                       </mat-icon>
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
                                          <span class="ft-size11 text-danger">Password required</span>
-                                         }
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
-                                         <p class="ft-size11 text-danger">
-                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
-                                            etc.), N, n, 1' | translate }}
-                                         </p>
-                                         }
+                                         
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -258,13 +233,11 @@
                                 <div class="form-group position-relative">
                                    <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
                                    <mat-form-field class="d-flex col">
-                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                      <input matInput required placeholder="User Name"
                                          autocomplete="off" formControlName="userName" />
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
-                                         SupplierlogInForm.get('userName')?.touched) {
                                          <span class="ft-size11 text-danger">Username Required</span>
-                                         }
+                                         
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -280,17 +253,9 @@
                                          </span>
                                       </mat-icon>
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
                                          <span class="ft-size11 text-danger">Password required</span>
-                                         }
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
-                                         <p class="ft-size11 text-danger">
-                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
-                                            etc.), N, n, 1' | translate }}
-                                         </p>
-                                         }
+                                         
+                                         
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -327,13 +292,11 @@
                                 <div class="form-group position-relative">
                                    <span class="material-icons-outlined icons-place icons-color-000-55">people</span>
                                    <mat-form-field class="d-flex col">
-                                      <input matInput required placeholder="{{'Login.Usernameplaceholder'| translate}}"
+                                      <input matInput required placeholder="User Name"
                                          autocomplete="off" formControlName="userName" />
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('userName')?.hasError('required') &&
-                                         SupplierlogInForm.get('userName')?.touched) {
                                          <span class="ft-size11 text-danger">Username Required</span>
-                                         }
+                                         
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -349,17 +312,7 @@
                                          </span>
                                       </mat-icon>
                                       <div class="login-validation">
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('required') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
                                          <span class="ft-size11 text-danger">Password required</span>
-                                         }
-                                         @if (SupplierlogInForm.get('passWord')?.hasError('pattern') &&
-                                         SupplierlogInForm.get('passWord')?.touched) {
-                                         <p class="ft-size11 text-danger">
-                                            {{ 'Password must contain at least 8 characters, includes special character (like @, #
-                                            etc.), N, n, 1' | translate }}
-                                         </p>
-                                         }
                                       </div>
                                    </mat-form-field>
                                 </div>
@@ -400,64 +353,3 @@
        <p class="copy-right">&copy; Copyright Krya Solutions Pvt. Ltd.</p>
    </footer>
 </div>
-<ng-template #downloadDoc>
-   <div class="dialog-container">
-       <div mat-dialog-title>
-           <div class="col-lg-11">
-               <h3>Download Centre</h3>
-           </div>
-           <div class="col-lg-1 text-end">
-               <button mat-icon-button mat-dialog-close>
-                   <i class="material-icons" matTooltip="close">close</i>
-               </button>
-           </div>
-       </div>
-       <mat-dialog-content>
-           <div class="widget-box">
-               <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-              Download List
-           </h5>
-               <div class="widget-content">
-                   <div class="table-container">
-                       <div class="tableFull">
-                           <table class="content-table">
-                               <thead>
-                                   <tr>
-                                       <th scope="col" style="padding: 4px 0px; text-align: left;">
-                                           <div class="col-lg-12">
-                                               <mat-checkbox color="primary" class="checkbox-custom fontNormal" [checked]="selectAllChecked">
-                                                   Select All
-                                               </mat-checkbox>
-                                           </div>
-                                       </th>
-                                   </tr>
-                               </thead>
-                               <tbody class="list">
-                                   <tr>
-                                       <td style="padding: 0px; text-align: left;">
-                                           <mat-checkbox color="primary" class="checkbox-custom fontNormal">
-                                               Registration Guideliness (OWASP_SCP_Quick_Reference_Guide.pdf)
-                                           </mat-checkbox>
-                                       </td>
-                                   </tr>
-                               </tbody>
-                           </table>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </mat-dialog-content>
-       <mat-dialog-actions>
-           <div class="footer-cta-btn">
-               <div class="cta-leftside-btn">
-                   <button class="btn-gray" mat-dialog-close cdkFocusInitial>
-                       <i class="fa fa-ban pe-2"></i>Close</button>
-               </div>
-               <div class="cta-rightside-btn">
-                   <button class="btn-blue"><i class="fa fa-download pe-2"></i>Download
-                   </button>
-               </div>
-           </div>
-       </mat-dialog-actions>
-   </div>
-</ng-template>
