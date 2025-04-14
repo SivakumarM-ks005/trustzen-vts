@@ -1,4 +1,4 @@
-<div class="m-4" *ngIf="loginData.userType === 2">
+<div class="m-4">
   <mat-card appearance="outlined" class="p-4">
     <div class="mange-profile">
       <div class="header-info">
@@ -29,32 +29,9 @@
           *ngIf="SupDetails?.status !== 'Requested information'">
           <i class="fa fa-eye"></i>
         </a>
-        <a class="pointer" matTooltip="View/Edit" *ngIf="SupDetails?.status === 'Requested information'">
-          <i class="fa fa-edit"></i>
-        </a>
       </div>
 
     </div>
 
   </mat-card>
 </div>
-
-
-<div class="content-container" *ngIf="loginData.userType === 1">
-
-  <div class="bread-crumbs">
-    <h2 class="page-title"><i class="fa fa-dot-circle-o me-2" aria-hidden="true"></i>Supplier Management</h2>
-  </div>
-  <div class="content-box p-2">
-    <div class="widget-box">
-      <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-        Supplier Pre-Qualification List
-      </h5>
-      <div class="widget-content">
-        <ag-grid-angular [theme]="theme" [rowData]="dataList" [columnDefs]="colDefs" [defaultColDef]="defaultColDef"
-          [pagination]="pagination" [paginationPageSize]="paginationPageSize"
-          [paginationPageSizeSelector]="paginationPageSizeSelector" />
-      </div>
-    </div>
-
-  </div>
