@@ -62,7 +62,7 @@
                 <div>
                     @if (tabGroup.selectedIndex === 0) {
                     <app-supplier-information [readonly]="false" [supplierId]="supplierId"
-                        (tabValidCheckEmit)="getScreenCompleteDetails()" (SaveDraftFlag)="getSaveDraftFlag($event)" (NextFlag)="getNextFlag($event)"
+                        
                         (nextTabEmit)="gotoNextTab($event)" ></app-supplier-information>
                     }
                 </div>
@@ -100,7 +100,7 @@
                 <div class="tabContent">
                     @if (tabGroup.selectedIndex === 1) {
                     <app-address-details #addressDetails [supplierId]="supplierId" (nextTabEmit)="gotoNextTab($event)"
-                        (tabValidCheckEmit)="getScreenCompleteDetails()" (SaveDraftFlag)="getSaveDraftFlag($event)" (NextFlag)="getNextFlag($event)"
+                        
                         (dialogResult)="handleDialogResult($event)" ></app-address-details>
                     }
                 </div>

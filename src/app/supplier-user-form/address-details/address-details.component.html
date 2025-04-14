@@ -1,12 +1,8 @@
 <div class="widget-box me-2" #target>
-    <form [formGroup]="addressForm">
+    <form >
        <h5 style="height: 35px;" class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-          Registered Address <span *ngIf="NextButtonValidation()"></span>
-          <div class="w-25 justify-content-end text-right d-flex">
-             <button *ngIf="ClearValues()" class="header-level-btn-gray me-2"
-             [disabled]="disableStatusBased == false" (click)="resetForm()">
-             <i class="fa fa-refresh pe-2" aria-hidden="true"></i>Clear</button>
-          </div>
+          Registered Address <span></span>
+          
        </h5>
        <div class="widget-content">
           <div class="grid-4cols">
@@ -15,10 +11,9 @@
                    Select Address
                 </mat-label>
                 <mat-select required formControlName="addressTypeId" matTooltip="Select Address Type"
-                   (selectionChange)="enableAddTaxButton()">
+                   >
                    <mat-option value="">-- Please Select --</mat-option>
-                   <mat-option *ngFor="let data of addressTypeList" [value]="data.addressTypeId"
-                   [disabled]="data.addressTypeName === 'All-in-One Site' && matchingIds">
+                   <mat-option>
                    Pay Site
                    </mat-option>
                 </mat-select>
@@ -28,7 +23,7 @@
                    Address Line1
                 </mat-label>
                 <input matInput matTooltip="Enter the address line1" required formControlName="addressLine1"
-                   (change)="enableAddTaxButton()">
+                   >
              </mat-form-field>
              <mat-form-field class="col">
                 <mat-label>Address Line2</mat-label>
@@ -46,11 +41,9 @@
                 <mat-label>
                    Select Country
                 </mat-label>
-                <mat-select required formControlName="countryId"
-                   (selectionChange)="getState(addressForm.get('countryId')?.value); enableAddTaxButton()"
-                   matTooltip="Select Country">
+                <mat-select required formControlName="countryId" matTooltip="Select Country">
                    <mat-option value="">-- Please Select --</mat-option>
-                   <mat-option *ngFor="let data of countryList" [value]="data.countryId">
+                   <mat-option>
                    India
                    </mat-option>
                 </mat-select>
@@ -59,11 +52,9 @@
                 <mat-label>
                    Select State/Province
                 </mat-label>
-                <mat-select required formControlName="stateId"
-                   (selectionChange)="getCities(addressForm.get('stateId')?.value); enableAddTaxButton()"
-                   matTooltip="Select State/Province">
+                <mat-select required formControlName="stateId" matTooltip="Select State/Province">
                    <mat-option value="">-- Please Select --</mat-option>
-                   <mat-option *ngFor="let data of stateList" [value]="data.stateId">
+                   <mat-option>
                    Tamil Nadu
                    </mat-option>
                 </mat-select>
@@ -72,10 +63,9 @@
                 <mat-label>
                    Select City
                 </mat-label>
-                <mat-select required formControlName="cityId" matTooltip="Select City"
-                   (selectionChange)="enableAddTaxButton()">
+                <mat-select required formControlName="cityId" matTooltip="Select City">
                    <mat-option value="">-- Please Select --</mat-option>
-                   <mat-option *ngFor="let data of cityList" [value]="data.cityId">
+                   <mat-option>
                    Chennai
                    </mat-option>
                 </mat-select>
@@ -84,7 +74,7 @@
                 <mat-label>Zip Code / PIN</mat-label>
                 <input matInput matTooltip="Enter the zip code / pin" formControlName="zipCode">
              </mat-form-field>
-             <mat-checkbox class="mt-3" formControlName="mainOffixe" (click)="checkmainOffice()">Main
+             <mat-checkbox class="mt-3" formControlName="mainOffixe">Main
                 office
              </mat-checkbox>
           </div>
@@ -92,8 +82,8 @@
              <h5
                 class="widget-title ps-0 pb-3 border-top pe-0 d-flex bg-light pt-3 align-items-center justify-content-between">
                 Tax Details
-                <button [disabled]="enableAddTax == false || disableStatusBased == false" class="small-btn-action"
-                (click)="addTaxDetail()" matTooltip="Add Another Tax">
+                <button class="small-btn-action"
+                matTooltip="Add Another Tax">
                 <i class="fa fa-plus"></i>
                 </button>
              </h5>
@@ -104,10 +94,10 @@
                       <mat-label>
                          Select Tax Type
                       </mat-label>
-                      <mat-select required formControlName="taxTypeId" (change)="unValidate(i)"
+                      <mat-select required formControlName="taxTypeId" 
                          matTooltip="Select Tax Type">
                          <mat-option value="">-- Please Select --</mat-option>
-                         <mat-option *ngFor="let data of taxTypeList" [value]="data.taxTypeId">
+                         <mat-option>
                          GST
                          </mat-option>
                       </mat-select>
@@ -116,16 +106,16 @@
                       <mat-label>
                          Tax and Duties Registration
                       </mat-label>
-                      <input matInput formControlName="registrationNumber" (change)="unValidate(i)"
+                      <input matInput formControlName="registrationNumber" 
                       [readonly]="isReadOnly(i)" matTooltip="Enter the tax and duties registration #"
                       required>
                    </mat-form-field>
-                   <mat-checkbox class="mt-3" formControlName="taxExemption" (change)="unValidate(i)">Tax
+                   <mat-checkbox class="mt-3" formControlName="taxExemption" >Tax
                       Exemption
                    </mat-checkbox>
                    <div class="d-flex justify-content-start align-items-center w-100 mt-3 ">
-                      <a *ngIf="taxDetails.length > 1 && i === taxDetails.length - 1" class="delete-hover"
-                      matTooltip="Remove Tax" (click)="deleteTaxDetails(i, taxDetails)">
+                      <a class="delete-hover"
+                      matTooltip="Remove Tax">
                       <span class="material-icons-outlined cursor-pointer">delete_sweep</span>
                       </a>
                    </div>
@@ -155,11 +145,11 @@
           </thead>
           <tbody class="list">
              <tr *ngFor="let address of addedData; let i = index">
-                <td>{{ i + 1 }}
+                <td>1
                 </td>
                 <td>
-                   <mat-checkbox class="round-checkbox" *ngIf="address.mainOffixe === true"
-                   [checked]="address.mainOffixe === true" [disabled]="address.mainOffixe === true">
+                   <mat-checkbox class="round-checkbox" 
+                  >
                    </mat-checkbox>
                 </td>
                 <td>Pay Site</td>
@@ -168,27 +158,25 @@
                 <td>Andaman and Nicobar Islands</td>
                 <td>India</td>
                 <td>
-                   <div *ngIf="address.zipCode">
+                   <div>
                       -
                    </div>
                 </td>
                 <td>
-                   <div *ngIf="address.poBox">
+                   <div>
                       Chennai
                    </div>
                 </td>
                 <td>
-                   <button mat-button *ngIf="disableStatusBased === false" class="btn-small" matTooltip="Edit"
-                   (click)="editAddress(address, i,target)">
+                   <button mat-button class="btn-small" matTooltip="Edit">
                    <i class="fa fa-eye"></i>
                    </button>
-                   <button mat-button class="btn-small" *ngIf="disableStatusBased === true" matTooltip="Edit"
-                   (click)="editAddress(address, i,target)">
+                   <button mat-button class="btn-small" matTooltip="Edit">
                    <i class="fa fa-edit"></i>
                    </button>
-                   <button [disabled]="disableStatusBased === false" mat-button
+                   <button mat-button
                    Xclass="btn btn-danger btn-sm smBtn" class="btn-small" matTooltip="Delete"
-                   (click)="deletePopUp(i)" *ngIf="address.mainOffixe === false">
+                  >
                    <i class="fa fa-trash text-danger"></i>
                    </button>
                 </td>
