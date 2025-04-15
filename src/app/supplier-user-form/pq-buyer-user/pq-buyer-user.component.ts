@@ -375,7 +375,7 @@ export class PQBuyerUserComponent implements OnInit {
     this.complianceChecklist.onComplianceSubmit(isNextClick);
   }
   saveAttachments(isNextClick: boolean = false) {
-    this.childAttachment.saveAttachments(isNextClick);
+    // this.childAttachment.saveAttachments(isNextClick);
   }
   savePQAttachments(isNextClick: boolean = false) {
     this.childPQAttachment.savePQAttachments(isNextClick);
@@ -412,7 +412,7 @@ export class PQBuyerUserComponent implements OnInit {
           // this.pqquestionaries.savePQquestionnaries(false);
           return;
         case 'attachment':
-          this.childAttachment.confirmatioPopUp();
+          // this.childAttachment.confirmatioPopUp();
           return;
         default:
           this.gotoPreviousTab();

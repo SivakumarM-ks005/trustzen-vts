@@ -413,7 +413,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   goToPreviousRegActivitities(checkClickPrevious?: boolean) {
-    this.regActivitiesCertificate.goToPreviousMaster(checkClickPrevious);
+    // this.regActivitiesCertificate.goToPreviousMaster(checkClickPrevious);
   }
 
   onSupplyInfoSubmit(isNextClick: boolean = false): void {
@@ -441,7 +441,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   saveRegActivitities(isNextClick: boolean = false) {
-    this.regActivitiesCertificate.saveMasterTables(isNextClick);
+    // this.regActivitiesCertificate.saveMasterTables(isNextClick);
   }
 
   onComplianceSubmit(isNextClick: boolean = false) {
@@ -449,7 +449,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   saveAttachments(isNextClick: boolean = false) {
-    this.childAttachment.saveAttachments(isNextClick);
+    // this.childAttachment.saveAttachments(isNextClick);
   }
 
   savePQAttachments(isNextClick: boolean = false) {
@@ -457,7 +457,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   savePQquestionnaries(isNextClick: boolean = false) {
-    this.pqquestionaries.PQquestionnaries(isNextClick);
+    // this.pqquestionaries.PQquestionnaries(isNextClick);
   }
 
   saveFinalSubmission() {
@@ -489,7 +489,7 @@ export class SupplierUserFormComponent implements OnInit {
           // this.Bank.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'pqquestionaries':
-          this.pqquestionaries.confirmatioPopUp(undefined, checkClickPrevious);
+          // this.pqquestionaries.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'categoryAndScope':
           // this.childCategoryScope.confirmatioPopUp(undefined, checkClickPrevious);
@@ -499,7 +499,7 @@ export class SupplierUserFormComponent implements OnInit {
           // this.pqquestionaries.savePQquestionnaries(false);
           return;
         case 'attachment':
-          this.childAttachment.confirmatioPopUp(undefined, checkClickPrevious);
+          // this.childAttachment.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         default:
           this.gotoPreviousTab();
