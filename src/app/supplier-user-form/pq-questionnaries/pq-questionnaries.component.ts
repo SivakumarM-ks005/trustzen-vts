@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ComplianceCheckService } from '../../core/services/supplier-management/supplier-compliance-checklist.service';
 import { CommonService } from '../../core/services/common.service';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import moment from 'moment';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminService } from '../../core/services/admin/admin.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -16,10 +15,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatBadge } from '@angular/material/badge';
 import { SupplierUserFormService } from '../../core/services/supplier-management/supplier.user.form.service';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { log } from 'console';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-pq-questionnaries',
@@ -56,10 +52,7 @@ export class PqQuestionnariesComponent implements OnInit {
     public commonService: CommonService,
     public fb: FormBuilder,
     public adminService: AdminService,
-    private sanitizer: DomSanitizer,
-    private dialog: MatDialog,
     public supplierUserFormService: SupplierUserFormService,
-    private SupplierUserForm: SupplierUserFormService,
     public activateRouter: ActivatedRoute
   ) {
     this.formPQuestions = this.fb.group({

@@ -1,10 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm, FormsModule } from '@angular/forms';
 import { CommonService } from '../../../core/services/common.service';
-import moment from 'moment';
 import { IssuingCountrylist, IssuingState, LicenseCategoryMasDto, LicenseCertificationDto, LicenseStatusMasDto, LicenseTypeMasDto } from '../../../core/models/licence-certificates.model';
-import { AdminService } from '../../../core/services/admin/admin.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { NgIf, NgFor, DatePipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
@@ -16,8 +13,6 @@ import { MatInput } from '@angular/material/input';
 import { MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
 import { MatBadge } from '@angular/material/badge';
-import { LoginService } from '../../../core/services/login/login.service';
-import { LicenceActivityService } from '../../../core/services/supplier-management/licence-activity.service';
 
 @Component({
   selector: 'app-licence-certificates',

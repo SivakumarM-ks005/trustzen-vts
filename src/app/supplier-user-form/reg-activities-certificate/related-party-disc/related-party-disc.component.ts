@@ -1,12 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { NgForm, FormsModule, NgModel } from '@angular/forms';
-import moment from 'moment';
+import { NgForm, FormsModule } from '@angular/forms';
 import { RelatedPartyDiscDto } from '../../../core/models/related-party-disc.model';
-import { AdminService } from '../../../core/services/admin/admin.service';
 import { CommonService } from '../../../core/services/common.service';
-import { ConfirmationDialogComponent } from '../../../confirmation-dialog/confirmation-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { NgIf, DatePipe } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -14,8 +9,6 @@ import { MatFormField, MatLabel, MatError, MatHint, MatSuffix } from '@angular/m
 import { MatInput } from '@angular/material/input';
 import { AllowNumberOnlyDirective } from '../../../core/directives/allowNumberOnly.directive';
 import { MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
-import { LicenceActivityService } from '../../../core/services/supplier-management/licence-activity.service';
-import { PreQualificationProcessComponent } from '@app/pre-qualification-process/pre-qualification-process.component';
 
 @Component({
   selector: 'app-related-party-disc',
@@ -44,12 +37,7 @@ export class RelatedPartyDiscComponent implements OnInit {
   profileStatus: any;
 
   constructor(
-    private licenceActivityService: LicenceActivityService,
-    private adminService: AdminService,
-    public commonService: CommonService,
-    private dialog: MatDialog,
-    private activateRouter: ActivatedRoute
-  ) { }
+    public commonService: CommonService) { }
   ngOnInit() {
     // this.getRelatedPartyDetail();
   }

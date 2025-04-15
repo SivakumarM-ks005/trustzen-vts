@@ -48,10 +48,6 @@ export class LicenceActivitiesComponent implements OnInit {
   profileStatus: any;
 
   constructor(
-    private licenceActivityService: LicenceActivityService,
-    private adminService: AdminService,
-    private commonService: CommonService,
-    private dialog: MatDialog,
     public activateRouter: ActivatedRoute
   ) { }
   ngOnInit() {
