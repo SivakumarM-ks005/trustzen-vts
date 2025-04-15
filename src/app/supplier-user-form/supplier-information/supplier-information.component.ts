@@ -1,9 +1,8 @@
-import { Component, EventEmitter, input, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonService } from '../../core/services/common.service';
 import { AdminService } from '../../core/services/admin/admin.service';
-import { Observable } from 'rxjs';
-import moment from 'moment';
+import { map, Observable, startWith } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatFormField, MatLabel, MatError, MatHint, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -53,31 +52,31 @@ export class SupplierInformationComponent implements OnInit {
     typeOfOwnershipId: 0,
     location: '',
     expiryDate: '',
+    managerCommLicId: 0,
+    managerFirstName: '',
+    managerMiddleName: '',
+    managerLastName: '',
+    managerRole: 0,
+    managerJobTitle: '',
     supplierType: '',
     typeOfOwnership: ''
   };
-
-
   selectedSupplierTypeId!: number;
   selectedSupplierRoleId!: number;
-
   selectedOwnershipTypeId!: number;
   myControl = new FormControl('');
   options: string[] = ['Local Company', 'Overseas'];
   filteredOptions: Observable<string[]> | undefined;
+  @Output() nextTabEmit = new EventEmitter();
+  @Output() tabValidCheckEmit = new EventEmitter();
   maxDate = new Date();
   minDate: Date = new Date();
+  @Output() dialogResult = new EventEmitter<boolean>();
   isSubmitted = false;
   isNext: boolean;
-  SupplierManagement: any;
-  tooltipValueForLicense: any;
-  checkEstablishDateAdmin: boolean = true;
-  checkLicenseCertificateAdmin: any = false;
-  checkIssueDateAdmin: boolean = true;
-  checkExpiryDateAdmin: boolean = true;
-  checkIssueLocationAdmin: boolean = true;
-  checkIssueByAdmin: any;
-  profileStatus: any;
+  @Output() SaveDraftFlag = new EventEmitter<boolean>();
+  @Output() NextFlag = new EventEmitter<boolean>();
+
 
   constructor(private fb: FormBuilder,
     public commonService: CommonService,
@@ -89,7 +88,47 @@ export class SupplierInformationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || '')),
+    );
+
+    // this.GetSupplierManagement();
+    this.loadSupplier();
+    this.loadOwnershipTypes();
+    this.loadSupplierTypes();
+    this.loadSupplierRole();
     this.inItSupplierForm(this.supplier);
+    this.activateRouter?.params?.subscribe((response) => {
+      if (response.status === 'In-Progress') {
+        this.supplierForm.disable();
+      } else if (response.profile === 'manageprofile') {
+        this.supplierForm.disable();
+        this.supplierForm.get('issuedDate')?.enable();
+        this.supplierForm.get('expiryDate')?.enable();
+      }
+    });
+  }
+
+  loadSupplier(): void {
+    this.commonService.getSupplier(this.supplierId).subscribe({
+      next: (data) => {
+        this.supplier = data;
+        localStorage.setItem('supplierClassification', data?.supplierClassification);
+        localStorage.setItem('issuedDate', data.issuedDate);
+        localStorage.setItem('expiryDate', data.expiryDate);
+        this.tabValidCheckEmit.emit();
+      },
+      error: (err) => {
+        console.error('Error fetching supplier types', err);
+      }
+    });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
   inItSupplierForm(data?: Supplier) {
@@ -106,21 +145,57 @@ export class SupplierInformationComponent implements OnInit {
       organizationWebsite: [data?.organizationWebsite || ''],
       commercialLicenseId: [data?.commercialLicenseId || ''],
       commercialLicenseNo: [data?.commercialLicenseNo || '', Validators.required],
-      establishmentDate: [new Date(), this.checkLicenseCertificateAdmin ? (this.checkEstablishDateAdmin ? Validators.required : Validators.nullValidator) : Validators.required],//[data?.establishmentDate || '', Validators.required],
-      issuedDate: [data?.issuedDate || '', this.checkLicenseCertificateAdmin ? (this.checkIssueDateAdmin ? Validators.required : Validators.nullValidator) : Validators.required],
+
       issuedBy: [data?.issuedBy || '', Validators.required],
       typeOfOwnershipId: [data?.typeOfOwnershipId || '', Validators.required],
-      location: [data?.location || '', this.checkLicenseCertificateAdmin ? (this.checkIssueLocationAdmin ? Validators.required : Validators.nullValidator) : Validators.required],
-      expiryDate: [data?.expiryDate || '', this.checkLicenseCertificateAdmin ? (this.checkExpiryDateAdmin ? Validators.required : Validators.nullValidator) : Validators.required],
+
+      managerCommLicId: [data?.managerCommLicId || ''],
+      managerFirstName: [data?.managerFirstName || '', Validators.required],
+      managerMiddleName: [data?.managerMiddleName || ''],
+      managerLastName: [data?.managerLastName || '', Validators.required],
+      managerRole: [data?.managerRole || '', Validators.required],
+      managerJobTitle: [data?.managerJobTitle || '', Validators.required],
     });
     console.log(this.supplierForm);
 
   }
+  loadOwnershipTypes(): void {
+    this.commonService.getOwnershipTypes().subscribe({
+      next: (data) => {
 
-  onSubmit(isNextClick: boolean = false): void {
-    this.isSubmitted = true;
-    if (isNextClick && this.supplierForm.dirty && this.supplierForm.valid && this.supplier?.supplierTypeId && this.profileStatus === 'manageprofile' || !isNextClick && this.profileStatus === 'manageprofile') {
+      },
+      error: (err) => {
+        console.error('Error fetching ownership types', err);
+      }
+    });
+  }
+  loadSupplierTypes(): void {
+    this.commonService.getSupplierTypes().subscribe({
+      next: (data) => {
+
+      },
+      error: (err) => {
+        console.error('Error fetching supplier types', err);
+      }
+    });
+  }
+
+  loadSupplierRole(): void {
+    this.commonService.getSupplierRole().subscribe({
+      next: (data) => {
+
+      },
+      error: (err) => {
+        console.error('Error fetching supplier role', err);
+      }
+    });
+  }
+
+  parseDate(dateString: string): Date | null {
+    if (dateString === "0001-01-01T00:00:00" || !dateString) {
+      return null; // Handle invalid or default date
     }
+    return new Date(dateString); // Convert to Date object
   }
 
 }
@@ -151,7 +226,11 @@ export interface Supplier {
   typeOfOwnershipId: number,
   location: string,
   expiryDate: string,
+  managerCommLicId: number,
+  managerFirstName: string,
+  managerMiddleName: string,
+  managerLastName: string,
+  managerRole: number,
+  managerJobTitle: string
 }
-
-
 

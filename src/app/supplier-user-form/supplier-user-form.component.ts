@@ -417,11 +417,11 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   onSupplyInfoSubmit(isNextClick: boolean = false): void {
-    this.childSupplierInformation.onSubmit(isNextClick);
+    // this.childSupplierInformation.onSubmit(isNextClick);
   }
 
   saveAddressDetails(isNextClick: boolean = false) {
-    this.addressDetails.onAddClick(isNextClick);
+    // this.addressDetails.onAddClick(isNextClick);
   }
 
   saveContactDetails(isNextClick: boolean = false) {
@@ -472,12 +472,12 @@ export class SupplierUserFormComponent implements OnInit {
   goto(buttonControlFlag: boolean, comp: string, checkClickPrevious?: boolean) {
 
     if (buttonControlFlag) {
-      this.addressDetails.saveAddressDetails();
+      // this.addressDetails.saveAddressDetails();
       this.gotoNextTab('');
     } else if (!buttonControlFlag) {
       switch (comp) {
         case 'addressDetails':
-          this.addressDetails.confirmatioPopUp(undefined, checkClickPrevious);
+          // this.addressDetails.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'contactDetails':
           // this.Contact.confirmatioPopUp(undefined, checkClickPrevious);

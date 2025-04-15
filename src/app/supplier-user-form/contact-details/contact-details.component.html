@@ -1,8 +1,8 @@
 <div class="widget-box">
   <h5 style="height: 35px;" class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-     Supplier Contact Information <span *ngIf="NextButtonValidation()"></span>
+     Supplier Contact Information 
      <div class="w-25 justify-content-end text-right d-flex">
-        <button class="header-level-btn-gray me-2" [disabled]="disableStatusBased == false"
+        <button class="header-level-btn-gray me-2" 
         >
         <i class="fa fa-refresh pe-2" aria-hidden="true"></i>Clear</button>
      </div>
@@ -119,12 +119,12 @@
            <th scope="col" width="10%">Action</th>
         </tr>
      </thead>
-     <tbody class="list" *ngFor="let contact of SecondarycontactDetails; let i = index">
-        <tr *ngIf="!contact?.firstContactFlag">
+     <tbody class="list" >
+        <tr >
            <td>Contact 1</td>
            <td>
-              <mat-checkbox *ngIf="contact.isPrimaryContact" [checked]="contact.isPrimaryContact"
-              [disabled]="contact.isPrimaryContact">
+              <mat-checkbox  
+              >
               </mat-checkbox>
            </td>
            <td> Mr Manoj B</td>
@@ -135,7 +135,7 @@
               <button Xclass="btn btn-primary btn-sm smBtn" mat-button class="btn-small"
                  matTooltip="Edit"><i class="fa fa-edit"></i>
               </button>
-              <button [disabled]="editFlag == true" mat-button
+              <button  mat-button
               Xclass="btn btn-danger btn-sm smBtn" class="btn-small" matTooltip="Delete">
               <i class="fa fa-trash text-danger"></i>
               </button>

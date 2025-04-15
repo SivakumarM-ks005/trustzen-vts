@@ -24,7 +24,7 @@
                                 </ng-template>
                                 <div>
                                     @if (tabGroup.selectedIndex === 0) {
-                                    <app-supplier-information [readonly]="false" 
+                                    <app-supplier-information 
                                         (tabValidCheckEmit)="getScreenCompleteDetails()"
                                         (nextTabEmit)="gotoNextTab()"></app-supplier-information>
                                     }

@@ -14,7 +14,8 @@ import { MatOption } from '@angular/material/core';
 import { MatInput } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { LoginService } from '../../core/services/login/login.service';
-
+import { SupplierUserFormService } from '../../core/services/supplier-management/supplier.user.form.service';
+import { PreQualificationProcessComponent } from '@app/pre-qualification-process/pre-qualification-process.component';
 interface BankCountrylist {
   countryId: number;
   countryName: string;
@@ -105,39 +106,38 @@ export class AddressDetailsComponent {
     private fb: FormBuilder,
     private loginservice: LoginService,
     public commonService: CommonService,
+    public supplierUserFormService: SupplierUserFormService,
     public adminService: AdminService,
     public activateRouter: ActivatedRoute
   ) {
 
   }
+
   ngOnInit() {
     const storedData: any = localStorage.getItem('loginDetails');
     this.userData = JSON.parse(storedData);
-    this.inItAddressForm();
+    this.getAddressType();
+    this.getAddressDetails(this.supplierId);
+    // this.inItAddressForm();
     this.inItTaxForm();
     this.getCountry();
-  }
+    this.getTaxType();
+    // this.checkAddressType();
 
-  inItAddressForm(data?: any) {
-    this.addressForm = this.fb.group({
-      addressTypeId: [data?.addressTypeId || '', Validators.required],
-      addressLine1: [data?.addressLine1 || '', Validators.required],
-      addressLine2: [data?.addressLine2 || ''],
-      addressLine3: [data?.addressLine3 || ''],
-      poBox: [data?.poBox || ''],
-      countryId: [data?.countryId || '', Validators.required],
-      stateId: [data?.stateId || '', Validators.required],
-      cityId: [data?.cityId || '', Validators.required],
-      zipCode: [data?.zipCode || ''],
-      mainOffixe: [data?.mainOffixe || false],
-      registerAddressId: [data?.registerAddressId || 0],
-      supplierId: [0],
-      loggedIn: [0],
-      deleteFlag: [false]
+    this.activateRouter?.params?.subscribe((response) => {
+      console.log('response', response);
+      if (response.status === 'In-Progress') {
+        this.addressForm.disable();
+        this.taxForm.get('taxDetails')?.disable();
+        this.disableStatusBased = false;
+      } else if (response.profile === 'manageprofile') {
+        this.profileStatus = response.profile;
+        this.addressForm.enable();
+        this.taxForm.get('taxDetails')?.enable();
+      }
+
     });
-
   }
-
   inItTaxForm(data?: any) {
     this.taxForm = this.fb.group({
       taxDetails: this.fb.array([]),
@@ -146,37 +146,10 @@ export class AddressDetailsComponent {
     // Populate tax details if editing existing data
     if (data?.taxInfo && data.taxInfo.length > 0) {
       data.taxInfo.forEach((taxDetail: any) => {
-        this.addTaxDetail(taxDetail);
+        // this.addTaxDetail(taxDetail);
       });
     }
-    if (this.taxDetails.length === 0) {
-      this.addTaxDetail();
-    }
-  }
 
-  get taxDetails(): FormArray {
-    return this.taxForm.get('taxDetails') as FormArray;
-  }
-
-  isReadOnly(i: number): boolean {
-
-    if (i === 0 && this.addressForm.get('mainOffixe')?.value) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  // Method to add a tax detail entry to FormArray
-  addTaxDetail(taxDetail?: any): void {
-
-    const taxDetailForm = this.fb.group({
-      taxTypeId: [taxDetail?.taxTypeId || null, Validators.required],
-      registrationNumber: [taxDetail?.registrationNumber || null, Validators.required],
-      taxExemption: [taxDetail?.taxExemption || false],
-      taxDetailId: [taxDetail?.taxDetailId || 0],
-      registerAddressId: [taxDetail?.registerAddressId || 0],
-    });
-    this.taxDetails.push(taxDetailForm);
   }
   getCountry() {
     this.countryList = [];
@@ -186,154 +159,72 @@ export class AddressDetailsComponent {
       }
     })
   }
-  onAddClick(isNextClick: boolean = false): void {
-    this.isSubmitted = true;
-    if (!isNextClick && this.profileStatus === 'manageprofile') {
+
+  getState(countryId: number): void {
+    this.stateList = [];
+    this.cityList = [];
+    this.country = this.countryList.find(c => c.countryId === countryId);
+    localStorage.setItem('country', this.country?.countryName)
+    this.loginservice.GetCountryBaseaState(countryId).subscribe((data) => {
+      if (data) {
+        this.stateList = data;
+      }
+    });
+  }
+
+  getCities(stateId: number): void {
+    this.cityList = [];
+    this.loginservice.GetStatebaseCity(stateId).subscribe((data) => {
+      if (data) {
+        this.cityList = data;
+      }
+    });
+  }
+
+  getAddressType() {
+    this.countryList = [];
+    this.commonService.getAddressType().subscribe((res) => {
+      if (res) {
+        this.addressTypeList = res;
+      }
+    })
+  }
+
+  checkAddressType() {
+    this.matchingIds = this.addressTypeList
+      .some(data1 => this.addedData.some(item2 => 'All-in-One Site' === item2?.addressType))
+    if (this.matchingIds) {
+      this.addressForm.disable();
+      this.taxForm.disable();
     } else {
-      if (this.addedData.length > 0) {
-        this.hasMainOffice = this.addedData.some((item: any) => item.mainOffixe === true);
-      }
-
-      if (isNextClick && this.addedData?.length !== 0 && this.editFlag && ((this.addressForm?.dirty && this.addressForm.valid) || (this.taxForm?.dirty && this.taxForm.valid))) {
-
-        this.confirmatioPopUp(isNextClick);
-        return;
-      } else if (this.addressForm.valid && this.taxForm.valid && !isNextClick) {
-        const combinedData = {
-          ...this.addressForm.value,
-          taxInfo: this.taxForm.value.taxDetails,
-        };
-        this.finalSaveAddressData = [combinedData];
-        if (this.editFlag) {
-          const index = this.addedData.findIndex(
-            (address) => address.registerAddressId === combinedData.registerAddressId
-          );
-          this.stateList.forEach(ele => {
-            if (this.addedData[index].stateId == ele.stateId) {
-              this.addedData[index].stateName = ele.stateName;
-            }
-          });
-          this.cityList.forEach(ele => {
-            if (this.addedData[index].cityId == ele.cityId) {
-              this.addedData[index].cityName = ele.cityName;
-            }
-          });
-          this.countryList.forEach(ele => {
-            if (this.addedData[index].countryId == ele.countryId) {
-              this.addedData[index].countryName = ele.countryName;
-            }
-          });
-          this.addressTypeList.forEach(ele => {
-            if (this.addedData[index].addressTypeId == ele.addressTypeId) {
-              this.addedData[index].addressType = ele.addressTypeName;
-            }
-          });
-          this.taxTypeList.forEach(ele => {
-            this.addedData[index].taxInfo.forEach(ele1 => {
-              if (ele1.taxTypeId == ele.taxTypeId) {
-                ele1.taxType = ele.taxTypeName;
-              }
-            })
-          });
-        } else {
-          this.stateList.forEach(ele => {
-            if (combinedData.stateId == ele.stateId) {
-              combinedData.stateName = ele.stateName;
-            }
-          })
-          this.cityList.forEach(ele => {
-            if (combinedData.cityId == ele.cityId) {
-              combinedData.cityName = ele.cityName;
-            }
-          });
-          this.countryList.forEach(ele => {
-            if (combinedData.countryId == ele.countryId) {
-              combinedData.countryName = ele.countryName;
-            }
-          });
-          this.addressTypeList.forEach(ele => {
-            if (combinedData.addressTypeId == ele.addressTypeId) {
-              combinedData.addressType = ele.addressTypeName;
-            }
-          });
-          this.taxTypeList.forEach(ele => {
-            combinedData.taxInfo.forEach((ele1: { taxTypeId: number; taxType: string; }) => {
-              if (ele1.taxTypeId == ele.taxTypeId) {
-                ele1.taxType = ele.taxTypeName;
-              }
-            })
-          });
-        }
-        this.saveAddressDetails(isNextClick);
-        return
-      }
-      else if (isNextClick && !this.addressForm.valid && !this.taxForm.valid) {
-        if (this.addedData.length !== 0) {
-          this.nextTabEmit.emit();
-        } else {
-          this.isSubmitted = true;
-          this.addressForm.markAllAsTouched();
-          this.taxForm.markAllAsTouched();
-          return
-        }
-      } else if (this.addressForm.valid && this.taxForm.valid) {
-        if (isNextClick) {
-          this.adminService.showMessage(`Complete all mandatory fields and click 'Save as Draft' to proceed.`);
-        } else {
-          this.adminService.showMessage('Please fill in all mandatory fields before save');
-        }
-      }
+      this.addressForm.enable();
+      this.taxForm.enable();
     }
   }
 
-  saveAddressDetails(isNextClick: boolean = false) {
-    this.isSubmitted = true;
-    if (this.addedData.length > 0) {
-      this.hasMainOffice = this.addedData.some((item: any) => item.mainOffixe === true);
-    }
+  getTaxType() {
+    this.taxTypeList = [];
+    this.commonService.getTaxType().subscribe((res) => {
+      if (res) {
+        this.taxTypeList = res;
+      }
+    })
   }
 
-  confirmatioPopUp(isNextClick: boolean = false, isPreviousClick: boolean = false): void {
-    if (this.addedData.length > 0) {
-      this.hasMainOffice = this.addedData.some((item: any) => item.mainOffixe === true);
-    }
-    const addressFields = Object.values(this.addressForm.controls).some(control => control.value);
-    const taxFields = Object.values(this.taxForm.controls).some(control => control.value);
-    if (addressFields || (taxFields && this.taxForm.dirty)) {
-      const cancelDialogRef = this.dialog.open(ConfirmationDialogComponent, {
-        disableClose: false,
-        hasBackdrop: true,
-        autoFocus: true,
-        width: '35%',
-        height: '40%',
-        position: {
-          top: 'calc(10vw + 20px)',
-        },
-        panelClass: 'confirmdialog',
-        data: {
-          parentDialogRef: this.commonService.dataLostModalConfig,  // Passing the parent dialog reference
-          checkBtnValue: isNextClick ? "next" : isPreviousClick ? "previous" : ""
-        },
-      })
-
-    } else {
-      if (isNextClick) {
-        if (this.addedData.length > 0 && this.hasMainOffice == false) {
-          this.adminService.showMessage('Please select at least one address as the main office to proceed.');
-          return;
-        } else if (this.addedData.length > 0) {
-          this.nextTabEmit.emit();
+  getAddressDetails(supplierId: number) {
+    this.getAddressFlag = true;
+    this.supplierUserFormService.getAddressDetails(supplierId).subscribe((res: any) => {
+      if (res) {
+        if (res[0].firstTaxFalg == true) {
+          this.inItTaxForm(res[0])
         } else {
-          this.adminService.showMessage(`Complete all mandatory fields and click 'Save as Draft' to proceed.`);
+          this.addedData = res;
         }
+        this.checkAddressType();
       }
-      else {
-        this.addressForm.reset();
-        this.taxForm.reset();
-        this.dialogResult.emit(true);
-        // }
-      }
-    }
+      this.tabValidCheckEmit.emit();
+      // this.updateDefaultMainOfficeStatus();
+    })
   }
 
 }
