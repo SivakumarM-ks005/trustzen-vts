@@ -1,94 +1,64 @@
-<form [formGroup]="formPQuestions" class="pq-screen me-2">
+<form [formGroup]="formPQuestions"  class="pq-screen me-2">
     <div class="widget-box">
         <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-            PQ Questionnaire <span *ngIf="clearValues() && NextButtonValidation()"></span>
-            <div class="d-flex">
-
-                <a mat-button [ngClass]="!isOpen? 'show':'hide'" matTooltip="Expand All"
-                    style="height: 30px; width: 30px; text-align: center;" (click)="openAccordionAll()"><i
-                        class="fa fa-expand" style="font-size: 20px;" aria-hidden="true"></i></a>
-                <a mat-button [ngClass]="isOpen? 'show':'hide'" matTooltip="Collapse All"
-                    style="height: 30px ;width: 30px; text-align: center;" (click)="closeAccordionAll()"><i
-                        class="fa fa-compress" aria-hidden="true" style="font-size: 20px;"></i></a>
-            </div>
+            PQ Questionnaire
+            
         </h5>
-        <div class="widget-content bg-white" formArrayName="sections">
+        <div class="widget-content bg-white" >
 
-            <mat-accordion *ngFor="let section of sections.controls; let i = index" [formGroupName]="i"
+            <mat-accordion 
                 class="accordion">
                 <mat-expansion-panel [expanded]="isOpen" class="mb-1">
                     <mat-expansion-panel-header>
-                        <div class="my-panel" (click)="$event.stopPropagation();">
+                        <div class="my-panel" >
                             Section - 1 : Company Registration FAQ:
                         </div>
                     </mat-expansion-panel-header>
                     <div formArrayName="questions">
-                        <ng-container *ngFor="let participant of getquestionselection(i).controls; let j = index"
-                            [formGroupName]="j">
+                        <ng-container>
                             <div class="grid-pq cust-field-height align-items-center p-2">
-                                <div class="mv-serial"><i class="fa fa-quora" aria-hidden="true"></i>. {{ j + 1 }}</div>
+                                <div class="mv-serial"><i class="fa fa-quora" aria-hidden="true"></i> 1</div>
                                 <div class="mv-quest">How many days does it take to get registered?<span
                                         class="mandatory-star">*</span></div>
 
                                 <div class="d-flex justify-content-start align-items-center">
-                                    <div *ngIf="participant.get('responseType')?.value === 'text'" class="ms-2">
+                                    <div class="ms-2">
                                         <mat-form-field style="width: 160px;">
                                             <input matInput formControlName="userResponse" [required]="false">
                                         </mat-form-field>
                                     </div>
-                                    <div *ngIf="participant.get('responseType')?.value === 'checkbox'">
-                                        <mat-checkbox formControlName="userResponseOption"
-                                            (change)="questionCheckbox(participant, i, j)">Answer</mat-checkbox>
-                                    </div>
-                                    <div *ngIf="participant.get('responseType')?.value === 'binary'">
-                                        <mat-radio-group formControlName="userResponseOption"
-                                            (change)="questionCheckbox(participant, i, j)">
-                                            <mat-radio-button value="Yes" checked>Yes</mat-radio-button>
-                                            <mat-radio-button value="No">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                    <div class="me-3 ms-2" *ngIf="participant.get('responseType')?.value === 'date'">
-                                        <mat-form-field>
-                                            <input matInput [matDatepicker]="issueDate"
-                                                formControlName="userResponse" />
-                                            <mat-datepicker-toggle matIconSuffix
-                                                [for]="issueDate"></mat-datepicker-toggle>
-                                            <mat-datepicker #issueDate></mat-datepicker>
-                                        </mat-form-field>
-                                    </div>
+                                    
                                 </div>
 
                                 <div class="ms-2"
-                                    *ngIf="participant.get('allowAttachments')?.value !== 'no' && participant.get('responseType')?.value === 'checkbox' || 
-                                                participant.get('allowAttachments')?.value !== 'no' && participant.get('responseType')?.value === 'binary'|| participant.get('allowAttachments')?.value !== 'no' && participant.get('responseType')?.value === 'date' || 
-                                                participant.get('allowAttachments')?.value !== 'no' && participant.get('responseType')?.value === 'text'">
+                                    >
                                     <div class="d-flex w-100 justify-content-between align-items-center mt-2">
                                         <div class="custom-file-upload">
                                             <button class="file-upload-button">
                                                 <input class="custom-file-input" id="customFileLang" type="file"
                                                     formControlName="attachmentPath" #manFileInput
                                                     accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf"
-                                                    (change)="onFileChangeQuestion($event, i, j)" multiple>
+                                                    multiple>
                                                 <i class="fa fa-cloud-upload" aria-hidden="true"></i><span
                                                     class="ps-2">Upload</span>
                                                 <span class="mandatory-star"
-                                                    *ngIf="participant.get('allowAttachments')?.value === 'mandatory' && !participant.get('attachmentNamePath')?.value">*</span>
+                                                    >*</span>
                                                 <!-- <label class="custom-file-label" for="customFileLang">Select the file to upload</label> -->
                                             </button>
 
                                         </div>
                                         <div class="attach-section col" style="width: 50px; margin-left: 20px;"
-                                            *ngIf="participant.get('attachmentNamePath')?.value">
+                                            >
 
-                                            <mat-icon matBadge="1" id="sidebarToggle" (click)="toggleAttach(i,j)">
+                                            <mat-icon matBadge="1" id="sidebarToggle" >
                                                 <span class="material-icons-outlined">ballot</span>
                                             </mat-icon>
 
                                             <div class="sidebar navbar-nav" style="display: none;"
-                                                [class.toggled]="attachToggle[getKey(i, j)]">
+                                               >
                                                 <div class="close-icon">
                                                     <div class="subHeading">Uploaded Files</div>
-                                                    <mat-icon class="icon-close" (click)="closeAttach(i,j)">
+                                                    <mat-icon class="icon-close" >
                                                         <span class="material-icons-outlined">close</span>
                                                     </mat-icon>
                                                 </div>
@@ -104,18 +74,17 @@
 
                                                                     <span class="helper-underline pointer me-1"
                                                                         style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;"
-                                                                        matTooltip="{{ participant.get('attachmentNamePath')?.value }}">{{
-                                                                        participant.get('attachmentNamePath')?.value }}
+                                                                        matTooltip="PDF">PDF
                                                                     </span>
 
-                                                                    <small>(86.5 KB)</small>
+                                                                    <small>20KB</small>
 
                                                                 </div>
                                                             </div>
                                                             <div class="col-auto">
                                                                 <button class="btn btn-sm smBtn btn-download"
                                                                     matTooltip="Download File"
-                                                                    (click)="downloadBase64File(participant.get('attachmentBase64')?.value, participant.get('attachmentNamePath')?.value)">
+                                                                    >
                                                                     <span
                                                                         class="material-icons-outlined">file_download</span>
                                                                 </button>
@@ -133,58 +102,33 @@
                                 </div>
                             </div>
                             <div class="grid-pq-child"
-                                *ngIf="participant.get('isvisible')?.value === 0 && participant.get('userResponseOption')?.value === 'No' ||
-                            participant.get('isvisible')?.value === 1 && participant.get('userResponseOption')?.value === 'Yes' ||
-                            participant.get('isvisible')?.value === 0 && participant.get('userResponseOption')?.value === false ||
-                            participant.get('isvisible')?.value === 1 && participant.get('userResponseOption')?.value === true ||
-                            participant.get('isvisible')?.value === 0 && participant.get('userResponseOption')?.value === '' && participant.get('responseType')?.value === 'checkbox' ||
-                            participant.get('isvisible')?.value === 1 && participant.get('userResponseOption')?.value === 'true' && participant.get('responseType')?.value === 'checkbox'"
+                                
                                 style="padding-left: 15px; ">
-                                <ng-container formArrayName="childResponses">
-                                    <ng-container *ngIf="getchildQuestion(i, j).length > 0">
+                                <ng-container >
+                                    <ng-container>
                                         <div class="grid-pq-child-question"
-                                            *ngFor="let nestedControl of getchildQuestion(i, j).controls; let k = index"
-                                            [formGroupName]="k" style="padding: 1px;">
+                                            style="padding: 1px;">
                                             <div class="d-flex align-items-center ps-2"><i class="fa fa-quora"
-                                                    aria-hidden="true"></i>. {{ j + 1 }}. {{ k + 1 }}</div>
-                                            <div>{{ nestedControl.get('childQuestion')?.value }}<span
+                                                    aria-hidden="true"></i>1</div>
+                                            <div>Question<span
                                                     class="mandatory-star"
-                                                    *ngIf="nestedControl.get('userResponse')?.valid && nestedControl.get('responseType')?.value !== 'binary' && nestedControl.get('responseType')?.value !== 'checkbox'">*</span>
+                                                    >*</span>
                                             </div>
                                             <div class="d-flex justify-content-start align-items-center">
-                                                <div *ngIf="nestedControl.get('responseType')?.value === 'text'">
-                                                    <mat-form-field>
-                                                        <input matInput formControlName="userResponse"
-                                                            [required]="false">
-                                                    </mat-form-field>
-                                                </div>
-                                                <div *ngIf="nestedControl.get('responseType')?.value === 'checkbox'">
-                                                    <mat-checkbox formControlName="userResponseOption"></mat-checkbox>
-                                                </div>
-                                                <div *ngIf="nestedControl.get('responseType')?.value === 'binary'">
+                                                
+                                                
+                                                <div >
                                                     <mat-radio-group class="d-flex"
                                                         formControlName="userResponseOption">
                                                         <mat-radio-button value="Yes" checked>Yes</mat-radio-button>
                                                         <mat-radio-button value="No">No</mat-radio-button>
                                                     </mat-radio-group>
                                                 </div>
-                                                <div class="me-3"
-                                                    *ngIf="nestedControl.get('responseType')?.value === 'date'">
-                                                    <mat-form-field>
-                                                        <input matInput formControlName="userResponse"
-                                                            [matDatepicker]="issueDate">
-                                                        <mat-datepicker-toggle matIconSuffix
-                                                            [for]="issueDate"></mat-datepicker-toggle>
-                                                        <mat-datepicker #issueDate></mat-datepicker>
-                                                    </mat-form-field>
-                                                </div>
+                                                
                                             </div>
 
                                             <div
-                                                *ngIf="nestedControl.get('allowAttachments')?.value !== 'no' && nestedControl.get('responseType')?.value === 'checkbox' 
-                                    || nestedControl.get('allowAttachments')?.value !== 'no' && nestedControl.get('responseType')?.value === 'binary' ||
-                                    nestedControl.get('allowAttachments')?.value !== 'no' && nestedControl.get('responseType')?.value === 'text' ||
-                                    nestedControl.get('allowAttachments')?.value !== 'no' && nestedControl.get('responseType')?.value === 'date'">
+                                                >
                                                 <div
                                                     class="d-flex w-100 justify-content-between align-items-center pt-4 mt-2">
                                                     <div class="custom-file-upload mt-2 position-relative">
@@ -195,12 +139,12 @@
                                                                     formControlName="attachmentPath" id="customFileLang"
                                                                     type="file" #manFileInput
                                                                     accept="image/jpg,image/jpeg,image/gif,image/png,application/pdf"
-                                                                    (change)="onFileChangeChild($event, i, j, k)">
+                                                                   >
                                                                 <i class="fa fa-cloud-upload"
                                                                     aria-hidden="true"></i><span
                                                                     class="ps-2">Upload</span>
                                                                 <span class="mandatory-star"
-                                                                    *ngIf="nestedControl.get('allowAttachments')?.value === 'mandatory' && !nestedControl.get('attachmentNamePath')?.value">*</span>
+                                                                   >*</span>
                                                             </button>
 
                                                         </div>
@@ -208,18 +152,18 @@
 
                                                     <div class="attach-section col mt-2"
                                                         style="width: 50px; margin-left: 20px;"
-                                                        *ngIf="nestedControl.get('attachmentNamePath')?.value">
+                                                        >
                                                         <mat-icon matBadge="1" id="sidebarToggle"
-                                                            (click)="childtoggleAttach(i,j,k)">
+                                                            >
                                                             <span class="material-icons-outlined">ballot</span>
                                                         </mat-icon>
 
                                                         <div class="sidebar navbar-nav" style="display: none;"
-                                                            [class.toggled]="childattachToggle[getchildKey(i, j, k)]">
+                                                            >
                                                             <div class="close-icon">
                                                                 <div class="subHeading">Uploaded Files</div>
                                                                 <mat-icon class="icon-close"
-                                                                    (click)="childcloseAttach(i,j,k)">
+                                                                   >
                                                                     <span class="material-icons-outlined">close</span>
                                                                 </mat-icon>
                                                             </div>
@@ -236,8 +180,8 @@
                                                                                 <span
                                                                                     class="helper-underline pointer me-1"
                                                                                     style="flex-shrink: 1; overflow: hidden; text-overflow: ellipsis;"
-                                                                                    matTooltip="{{nestedControl.get('attachmentNamePath')?.value}}">
-                                                                                    {{nestedControl.get('attachmentNamePath')?.value}}
+                                                                                    matTooltip="pdf">
+                                                                                   PDF
                                                                                 </span>
                                                                                 <small>(86.5 KB)</small>
 
@@ -247,7 +191,7 @@
                                                                             <button
                                                                                 class="btn btn-sm smBtn btn-download"
                                                                                 matTooltip="Download File"
-                                                                                (click)="downloadBase64File(nestedControl.get('attachmentBase64')?.value, nestedControl.get('attachmentNamePath')?.value)">
+                                                                                >
                                                                                 <span
                                                                                     class="material-icons-outlined">file_download</span>
                                                                             </button>

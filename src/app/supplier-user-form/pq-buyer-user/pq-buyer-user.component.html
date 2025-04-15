@@ -24,7 +24,7 @@
                                 </ng-template>
                                 <div>
                                     @if (tabGroup.selectedIndex === 0) {
-                                    <app-supplier-information [readonly]="false" [supplierId]="supplierId"
+                                    <app-supplier-information [readonly]="false" 
                                         (tabValidCheckEmit)="getScreenCompleteDetails()"
                                         (nextTabEmit)="gotoNextTab()"></app-supplier-information>
                                     }
@@ -49,10 +49,10 @@
                                 </ng-template>
                                 <div class="tabContent">
                                     @if (tabGroup.selectedIndex === 1) {
-                                    <app-address-details #addressDetails [supplierId]="supplierId"
+                                    <app-address-details #addressDetails 
                                         (nextTabEmit)="gotoNextTab()" (tabValidCheckEmit)="getScreenCompleteDetails()"
-                                        (SaveDraftFlag)="getSaveDraftFlag($event)"
-                                        (dialogResult)="handleDialogResult($event)"></app-address-details>
+                                       
+                                        ></app-address-details>
                                     }
                                 </div>
                                 <footer>
@@ -81,11 +81,11 @@
                                 <div class="tabContent">
                                     <div class="previewBox">
                                         @if (tabGroup.selectedIndex === 2) {
-                                        <app-contact-details #Contact [supplierId]="supplierId"
+                                        <app-contact-details #Contact 
                                             (nextTabEmit)="gotoNextTab()"
                                             (tabValidCheckEmit)="getScreenCompleteDetails()"
-                                            (SaveDraftFlag)="getSaveDraftFlag($event)"
-                                            (dialogResult)="handleDialogResult($event)"></app-contact-details>
+                                           
+                                            ></app-contact-details>
                                         }
                                     </div>
                                 </div>
@@ -112,10 +112,10 @@
                                 </ng-template>
                                 <div class="tabContent">
                                     @if (tabGroup.selectedIndex === 3){
-                                    <app-financial-health-details #financialHealth [supplierId]="supplierId"
+                                    <app-financial-health-details #financialHealth 
                                         (nextTabEmit)="gotoNextTab()" (tabValidCheckEmit)="getScreenCompleteDetails()"
-                                        (SaveDraftFlag)="getSaveDraftFlag($event)"
-                                        (dialogResult)="handleDialogResult($event)"></app-financial-health-details>
+                                       
+                                        ></app-financial-health-details>
                                     }
                                 </div>
                                 <footer>
@@ -141,10 +141,10 @@
                                 </ng-template>
                                 <div class="tabContent previewBox">
                                     @if (tabGroup.selectedIndex === 4){
-                                    <app-bank-details #Bank [supplierId]="supplierId" (nextTabEmit)="gotoNextTab()"
+                                    <app-bank-details #Bank  (nextTabEmit)="gotoNextTab()"
                                         (tabValidCheckEmit)="getScreenCompleteDetails()"
-                                        (SaveDraftFlag)="getSaveDraftFlag($event)"
-                                        (dialogResult)="handleDialogResult($event)"></app-bank-details>
+                                       
+                                        ></app-bank-details>
                                     }
                                 </div>
                                 <footer>
@@ -172,10 +172,10 @@
                                     <div class="previewBox">
                                         @if (tabGroup.selectedIndex === 5) {
                                         <app-category-scope-management #childCategoryScope (nextTabEmit)="gotoNextTab()"
-                                            (dialogResult)="handleDialogResult($event)" [supplierId]="supplierId"
-                                            (tabValidCheckEmit)="getScreenCompleteDetails()" [userId]="userId"
-                                            (SaveDraftFlag)="getSaveDraftFlag($event)"
-                                            (disableSaveCategoryEmit)="disableOrEnableCategorySave($event)">
+                                             
+                                            (tabValidCheckEmit)="getScreenCompleteDetails()" 
+                                           
+                                            >
                                         </app-category-scope-management>
                                         }
                                     </div>
@@ -204,9 +204,9 @@
                                 </ng-template>
                                 <div class="tabContent">
                                     @if (tabGroup.selectedIndex === 6) {
-                                    <app-pq-questionnaries #pqquestionaries [supplierId]="supplierId"
+                                    <app-pq-questionnaries #pqquestionaries 
                                         (nextTabEmit)="gotoNextTab()" (tabValidCheckEmit)="getScreenCompleteDetails()"
-                                        (dialogResult)="handleDialogResult($event)"></app-pq-questionnaries>
+                                        ></app-pq-questionnaries>
                                     }
                                 </div>
                                 <footer>
@@ -235,9 +235,9 @@
                                 <div class="tabContent previewBox">
                                     @if (tabGroup.selectedIndex === 7) {
                                     <app-reg-activities-certificate (tabValidCheckEmit)="getScreenCompleteDetails()"
-                                        (dialogResult)="handleDialogResult($event)" (nextTabEmit)="gotoNextTab()"
-                                        (SaveDraftFlag)="getSaveDraftFlag($event)" [userId]="userId"
-                                        [supplierId]="supplierId"></app-reg-activities-certificate>
+                                         (nextTabEmit)="gotoNextTab()"
+                                        
+                                        ></app-reg-activities-certificate>
                                     }
                                 </div>
                                 <footer>
@@ -265,9 +265,9 @@
                                 </ng-template>
                                 <div class="tabContent previewBox">
                                     @if (tabGroup.selectedIndex === 8) {
-                                    <app-supplier-attachment #attachment (dialogResult)="handleDialogResult($event)"
-                                        [supplierId]="supplierId" (nextTabEmit)="gotoNextTab()"
-                                        (tabValidCheckEmit)="getScreenCompleteDetails()" [userId]="userId"
+                                    <app-supplier-attachment #attachment 
+                                         (nextTabEmit)="gotoNextTab()"
+                                        (tabValidCheckEmit)="getScreenCompleteDetails()" 
                                         (disableSaveAttachEmit)="disableOrEnableAttachSave($event)"></app-supplier-attachment>
                                     }
                                 </div>
@@ -295,11 +295,11 @@
                                 <div>
                                     @if (loggedDetails?.userType === 1) {
                                     @if (tabGroup.selectedIndex === 0) {
-                                    <app-supplier-form-preview [supplierId]="supplierId"></app-supplier-form-preview>
+                                    <app-supplier-form-preview ></app-supplier-form-preview>
                                     }
                                     } @else {
                                     @if (tabGroup.selectedIndex === 9) {
-                                    <app-supplier-form-preview [supplierId]="supplierId"></app-supplier-form-preview>
+                                    <app-supplier-form-preview ></app-supplier-form-preview>
                                     }
                                     }
                                 </div>
@@ -331,8 +331,8 @@
                                 </ng-template>
                                 <div class="tabContent previewBox">
                                     @if (tabGroup.selectedIndex === 1) {
-                                    <app-pq-assesment-list #pqattachment (dialogResult)="handleDialogResult($event)"
-                                        [supplierId]="supplierId" (nextTabEmit)="gotoNextTab()"></app-pq-assesment-list>
+                                    <app-pq-assesment-list #pqattachment 
+                                         (nextTabEmit)="gotoNextTab()"></app-pq-assesment-list>
                                     }
                                 </div>
                                 <footer>
@@ -376,8 +376,8 @@
                                 </ng-template>
                                 <div class="tabContent">
                                     @if (tabGroup.selectedIndex === 10){
-                                    <app-final-submission #final [supplierId]="supplierId"
-                                        (dialogResult)="handleDialogResult($event)"></app-final-submission>
+                                    <app-final-submission #final 
+                                        ></app-final-submission>
                                     }
                                 </div>
 
@@ -421,7 +421,7 @@
                                     </ng-template>
                                     <div>
                                         <app-supplier-form-preview
-                                            [supplierId]="supplierId"></app-supplier-form-preview>
+                                            ></app-supplier-form-preview>
                                     </div>
                                     <div class="footer-action-btn">
                                         <div class="middle-spacer"></div>
@@ -439,8 +439,8 @@
                                     </ng-template>
                                     <div class="tabContent previewBox" style="padding: 5px 10px; ">
                                         @if (tabGroup.selectedIndex === 1) {
-                                        <app-pq-assesment-list #pqattachment (dialogResult)="handleDialogResult($event)"
-                                            [supplierId]="supplierId"
+                                        <app-pq-assesment-list #pqattachment 
+                                            
                                             (nextTabEmit)="gotoNextTab()"></app-pq-assesment-list>
                                         }
                                     </div>

@@ -381,7 +381,7 @@ export class PQBuyerUserComponent implements OnInit {
     this.childPQAttachment.savePQAttachments(isNextClick);
   }
   savePQquestionnaries(isNextClick: boolean = false) {
-    this.pqquestionaries.PQquestionnaries(isNextClick);
+    // this.pqquestionaries.PQquestionnaries(isNextClick);
   }
   saveFinalSubmission() {
     // this.FinalSubmission.SaveFinalSubmission();
@@ -409,7 +409,7 @@ export class PQBuyerUserComponent implements OnInit {
           // this.childCategoryScope.confirmatioPopUp();
           return;
         case 'compliance':
-          this.pqquestionaries.savePQquestionnaries(false);
+          // this.pqquestionaries.savePQquestionnaries(false);
           return;
         case 'attachment':
           this.childAttachment.confirmatioPopUp();
