@@ -62,28 +62,12 @@ export class RegActivitiesCertificateComponent implements OnInit {
       }
     });
   }
-  tabParentCheck() {
-    this.tabValidCheckEmit.emit();
-  }
-
-  tabParentPrevious() {
-    this.dialogResult.emit(true);
-  }
-
-  tabParentNext() {
-    this.nextTabEmit.emit(true);
-  }
-  saveDraftCommonFlag(value: boolean) {
-    const flag = value;
-    this.SaveDraftFlag.emit(flag);
-  }
 
   getNextFlag(data: any){
    const pageName = data;
    this.NextFlag.emit(pageName)
     
   }
-
   previousTab() {
     if (this.tabGroupReg.selectedIndex === 0) {
       this.dialogResult.emit(true);
@@ -112,59 +96,7 @@ export class RegActivitiesCertificateComponent implements OnInit {
       }
     }
   }
-    // if (this.tabGroupReg.selectedIndex === 2) {
-    //   this.nextTabEmit.emit();
-    // }
-    // if (this.tabGroupReg.selectedIndex === 1) {
-    //   this.tabGroupReg.selectedIndex = 2;
-    // }
-    // else {
-    //   this.tabGroupReg.selectedIndex = 1;
-    // }
   }
-  goToPrevious(comp: string, checkClickPrevious? : boolean) {
-    if (comp === 'activity') {
-      this.childActivity.confirmatioPopUp(false,checkClickPrevious);
-    } else if (comp === 'certificate') {
-      this.childLicense.confirmatioPopUp(false,checkClickPrevious);
-    } else if (comp === 'relatedParty') {
-      this.childRelatedParty.confirmatioPopUp(false,checkClickPrevious);
-    }
-  }
-  saveActivityDetails(isNextClick: boolean = false) {
-    this.childActivity.addActivities(isNextClick);
-  }
-  saveLicenseDetails(isNextClick: boolean = false) {
-    this.childLicense.addLicenseCertificate(isNextClick);
-  }
-  saveRelatedPartyDetails(isNextClick: boolean = false) {
-    this.childRelatedParty.saveRelatedParty(isNextClick);
-  }
-  saveMasterTables(isNextClick: boolean = false) {
-    const idx = this.tabGroupReg?.selectedIndex ?? 0;
-    let comp = this.links[idx].compName;
-    if (comp === 'activity') {
-      this.saveActivityDetails(isNextClick)
-    } else if (comp === 'certificate') {
-      this.saveLicenseDetails(isNextClick)
-    } else if (comp === 'relatedParty') {
-      this.saveRelatedPartyDetails(isNextClick)
-    }
-  }
-
-  goToPreviousMaster(checkClickPrevious?: boolean) {
-    // if (this.tabGroupReg.selectedIndex === 0) {
-    //   this.goToPrevious('activity')
-    // } else if (this.tabGroupReg.selectedIndex === 1) {
-    //   this.goToPrevious('certificate')
-    // } else if (this.tabGroupReg.selectedIndex === 2) {
-    //   this.goToPrevious(previousComp)
-    // }
-    const idx = this.tabGroupReg?.selectedIndex ?? 0;
-    let previousComp = this.links[idx].compName;
-    this.goToPrevious(previousComp, checkClickPrevious);
-  }
-
 
   tabClick(tab: any) {
     this.links.forEach((ln: any) => {

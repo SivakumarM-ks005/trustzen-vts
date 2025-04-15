@@ -340,7 +340,7 @@ export class PQBuyerUserComponent implements OnInit {
   }
 
   goToPreviousRegActivitities() {
-    this.regActivitiesCertificate.goToPreviousMaster();
+    // this.regActivitiesCertificate.goToPreviousMaster();
   }
 
   onSupplyInfoSubmit(isNextClick: boolean = false): void {
@@ -368,7 +368,7 @@ export class PQBuyerUserComponent implements OnInit {
   }
 
   saveRegActivitities(isNextClick: boolean = false) {
-    this.regActivitiesCertificate.saveMasterTables(isNextClick);
+    // this.regActivitiesCertificate.saveMasterTables(isNextClick);
   }
 
   onComplianceSubmit(isNextClick: boolean = false) {

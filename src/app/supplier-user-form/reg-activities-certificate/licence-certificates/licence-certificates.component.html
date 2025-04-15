@@ -1,13 +1,6 @@
 <div class="widget-box">
     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-       Add Business Licenses and
-       Certificates <span *ngIf="NextButtonValidation()"></span>
-       <div class="d-flex">
-          <button mat-stroked-button [disabled]="disableStatusBased == false" *ngIf="ClearValues()"
-          (click)="clearLicenseCertificate()" matTooltip="Clear License Certificate"
-          class="header-level-btn-gray me-2"><i class="fa fa-refresh pe-2"></i>
-          Clear</button>
-       </div>
+       Add Business Licenses and Certificates
     </h5>
     <div class="widget-content">
        <form id="licenceCertificatesFormId">
@@ -19,8 +12,8 @@
                 <mat-select [(ngModel)]="saveLicenseVm.categoryId" name="categoryName" #categoryIdControl="ngModel"
                 matTooltip="Select the category" [required]="true">
                 <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let cat of licenseCategoryList" [value]="cat.licenseCategoryId">
-                License
+                <mat-option>
+                Select
                 </mat-option>
                 </mat-select>
              </mat-form-field>
@@ -31,8 +24,8 @@
                 <mat-select [(ngModel)]="saveLicenseVm.licenseTypeId" name="licenseTypeName"
                 #licenseTypeControl="ngModel" matTooltip="Select the license type" [required]="true">
                 <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let lt of licenseTypeList" [value]="lt.licenseTypeId">
-                Import License
+                <mat-option>
+               Select
                 </mat-option>
                 </mat-select>
              </mat-form-field>
@@ -60,7 +53,7 @@
                 <input matInput matTooltip="Enter the issue date" [matDatepicker]="issueDate"
                 [(ngModel)]="saveLicenseVm.issueDate" name="issueDateName" #issueDateControl="ngModel"
                 [required]="true">
-                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                <mat-hint>PDF</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="issueDate"></mat-datepicker-toggle>
                 <mat-datepicker #issueDate></mat-datepicker>
              </mat-form-field>
@@ -71,7 +64,7 @@
                 <input matInput matTooltip="Enter the expiry date" [matDatepicker]="expiryDateTab"
                 [(ngModel)]="saveLicenseVm.expiryDate" name="expiryDateName" #expiryDateControl="ngModel"
                 [required]="true">
-                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                <mat-hint>PDF</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="expiryDateTab"></mat-datepicker-toggle>
                 <mat-datepicker #expiryDateTab></mat-datepicker>
              </mat-form-field>
@@ -86,11 +79,11 @@
              <mat-form-field class="col">
                 <mat-label>Issuing Country</mat-label>
                 <mat-select [(ngModel)]="saveLicenseVm.issuingCountryId" matTooltip="Select a issuing country"
-                (selectionChange)="getStates(saveLicenseVm.issuingCountryId)" name="issuingCountryName"
+                name="issuingCountryName"
                 #issuingCountryIdControl="ngModel">
                 <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let country of issuingCountryList" [value]="country.countryId">
-                India
+                <mat-option>
+                Select
                 </mat-option>
                 </mat-select>
              </mat-form-field>
@@ -99,8 +92,8 @@
                 <mat-select [(ngModel)]="saveLicenseVm.issuingStateId" name="issuingStateName"
                 #issuingStateIdControl="ngModel" matTooltip="Select a issuing state">
                 <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let state of issuingStateList" [value]="state.stateId">
-                Tamil Nadu
+                <mat-option>
+              Select
                 </mat-option>
                 </mat-select>
              </mat-form-field>
@@ -111,14 +104,10 @@
                 <mat-select matInput matTooltip="Select a status" [(ngModel)]="saveLicenseVm.statusId"
                 name="statusIdName" #statusIdControl="ngModel" [required]="true">
                 <mat-option value="">-- Please Select --</mat-option>
-                <mat-option *ngFor="let st of licenseStatusList" [value]="st.licenseStatusId">
-                Active
+                <mat-option>
+                Select
                 </mat-option>
                 </mat-select>
-                <!-- @if (statusIdControl.errors?.required) {
-                   <mat-error matTooltip="Status is required">
-                       Status is required</mat-error>
-                   } -->
              </mat-form-field>
              <mat-form-field class="col">
                 <mat-label>Related Activity</mat-label>
@@ -136,19 +125,19 @@
                       <button class="file-upload-button">
                          <input class="custom-file-input" id="customFileLang" type="file"
                          accept=".txt, application/pdf,.xls,.xlsx,.doc, .docs"
-                         (change)="onFileChange($event)" multiple #fileInput>
+                          multiple #fileInput>
                          <i class="fa fa-cloud-upload" aria-hidden="true"></i><span class="ps-2">Upload</span>
                          <!-- <label class="custom-file-label" for="customFileLang">Select the file to upload</label> -->
                       </button>
                    </div>
                    <div class="attach-section col position-relative" style="width: 50px; margin-left: 20px;">
-                      <mat-icon matBadge={{listOfFiles.length}} id="sidebarToggle" (click)="toggleAttach()">
+                      <mat-icon matBadge={{listOfFiles.length}} id="sidebarToggle" >
                          <span class="material-icons-outlined">ballot</span>
                       </mat-icon>
                       <div class="sidebar navbar-nav" style="display: none;" [class.toggled]="attachToggle">
                          <div class="close-icon">
                             <div class="subHeading">Attachments</div>
-                            <mat-icon class="icon-close" (click)="closeAttach()">
+                            <mat-icon class="icon-close" >
                                <span class="material-icons-outlined">close</span>
                             </mat-icon>
                          </div>

@@ -1,11 +1,6 @@
 <div class="widget-box">
     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
-       Add Related Party Disclosures <span *ngIf="NextButtonValidation()"></span>
-       <div class="d-flex">
-          <button [disabled]="disableStatusBased == false" *ngIf="clearValues()" class="header-level-btn-gray me-2"
-          (click)="clearRelatedParty()" matTooltip="Clear Activity"><i
-             class="fa fa-refresh pe-2"></i>Clear</button>
-       </div>
+       Add Related Party Disclosures 
     </h5>
     <form id="relatedPartyFormId">
        <div class="widget-content">
@@ -32,7 +27,7 @@
                 </mat-label>
                 <input matInput matTooltip="Enter the % Of Ownership"
                 [(ngModel)]="saveRelatedPartyVm.percentOfOwnership" #percentControl="ngModel"
-                name="percentOfOwner" maxlength="3" allowNumberOnly (input)="validateOwnership($event)" required
+                name="percentOfOwner" maxlength="3" allowNumberOnly  required
                 pattern="^(100|[1-9]?[0-9])$">
              </mat-form-field>
              <mat-form-field class="col">
@@ -42,7 +37,7 @@
                 <input matInput matTooltip="Enter the start Date" [matDatepicker]="startDateTab"
                 [(ngModel)]="saveRelatedPartyVm.startDate" #startControl="ngModel" [required]="true"
                 name="startDate">
-                <mat-hint>{{commonService.hindDateFormat}}</mat-hint>
+                <mat-hint>Date</mat-hint>
                 <mat-datepicker-toggle matIconSuffix [for]="startDateTab"></mat-datepicker-toggle>
                 <mat-datepicker #startDateTab></mat-datepicker>
              </mat-form-field>
