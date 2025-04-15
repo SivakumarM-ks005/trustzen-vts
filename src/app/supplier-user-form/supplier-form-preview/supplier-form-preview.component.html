@@ -2,13 +2,13 @@
     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
         Application Preview
         <div class="d-flex">
-            <button class="header-level-btn-blue me-5" matTooltip="Search Tax Payer" (click)="taxPayer()"><i
+            <button class="header-level-btn-blue me-5" matTooltip="Search Tax Payer" ><i
                     class="fa fa-search pe-2"></i>Search Tax Payer</button>
             <a mat-button [ngClass]="!isOpen? 'show':'hide'" matTooltip="Expand All"
-                style="height: 30px; width: 30px; text-align: center;" (click)="openAccordionAll()"><i
+                style="height: 30px; width: 30px; text-align: center;"><i
                     class="fa fa-expand" style="font-size: 20px;" aria-hidden="true"></i></a>
             <a mat-button [ngClass]="isOpen? 'show':'hide'" matTooltip="Collapse All"
-                style="height: 30px ;width: 30px; text-align: center;" (click)="closeAccordionAll()"><i
+                style="height: 30px ;width: 30px; text-align: center;" ><i
                     class="fa fa-compress" aria-hidden="true" style="font-size: 20px;"></i></a>
         </div>
     </h5>
@@ -19,12 +19,11 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title>1. Supplier Information </mat-panel-title>
                     <mat-panel-description class=" justify-content-end">
-                        @if (panelOpenStep1()) {
-                        } @else {
+              
                         <div class="status-label">
                             Status: <span class="status-state text-success">Completed</span>
                         </div>
-                        }
+                        
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <div class="widget-box">
@@ -115,10 +114,10 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div *ngIf="addressDetailsData.length === 0" class="noRecordsMessage">
+                <div class="noRecordsMessage">
                     <div class="ft-size11 text-danger">No data available.</div>
                 </div>
-                <div class="widget-box" *ngFor="let address of addressDetailsData; let i = index">
+                <div class="widget-box" >
                     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
                         Address 1
                         <span class="badge text-bg-secondary ms-3">Main Office</span>
@@ -154,7 +153,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let tax of address.taxInfo; let ind = index">
+                                    <tr >
                                         <td>1</td>
                                         <td>Value Added Tax (VAT) Registration</td>
                                         <td>TR-343-34</td>
@@ -176,10 +175,10 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div class="widget-box" *ngFor="let contact of supplierContacts; let i = index">
+                <div class="widget-box">
                     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
                         Contact 1
-                        <span *ngIf="contact.isPrimaryContact" class="badge text-bg-secondary ms-3">Primary
+                        <span class="badge text-bg-secondary ms-3">Primary
                             Contact</span>
                     </h5>
                     <div class="widget-content">
@@ -229,7 +228,7 @@
                         <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
                             Business Capability
                         </h5>
-                        <div class="widget-content" *ngIf="financialBusinessDetails?.businessCreditInfos">
+                        <div class="widget-content">
                             <div class="display-grid-70-30">
                                 <p class="display-label">Experience History</p>
                                 <p class="display-data">1-3 Years</p>
@@ -261,10 +260,10 @@
                             <div class="d-flex">
                                 <span class="display-data no-colon">
                                     <div class="d-flex flex-row align-items-center"
-                                        *ngFor="let file of financialBusinessDetails.financialHealthInfo.financialHealthDocsInfo; let idx = index">
+                                        >
                                         <div class="col subHeading2">
                                             <a class="helper-underline pointer me-1"
-                                                (click)="downloadFile(file.folderPath)">
+                                                >
                                                 1.
                                                 Capture3.JPG<!-- {{file.fileType}} -->
                                             </a>
@@ -281,7 +280,7 @@
                             Credit Limit
                         </h5>
                         <div class="widget-content">
-                            <div class="display-grid-60-40" *ngIf="financialBusinessDetails?.businessCreditInfos">
+                            <div class="display-grid-60-40" >
                                 <p class="display-label">Credit Limit</p>
                                 <p class="display-data">N/A</p>
                                 <p class="display-label">Credit Exposure Limit</p>
@@ -297,18 +296,18 @@
                             Project Details
                         </h5>
                         <div class="widget-content">
-                            <div *ngIf="financialBusinessDetails.projectDetailsInfos.length === 0"
+                            <div
                                 class="noRecordsMessage">
                                 <div class="smText noData">No data available.</div>
                             </div>
                             <div class="grid-2cols">
                                 <div class="display-box"
-                                    *ngFor="let project of financialBusinessDetails.projectDetailsInfos">
+                                   >
                                     <p class="display-label">Project Name</p>
                                     <p class="display-data">Ongoing Project</p>
                                     <p class="display-label">Project Description&nbsp;</p>
                                     <p class="url display-data ">
-                                        https://dev.procurezen.ai/ProcureZen
+                                        https://dev.procurezen.ai/trustzen
                                     </p>
                                     <p class="display-label">Customer Name</p>
                                     <p class="display-data">VTS</p>
@@ -332,7 +331,7 @@
                         Assets and Liabilities
                     </h5>
                     <div class="widget-content">
-                        <div *ngFor="let assetLiab of financialBusinessDetails.assetLiabilitieInfos">
+                        <div >
                             <div class="grid-3cols">
                                 <div class="widget-box">
                                     <h5
@@ -435,14 +434,14 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div *ngIf="savaAllCategoryAndScopeVm.length === 0" class="noRecordsMessage">
+                <div class="noRecordsMessage">
                     <div class="smText noData">No data available.</div>
                 </div>
-                <div *ngFor="let bank of supplierBanks; let i = index">
+                <div>
                     <div class="widget-box">
                         <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-start">
                             Bank 1
-                            <span *ngIf="bank.defaultBank" class="badge text-bg-secondary">Default Bank</span>
+                            <span class="badge text-bg-secondary">Default Bank</span>
                         </h5>
                         <div class="widget-content">
                             <div class="grid-3cols">
@@ -495,7 +494,7 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div *ngIf="savaAllCategoryAndScopeVm.length === 0" class="noRecordsMessage">
+                <div class="noRecordsMessage">
                     <div class="smText noData">No data available.</div>
                 </div>
                 <div class="widget-box">
@@ -543,7 +542,7 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div *ngIf="pqQuestionnaries?.sections.length === 0" class="noRecordsMessage">
+                <div class="noRecordsMessage">
                     <div class="smText noData">No data available.</div>
                 </div>
                 <div class="grid-2cols">
@@ -552,36 +551,36 @@
                             PQ Questionnaire
                         </h5>
                         <div class="widget-content">
-                            <div *ngFor="let section of pqQuestionnaries?.sections">
-                                <div *ngFor="let question of section?.questions">
+                            <div>
+                                <div>
                                     <span class="display-label">How many days does it take to get registered? </span>
-                                    <span class="display-data" *ngIf="question?.userResponseOption">
+                                    <span class="display-data">
                                         true
                                     </span>
                                     <span class="display-data"
-                                        *ngIf="question?.userResponse && question?.responseType === 'date'">
+                                        >
                                         Fee management
                                     </span>
                                     <span class="display-data"
-                                        *ngIf="question?.userResponse && question?.responseType === 'text'">
+                                        >
                                         No
                                     </span>
-                                    <div *ngFor="let childQuestion of question?.childQuestion">
+                                    <div >
                                         <span class="display-label">Fee management
                                         </span>
                                         <span class="display-data"
-                                            *ngIf="childQuestion?.userResponseOption && childQuestion?.userResponseOption">
+                                           >
                                             No
                                         </span>
                                         <span class="display-data"
-                                            *ngIf="childQuestion?.userResponse && childQuestion?.responseType === 'date'">
+                                            >
                                             Fee management
                                         </span>
                                         <span class="display-data"
-                                            *ngIf="childQuestion?.userResponse && childQuestion?.responseType === 'text'">
+                                            >
                                             No
                                         </span>
-                                        <span class="display-data" *ngIf="childQuestion?.attachmentPath">
+                                        <span class="display-data" >
                                             Fee management
                                         </span>
                                     </div>
@@ -594,17 +593,16 @@
                             Attachments
                         </h5>
                         <div class="widget-content">
-                            <div *ngFor="let section of pqQuestionnaries?.sections">
-                                <div *ngFor="let question of section?.questions">
+                            <div >
+                                <div >
                                     <span class="display-data ms-2 pointer attachment-link" style="text-align: center;"
-                                        *ngIf="question?.attachmentNamePath"
-                                        (click)="openImagePopup(question.attachmentBase64)">
+                                        
+                                        >
                                         Leave Breakup 2.pdf
                                     </span>
-                                    <div *ngFor="let childQuestion of question?.childQuestion">
+                                    <div>
                                         <span class="display-data ms-2 pointer attachment-link"
-                                            *ngIf="childQuestion?.attachmentNamePath"
-                                            (click)="openImagePopup(childQuestion.attachmentBase64)">
+                                            >
                                             Leave Breakup 2.pdf
                                         </span>
                                     </div>
@@ -624,7 +622,7 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <div *ngIf="licensedActivitiesAndSubActivities">
+                <div >
                     <div class="widget-box">
                         <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
                             1. Licensed Activities and Sub-Activities
@@ -651,7 +649,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="widget-box" *ngIf="businessLicensesAndCertificates">
+                    <div class="widget-box">
                         <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
                             2. Business Licenses and Certificates
                         </h5>
@@ -777,7 +775,7 @@
                                         <td>Owner-Visa</td>
                                         <td>DSSI9999</td>
                                         <td>11-Apr-2025</td>
-                                        <td>https://dev.procurezen.ai/ProcureZen</td>
+                                        <td>https://dev.procurezen.ai/trustzen</td>
                                         <td>
                                             <div class="d-flex flex-row align-items-center">
                                                 <div class="col-auto subHeading2 pe-1">1</div>
@@ -795,7 +793,7 @@
                         </div>
                     </div>
                 </div>
-                @if(optionalAttachFlag){
+
                 <div class="widget-box">
                     <h5 class="widget-title pt-3 pb-3 d-flex align-items-center justify-content-between">
                         Optional Attachment
@@ -819,7 +817,7 @@
                                         <td>Owner-Visa</td>
                                         <td>DSSI9999</td>
                                         <td>11-Apr-2025</td>
-                                        <td>https://dev.procurezen.ai/ProcureZen</td>
+                                        <td>https://dev.procurezen.ai/trustzen</td>
                                         <td>
                                             <div class="d-flex flex-row align-items-center">
                                                 <div class="col-auto subHeading2 pe-1">1</div>
@@ -837,7 +835,7 @@
                         </div>
                     </div>
                 </div>
-                }
+                
             </mat-expansion-panel>
         </mat-accordion>
     </div>
@@ -845,7 +843,7 @@
 <!-- Popup Modal -->
 <!-- <div  class="popup-overlay" (click)="closePopup()"> -->
 <div class="popup-container" *ngIf="showPopup" (click)="$event.stopPropagation()">
-    <button class="close-btn" (click)="closePopup()">×</button>
+    <button class="close-btn" >×</button>
     <iframe [src]="popupImage" frameborder="0" width="300%" height="500px"></iframe>
 </div>
 <!-- </div> -->
