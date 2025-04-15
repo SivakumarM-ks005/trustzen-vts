@@ -1,10 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import moment from 'moment';
 import { AdminService } from '../../core/services/admin/admin.service';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, NgForm, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  FormBuilder, FormGroup, NgForm, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonService } from '../../core/services/common.service';
 import { MandatoryAttachmentTypeMas, OptionalAttachmentTypeMas, SaveAttachmentVm, SaveManAndOptAttachmentVm } from '../../core/models/supplier-attachment.model';
-import { ConfirmationDialogComponent } from '../../confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
@@ -84,14 +83,6 @@ export class SupplierAttachmentComponent implements OnInit {
     this.saveManAttachment.uploadedDate = moment(new Date()).format(this.commonService.showFormat.toUpperCase());
     this.saveOptAttachment.uploadedUserName = this.loggedUserDetails ? this.loggedUserDetails.userName : '';
     this.saveOptAttachment.uploadedDate = moment(new Date()).format(this.commonService.showFormat.toUpperCase());
-    // projectDetailsInfos: this.fb.array([]);
-    // for (let i = 0; i < this.numberOfMandatoryAttachments; i++) {
-    //   this.saveManAttachment.controlValidate = ''
-    //   this.saveAllManData.push(this.saveManAttachment)
-    // }
-
-    // this.getAttachmentTypeMas();
-
     this.activateRouter?.params?.subscribe((response) => {
 
       if (response.profile === 'manageprofile') {
