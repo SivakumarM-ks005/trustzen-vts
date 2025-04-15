@@ -437,7 +437,7 @@ export class SupplierUserFormComponent implements OnInit {
   }
 
   saveCategoryAndScope(isNextClick: boolean = false) {
-    this.childCategoryScope.addCategories(isNextClick);
+    // this.childCategoryScope.addCategories(isNextClick);
   }
 
   saveRegActivitities(isNextClick: boolean = false) {
@@ -492,7 +492,7 @@ export class SupplierUserFormComponent implements OnInit {
           this.pqquestionaries.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'categoryAndScope':
-          this.childCategoryScope.confirmatioPopUp(undefined, checkClickPrevious);
+          // this.childCategoryScope.confirmatioPopUp(undefined, checkClickPrevious);
           return;
         case 'compliance':
           this.complianceChecklist.confirmatioPopUp();

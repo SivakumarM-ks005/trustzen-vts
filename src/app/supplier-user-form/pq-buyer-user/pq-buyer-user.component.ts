@@ -364,7 +364,7 @@ export class PQBuyerUserComponent implements OnInit {
   }
 
   saveCategoryAndScope(isNextClick: boolean = false) {
-    this.childCategoryScope.addCategories(isNextClick);
+    // this.childCategoryScope.addCategories(isNextClick);
   }
 
   saveRegActivitities(isNextClick: boolean = false) {
@@ -406,7 +406,7 @@ export class PQBuyerUserComponent implements OnInit {
           // this.Bank.confirmatioPopUp();
           return;
         case 'categoryAndScope':
-          this.childCategoryScope.confirmatioPopUp();
+          // this.childCategoryScope.confirmatioPopUp();
           return;
         case 'compliance':
           this.pqquestionaries.savePQquestionnaries(false);
