@@ -286,8 +286,7 @@ mat-label {
     .tab-box {
       padding: 4px 0px;
       text-align: center;
-      // width: 70px;
-      width: 76.9px;
+      width: 77.9px;
       height: 83px;
       border-radius: 5px;
       padding: 4px 0px;
@@ -430,6 +429,7 @@ mat-label {
 .nav-pills .show > .nav-link {
   color: var(--bs-nav-pills-link-active-color);
   background-image: linear-gradient(to bottom, #005cbb 0%, #13274f 100%);
+  margin: 0px 3px;
 }
 .candiate-log {
   padding: 6px 0px 5px 0px;
