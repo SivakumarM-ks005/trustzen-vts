@@ -11,10 +11,28 @@ import { Observable, throwError } from 'rxjs';
 })
 export class LoginService {
 
+
+    showLoginMenu: boolean = false;
+    showLoginCustomMenu: boolean = false;
+
+
+    toggleLoginMenu() {
+        this.showLoginMenu = true;
+        this.showLoginCustomMenu = false;  // Hide login custom menu
+      }
+    
+      // Show Login Custom Menu and hide Login Menu
+      toggleLoginCustomMenu() {
+        this.showLoginCustomMenu = true;
+        this.showLoginMenu = false;  // Hide login menu
+      }
+      
     private readonly API_URL = environment.apiUrl;
 
     constructor(private _httpClient: HttpClient) {
     }
+
+
 
     saveSupplierRegistration(element: any): Observable<any> {
         const dataUrl = this.API_URL + "SupplierRegister/SaveSupplierRegister";

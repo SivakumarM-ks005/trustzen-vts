@@ -17,6 +17,7 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { CdkScrollable } from '@angular/cdk/scrolling';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { LoginService } from '../core/services/login/login.service';
+// import { LoginService } from '@app/login/service/login.service';
 import { SupplierUserFormService } from '../core/services/supplier-management/supplier.user.form.service';
 import { DateTimeService } from '../core/date-time/date-time.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -50,10 +51,14 @@ export class HomePageComponent {
   isPasswordVisible: boolean = false;  // Flag to control password visibility
   getImplementationConfigDataRes: any;
 
+  isVisible: boolean = false;
+  issupplierformVisible: boolean = false;
+
   constructor(private fb: FormBuilder,
     public loginService: LoginService,
     public dialog: MatDialog,
     public route: Router,
+    public loginservice: LoginService,
     public admin: AdminService,
     public supplierUser: SupplierUserFormService,
     public adminService: AdminService,
@@ -85,11 +90,33 @@ export class HomePageComponent {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
 
+
+  // login_custom() {
+  //   this.loginservice.toggleLoginCustom();
+  // }
+
+  // login() {
+  //   this.loginservice.toggleSupplierForm();
+  // }
+
   login_custom() {
     this.route.navigate(["/krya/dashboard-menu"]);
+    this.loginservice.toggleLoginMenu();
+
+    // this.loginservice.toggleLoginCustom();
   }
 
+  //     .supplier-top-header {
+  //     display: none;
+  // }
+  // .supply-manage-top {
+  //     display: none;
+  // }
   login() {
+
+    this.loginservice.toggleLoginCustomMenu();
+
+    // this.loginservice.toggleSupplierForm();
     this.SupplierlogInForm.get('mfaCode')?.clearValidators();
     this.SupplierlogInForm.get('mfaCode')?.updateValueAndValidity();
     if (this.SupplierlogInForm.valid) {

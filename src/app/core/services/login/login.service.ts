@@ -12,6 +12,20 @@ import { CommonService } from '../common.service';
 })
 export class LoginService {
 
+    showLoginMenu: boolean = false;
+    showLoginCustomMenu: boolean = false;
+    
+    toggleLoginMenu() {
+        this.showLoginMenu = true;
+        this.showLoginCustomMenu = false;  // Hide login custom menu
+      }
+    
+      // Show Login Custom Menu and hide Login Menu
+      toggleLoginCustomMenu() {
+        this.showLoginCustomMenu = true;
+        this.showLoginMenu = false;  // Hide login menu
+      }
+
     API_URL: string;
     APIADMIN_URL: string;
     SUPAPI_URL: 'https://test-suppreg-api.procurezen.ai/api/supplier/';

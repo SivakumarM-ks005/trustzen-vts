@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
   title = 'procurezen';
   show = false;
   isLoading$ = false;
+  // isVisible = true;
+  // issupplierformVisible = true;
 
   constructor(public loaderService: LoaderService, private router: Router, private sessionTimeoutService: SessionTimeoutService, private supplierUser: SupplierUserFormService) {
 
@@ -80,6 +82,18 @@ export class AppComponent implements OnInit {
       this.sessionTimeoutService.startSessionTimeout(sessionTimeOut, sessionTextField, sessionMinsSeconds);
     }
   }
+
+
+
+  // login_custom() {
+  //   this.visibilityService.toggleLoginCustom();
+  // }
+  
+  // login() {
+  //   this.visibilityService.toggleSupplierLogin();
+  // }
+  
+
 
   ngOnDestroy(): void {
     this.sessionTimeoutService.stopSessionTimeout();

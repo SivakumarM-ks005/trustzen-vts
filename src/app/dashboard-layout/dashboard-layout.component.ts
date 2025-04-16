@@ -8,6 +8,8 @@ import { NgIf } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenuTrigger, MatMenu, MatMenuItem } from '@angular/material/menu';
 import { MatTooltip } from '@angular/material/tooltip';
+import { LoginService } from '../core/services/login/login.service';
+// import { LoginService } from '@app/login/service/login.service';
 
 @Component({
   selector: 'app-dashboard-layout',
@@ -20,7 +22,6 @@ export class DashboardLayoutComponent implements OnInit {
   masterSearch: any;
   showSubmenu: boolean = false;
   showSubSubMenu: boolean = false;
-
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
   isMobile = true;
@@ -34,9 +35,12 @@ export class DashboardLayoutComponent implements OnInit {
   requestForInformation: boolean = false;
   SupDetails: any;
   getImplementationConfigDataRes: any;
+  // isVisible = true;
+  // issupplierformVisible = true;
 
   constructor(private observer: BreakpointObserver,
     private activateRouter: ActivatedRoute,
+    public loginservice: LoginService,
     private router: Router) {
   }
   ngOnInit() {
@@ -53,6 +57,9 @@ export class DashboardLayoutComponent implements OnInit {
       }
     });
   }
+
+
+  
   manageProfile(profile: any) {
     this.router.navigate([`/krya/dashboardSupReg/profile/${profile}`], { skipLocationChange: true, replaceUrl: true })
   }
