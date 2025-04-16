@@ -20,17 +20,6 @@ import { LoginService } from '../../core/services/login/login.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { SupplierUserFormService } from '../../core/services/supplier-management/supplier.user.form.service';
 import { AllowNumberOnlyDirective } from '../../core/directives/allowNumberOnly.directive';
-interface FinancialCurrency {
-  currencyId: number;
-  currencyName: string;
-  countryId: number;
-}
-interface BankCountrylist {
-  countryId: number;
-  countryName: string;
-
-}
-
 @Component({
   selector: 'app-financial-health-details',
   templateUrl: './financial-health-details.component.html',
@@ -46,8 +35,6 @@ export class FinancialHealthDetailsComponent implements OnInit {
   creditLimitError: any | null = null;
   exposureLimitError: any | null = null;
   userData: any | null;
-  FinCurrencyList: FinancialCurrency[] = [];
-  BankCountryList: BankCountrylist[] = [];
   @Output() dialogResult = new EventEmitter<boolean>();
   @Output() nextTabEmit = new EventEmitter();
   previousTabClick: boolean = false;
@@ -142,13 +129,6 @@ export class FinancialHealthDetailsComponent implements OnInit {
     })
   }
 
-  getSyatemParameter() {
-    this.SupplierUserForm.GetSysParameterGeneral().subscribe(res => {
-      if (res) {
-        this.systemParameter = res;
-      }
-    })
-  }
 
   GetFinancialBusinessDetails() {
     this.SupplierUserForm.GetFinancialBusinessDetails(this.supplierId).subscribe(data => {
@@ -173,10 +153,8 @@ export class FinancialHealthDetailsComponent implements OnInit {
         // Populate data if available, otherwise add an empty form group
         if (data.projectDetailsInfos && data.projectDetailsInfos.length > 0) {
           data.projectDetailsInfos.forEach((projectDetail: any) => {
-            projectDetailsArray.push(this.createProjectDetailFormGroup(projectDetail));
           });
         } else {
-          projectDetailsArray.push(this.createProjectDetailFormGroup({})); // Add an empty group
         }
         this.activateRouter?.params?.subscribe((response) => {
           if (response.status === 'In-Progress') {
@@ -200,8 +178,6 @@ export class FinancialHealthDetailsComponent implements OnInit {
         // If no data is returned, initialize with a single empty group        
         const projectDetailsArray = this.financialForm.get('projectDetailsInfos') as FormArray;
         projectDetailsArray.clear();
-        projectDetailsArray.push(this.createProjectDetailFormGroup({}));
-
         const financialHealthDocsInfoArray = this.financialForm.get('financialHealthInfo.financialHealthDocsInfo') as FormArray;
         financialHealthDocsInfoArray.clear();
       }
@@ -214,42 +190,21 @@ export class FinancialHealthDetailsComponent implements OnInit {
     };
   }
 
-  // Helper method to create a FormGroup for project details
-  createProjectDetailFormGroup(projectDetail: any): FormGroup {
-    return this.fb.group({
-      projectDetailsId: [projectDetail.projectDetailsId || null],
-      projectStatusId: [projectDetail.projectStatusId || 0, [Validators.required, this.invalidValueValidator(0)]],
-      customerName: [projectDetail.customerName || null, Validators.required],
-      projectDescription: [projectDetail.projectDescription || null, Validators.required],
-      startDate: [projectDetail.startDate || null, Validators.required],
-      endDate: [projectDetail.endDate || null],
-      countryId: [projectDetail.countryId || null, Validators.required],
-      currencyId: [projectDetail.currencyId || null],
-      value: [projectDetail.value || null]
-    });
-  }
-
-
   getCountry(): void {
     this.loginservice.getCountry().subscribe(data => {
       if (data) {
-        this.BankCountryList = data;
       }
     });
   }
   getCurrency(): void {
     this.loginservice.GetCurrencyDetails().subscribe(data => {
       if (data) {
-        this.FinCurrencyList = data;
       }
     });
   }
   get projectDetailsInfos(): FormArray {
     return this.financialForm.get('projectDetailsInfos') as FormArray;
   }
-
-
-
   NextButtonValidation() {
     if (this.financialData?.businessCreditInfos?.experienceName) {
       this.NextFlag.emit(true);
