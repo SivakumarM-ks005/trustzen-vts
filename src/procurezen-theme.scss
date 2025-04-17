@@ -259,19 +259,22 @@ input:focus-visible {
             }
 
             .widget-title {
-                font: 400 14px / 10px 'Roboto', sans-serif;
-                color: $BravesNavy;
-                background: $AliceBlue;
-                // color: #fff;
+                font: 400 14px / 10px "Roboto", sans-serif;
+                border: 1px solid #f0f8ff;
+                background: #f0f8ff;
+                color: #13274F;
+                /* background: #F0F8FF; */
                 height: 30px;
                 line-height: 30px;
                 padding: 0px 10px 0px 10px !important;
-                border-bottom: 1px solid $LightGray;
-                display: flex;
+                /* border-bottom: 1px solid #D3D3D3; */
+                display: flex
+            ;
                 align-items: center;
                 width: 100%;
                 margin-bottom: 0;
                 border-radius: 5px;
+                border-bottom: 1px solid #ccc;
 
                 // .number-notation {
                 //     background: $pzenOrange;

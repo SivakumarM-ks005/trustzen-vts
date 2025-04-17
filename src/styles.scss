@@ -2642,3 +2642,17 @@ ag-grid-angular {
     border-color: rgba(0, 0, 0, 0);
     border-radius: 50%;
 } 
+
+
+@media only screen and (min-width : 320px) and (max-width : 767px) {
+    .mat-expansion-panel-header-title {
+        font-size: 12px;
+        line-height: 15px;
+    }
+ }
+
+ @media only screen and (min-width : 768px) and (max-width : 1023px) {
+    .mat-accordion .mat-expansion-panel-header-description {
+        flex-grow: 1;
+    }
+ }
