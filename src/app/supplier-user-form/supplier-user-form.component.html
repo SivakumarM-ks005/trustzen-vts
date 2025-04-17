@@ -1,36 +1,28 @@
 <div class="content-container">
 
     @if(!hideHeader){
-    <mat-toolbar class="mat-header">
-        <img src="assets/procureZEN-borderless.png" alt="ProcureZEN" style="height: 35px;">
-        <div class="d-flex flex-row user-profile" matTooltip="User Profile">
-            <div class="avatar-sm" [matMenuTriggerFor]="menu">
-                <img src="assets/images/avatar.png" alt="User Profile" class="user-img">
+        <mat-toolbar color="primary top-header" class="menuBar">
+            <div class="d-flex flex-row justify-content-between align-items-center flex-fill">
+                 
+                     <div class="h2 text-white d-inline-block col">
+                        <a routerLink="/trustzen"><img src="assets/images/Trustzen-Logo.png" alt="trustzen_logo"
+                           style="height: 25px;"></a>
+                     </div>
+                 
+                
+                        <div class="d-flex flex-row user-profile" matTooltip="User Profile">
+                           <div class="avatar-sm" [matMenuTriggerFor]="menu">
+                              <img src="assets/images/user/04.jpg" alt="User Profile" class="user-img">
+                           </div>
+                           <mat-menu #menu="matMenu" class="XuserMenu comm-menu comm-menu-userprofile">
+                              <button mat-menu-item (click)="logOut()">
+                              <img src="../../assets/images/icons/logout.png" alt="Logout Profile">Logout
+                              </button>
+                           </mat-menu>
+                        </div>
+                
             </div>
-            <a [matMenuTriggerFor]="menu" class="toolbarLink pointer ft-size13 user-name">
-                {{userName | translate}}
-            </a>
-            <mat-menu #menu="matMenu" class="XuserMenu comm-menu comm-menu-userprofile">
-                <button mat-menu-item *ngIf="SupDetails?.status === 'Request For Information'">
-                    <!-- <span class="material-icons-outlined">person</span> -->
-                    <img src="../../assets/images/icons/userprofile.png" alt="User Profile">
-                    Manage Profile
-                </button>                
-                <button mat-menu-item>
-                    <a class="text-dark" href="javascript:void(0)" (click)="onchangePswdSubmit()">
-                        <!-- <span class="material-icons-outlined">person</span>  -->
-                        <img src="../../assets/images/icons/change-password.png" alt="Change Profile Password" width="28">
-                        Change Password 
-                    </a>
-                </button>
-                <button mat-menu-item (click)="logOut()">
-                    <!-- <span class="material-icons-outlined">person_off</span> change-password  -->
-                    <img src="../../assets/images/icons/logout.png" alt="Logout Profile">
-                    Logout
-                </button>
-            </mat-menu>
-        </div>
-    </mat-toolbar>
+         </mat-toolbar>
     }
 
 

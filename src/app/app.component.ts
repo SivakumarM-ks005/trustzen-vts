@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
   }
   Urlfind(sessionTimeOut: any, sessionTextField: any, sessionMinsSeconds: any) {
     const currentUrl = this.router.url;
-    if (currentUrl !== "/ProcureZen") {
+    if (currentUrl !== "/trustzen") {
       this.sessionTimeoutService.startSessionTimeout(sessionTimeOut, sessionTextField, sessionMinsSeconds);
     }
   }

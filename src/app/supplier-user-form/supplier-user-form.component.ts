@@ -152,7 +152,7 @@ export class SupplierUserFormComponent implements OnInit {
   supplierManagementResponce: any;
   tabValidation: string;
   profileStatus: boolean = false;
-
+  loginData: any;
 
   constructor(
     private elementRef: ElementRef,
@@ -175,7 +175,7 @@ export class SupplierUserFormComponent implements OnInit {
 
   ngOnInit() {
 
-    window.history.replaceState({}, '', '/ProcureZen');
+    window.history.replaceState({}, '', '/trustzen');
 
     this.route.url.subscribe((event) => {
       if (event[0].path === "dashboardSupReg") {
@@ -298,18 +298,11 @@ export class SupplierUserFormComponent implements OnInit {
   logOut() {
     const element = {
       "userId": localStorage.getItem('userId'),
-      "userName": this.loggedDetails?.userName
+      "userName": this.loginData?.userName
     }
-    this.loginservice.logoutToken(element).subscribe({
-      next: res => {
-      localStorage.removeItem('loginDetails');
-      this.router.navigate(['/ProcureZen'], { skipLocationChange: true, replaceUrl: true })
-      }, error: error => {
-        localStorage.removeItem('loginDetails');
-        this.router.navigate(['/ProcureZen'], { skipLocationChange: true, replaceUrl: true })
-      }
-    })
-    // localStorage.removeItem('loginDetails');
+    localStorage.clear();  
+
+    this.router.navigate(['/trustzen'], { skipLocationChange: true, replaceUrl: true })
   }
 
   changePasswordPopUp() {

@@ -133,13 +133,13 @@ export class HomePageComponent {
               if (res?.userType === 1) {
                 this.route.navigate(['/krya/dashboard-menu'], { queryParams: { ImplementConfig: JSON.stringify(this.getImplementationConfigDataRes) }, skipLocationChange: true, replaceUrl: true });
               }
-              else if (res.supplierCompletedFlag === true) {
-                this.route.navigate(['/krya/dashboard'], { queryParams: { ImplementConfig: JSON.stringify(this.getImplementationConfigDataRes) }, skipLocationChange: true, replaceUrl: true })
-              }
+              // else if (res.supplierCompletedFlag === true) {
+              //   this.route.navigate(['/krya/dashboard'], { queryParams: { ImplementConfig: JSON.stringify(this.getImplementationConfigDataRes) }, skipLocationChange: true, replaceUrl: true })
+              // }
               else if (res?.userType === 2) {
                 this.route.navigate(['/SupplierUserForm'], { skipLocationChange: true, replaceUrl: true });
               } else if (res?.userType === 3) {
-                this.route.navigate(['/ProcureZen']);
+                this.route.navigate(['/trustzen']);
               }
             }
           })

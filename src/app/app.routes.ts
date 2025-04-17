@@ -260,7 +260,7 @@ export const routes: Routes = [
     ]
   },
   {
-    path: '**', redirectTo: '/ProcureZen',
+    path: '**', redirectTo: '/trustzen',
     pathMatch: 'full'
   }
 
