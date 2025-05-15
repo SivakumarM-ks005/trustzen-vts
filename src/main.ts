@@ -3,11 +3,11 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { provideHttpClient, withFetch, HTTP_INTERCEPTORS, withInterceptorsFromDi, HttpClient, withInterceptors } from '@angular/common/http';
 import { provideClientHydration, BrowserModule, bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { LanguageService } from './app/core/services/language/language.service';
+
 import { MAT_DATE_FORMATS, DateAdapter, MatNativeDateModule } from '@angular/material/core';
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
-import { CommonService } from './app/core/services/common.service';
-import { HttpInterceptorService } from './app/core/interceptor/httpInterceptor.service';
+
+
 import { routes } from './app/app.routes';
 import { TableModule } from 'primeng/table';
 import { AngularEditorModule } from '@kolkov/angular-editor';
@@ -18,11 +18,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app/app.component';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { CustomDateAdapter } from './app/core/date-time/customDateAdapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideRouter, withHashLocation } from '@angular/router';
 import { DatePipe, HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { NumberToWordsPipe } from '@app/core/pipes/number-to-words.pipe';
+
 // import { cacheInterceptor } from './app/core/interceptor/cacheinterceptor.service';
 
 // const MY_DATE_FORMATS = {
@@ -40,7 +39,7 @@ import { NumberToWordsPipe } from '@app/core/pipes/number-to-words.pipe';
 
 
 bootstrapApplication(AppComponent, {
-    providers: [DatePipe,NumberToWordsPipe,
+    providers: [DatePipe,
         provideRouter(routes, withHashLocation()),
         importProvidersFrom(TableModule, AngularEditorModule, ScrollPanelModule, NgSelectModule, AgGridModule, 
         // ngx-translate and the loader module,
@@ -57,9 +56,7 @@ bootstrapApplication(AppComponent, {
         provideClientHydration(),
         provideAnimationsAsync(),
         MatDatepickerModule,
-        LanguageService,
-        CustomDateAdapter, // so we could inject services to 'CustomDateAdapter'
-        { provide: DateAdapter, useClass: CustomDateAdapter },
+        
         // { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
         // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
         // {
@@ -74,17 +71,8 @@ bootstrapApplication(AppComponent, {
         //   deps: [AuthService],
         //   multi: true,
         // },
-        {
-            provide: APP_INITIALIZER,
-            useFactory: (navService: CommonService) => () => navService.load(),
-            deps: [CommonService],
-            multi: true
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpInterceptorService,
-            multi: true
-        },
+       
+       
         // provideHttpClient(withInterceptors([cacheInterceptor])),
         // { provide: DateAdapter, useClass: CustomDateAdapterFormats },
         // { provide: MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS },
