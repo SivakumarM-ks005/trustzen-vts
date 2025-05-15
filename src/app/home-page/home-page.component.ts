@@ -11,7 +11,6 @@ import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition
 
 import { Router } from '@angular/router';
 
-import { environment } from '../../environments/environment';
 
 import { NgClass, NgIf, NgFor } from '@angular/common';
 import { MatTooltip } from '@angular/material/tooltip';

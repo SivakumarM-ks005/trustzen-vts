@@ -1,9 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home-page/home-page.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { DashboardLayoutComponent } from './dashboard-layout/dashboard-layout.component';
-import { DashboardMenusComponent } from './dashboard-menus/dashboard-menus.component';
 // import { MaskedRouteComponent } from './masked-route.component';
 // import { MaskUrlGuard } from './core/auth-guard/mask-url.guard';
 
